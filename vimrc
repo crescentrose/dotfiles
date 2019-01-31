@@ -1,0 +1,141 @@
+" Plugins, using vim-plug: https://github.com/junegunn/vim-plug
+" Auto install vim-plug if it does not exist on the system
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Define plugins
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-commentary'
+Plug 'nanotech/jellybeans.vim'
+Plug 'thoughtbot/vim-rspec'
+Plug 'majutsushi/tagbar'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'itchyny/lightline.vim'
+
+" Temporarily disabled (evaluating usefulness)
+" Plug 'kana/vim-textobj-user'
+" Plug 'nelstrom/vim-textobj-rubyblock'
+
+call plug#end()
+
+" Light it up!
+colorscheme jellybeans
+
+" Include the built-in matchit.vim plugin
+" Allows for matching of blocks with the % motion
+packadd! matchit 
+runtime macros/matchit.vim
+
+" Show line numbers on the side
+set number
+set numberwidth=5
+
+" Our custom keybinds start with Space
+let mapleader = "\<Space>"
+
+" Maximum config stealing efficiency bindings!
+" S-so to save and re-source vimrc
+" S-vc to open vimrc in new tab
+nmap <leader>so :w<cr>:source ~/.vimrc<cr>
+nmap <leader>vc :tabe ~/.vimrc<cr>
+
+" Exit help easily to reduce time wasted on being a noob
+autocmd Filetype help nmap <buffer> q :q<cr>
+
+" Move within wrapped lines
+nmap k gk
+nmap j gj
+
+" Some basic setup
+set backspace=2 " Backspace deletes like most programs in instert mode
+set nobackup
+set nowritebackup
+set noswapfile
+set history=50
+set ruler
+set showcmd
+set incsearch
+set laststatus=2
+set autowrite
+" Hide mode name from command bar (as it is shown in Lightline)
+set noshowmode
+
+" If you don't have a color terminal get with the times.
+syntax on
+
+" Make it painfully obvious how little space we have to write our prose
+set textwidth=80
+set colorcolumn=+1
+
+" Get off my lawn
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
+
+" Soft tabs, 2 spaces
+set tabstop=2
+set shiftwidth=2
+set shiftround
+set expandtab
+
+" More natural splitting configuration (based on thoughtbot's definition of
+" natural)
+
+set splitbelow
+set splitright
+
+" Plugin settings
+" CtrlP
+" Make CtrlP use ag for listing the files. Way faster and no useless files.
+let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
+let g:ctrlp_use_caching = 0
+
+" rspec-vim
+" Run spec
+
+nmap <Leader>t :call RunCurrentSpecFile()<CR>
+nmap <Leader>a :call RunAllSpecs()<CR>
+nmap <Leader>l :call RunLastSpec()<CR>
+
+let g:rspec_runner = "os_x_iterm2"
+
+" netrw
+" Make some file browser adjustments
+
+let g:netrw_liststyle = 3 " Tree view is the default view
+let g:netrw_banner = 0 " Hide the directory banner permanently
+let g:netrw_winsize = 25 " Reduce the size of the split to 25%
+
+" Use space-` to open a temporary project overview pane.
+nmap <Leader>` :Vexplore<CR> 
+
+" CtrlP
+" Use Alt-P (π character on macOS) to search for tags
+nnoremap π :CtrlPTag<cr>
+nmap <F8> :TagbarToggle<CR>
+
+filetype indent plugin on
+
+" Use Gutentags for managing tags
+" Include Gemfile as a potential project root
+let g:gutentags_project_root = ['Gemfile']
+" Show tag generating indicator on status line while it's running
+" :set statusline+=%{gutentags#statusline()}
+
+" Lightline
+" Match Lightline color theme to Vim color theme
+let g:lightline = {
+      \ 'colorscheme': 'jellybeans',
+      \ }

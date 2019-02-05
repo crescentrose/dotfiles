@@ -28,7 +28,6 @@ safe_source ~/.aliasrc
 # make sure GPG can do its thing on macOS
 export GPG_TTY=$(tty)
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+eval "$(rbenv init -)"
 
 zplug load 

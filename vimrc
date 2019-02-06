@@ -104,6 +104,7 @@ let g:ctrlp_use_caching = 0
 
 " rspec-vim
 " Run spec
+let g:rspec_command = "!bundle exec rspec {spec}"
 
 nmap <Leader>t :call RunCurrentSpecFile()<CR>
 nmap <Leader>a :call RunAllSpecs()<CR>

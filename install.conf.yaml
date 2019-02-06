@@ -9,6 +9,7 @@
     ~/.vimrc:
     ~/.zshrc:
     ~/.gitignore_global:
+    ~/.gemrc:
 
 - shell:
     - ['git submodule update --init --recursive', 'Installing submodules']

@@ -10,6 +10,7 @@
     ~/.zshrc:
     ~/.gitignore_global:
     ~/.gemrc:
+    ~/.gitconfig:
 
 - shell:
     - ['git submodule update --init --recursive', 'Installing submodules']

@@ -109,6 +109,7 @@ let g:rspec_command = "!bundle exec rspec {spec}"
 nmap <Leader>t :call RunCurrentSpecFile()<CR>
 nmap <Leader>a :call RunAllSpecs()<CR>
 nmap <Leader>l :call RunLastSpec()<CR>
+nmap <Leader>s :call RunNearestSpec()<CR>
 
 let g:rspec_runner = "os_x_iterm2"
 
@@ -140,3 +141,8 @@ let g:gutentags_project_root = ['Gemfile']
 let g:lightline = {
       \ 'colorscheme': 'jellybeans',
       \ }
+
+" Vim diff tools
+if &diff
+    highlight! link DiffText MatchParen
+endif

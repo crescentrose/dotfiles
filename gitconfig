@@ -1,0 +1,10 @@
+[core]
+	excludesfile = /Users/ivan/.gitignore_global
+	editor = /usr/bin/vim
+[commit]
+	gpgsign = true
+[alias]
+  publish = push --set-upstream origin $(git rev-parse — abbrev-ref HEAD)
+# use separate file for username / github token / etc
+[include]
+  path = ~/.gitconfig.local

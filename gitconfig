@@ -4,7 +4,7 @@
 [commit]
 	gpgsign = true
 [alias]
-  publish = push --set-upstream origin $(git rev-parse — abbrev-ref HEAD)
+  publish ="!git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)"
 # use separate file for username / github token / etc
 [include]
   path = ~/.gitconfig.local

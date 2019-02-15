@@ -146,3 +146,9 @@ let g:lightline = {
 if &diff
     highlight! link DiffText MatchParen
 endif
+
+" God knows what this does.
+imap <C-t> <></><Esc>5hdiwp3lpT>i
+
+" Use full line to separate windows
+set fillchars+=vert:│

@@ -50,7 +50,7 @@ frameBox:
   title: Terminalizer
   style:
     border: 0px black solid
-		backgroundColor: null
+    backgroundColor: null
     # boxShadow: none
     # margin: 0px
 

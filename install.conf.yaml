@@ -11,6 +11,7 @@
     ~/.gitignore_global:
     ~/.gemrc:
     ~/.gitconfig:
+    ~/.terminalizer/config.yml: terminalizer.config.yml
 
 - shell:
     - ['git submodule update --init --recursive', 'Installing submodules']

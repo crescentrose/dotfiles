@@ -13,7 +13,7 @@ zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
 # zsh-syntax-highlighting: self-descriptive
 zplug 'zsh-users/zsh-syntax-highlighting', defer:2
 # zsh-completions: approximately one billion completion scripts
-zplug 'zsh-users/zsh-completions', defer:2
+# zplug 'zsh-users/zsh-completions', defer:2
 zplug 'zsh-users/zsh-autosuggestions'
 
 # Include Google Cloud SDK stuff

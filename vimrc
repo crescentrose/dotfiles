@@ -20,12 +20,11 @@ Plug 'tpope/vim-commentary'
 Plug 'nanotech/jellybeans.vim'
 Plug 'thoughtbot/vim-rspec'
 Plug 'majutsushi/tagbar'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'itchyny/lightline.vim'
 
 " Temporarily disabled (evaluating usefulness)
-" Plug 'kana/vim-textobj-user'
-" Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'kana/vim-textobj-user'
+Plug 'nelstrom/vim-textobj-rubyblock'
 
 call plug#end()
 
@@ -34,8 +33,8 @@ colorscheme jellybeans
 
 " Include the built-in matchit.vim plugin
 " Allows for matching of blocks with the % motion
-packadd! matchit 
-runtime macros/matchit.vim
+" packadd! matchit 
+" runtime macros/matchit.vim
 
 " Show line numbers on the side
 set number
@@ -132,7 +131,7 @@ filetype indent plugin on
 
 " Use Gutentags for managing tags
 " Include Gemfile as a potential project root
-let g:gutentags_project_root = ['Gemfile']
+" let g:gutentags_project_root = ['Gemfile']
 " Show tag generating indicator on status line while it's running
 " :set statusline+=%{gutentags#statusline()}
 

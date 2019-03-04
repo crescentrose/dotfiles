@@ -147,7 +147,36 @@ if &diff
 endif
 
 " God knows what this does.
-imap <C-t> <></><Esc>5hdiwp3lpT>i
+inoremap <C-t> <></><Esc>5hdiwp3lpT>i
 
 " Use full line to separate windows
 set fillchars+=vert:│
+
+" Move around windows with Ctrl+hjkl instead of having to do two keystrokes
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Toggle relative and absolute line numbers
+nnoremap <Leader>l :set relativenumber!<cr>
+nnoremap <Leader>q :copen<cr>
+nnoremap <Leader>h :cp<cr>
+nnoremap <Leader>l :cn<cr>
+
+command! MakeRspec :cexpr system("bundle exec rspec --require ~/Code/dotfiles/QuickfixFormatter.rb -f QuickfixFormatter --no-profile")
+
+augroup filetype_ruby
+  autocmd!
+  " Use rubocop as a makeprg in Ruby code. This lets us run :make and have a
+  " nice overview of any issues that we need to fix.
+  autocmd FileType ruby setlocal makeprg=bundle\ exec\ rubocop\ -f\ e
+  autocmd FileType ruby nnoremap <buffer> <Leader><Space> :MakeRspec<CR>
+augroup END
+
+augroup filetype_quickfix
+  autocmd!
+  " Quickly hide the quickfix window if we so desire.
+  autocmd Filetype qf nmap <buffer> q :q<cr>
+  autocmd Filetype qf setlocal wrap
+augroup END

@@ -10,6 +10,7 @@ endif
 " Define plugins
 
 call plug#begin('~/.vim/plugged')
+" Plugin settings
 
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-sensible'
@@ -17,14 +18,14 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 Plug 'nanotech/jellybeans.vim'
 Plug 'thoughtbot/vim-rspec'
 Plug 'majutsushi/tagbar'
 Plug 'itchyny/lightline.vim'
-
-" Temporarily disabled (evaluating usefulness)
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
 
 call plug#end()
 
@@ -180,3 +181,6 @@ augroup filetype_quickfix
   autocmd Filetype qf nmap <buffer> q :q<cr>
   autocmd Filetype qf setlocal wrap
 augroup END
+
+" Vimwiki
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.wiki'}]

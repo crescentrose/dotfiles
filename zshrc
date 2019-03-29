@@ -6,6 +6,11 @@ function safe_source {
 # Enable zplug
 source ~/.zplug/init.zsh
 
+# Enable history
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.zsh_history
+
 # zsh-async: dependecy for many other plugins
 zplug mafredri/zsh-async, from:github
 # pure: nice terminal prompt

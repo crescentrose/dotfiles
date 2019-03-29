@@ -44,6 +44,8 @@ set numberwidth=5
 " Our custom keybinds start with Space
 let mapleader = "\<Space>"
 
+set omnifunc=syntaxcomplete#Complete
+
 " Maximum config stealing efficiency bindings!
 " S-so to save and re-source vimrc
 " S-vc to open vimrc in new tab

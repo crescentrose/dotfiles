@@ -58,6 +58,9 @@ nmap k gk
 nmap j gj
 
 " Some basic setup
+set termguicolors
+set undodir=~/.vim/undodir
+set undofile
 set backspace=2 " Backspace deletes like most programs in instert mode
 set nobackup
 set nowritebackup

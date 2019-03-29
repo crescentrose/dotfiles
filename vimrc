@@ -181,19 +181,20 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " Toggle relative and absolute line numbers
-nnoremap <Leader>l :set relativenumber!<cr>
+nnoremap <Leader>o :set relativenumber!<cr>
 nnoremap <Leader>q :copen<cr>
 nnoremap <Leader>h :cp<cr>
 nnoremap <Leader>l :cn<cr>
 
-command! MakeRspec :cexpr system("bundle exec rspec --require ~/Code/dotfiles/QuickfixFormatter.rb -f QuickfixFormatter --no-profile")
+command! MakeRubocop :cexpr system("bundle exec rubocop -f e " . shellescape(expand('%:p')))
+command! MakeRubocopAll :cexpr system("bundle exec rubocop -f e")
 
 augroup filetype_ruby
   autocmd!
-  " Use rubocop as a makeprg in Ruby code. This lets us run :make and have a
-  " nice overview of any issues that we need to fix.
-  autocmd FileType ruby setlocal makeprg=bundle\ exec\ rubocop\ -f\ e
-  autocmd FileType ruby nnoremap <buffer> <Leader><Space> :MakeRspec<CR>
+  " Run <Leader><Space> to run Rubocop on the current project and expand the
+  " results in a quickfix window.
+  autocmd FileType ruby nnoremap <buffer> <Leader><Space> :MakeRubocop<cr>:copen<cr>
+  autocmd FileType ruby nnoremap <buffer> <Leader>p :MakeRubocopAll<cr>:copen<cr>
 augroup END
 
 augroup filetype_quickfix

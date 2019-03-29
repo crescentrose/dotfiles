@@ -1,149 +1,43 @@
-" Plugins, using vim-plug: https://github.com/junegunn/vim-plug
-" Auto install vim-plug if it does not exist on the system
+" @crescentrose's vimrc
+" a magic land of mystery and excitement
+" recommendation: open with folds for nice categorisation
+" soundtrack: https://www.youtube.com/watch?v=--9aIYos4M8
 
+filetype indent plugin on
+
+" Our custom keybinds start with Space
+let mapleader = "\<Space>"
+
+" Plugins, using vim-plug: https://github.com/junegunn/vim-plug {{{
+" Auto install vim-plug if it does not exist on the system
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" Define plugins
-
 call plug#begin('~/.vim/plugged')
-" Plugin settings
+  Plug 'tpope/vim-sensible'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-rails'
+  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-fugitive'
+  Plug 'nanotech/jellybeans.vim'
+  Plug 'kana/vim-textobj-user'
+  Plug 'nelstrom/vim-textobj-rubyblock'
+  
+  Plug 'ctrlpvim/ctrlp.vim'
+  " Make CtrlP use ag for listing the files. Way faster and no useless files.
+  let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g "" --ignore .git'
+  let g:ctrlp_use_caching = 0
+  
+  Plug 'thoughtbot/vim-rspec'
+  let g:rspec_command = "!bundle exec rspec {spec}"
+  let g:rspec_runner = "os_x_iterm2"
 
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'nanotech/jellybeans.vim'
-Plug 'thoughtbot/vim-rspec'
-Plug 'majutsushi/tagbar'
-Plug 'itchyny/lightline.vim'
-Plug 'kana/vim-textobj-user'
-Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
-
-call plug#end()
-
-" Light it up!
-colorscheme jellybeans
-
-" Include the built-in matchit.vim plugin
-" Allows for matching of blocks with the % motion
-" packadd! matchit 
-" runtime macros/matchit.vim
-
-" Show line numbers on the side
-set number
-set numberwidth=5
-
-" Our custom keybinds start with Space
-let mapleader = "\<Space>"
-
-set omnifunc=syntaxcomplete#Complete
-
-" Maximum config stealing efficiency bindings!
-" S-so to save and re-source vimrc
-" S-vc to open vimrc in new tab
-nmap <leader>so :w<cr>:source ~/.vimrc<cr>
-nmap <leader>vc :tabe ~/.vimrc<cr>
-
-" Exit help easily to reduce time wasted on being a noob
-autocmd Filetype help nmap <buffer> q :q<cr>
-
-" Move within wrapped lines
-nmap k gk
-nmap j gj
-
-" Some basic setup
-set termguicolors
-set undodir=~/.vim/undodir
-set undofile
-set backspace=2 " Backspace deletes like most programs in instert mode
-set nobackup
-set nowritebackup
-set noswapfile
-set history=50
-set ruler
-set showcmd
-set incsearch
-set laststatus=2
-set autowrite
-" Hide mode name from command bar (as it is shown in Lightline)
-set noshowmode
-
-" If you don't have a color terminal get with the times.
-syntax on
-
-" Make it painfully obvious how little space we have to write our prose
-set textwidth=80
-set colorcolumn=+1
-
-" Get off my lawn
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
-
-" Soft tabs, 2 spaces
-set tabstop=2
-set shiftwidth=2
-set shiftround
-set expandtab
-
-" More natural splitting configuration (based on thoughtbot's definition of
-" natural)
-
-set splitbelow
-set splitright
-
-" Plugin settings
-" CtrlP
-" Make CtrlP use ag for listing the files. Way faster and no useless files.
-let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g "" --ignore .git'
-let g:ctrlp_use_caching = 0
-
-" rspec-vim
-" Run spec
-let g:rspec_command = "!bundle exec rspec {spec}"
-
-nmap <Leader>t :call RunCurrentSpecFile()<CR>
-nmap <Leader>a :call RunAllSpecs()<CR>
-nmap <Leader>l :call RunLastSpec()<CR>
-nmap <Leader>s :call RunNearestSpec()<CR>
-
-let g:rspec_runner = "os_x_iterm2"
-
-" netrw
-" Make some file browser adjustments
-
-let g:netrw_liststyle = 3 " Tree view is the default view
-let g:netrw_banner = 0 " Hide the directory banner permanently
-let g:netrw_winsize = 25 " Reduce the size of the split to 25%
-
-" Use space-` to open a temporary project overview pane.
-nmap <Leader>` :Vexplore<CR> 
-
-" CtrlP
-" Use Alt-P (π character on macOS) to search for tags
-nnoremap π :CtrlPTag<cr>
-nmap <F8> :TagbarToggle<CR>
-
-filetype indent plugin on
-
-" Use Gutentags for managing tags
-" Include Gemfile as a potential project root
-" let g:gutentags_project_root = ['Gemfile']
-" Show tag generating indicator on status line while it's running
-" :set statusline+=%{gutentags#statusline()}
-
-" Lightline
-" Match Lightline color theme to Vim color theme
-let g:lightline = {
+  Plug 'itchyny/lightline.vim'
+  let g:lightline = {
       \ 'colorscheme': 'jellybeans',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
@@ -154,25 +48,98 @@ let g:lightline = {
       \ }
       \ }
 
-function! LightlineFilename()
-  let root = fnamemodify(get(b:, 'git_dir'), ':h')
-  let path = expand('%:p')
-  if path[:len(root)-1] ==# root
-    return path[len(root)+1:]
-  endif
-  return expand('%')
-endfunction
+  Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
+  let g:vimwiki_list = [
+  \ {'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.wiki'}
+  \]
 
-" Vim diff tools
-if &diff
-    highlight! link DiffText MatchParen
-endif
+call plug#end()
 
-" God knows what this does.
-inoremap <C-t> <></><Esc>5hdiwp3lpT>i
+" Light it up!
+colorscheme jellybeans
+
+" Include the built-in matchit.vim plugin
+" Allows for matching of blocks with the % motion
+packadd! matchit 
+runtime macros/matchit.vim
+
+" Plugins end }}}
+
+" Vim settings {{{
+" Show line numbers on the side
+set number
+set numberwidth=5 " Comfortable line number pane width
+
+set omnifunc=syntaxcomplete#Complete " Use Omnifunc
+
+set termguicolors " Use the full spread of our monitor's colours
+
+set undodir=~/.vim/undodir " Permanent undos
+set undofile
+
+set backspace=2 " Backspace deletes like most programs in instert mode
+
+set nobackup " Don't write the pesky swap files
+set nowritebackup
+set noswapfile
+
+set history=50 " remember last 50 cmds
+
+set showcmd " show the last command written in cmd mode
+set incsearch " display the next matched line by search
+set laststatus=2 " always show the status line
+set autowriteall " automatically save on any editor switch
+
+" Hide mode name from command bar (as it is shown in Lightline)
+set noshowmode
+
+" Make it painfully obvious how little space we have to write our prose
+set textwidth=80
+set colorcolumn=+1
+
+" Soft tabs, 2 spaces
+" TODO: Maybe I don't want 2 spaces per tab always.
+set tabstop=2
+set shiftwidth=2
+set shiftround
+set expandtab
+
+" More natural splitting configuration (based on thoughtbot's definition of
+" natural)
+set splitbelow
+set splitright
+
+" If you don't have a color terminal get with the times.
+syntax on
 
 " Use full line to separate windows
 set fillchars+=vert:│
+
+" Make some file browser adjustments
+let g:netrw_liststyle = 3 " Tree view is the default view
+let g:netrw_banner = 0 " Hide the directory banner permanently
+let g:netrw_winsize = 25 " Reduce the size of the split to 25%
+
+" Vim diff tools
+if &diff
+  highlight! link DiffText MatchParen
+endif
+
+" Vim settings end }}}
+
+" Bindings {{{
+" Move within wrapped lines
+nmap k gk
+nmap j gj
+
+" Get off my lawn
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
+
+" Use space-` to open a temporary project overview pane.
+nnoremap <Leader>` :Vexplore<CR> 
 
 " Move around windows with Ctrl+hjkl instead of having to do two keystrokes
 nnoremap <C-h> <C-w>h
@@ -182,13 +149,33 @@ nnoremap <C-l> <C-w>l
 
 " Toggle relative and absolute line numbers
 nnoremap <Leader>o :set relativenumber!<cr>
+
+" Open/close the quickfix pane and go back and forth between errors
 nnoremap <Leader>q :copen<cr>
 nnoremap <Leader>h :cp<cr>
 nnoremap <Leader>l :cn<cr>
 
+" Maximum config stealing efficiency bindings!  S-so to save and re-source vimrc
+" S-vc to open vimrc in new tab
+nnoremap <leader>so :w<cr>:source ~/.vimrc<cr>
+nnoremap <leader>vc :tabe ~/.vimrc<cr>
+
+" vim-rspec bindings
+nnoremap <Leader>t :call RunCurrentSpecFile()<CR>
+nnoremap <Leader>a :call RunAllSpecs()<CR>
+nnoremap <Leader>l :call RunLastSpec()<CR>
+nnoremap <Leader>s :call RunNearestSpec()<CR>
+
+" Use Alt-P (π character on macOS) to search for tags
+nnoremap π :CtrlPTag<cr>
+" Bindings end }}}
+
+" Custom commands {{{
 command! MakeRubocop :cexpr system("bundle exec rubocop -f e " . shellescape(expand('%:p')))
 command! MakeRubocopAll :cexpr system("bundle exec rubocop -f e")
+" Custom commands end }}}
 
+" Autocmds {{{
 augroup filetype_ruby
   autocmd!
   " Run <Leader><Space> to run Rubocop on the current project and expand the
@@ -204,5 +191,26 @@ augroup filetype_quickfix
   autocmd Filetype qf setlocal wrap
 augroup END
 
-" Vimwiki
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.wiki'}]
+augroup filetype_vim
+  autocmd!
+  " Use automatic marker folds for Vim files
+  autocmd FileType vim setlocal foldmethod=marker
+  " Since our vimrc is nicely categorised, automatically fold it on startup
+  autocmd FileType vim setlocal foldlevel=0
+augroup END
+
+" Exit help easily to reduce time wasted on being a noob
+autocmd Filetype help nmap <buffer> q :q<cr>
+" Autocmds end }}}
+
+" Custom functions {{{
+" Retrieve a filename to show in Lightline.
+function! LightlineFilename()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root)-1] ==# root
+    return path[len(root)+1:]
+  endif
+  return expand('%')
+endfunction
+" Custom functions end }}}

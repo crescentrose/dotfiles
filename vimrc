@@ -115,6 +115,10 @@ syntax on
 " Use full line to separate windows
 set fillchars+=vert:│
 
+" Display tabs and trailing spaces
+set list
+set listchars=tab:␉·,trail:␠,nbsp:⎵
+
 " Make some file browser adjustments
 let g:netrw_liststyle = 3 " Tree view is the default view
 let g:netrw_banner = 0 " Hide the directory banner permanently

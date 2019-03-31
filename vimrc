@@ -9,6 +9,7 @@ filetype indent plugin on
 let mapleader = "\<Space>"
 
 " Plugins, using vim-plug: https://github.com/junegunn/vim-plug {{{
+
 " Auto install vim-plug if it does not exist on the system
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -17,25 +18,39 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+  " sensible.vim: Defaults everyone can agree on
   Plug 'tpope/vim-sensible'
+  " surround.vim: quoting/parenthesizing made simple
   Plug 'tpope/vim-surround'
+  " repeat.vim: enable repeating supported plugin maps with "."
   Plug 'tpope/vim-repeat'
+  " rails.vim: Ruby on Rails power tools
+  " TODO: See how much I actually use this.
   Plug 'tpope/vim-rails'
+  " commentary.vim: comment stuff out
   Plug 'tpope/vim-commentary'
+  " fugitive.vim: A Git wrapper so awesome, it should be illegal
+  " TODO: I really just need a small subset of this.
   Plug 'tpope/vim-fugitive'
+  " A colorful, dark color scheme for Vim.
   Plug 'nanotech/jellybeans.vim'
+  " Vim plugin: Create your own text objects
   Plug 'kana/vim-textobj-user'
+  " A custom text object for selecting ruby blocks.
   Plug 'nelstrom/vim-textobj-rubyblock'
-  
+
+  " Active fork of kien/ctrlp.vim—Fuzzy file, buffer, mru, tag, etc finder.
   Plug 'ctrlpvim/ctrlp.vim'
   " Make CtrlP use ag for listing the files. Way faster and no useless files.
   let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g "" --ignore .git'
   let g:ctrlp_use_caching = 0
-  
+
+  " Run Rspec specs from Vim
   Plug 'thoughtbot/vim-rspec'
   let g:rspec_command = "!bundle exec rspec {spec}"
   let g:rspec_runner = "os_x_iterm2"
 
+  " A light and configurable statusline/tabline plugin for Vim 
   Plug 'itchyny/lightline.vim'
   let g:lightline = {
       \ 'colorscheme': 'jellybeans',
@@ -48,6 +63,7 @@ call plug#begin('~/.vim/plugged')
       \ }
       \ }
 
+  " Personal Wiki for Vim
   Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
   let g:vimwiki_list = [
   \ {'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.wiki'}
@@ -109,6 +125,15 @@ set expandtab
 set splitbelow
 set splitright
 
+" If I head that fucking ~dInG!~ one more time I swear
+set visualbell
+set vb t_vb=
+
+set encoding=utf-8 " Should be default, just in case
+
+" Put some lines around the cursor so that we have at least a little bit of
+" context
+set scrolloff=3
 " If you don't have a color terminal get with the times.
 syntax on
 

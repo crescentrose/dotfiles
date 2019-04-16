@@ -38,6 +38,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'kana/vim-textobj-user'
   " A custom text object for selecting ruby blocks.
   Plug 'nelstrom/vim-textobj-rubyblock'
+  " basic vim/terraform integration
+  Plug 'hashivim/vim-terraform'
 
   " Active fork of kien/ctrlp.vim—Fuzzy file, buffer, mru, tag, etc finder.
   Plug 'ctrlpvim/ctrlp.vim'
@@ -73,6 +75,9 @@ call plug#end()
 
 " Light it up!
 colorscheme jellybeans
+
+" But only slightly.
+let &t_ut=''
 
 " Include the built-in matchit.vim plugin
 " Allows for matching of blocks with the % motion

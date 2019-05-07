@@ -40,12 +40,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'nelstrom/vim-textobj-rubyblock'
   " basic vim/terraform integration
   Plug 'hashivim/vim-terraform'
-
-  " Active fork of kien/ctrlp.vim—Fuzzy file, buffer, mru, tag, etc finder.
-  Plug 'ctrlpvim/ctrlp.vim'
-  " Make CtrlP use ag for listing the files. Way faster and no useless files.
-  let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g "" --ignore .git'
-  let g:ctrlp_use_caching = 0
+  " Vim/Ruby Configuration Files
+  Plug 'vim-ruby/vim-ruby'
+  " 🌸 A command-line fuzzy finder
+  Plug '/usr/local/opt/fzf'
 
   " Run Rspec specs from Vim
   Plug 'thoughtbot/vim-rspec'
@@ -159,6 +157,11 @@ if &diff
   highlight! link DiffText MatchParen
 endif
 
+" Use The Silver Searcher for grepping if available.
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+endif
+
 " Vim settings end }}}
 
 " Bindings {{{
@@ -200,8 +203,9 @@ nnoremap <Leader>a :call RunAllSpecs()<CR>
 nnoremap <Leader>l :call RunLastSpec()<CR>
 nnoremap <Leader>s :call RunNearestSpec()<CR>
 
-" Use Alt-P (π character on macOS) to search for tags
-nnoremap π :CtrlPTag<cr>
+" Search for files with Ctrl+P
+nnoremap <C-p> :FZF<CR>
+
 " Bindings end }}}
 
 " Custom commands {{{
@@ -215,6 +219,10 @@ augroup filetype_ruby
   " Run <Leader><Space> to run Rubocop on the current project and expand the
   " results in a quickfix window.
   autocmd FileType ruby nnoremap <buffer> <Leader><Space> :MakeRubocop<cr>:copen<cr>
+  autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+  autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1 
+  autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+  autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   autocmd FileType ruby nnoremap <buffer> <Leader>p :MakeRubocopAll<cr>:copen<cr>
 augroup END
 
@@ -231,6 +239,12 @@ augroup filetype_vim
   autocmd FileType vim setlocal foldmethod=marker
   " Since our vimrc is nicely categorised, automatically fold it on startup
   autocmd FileType vim setlocal foldlevel=0
+augroup END
+
+" Don't pollute the working directory with random NetrwListing files.
+augroup filetype_netrw
+  autocmd!
+  autocmd FileType netrw setlocal noautowriteall
 augroup END
 
 " Exit help easily to reduce time wasted on being a noob

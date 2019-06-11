@@ -45,6 +45,11 @@ call plug#begin('~/.vim/plugged')
   " 🌸 A command-line fuzzy finder
   Plug '/usr/local/opt/fzf'
 
+  " Open devdocs.io from Vim
+  Plug 'rhysd/devdocs.vim'
+  " Open devdocs.io in Safari on macOS
+  let g:devdocs_open_cmd = 'open -a Safari'
+  
   " Run Rspec specs from Vim
   Plug 'thoughtbot/vim-rspec'
   let g:rspec_command = "!bundle exec rspec {spec}"
@@ -66,7 +71,8 @@ call plug#begin('~/.vim/plugged')
   " Personal Wiki for Vim
   Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
   let g:vimwiki_list = [
-  \ {'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.wiki'}
+  \ {'path': '~/wiki/private/', 'syntax': 'markdown', 'ext': '.wiki'},
+  \ {'path': '~/wiki/public/', 'syntax': 'markdown', 'ext': '.wiki'}
   \]
 
 call plug#end()
@@ -206,11 +212,17 @@ nnoremap <Leader>s :call RunNearestSpec()<CR>
 " Search for files with Ctrl+P
 nnoremap <C-p> :FZF<CR>
 
+" Use DevDocs instead of keywordprg
+nmap K <Plug>(devdocs-under-cursor)
+
 " Bindings end }}}
 
 " Custom commands {{{
+
 command! MakeRubocop :cexpr system("bundle exec rubocop -f e " . shellescape(expand('%:p')))
 command! MakeRubocopAll :cexpr system("bundle exec rubocop -f e")
+command! RipperTags :!ripper-tags -R . --exclude=vendor
+
 " Custom commands end }}}
 
 " Autocmds {{{

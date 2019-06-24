@@ -43,9 +43,12 @@ call plug#begin('~/.vim/plugged')
   " I don't really work with Terraform right now.
   " Plug 'hashivim/vim-terraform'
   " Vim/Ruby Configuration Files
-  Plug 'vim-ruby/vim-ruby'
+  " Turns out auto-completion in a dynamic language sucks. Who knew?
+  " Plug 'vim-ruby/vim-ruby'
   " 🌸 A command-line fuzzy finder
   Plug '/usr/local/opt/fzf'
+  " fzf ❤️ vim
+  Plug 'junegunn/fzf.vim'
 
   " Open devdocs.io from Vim
   Plug 'rhysd/devdocs.vim'
@@ -186,7 +189,8 @@ nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
 " Use space-` to open a temporary project overview pane.
-nnoremap <Leader>` :Vexplore<CR> 
+" I never use this anymore.
+" nnoremap <Leader>` :Vexplore<CR>
 
 " Move around windows with Ctrl+hjkl instead of having to do two keystrokes
 nnoremap <C-h> <C-w>h
@@ -214,7 +218,7 @@ nnoremap <Leader>l :call RunLastSpec()<CR>
 nnoremap <Leader>s :call RunNearestSpec()<CR>
 
 " Search for files with Ctrl+P
-nnoremap <C-p> :FZF<CR>
+nnoremap <C-p> :Files<CR>
 
 " Use DevDocs instead of keywordprg
 nmap K <Plug>(devdocs-under-cursor)
@@ -235,11 +239,12 @@ augroup filetype_ruby
   " Run <Leader><Space> to run Rubocop on the current project and expand the
   " results in a quickfix window.
   autocmd FileType ruby nnoremap <buffer> <Leader><Space> :MakeRubocop<cr>:copen<cr>
+  autocmd FileType ruby nnoremap <buffer> <Leader>p :MakeRubocopAll<cr>:copen<cr>
+  " TODO: Am I really using Autocomplete that much?
   autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
   autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1 
   autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-  autocmd FileType ruby nnoremap <buffer> <Leader>p :MakeRubocopAll<cr>:copen<cr>
 augroup END
 
 augroup filetype_quickfix

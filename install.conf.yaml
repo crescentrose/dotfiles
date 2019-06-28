@@ -13,7 +13,8 @@
     ~/.gemrc:
     ~/.gitconfig:
     ~/.terminalizer/config.yml: terminalizer.config.yml
-    ~/.config/kitty/kitty.conf: kitty.conf
+    ~/.config/kitty: kitty
+
 
 - shell:
     - ['git submodule update --init --recursive', 'Installing submodules']

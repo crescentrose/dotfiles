@@ -10,7 +10,7 @@
 [include]
   path = ~/.gitconfig.local
 [merge]
-	tool = vimdiff
+	tool = fugitive
 
 # use Kitty terminal as diff tool
 # ?????
@@ -24,3 +24,5 @@
   cmd = kitty +kitten diff $LOCAL $REMOTE
 [difftool "kitty.gui"]
   cmd = kitty kitty +kitten diff $LOCAL $REMOTE
+[mergetool "fugitive"]
+	cmd = vim -f -c \"Gdiff\" \"$MERGED\"

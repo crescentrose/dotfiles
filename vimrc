@@ -175,6 +175,19 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 endif
 
+" Vim terminal theme consistent with Base16 Twilight - kitty color config
+" Original by David Hart (https://github.com/hartbit)
+
+let g:terminal_ansi_colors = [
+      \  '#1e1e1e', '#cf6a4c', '#8f9d6a',
+      \  '#f9ee98', '#7587a6', '#9b859d',
+      \  '#afc4db', '#a7a7a7', '#5f5a60',
+      \  '#cf6a4c', '#8f9d6a', '#f9ee98',
+      \  '#7587a6', '#9b859d', '#afc4db',
+      \  '#a7a7a7'
+      \  ]
+hi Terminal ctermbg=none ctermfg=none guibg=#1e1e1e guifg=#a7a7a7
+
 " Vim settings end }}}
 
 " Bindings {{{

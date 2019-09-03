@@ -24,10 +24,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-surround'
   " repeat.vim: enable repeating supported plugin maps with "."
   Plug 'tpope/vim-repeat'
-  " rails.vim: Ruby on Rails power tools
-  " TODO: See how much I actually use this.
-  " Turns out it's a little bit too bloated for my taste.
-  " Plug 'tpope/vim-rails'
   " commentary.vim: comment stuff out
   Plug 'tpope/vim-commentary'
   " fugitive.vim: A Git wrapper so awesome, it should be illegal
@@ -39,12 +35,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'kana/vim-textobj-user'
   " A custom text object for selecting ruby blocks.
   Plug 'nelstrom/vim-textobj-rubyblock'
-  " basic vim/terraform integration
-  " I don't really work with Terraform right now.
-  " Plug 'hashivim/vim-terraform'
-  " Vim/Ruby Configuration Files
-  " Turns out auto-completion in a dynamic language sucks. Who knew?
-  " Plug 'vim-ruby/vim-ruby'
   " 🌸 A command-line fuzzy finder
   Plug '/usr/local/opt/fzf'
   " fzf ❤️ vim
@@ -72,15 +62,6 @@ call plug#begin('~/.vim/plugged')
       \   'filename': 'LightlineFilename',
       \ }
       \ }
-
-  " Personal Wiki for Vim
-  " TODO: see if I prefer Bear for macOS/iOS over this... do I have patience to
-  " maintain a personal wiki?
-  Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
-  let g:vimwiki_list = [
-  \ {'path': '~/wiki/private/', 'syntax': 'markdown', 'ext': '.wiki'},
-  \ {'path': '~/wiki/public/', 'syntax': 'markdown', 'ext': '.wiki'}
-  \]
 
 call plug#end()
 

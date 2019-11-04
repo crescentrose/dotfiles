@@ -50,6 +50,7 @@ call plug#begin('~/.vim/plugged')
     \ '*': ['remove_trailing_lines', 'trim_whitespace'],
     \ 'javascript': ['eslint']
   \ }
+  let g:ale_completion_enabled = 1
   nnoremap <Leader>f :ALEFix<cr>
 
   " Open devdocs.io from Vim
@@ -180,6 +181,9 @@ let g:terminal_ansi_colors = [
       \  '#a7a7a7'
       \  ]
 hi Terminal ctermbg=none ctermfg=none guibg=#1e1e1e guifg=#a7a7a7
+
+" Don't automatically insert suggestions from suggestion menus
+set completeopt=menu,menuone,preview,noselect,noinsert
 
 " Vim settings end }}}
 

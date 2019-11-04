@@ -3,3 +3,5 @@ tags*
 .DS_Store
 .solargraph.yml
 .netrwhist
+
+vendor/bundle

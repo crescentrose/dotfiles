@@ -39,11 +39,23 @@ call plug#begin('~/.vim/plugged')
   Plug '/usr/local/opt/fzf'
   " fzf ❤️ vim
   Plug 'junegunn/fzf.vim'
+  " A solid language pack for Vim.
+  Plug 'sheerun/vim-polyglot'
+
+  " Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support
+  Plug 'dense-analysis/ale'
+  let g:ale_sign_error = '❌'
+  let g:ale_sign_warning = '⚠️'
+  let g:ale_fixers = {
+    \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+    \ 'javascript': ['eslint']
+  \ }
+  nnoremap <Leader>f :ALEFix<cr>
 
   " Open devdocs.io from Vim
   Plug 'rhysd/devdocs.vim'
   " Open devdocs.io in Safari on macOS
-  let g:devdocs_open_cmd = 'open -a Safari'
+  let g:devdocs_open_cmd = 'open -a DevDocs.app'
 
   " Run Rspec specs from Vim
   Plug 'thoughtbot/vim-rspec'
@@ -73,7 +85,7 @@ let &t_ut=''
 
 " Include the built-in matchit.vim plugin
 " Allows for matching of blocks with the % motion
-packadd! matchit 
+packadd! matchit
 runtime macros/matchit.vim
 
 " Plugins end }}}
@@ -83,7 +95,7 @@ runtime macros/matchit.vim
 set number
 set numberwidth=5 " Comfortable line number pane width
 
-set omnifunc=syntaxcomplete#Complete " Use Omnifunc
+set omnifunc=syntaxcomplete#Complete " Use ALE for Omnifunc
 
 set termguicolors " Use the full spread of our monitor's colours
 
@@ -153,7 +165,7 @@ endif
 
 " Use The Silver Searcher for grepping if available.
 if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
+  set grepprg=ag\ --vimgrep
 endif
 
 " Vim terminal theme consistent with Base16 Twilight - kitty color config
@@ -216,6 +228,7 @@ nnoremap <C-p> :Files<CR>
 
 " Use DevDocs instead of keywordprg
 nmap K <Plug>(devdocs-under-cursor)
+vmap K <Plug>(devdocs-under-cursor)
 
 " Bindings end }}}
 

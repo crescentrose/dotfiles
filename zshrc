@@ -60,5 +60,6 @@ export FZF_DEFAULT_OPTS="\
 
 export FZF_DEFAULT_COMMAND="ag -l --nocolor -g \"\""
 export BAT_THEME="OneHalfDark"
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

@@ -31,6 +31,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-fugitive'
   " A colorful, dark color scheme for Vim.
   Plug 'nanotech/jellybeans.vim'
+  " Modern theme for modern VIMs
+  Plug 'ayu-theme/ayu-vim'
   " Vim plugin: Create your own text objects
   Plug 'kana/vim-textobj-user'
   " A custom text object for selecting ruby blocks.
@@ -41,6 +43,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf.vim'
   " A solid language pack for Vim.
   Plug 'sheerun/vim-polyglot'
+  " 📔 The interactive scratchpad for hackers.
+  Plug 'metakirby5/codi.vim'
 
   " Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support
   Plug 'dense-analysis/ale'
@@ -77,12 +81,6 @@ call plug#begin('~/.vim/plugged')
       \ }
 
 call plug#end()
-
-" Light it up!
-colorscheme jellybeans
-
-" But only slightly.
-let &t_ut=''
 
 " Include the built-in matchit.vim plugin
 " Allows for matching of blocks with the % motion
@@ -181,6 +179,12 @@ let g:terminal_ansi_colors = [
       \  '#a7a7a7'
       \  ]
 hi Terminal ctermbg=none ctermfg=none guibg=#1e1e1e guifg=#a7a7a7
+
+" Light it up!
+colorscheme jellybeans
+
+" But only slightly.
+let &t_ut=''
 
 " Don't automatically insert suggestions from suggestion menus
 set completeopt=menu,menuone,preview,noselect,noinsert

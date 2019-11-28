@@ -152,6 +152,9 @@ set fillchars+=vert:│
 set list
 set listchars=tab:␉·,trail:␠,nbsp:⎵
 
+" (resigned sigh)
+set mouse=a
+
 " Make some file browser adjustments
 let g:netrw_liststyle = 3 " Tree view is the default view
 let g:netrw_banner = 0 " Hide the directory banner permanently

@@ -29,14 +29,8 @@ call plug#begin('~/.vim/plugged')
   " fugitive.vim: A Git wrapper so awesome, it should be illegal
   " TODO: I really just need a small subset of this.
   Plug 'tpope/vim-fugitive'
-  " A colorful, dark color scheme for Vim.
-  Plug 'nanotech/jellybeans.vim'
-  " Modern theme for modern VIMs
-  Plug 'ayu-theme/ayu-vim'
-  " Vim plugin: Create your own text objects
-  Plug 'kana/vim-textobj-user'
-  " A custom text object for selecting ruby blocks.
-  Plug 'nelstrom/vim-textobj-rubyblock'
+  " Oceanic Next theme for neovim
+  Plug 'mhartington/oceanic-next'
   " 🌸 A command-line fuzzy finder
   Plug '/usr/local/opt/fzf'
   " fzf ❤️ vim
@@ -57,20 +51,13 @@ call plug#begin('~/.vim/plugged')
   let g:ale_completion_enabled = 1
   nnoremap <Leader>f :ALEFix<cr>
 
-  " Open devdocs.io from Vim
-  Plug 'rhysd/devdocs.vim'
-  " Open devdocs.io in Safari on macOS
-  let g:devdocs_open_cmd = 'open -a DevDocs.app'
-
-  " Run Rspec specs from Vim
-  Plug 'thoughtbot/vim-rspec'
-  let g:rspec_command = "!bundle exec rspec {spec}"
-  let g:rspec_runner = "os_x_iterm2"
+  Plug 'puremourning/vimspector'
+  let g:vimspector_enable_mappings = 'HUMAN'
 
   " A light and configurable statusline/tabline plugin for Vim 
   Plug 'itchyny/lightline.vim'
   let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
+      \ 'colorscheme': 'oceanicnext',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'readonly', 'filename', 'modified' ] ]
@@ -184,7 +171,9 @@ let g:terminal_ansi_colors = [
 hi Terminal ctermbg=none ctermfg=none guibg=#1e1e1e guifg=#a7a7a7
 
 " Light it up!
-colorscheme jellybeans
+let g:oceanic_next_terminal_bold = 1
+let g:oceanic_next_terminal_italic = 1
+colorscheme OceanicNext
 
 " But only slightly.
 let &t_ut=''

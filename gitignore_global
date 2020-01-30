@@ -3,5 +3,6 @@ tags*
 .DS_Store
 .solargraph.yml
 .netrwhist
+.vimspector.json
 
 vendor/bundle

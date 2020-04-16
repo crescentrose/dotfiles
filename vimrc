@@ -31,14 +31,18 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-fugitive'
   " Oceanic Next theme for neovim
   Plug 'mhartington/oceanic-next'
-  " 🌸 A command-line fuzzy finder
-  Plug '/usr/local/opt/fzf'
-  " fzf ❤️ vim
-  Plug 'junegunn/fzf.vim'
   " A solid language pack for Vim.
   Plug 'sheerun/vim-polyglot'
   " 📔 The interactive scratchpad for hackers.
   Plug 'metakirby5/codi.vim'
+  " EditorConfig plugin for Vim http://editorconfig.org
+  Plug 'editorconfig/editorconfig-vim'
+  " fzf ❤️ vim
+  Plug 'junegunn/fzf.vim'
+
+  " 🌸 A command-line fuzzy finder
+  Plug '/usr/local/opt/fzf'
+  " let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
   " Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support
   Plug 'dense-analysis/ale'
@@ -83,7 +87,7 @@ set numberwidth=5 " Comfortable line number pane width
 
 set omnifunc=syntaxcomplete#Complete " Use ALE for Omnifunc
 
-set termguicolors " Use the full spread of our monitor's colours
+set notermguicolors " termguicolors do not work over mosh :(
 
 set undodir=~/.vim/undodir " Permanent undos
 set undofile
@@ -176,7 +180,7 @@ let g:oceanic_next_terminal_italic = 1
 colorscheme OceanicNext
 
 " But only slightly.
-let &t_ut=''
+" let &t_ut=''
 
 " Don't automatically insert suggestions from suggestion menus
 set completeopt=menu,menuone,preview,noselect,noinsert
@@ -290,3 +294,5 @@ function! LightlineFilename()
   return expand('%')
 endfunction
 " Custom functions end }}}
+
+

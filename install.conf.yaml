@@ -1,6 +1,6 @@
 - defaults:
     links:
-        relink: true
+      relink: true
 
 - clean: ['~']
 

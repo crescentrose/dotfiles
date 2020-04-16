@@ -58,7 +58,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'puremourning/vimspector'
   let g:vimspector_enable_mappings = 'HUMAN'
 
-  " A light and configurable statusline/tabline plugin for Vim 
+  " A light and configurable statusline/tabline plugin for Vim
   Plug 'itchyny/lightline.vim'
   let g:lightline = {
       \ 'colorscheme': 'oceanicnext',
@@ -181,6 +181,12 @@ colorscheme OceanicNext
 
 " But only slightly.
 " let &t_ut=''
+
+" Hack for tmux
+if !has("gui_running")
+  set t_Co=256
+  set term=xterm-256color
+endif
 
 " Don't automatically insert suggestions from suggestion menus
 set completeopt=menu,menuone,preview,noselect,noinsert

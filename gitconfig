@@ -26,6 +26,3 @@
   cmd = kitty kitty +kitten diff $LOCAL $REMOTE
 [mergetool "fugitive"]
 	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
-[user]
-	email = ivan@halcyon.hr
-	name = Ivan Ostric

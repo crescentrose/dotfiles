@@ -39,7 +39,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'editorconfig/editorconfig-vim'
   " fzf ❤️ vim
   Plug 'junegunn/fzf.vim'
-
+  " Seamless navigation between tmux panes and vim splits
+  Plug 'christoomey/vim-tmux-navigator'
   " 🌸 A command-line fuzzy finder
   Plug '/usr/local/opt/fzf'
   " let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
@@ -209,10 +210,11 @@ nnoremap <Down> :echoe "Use j"<CR>
 " nnoremap <Leader>` :Vexplore<CR>
 
 " Move around windows with Ctrl+hjkl instead of having to do two keystrokes
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" This should be resolved with vim-tmux-navigator
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
 
 " Toggle relative and absolute line numbers
 nnoremap <Leader>o :set relativenumber!<cr>
@@ -300,5 +302,4 @@ function! LightlineFilename()
   return expand('%')
 endfunction
 " Custom functions end }}}
-
 

@@ -46,7 +46,9 @@ safe_source ~/.aliasrc
 # make sure GPG can do its thing on macOS
 export GPG_TTY=$(tty)
 
-eval "$($HOME/.rbenv/bin/rbenv init -)"
+if [[ -f "$HOME/.rbenv/bin/rbenv" ]]; then
+  eval "$($HOME/.rbenv/bin/rbenv init -)"
+fi
 
 zplug load 
 

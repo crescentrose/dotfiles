@@ -82,18 +82,27 @@ runtime macros/matchit.vim
 " Plugins end }}}
 
 " Vim settings {{{
+
+" Hack for tmux
+" This has to be first so that various terminal options would not be overriden
+" later
+if !has("gui_running")
+  set t_Co=256
+  set term=xterm-256color
+endif
+
 " Show line numbers on the side
 set number
 set numberwidth=5 " Comfortable line number pane width
 
 set omnifunc=syntaxcomplete#Complete " Use ALE for Omnifunc
 
-set notermguicolors " termguicolors do not work over mosh :(
+set termguicolors " termguicolors do not work over mosh :(
 
 set undodir=~/.vim/undodir " Permanent undos
 set undofile
 
-set backspace=2 " Backspace deletes like most programs in instert mode
+set backspace=2 " Backspace deletes like most programs in insert mode
 
 set nobackup " Don't write the pesky swap files
 set nowritebackup
@@ -126,7 +135,6 @@ set splitbelow
 set splitright
 
 " If I head that fucking ~dInG!~ one more time I swear
-set visualbell
 set vb t_vb=
 
 set encoding=utf-8 " Should be default, just in case
@@ -180,14 +188,8 @@ let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
 colorscheme OceanicNext
 
-" But only slightly.
-" let &t_ut=''
-
-" Hack for tmux
-if !has("gui_running")
-  set t_Co=256
-  set term=xterm-256color
-endif
+" But we want our background to be transparent
+let &t_ut=''
 
 " Don't automatically insert suggestions from suggestion menus
 set completeopt=menu,menuone,preview,noselect,noinsert
@@ -210,11 +212,14 @@ nnoremap <Down> :echoe "Use j"<CR>
 " nnoremap <Leader>` :Vexplore<CR>
 
 " Move around windows with Ctrl+hjkl instead of having to do two keystrokes
-" This should be resolved with vim-tmux-navigator
-" nnoremap <C-h> <C-w>h
-" nnoremap <C-j> <C-w>j
-" nnoremap <C-k> <C-w>k
-" nnoremap <C-l> <C-w>l
+" Only do this outside of tmux, as it's resolved with `vim-tmux-navigator`
+" otherwise
+if !$TMUX
+  nnoremap <C-h> <C-w>h
+  nnoremap <C-j> <C-w>j
+  nnoremap <C-k> <C-w>k
+  nnoremap <C-l> <C-w>l
+endif
 
 " Toggle relative and absolute line numbers
 nnoremap <Leader>o :set relativenumber!<cr>

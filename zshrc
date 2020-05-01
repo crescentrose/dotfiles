@@ -46,8 +46,10 @@ safe_source ~/.aliasrc
 # make sure GPG can do its thing on macOS
 export GPG_TTY=$(tty)
 
-if [[ -f "$HOME/.rbenv/bin/rbenv" ]]; then
-  eval "$($HOME/.rbenv/bin/rbenv init -)"
+# engage rbenv if it is installed
+if command -v 'rbenv' >/dev/null; then
+  RBENV="$(which rbenv)"
+  eval "$($RBENV init -)"
 fi
 
 zplug load 
@@ -58,16 +60,14 @@ export FZF_DEFAULT_OPTS="\
   --ansi \
 "
 
-  # --preview-window 'right:60%' \
-  # --preview 'bat --color=always --style=header,grid --line-range :300 {}' \
-# "
-
 export FZF_DEFAULT_COMMAND="ag -l --nocolor -g \"\""
 export BAT_THEME="OneHalfDark"
 
 # Set up this for the ancient OpenSSL version required by Ruby 2.4 and down.
-export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
-export SSL_CERT_DIR=/etc/ssl/certs
+if [[ uname =~ Linux ]]; then
+  export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+  export SSL_CERT_DIR=/etc/ssl/certs
+fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -76,5 +76,3 @@ export NVM_DIR="$HOME/.nvm"
 if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
-
-export PATH="$HOME/.rbenv/bin:$PATH"

@@ -20,5 +20,4 @@
 
 - shell:
     - ['git submodule update --init --recursive', 'Installing submodules']
-    - ['brew install fzf', 'Installing fuzzy finder']
-    - ['brew install rbenv', 'Installing rbenv']
+    - ['bash system_setup.sh', 'Verify system state']

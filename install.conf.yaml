@@ -4,6 +4,10 @@
 
 - clean: ['~']
 
+- create:
+  - ~/.config
+  - ~/.terminalizer
+
 - link:
     ~/.tmux.conf: config/tmux.conf
     ~/.vim: config/vim

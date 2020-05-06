@@ -5,18 +5,20 @@
 - clean: ['~']
 
 - link:
-    ~/.tmux:
-    ~/.tmux.conf:
-    ~/.vim:
-    ~/.vimrc:
-    ~/.zshrc:
-    ~/.aliasrc:
-    ~/.gitignore_global:
-    ~/.gemrc:
-    ~/.gitconfig:
-    ~/.terminalizer/config.yml: terminalizer.config.yml
-    ~/.config/kitty: kitty
-
+    ~/.tmux.conf: config/tmux.conf
+    ~/.vim: config/vim
+    ~/.vimrc: config/vimrc
+    ~/.zshrc: config/zshrc
+    ~/.aliasrc: config/aliasrc
+    ~/.gitignore_global: config/gitignore_global
+    ~/.gemrc: config/gemrc
+    ~/.gitconfig: config/gitconfig
+    ~/.config/kitty:
+      relink: true
+      path: config/kitty
+    ~/.terminalizer/config.yml:
+      relink: true
+      path: config/terminalizer.config.yml
 
 - shell:
     - ['git submodule update --init --recursive', 'Installing submodules']

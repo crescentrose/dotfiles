@@ -1,8 +1,11 @@
 .vscode
-tags*
+tags
 .DS_Store
 .solargraph.yml
 .netrwhist
 .vimspector.json
 
 vendor/bundle
+
+# Elemental extravaganza
+config/initializers/backport_pg_10_support_to_rails_4.rb

@@ -20,4 +20,3 @@
 
 - shell:
     - ['git submodule update --init --recursive', 'Installing submodules']
-    - ['bash system_setup.sh', 'Verify system state']

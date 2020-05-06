@@ -26,15 +26,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-repeat'
   " commentary.vim: comment stuff out
   Plug 'tpope/vim-commentary'
-  " fugitive.vim: A Git wrapper so awesome, it should be illegal
-  " TODO: I really just need a small subset of this.
-  Plug 'tpope/vim-fugitive'
   " Oceanic Next theme for neovim
   Plug 'mhartington/oceanic-next'
   " A solid language pack for Vim.
   Plug 'sheerun/vim-polyglot'
-  " 📔 The interactive scratchpad for hackers.
-  Plug 'metakirby5/codi.vim'
   " EditorConfig plugin for Vim http://editorconfig.org
   Plug 'editorconfig/editorconfig-vim'
   " fzf ❤️ vim
@@ -93,7 +88,8 @@ endif
 
 " Show line numbers on the side
 set number
-set numberwidth=5 " Comfortable line number pane width
+set relativenumber " show both the relative number and the actual line number
+set numberwidth=4 " Comfortable line number pane width
 
 set omnifunc=syntaxcomplete#Complete " Use ALE for Omnifunc
 
@@ -141,7 +137,7 @@ set encoding=utf-8 " Should be default, just in case
 
 " Put some lines around the cursor so that we have at least a little bit of
 " context
-set scrolloff=3
+set scrolloff=5
 " If you don't have a color terminal get with the times.
 syntax on
 
@@ -158,7 +154,6 @@ set mouse=a
 " Make some file browser adjustments
 let g:netrw_liststyle = 3 " Tree view is the default view
 let g:netrw_banner = 0 " Hide the directory banner permanently
-let g:netrw_winsize = 25 " Reduce the size of the split to 25%
 
 " Vim diff tools
 if &diff
@@ -172,7 +167,6 @@ endif
 
 " Vim terminal theme consistent with Base16 Twilight - kitty color config
 " Original by David Hart (https://github.com/hartbit)
-
 let g:terminal_ansi_colors = [
       \  '#1e1e1e', '#cf6a4c', '#8f9d6a',
       \  '#f9ee98', '#7587a6', '#9b859d',
@@ -201,16 +195,6 @@ set completeopt=menu,menuone,preview,noselect,noinsert
 nmap k gk
 nmap j gj
 
-" Get off my lawn
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
-
-" Use space-` to open a temporary project overview pane.
-" I never use this anymore.
-" nnoremap <Leader>` :Vexplore<CR>
-
 " Move around windows with Ctrl+hjkl instead of having to do two keystrokes
 " Only do this outside of tmux, as it's resolved with `vim-tmux-navigator`
 " otherwise
@@ -221,75 +205,28 @@ if !$TMUX
   nnoremap <C-l> <C-w>l
 endif
 
-" Toggle relative and absolute line numbers
-nnoremap <Leader>o :set relativenumber!<cr>
-
 " Open/close the quickfix pane and go back and forth between errors
 nnoremap <Leader>q :copen<cr>
 nnoremap <Leader>h :cp<cr>
 nnoremap <Leader>l :cn<cr>
 
-" Maximum config stealing efficiency bindings!  S-so to save and re-source vimrc
-" S-vc to open vimrc in new tab
-nnoremap <leader>so :w<cr>:source ~/.vimrc<cr>
-nnoremap <leader>vc :tabe ~/.vimrc<cr>
-
-" vim-rspec bindings
-nnoremap <Leader>t :call RunCurrentSpecFile()<CR>
-nnoremap <Leader>a :call RunAllSpecs()<CR>
-nnoremap <Leader>l :call RunLastSpec()<CR>
-nnoremap <Leader>s :call RunNearestSpec()<CR>
-
 " Search for files with Ctrl+P
 nnoremap <C-p> :Files<CR>
-
-" Use DevDocs instead of keywordprg
-nmap K <Plug>(devdocs-under-cursor)
-vmap K <Plug>(devdocs-under-cursor)
 
 " Bindings end }}}
 
 " Custom commands {{{
 
-command! MakeRubocop :cexpr system("bundle exec rubocop -f e " . shellescape(expand('%:p')))
-command! MakeRubocopAll :cexpr system("bundle exec rubocop -f e")
 command! RipperTags :!ripper-tags -R . --exclude=vendor
 
 " Custom commands end }}}
 
 " Autocmds {{{
-augroup filetype_ruby
-  autocmd!
-  " Run <Leader><Space> to run Rubocop on the current project and expand the
-  " results in a quickfix window.
-  autocmd FileType ruby nnoremap <buffer> <Leader><Space> :MakeRubocop<cr>:copen<cr>
-  autocmd FileType ruby nnoremap <buffer> <Leader>p :MakeRubocopAll<cr>:copen<cr>
-  " TODO: Am I really using Autocomplete that much?
-  autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-  autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1 
-  autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-  autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-augroup END
-
 augroup filetype_quickfix
   autocmd!
   " Quickly hide the quickfix window if we so desire.
   autocmd Filetype qf nmap <buffer> q :q<cr>
   autocmd Filetype qf setlocal wrap
-augroup END
-
-augroup filetype_vim
-  autocmd!
-  " Use automatic marker folds for Vim files
-  autocmd FileType vim setlocal foldmethod=marker
-  " Since our vimrc is nicely categorised, automatically fold it on startup
-  autocmd FileType vim setlocal foldlevel=0
-augroup END
-
-" Don't pollute the working directory with random NetrwListing files.
-augroup filetype_netrw
-  autocmd!
-  autocmd FileType netrw setlocal noautowriteall
 augroup END
 
 " Exit help easily to reduce time wasted on being a noob
@@ -308,3 +245,4 @@ function! LightlineFilename()
 endfunction
 " Custom functions end }}}
 
+" vim: fdm=marker fdl=0

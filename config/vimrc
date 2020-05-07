@@ -209,6 +209,9 @@ nnoremap <Leader>l :cn<cr>
 " Search for files with Ctrl+P
 nnoremap <C-p> :Files<CR>
 
+" Search for snippets with space-space
+nnoremap <Leader><Space> :call SnippetFinder()<cr>
+
 " Bindings end }}}
 
 " Custom commands {{{
@@ -216,6 +219,7 @@ nnoremap <C-p> :Files<CR>
 command! RipperTags :!ripper-tags -R . --exclude=vendor
 command! DarkMode :call DarkMode()
 command! LightMode :call LightMode()
+command! Snippets :call SnippetFinder()
 
 " Custom commands end }}}
 
@@ -261,6 +265,42 @@ function! LightlineFilename()
   endif
   return expand('%')
 endfunction
+
+" minisnip {{{
+" a hyper-minimalist fzf-powered snippet manager
+
+" place your snippets here:
+let g:snippet_dir = "~/Code/dotfiles/snippets/"
+let g:snippet_preview = "bat --color=always --style=changes {1}"
+
+function! SnippetFinder()
+  " look for snippets in a directory that matches the current file type
+  if &filetype == ""
+    let snippet_dir = g:snippetdir . "/misc/*"
+  else
+    let snippet_dir = g:snippetdir . "/" . &filetype . "/*"
+  endif
+
+  call fzf#run(fzf#wrap({'sink': function("SnippetWriter"),
+        \ 'source': 'find ' . snippet_dir . ' -type f -exec printf "{}:" \; -exec head -n 1 {} \;',
+        \ 'options': '--delimiter=":" --preview="'. g:snippet_preview .'" --with-nth=2..'}))
+endfunction
+
+function! SnippetWriter(snippet_details)
+  " fzf outputs the result in the form of 'filename:first_line_in_file' so we
+  " have to get the filename from that mess
+  let filename = split(a:snippet_details, ":")[0]
+
+  " the first line is a comment, so we will remove that
+  " TODO: possible issue if the user is lazy and does not add a descriptive
+  " comment on the top of the file - but then what are they gonna be searching
+  " by?
+  let cmd = "tail +2 " . filename
+  execute "read !" . cmd
+endfunction
+
+" }}}
+
 " Custom functions end }}}
 
 " Automatic light mode / dark mode switcher {{{

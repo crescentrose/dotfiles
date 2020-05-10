@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+SNIPPET_DIR="$HOME/Code/dotfiles/snippets/shell"
+SNIPPET_PREVIEW="bat --color=always --style=changes {1}"
+
+FILENAME=$(find $SNIPPET_DIR -type f -exec printf "{}:" \; -exec head -n 1 {} \; | \
+  fzf --height 40% --reverse --delimiter=":" --preview="$SNIPPET_PREVIEW" --with-nth=2.. |\
+  sed "s/\(.*\):#.*$/\1/")
+
+tail +2 $FILENAME | perl -pe 'chomp if eof'
+

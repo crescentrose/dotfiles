@@ -23,6 +23,9 @@
     ~/.terminalizer/config.yml:
       relink: true
       path: config/terminalizer.config.yml
+    ~/bin:
+      relink: true
+      path: bin
 
 - shell:
     - ['git submodule update --init --recursive', 'Installing submodules']

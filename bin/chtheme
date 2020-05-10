@@ -1,0 +1,18 @@
+#!/bin/zsh
+
+if ! command -v kitty >/dev/null; then
+  exit 1
+fi
+
+case "$1" in
+"light")
+  kitty @ set-colors -a -c "$HOME/.config/kitty/themes/base16-tomorrow.conf"
+  ;;
+"dark")
+  kitty @ set-colors -a -c "$HOME/.config/kitty/themes/base16-twilight.conf"
+  ;;
+*)
+  cat <<EOF
+    usage: chtheme [light|dark]
+EOF
+esac

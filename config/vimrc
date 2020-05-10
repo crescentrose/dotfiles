@@ -1,6 +1,5 @@
 " @crescentrose's vimrc
 " a magic land of mystery and excitement
-" recommendation: open with folds for nice categorisation
 " soundtrack: https://www.youtube.com/watch?v=--9aIYos4M8
 
 filetype indent plugin on
@@ -38,7 +37,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'christoomey/vim-tmux-navigator'
   " 🌸 A command-line fuzzy finder
   Plug '/usr/local/opt/fzf'
-  " let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
   " Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support
   Plug 'dense-analysis/ale'
@@ -57,7 +55,6 @@ call plug#begin('~/.vim/plugged')
   " A light and configurable statusline/tabline plugin for Vim
   Plug 'itchyny/lightline.vim'
   let g:lightline = {
-      \ 'colorscheme': 'oceanicnext',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'readonly', 'filename', 'modified' ] ]
@@ -180,7 +177,6 @@ hi Terminal ctermbg=none ctermfg=none guibg=#1e1e1e guifg=#a7a7a7
 " Light it up!
 let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
-colorscheme OceanicNext
 
 " But we want our background to be transparent
 let &t_ut=''
@@ -218,6 +214,8 @@ nnoremap <C-p> :Files<CR>
 " Custom commands {{{
 
 command! RipperTags :!ripper-tags -R . --exclude=vendor
+command! DarkMode :call DarkMode()
+command! LightMode :call LightMode()
 
 " Custom commands end }}}
 
@@ -234,6 +232,26 @@ autocmd Filetype help nmap <buffer> q :q<cr>
 " Autocmds end }}}
 
 " Custom functions {{{
+
+" Light mode / dark mode switch
+function! DarkMode()
+  colorscheme OceanicNext
+  let g:lightline.colorscheme = 'wombat'
+  call LightlineReload()
+endfunction
+
+function! LightMode()
+  colorscheme OceanicNextLight
+  let g:lightline.colorscheme = 'ayu_light'
+  call LightlineReload()
+endfunction
+
+function! LightlineReload()
+  call lightline#init()
+  call lightline#colorscheme()
+  call lightline#update()
+endfunction
+
 " Retrieve a filename to show in Lightline.
 function! LightlineFilename()
   let root = fnamemodify(get(b:, 'git_dir'), ':h')
@@ -244,5 +262,19 @@ function! LightlineFilename()
   return expand('%')
 endfunction
 " Custom functions end }}}
+
+" Automatic light mode / dark mode switcher {{{
+" You will need to build and install https://github.com/crescentrose/sunshine
+if executable($HOME . "/.cargo/bin/sunshine")
+  let time = trim(system($HOME . "/.cargo/bin/sunshine -s \"!@45 15\""))
+  if time ==# "day"
+    call LightMode()
+  else
+    call DarkMode()
+  endif
+else
+  call DarkMode()
+endif
+" }}}
 
 " vim: fdm=marker fdl=0

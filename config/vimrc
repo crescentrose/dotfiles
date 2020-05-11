@@ -270,7 +270,7 @@ endfunction
 " a hyper-minimalist fzf-powered snippet manager
 
 " place your snippets here:
-let g:snippet_dir = "~/Code/dotfiles/snippets/"
+let g:snippetdir = "~/Code/dotfiles/snippets/"
 let g:snippet_preview = "bat --color=always --style=changes {1}"
 
 function! SnippetFinder()

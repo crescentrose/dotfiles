@@ -10,26 +10,26 @@ function safe_source {
 }
 
 function zsh_minisnip {
-  emulate -L zsh
   local snippet sub subs replacement key
   snippet=$(minisnip)
   LBUFFER=$snippet
   zle reset-prompt
 
+  # Get any substitutions from the snippet
   subs=($(egrep -o "{:[a-zA-Z0-9]+:}" <<< "$snippet"))
-  if [[ -n "$subs" ]]; then
-    for sub in $subs; do
-      local subname=$(sed -E "s/[{:}]//g" <<< "$sub")
-      zle -R -c "$subname: _"
-      read -k key
 
+  if [[ -n "$subs" ]]; then
+    # Run through all placeholders
+    # ${(u)subs[@]} means only unique members of the array
+    for sub in ${(u)subs[@]}; do
+      local subname=$(sed -E "s/[{:}]//g" <<< "$sub")
+      zle -R -c "$subname: _" # underscore is a hacky way of displaying a cursor
+      read -k key
+      # lifted almost verbatim from the zsh manual
       while [[ '#key' -ne '##\n' && '#key' -ne '##\r' ]]; do
         if [[ '#key' -eq '##^?' || '#key' -eq '##^h' ]]; then
-          # Delete a character
           [[ -n $replacement ]] && replacement=${replacement[1,-2]}
         elif [[ '#key' -eq '##\C-g' ]]; then
-          # Abort: returning 1 signals to zle that this
-          # is an abnormal termination.
           return 1
         else
           replacement="${replacement}${key}"
@@ -37,6 +37,8 @@ function zsh_minisnip {
         zle -R -c "$subname: ${replacement}_"
         read -k key || return 1
       done
+
+      # perform the replacement, clean up and display it in the buffer
       snippet=$(sed -E "s/$sub/$replacement/g" <<< "$snippet")
       replacement=
       key=
@@ -44,9 +46,6 @@ function zsh_minisnip {
       zle reset-prompt
     done
   fi
-
-  LBUFFER=$snippet
-  zle reset-prompt
 }
 
 # }}}
@@ -84,7 +83,7 @@ if command -v 'rbenv' >/dev/null; then
 fi
 
 # Engage FZF
-safe_source "~/.fzf.zsh"
+safe_source "$HOME/.fzf.zsh"
 
 # Load NVM
 export NVM_DIR="$HOME/.nvm"

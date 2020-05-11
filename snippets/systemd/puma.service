@@ -1,0 +1,49 @@
+# systemd: daemonize a Ruby on Rails application
+# More info:
+# https://github.com/puma/puma/blob/master/docs/systemd.md#alternative-forking-configuration
+#
+# Substitute {username}, {application} and {ruby_version} to get your
+# full service file, and then pick betrween RVM or rbenv.
+# e.g. (in Vi): %s/{ruby_version}/2.6.3/g
+
+[Unit]
+Description=Puma HTTP server
+After=network.target
+
+[Service]
+# Background process configuration (use with --daemon in ExecStart)
+Type=forking
+
+# Preferably configure a non-privileged user
+User={username}
+
+# The path to the puma application root
+WorkingDirectory=/srv/{application}/current
+
+# The command to start Puma
+ExecStart=/srv/{application}/current/bin/bundle exec puma -C /srv/{application}/shared/puma.rb --daemon
+
+# The command to stop Puma
+ExecStop=/srv/{application}/current/bin/bundle exec pumactl -S /srv/{application}/shared/tmp/pids/puma.state stop
+
+# Should systemd restart puma?
+Restart=on-failure
+
+# `puma_ctl restart` wouldn't work without this.
+# See the original config file for details.
+RemainAfterExit=yes
+
+# Choose one or the other (rvm or rbenv) - using both will muck it up.
+
+# Include these environment variables if you are using RVM - don't forget
+# to update with proper paths depending on your Ruby version!
+Environment=GEM_HOME=/srv/{application}/.rvm/gems/ruby-{ruby_version}
+Environment=PATH=/srv/{application}/.rvm/gems/ruby{ruby_version}/bin:/srv/{application}/.rvm/gems/ruby-{ruby_version}@global/bin:/srv/{application}/.rvm/rubies/ruby-{ruby_version}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/srv/{application}/.rvm/bin
+
+# Include these environment variables if you are using rbenv - no need to
+# specify the proper version because rbenv is magic!
+Environment=RBENV_ROOT=/srv/{application}/.rbenv
+Environment=PATH=/srv/{application}/.rbenv/shims:/srv/{application}/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+
+[Install]
+WantedBy=multi-user.target

@@ -121,6 +121,8 @@ export BAT_THEME="OneHalfDark"
 
 # make sure GPG can do its thing on macOS
 export GPG_TTY=$(tty)
+
+export CDPATH=".:$HOME/Code"
 # }}}
 
 # Autocompletion {{{

@@ -4,9 +4,17 @@ alias editalias="vim ~/.aliasrc; source ~/.aliasrc"
 alias ls="ls -alh"
 alias icat="kitty +kitten icat"
 alias clear_safari_hsts_cache="killall nsurlstoraged; rm -f ~/Library/Cookies/HSTS.plist"
+alias addsnippet="vim ~/Code/dotfiles/snippets/."
 
 posta() {
   curl -XPOST "https://www.posta.hr/chrome.aspx?vrsta=1&query=$1" \
     -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36' \
     --silent | jq
 }
+
+gitignore() {
+  local langs=${(j:,:)@}
+  curl "https://www.gitignore.io/api/$langs" --silent
+}
+
+# vim: ft=zsh

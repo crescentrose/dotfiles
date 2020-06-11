@@ -305,8 +305,8 @@ endfunction
 
 " Automatic light mode / dark mode switcher {{{
 " You will need to build and install https://github.com/crescentrose/sunshine
-if executable($HOME . "/.cargo/bin/sunshine")
-  let time = trim(system($HOME . "/.cargo/bin/sunshine -s \"!@45 15\""))
+if executable("sunshine")
+  let time = trim(system("sunshine -s \"!@45 15\""))
   if time ==# "day"
     call LightMode()
   else

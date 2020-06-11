@@ -26,3 +26,5 @@
   cmd = kitty kitty +kitten diff $LOCAL $REMOTE
 [mergetool "fugitive"]
 	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
+[pull]
+	ff = only

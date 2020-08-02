@@ -25,6 +25,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-repeat'
   " commentary.vim: comment stuff out
   Plug 'tpope/vim-commentary'
+  " vinegar.vim: Combine with netrw to create a delicious salad dressing
+  Plug 'tpope/vim-vinegar'
   " Oceanic Next theme for neovim
   Plug 'mhartington/oceanic-next'
   " A solid language pack for Vim.
@@ -49,8 +51,8 @@ call plug#begin('~/.vim/plugged')
   let g:ale_completion_enabled = 1
   nnoremap <Leader>f :ALEFix<cr>
 
-  Plug 'puremourning/vimspector'
-  let g:vimspector_enable_mappings = 'HUMAN'
+  " Plug 'puremourning/vimspector'
+  " let g:vimspector_enable_mappings = 'HUMAN'
 
   " A light and configurable statusline/tabline plugin for Vim
   Plug 'itchyny/lightline.vim'
@@ -305,16 +307,29 @@ endfunction
 
 " Automatic light mode / dark mode switcher {{{
 " You will need to build and install https://github.com/crescentrose/sunshine
-if executable("sunshine")
-  let time = trim(system("sunshine -s \"!@45 15\""))
+function! ChangeColorScheme(channel, msg)
+  let time = trim(a:msg)
   if time ==# "day"
     call LightMode()
   else
     call DarkMode()
   endif
-else
-  call DarkMode()
-endif
+endfunction
+
+function! Sunshine(timer)
+  if executable("sunshine")
+    let job = job_start(["sunshine", "-s", "@45 15"], {"out_cb": "ChangeColorScheme"})
+  else
+    call DarkMode()
+  endif
+endfunction
+
+function! AutoDarkModeSetup()
+  let timer = timer_start(30000, 'Sunshine', {'repeat': -1})
+  call Sunshine(timer) " Initial call to setup the theme
+endfunction
+
+call AutoDarkModeSetup()
 " }}}
 
 " vim: fdm=marker fdl=0

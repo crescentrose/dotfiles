@@ -13,6 +13,7 @@
     ~/.vim: config/vim
     ~/.vimrc: config/vimrc
     ~/.zshrc: config/zshrc
+    ~/.irbrc: config/irbrc
     ~/.aliasrc: config/aliasrc
     ~/.gitignore_global: config/gitignore_global
     ~/.gemrc: config/gemrc

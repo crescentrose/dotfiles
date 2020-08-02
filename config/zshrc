@@ -1,7 +1,7 @@
 # @crescentrose's zsh file
 # not nearly as buff as `vimrc` 😰
 
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.symfony/bin:$PATH"
 
 # Custom functions {{{
 # Ensure that the files we want to source actually exist.
@@ -62,7 +62,7 @@ zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
 zplug 'zsh-users/zsh-syntax-highlighting', defer:2
 # zsh-completions: approximately one billion completion scripts
 zplug 'zsh-users/zsh-completions', defer:2
-zplug 'zsh-users/zsh-autosuggestions'
+zplug 'zsh-users/zsh-autosuggestions', defer:2
 
 zplug load 
 
@@ -87,7 +87,7 @@ safe_source "$HOME/.fzf.zsh"
 
 # Load NVM
 export NVM_DIR="$HOME/.nvm"
-safe_source "$NVM_DIR/nvm.sh" 
+source "$HOME/bin/lazy_load_nvm.sh"
 
 # use Linuxbrew if on Linux
 if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] then

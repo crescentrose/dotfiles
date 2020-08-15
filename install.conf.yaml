@@ -21,6 +21,12 @@
     ~/.config/kitty:
       relink: true
       path: config/kitty
+    ~/.config/sway:
+      relink: true
+      path: config/sway
+    ~/.config/waybar:
+      relink: true
+      path: config/waybar
     ~/.terminalizer/config.yml:
       relink: true
       path: config/terminalizer.config.yml

@@ -318,7 +318,7 @@ endfunction
 
 function! Sunshine(timer)
   if executable("sunshine")
-    let job = job_start(["sunshine", "-s", "@45 15"], {"out_cb": "ChangeColorScheme"})
+    let job = job_start(["sunshine", "-s", "#Rijeka, Croatia"], {"out_cb": "ChangeColorScheme"})
   else
     call DarkMode()
   endif

@@ -96,7 +96,7 @@ fi
 
 # automatically change kitty colors based on time of day
 if command -v "sunshine" >/dev/null; then
-  if [[ "$(sunshine -s "!@45.8150 15.9819")" = "day" ]]; then
+  if [[ "$(sunshine -s "#Rijeka, Croatia")" = "day" ]]; then
     chtheme light
   else
     chtheme dark

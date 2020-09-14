@@ -268,6 +268,21 @@ function! LightlineFilename()
   return expand('%')
 endfunction
 
+function! PerformRakeTask(rake_task)
+  let rake_task = split(a:rake_task, " ")[0]
+  execute "!bundle exec rails " . rake_task
+endfunction
+
+command! Rake
+  \ call fzf#run(fzf#wrap({
+    \ 'sink': function('PerformRakeTask'),
+    \ 'source': "bundle exec rails -T | cut -d ' ' -f2-",
+    \ 'options': '--nth=1'
+    \ }))
+
+nnoremap <Leader>t :Rake<cr>
+
+
 " minisnip {{{
 " a hyper-minimalist fzf-powered snippet manager
 

@@ -1,7 +1,7 @@
 # @crescentrose's zsh file
 # not nearly as buff as `vimrc` 😰
 
-export PATH="$HOME/bin:$HOME/.symfony/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
 
 # Custom functions {{{
 # Ensure that the files we want to source actually exist.
@@ -52,7 +52,8 @@ function zsh_minisnip {
 
 # Plugins, using zplug: https://github.com/zplug/zplug {{{
 # Enable zplug
-source ~/.zplug/init.zsh
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
 
 # zsh-async: dependecy for many other plugins
 zplug mafredri/zsh-async, from:github
@@ -86,8 +87,7 @@ fi
 safe_source "$HOME/.fzf.zsh"
 
 # Load NVM
-export NVM_DIR="$HOME/.nvm"
-source "$HOME/bin/lazy_load_nvm.sh"
+eval "$(fnm env --multi)"
 
 # use Linuxbrew if on Linux
 if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] then
@@ -106,9 +106,9 @@ fi
 
 # Environment variables {{{
 # Enable history
-HISTSIZE=10000
-SAVEHIST=10000
-HISTFILE=~/.zsh_history
+export HISTSIZE=10000
+export SAVEHIST=10000
+export HISTFILE=~/.zsh_history
 
 # Default configuration for `fzf`
 export FZF_DEFAULT_OPTS="\
@@ -123,6 +123,8 @@ export BAT_THEME="OneHalfDark"
 export GPG_TTY=$(tty)
 
 export CDPATH=".:$HOME/Code"
+
+export LANG=en_US.UTF-8
 # }}}
 
 # Autocompletion {{{

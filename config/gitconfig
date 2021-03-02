@@ -28,3 +28,6 @@
 	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
 [pull]
 	ff = only
+[user]
+	name = Ivan Ostric
+	email = ivan@halcyon.hr

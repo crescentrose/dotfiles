@@ -87,7 +87,7 @@ fi
 safe_source "$HOME/.fzf.zsh"
 
 # Load NVM
-eval "$(fnm env --multi)"
+eval "$(fnm env)"
 
 # use Linuxbrew if on Linux
 if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] then
@@ -125,6 +125,9 @@ export GPG_TTY=$(tty)
 export CDPATH=".:$HOME/Code"
 
 export LANG=en_US.UTF-8
+
+# Google :(
+export CLOUDSDK_PYTHON=python2
 # }}}
 
 # Autocompletion {{{

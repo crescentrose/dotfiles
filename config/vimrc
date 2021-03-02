@@ -117,6 +117,9 @@ set noshowmode
 set textwidth=80
 set colorcolumn=+1
 
+" Do not wrap text automatically for the love of all that is holy
+set formatoptions-=t
+
 " Soft tabs, 2 spaces
 " TODO: Maybe I don't want 2 spaces per tab always.
 set tabstop=2
@@ -333,7 +336,7 @@ endfunction
 
 function! Sunshine(timer)
   if executable("sunshine")
-    let job = job_start(["sunshine", "-s", "#Rijeka, Croatia"], {"out_cb": "ChangeColorScheme"})
+    let job = job_start(["sunshine", "-s", "#Amsterdam"], {"out_cb": "ChangeColorScheme"})
   else
     call DarkMode()
   endif

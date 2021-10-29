@@ -2,6 +2,7 @@
 # not nearly as buff as `vimrc` 😰
 
 export PATH="$HOME/bin:$PATH"
+export EDITOR=vim
 
 # Custom functions {{{
 # Ensure that the files we want to source actually exist.
@@ -47,13 +48,20 @@ function zsh_minisnip {
     done
   fi
 }
-
 # }}}
 
 # Plugins, using zplug: https://github.com/zplug/zplug {{{
 # Enable zplug
-export ZPLUG_HOME=/usr/local/opt/zplug
-source $ZPLUG_HOME/init.zsh
+export ZPLUG_HOME="$HOME/.zplug"
+
+if [[ ! -a "$ZPLUG_HOME/init.zsh" ]]; then
+  echo "[::] zplug not found, installing now..."
+  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+  zplug_setup=1
+  sleep 1
+fi
+
+source "$ZPLUG_HOME/init.zsh"
 
 # zsh-async: dependecy for many other plugins
 zplug mafredri/zsh-async, from:github
@@ -65,7 +73,12 @@ zplug 'zsh-users/zsh-syntax-highlighting', defer:2
 zplug 'zsh-users/zsh-completions', defer:2
 zplug 'zsh-users/zsh-autosuggestions', defer:2
 
-zplug load 
+zplug load
+
+if [[ "$zplug_setup" == "1" ]]; then
+  zplug install
+  zplug load
+fi
 
 # Plugins end }}}
 
@@ -73,9 +86,15 @@ zplug load
 # Include custom aliases from a separate file so that we can change them easily
 safe_source ~/.aliasrc
 
-# Include Google Cloud SDK stuff
-safe_source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
-safe_source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
+# Google :(
+export CLOUDSDK_PYTHON=python2
+
+# TODO: Extract to helper function so that shell startup isn't bogged down by
+# homebrew.
+if command -v 'brew' >/dev/null; then
+  safe_source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+  safe_source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+fi
 
 # engage rbenv if it is installed
 if command -v 'rbenv' >/dev/null; then
@@ -86,8 +105,12 @@ fi
 # Engage FZF
 safe_source "$HOME/.fzf.zsh"
 
-# Load NVM
-eval "$(fnm env)"
+# He calls himself a programmer, but before him I see an Apple keyboard
+# May the merciful lord Stroustrup forgive you, for you must be a JavaScript
+# developer!
+if command -v 'fnm' >/dev/null; then
+  eval "$(fnm env)"
+fi
 
 # use Linuxbrew if on Linux
 if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] then
@@ -96,7 +119,7 @@ fi
 
 # automatically change kitty colors based on time of day
 if command -v "sunshine" >/dev/null; then
-  if [[ "$(sunshine -s "#Rijeka, Croatia")" = "day" ]]; then
+  if [[ "$(sunshine -s "#Utrecht, Netherlands")" = "day" ]]; then
     chtheme light
   else
     chtheme dark
@@ -125,9 +148,6 @@ export GPG_TTY=$(tty)
 export CDPATH=".:$HOME/Code"
 
 export LANG=en_US.UTF-8
-
-# Google :(
-export CLOUDSDK_PYTHON=python2
 # }}}
 
 # Autocompletion {{{
@@ -135,7 +155,7 @@ autoload -Uz compinit
 compinit
 
 # Completion for kitty
-if [[ "$TERM" = "xterm-kitty" ]]; then
+if [[ "$TERM" == "xterm-kitty" && "$SSH_CLIENT" == "" ]]; then
   kitty + complete setup zsh | source /dev/stdin
 fi
 # }}}

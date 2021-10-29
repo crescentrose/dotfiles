@@ -1,5 +1,4 @@
-" @crescentrose's vimrc
-" a magic land of mystery and excitement
+" @crescentrose's vimrc a magic land of mystery and excitement
 " soundtrack: https://www.youtube.com/watch?v=--9aIYos4M8
 
 filetype indent plugin on
@@ -37,6 +36,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf.vim'
   " Seamless navigation between tmux panes and vim splits
   Plug 'christoomey/vim-tmux-navigator'
+  " SourcePawn support files
+  Plug 'withgod/vim-sourcepawn'
   " 🌸 A command-line fuzzy finder
   Plug '/usr/local/opt/fzf'
 
@@ -46,8 +47,10 @@ call plug#begin('~/.vim/plugged')
   let g:ale_sign_warning = '⚠️'
   let g:ale_fixers = {
     \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-    \ 'javascript': ['eslint']
+    \ 'javascript': ['eslint'],
+    \ 'ruby': ['rubocop']
   \ }
+  let g:ale_fix_on_save = 1
   let g:ale_completion_enabled = 1
   nnoremap <Leader>f :ALEFix<cr>
 
@@ -214,6 +217,7 @@ nnoremap <Leader>l :cn<cr>
 " Search for files with Ctrl+P
 nnoremap <C-p> :Files<CR>
 
+
 " Search for snippets with space-space
 nnoremap <Leader><Space> :call SnippetFinder()<cr>
 
@@ -337,8 +341,6 @@ endfunction
 function! Sunshine(timer)
   if executable("sunshine")
     let job = job_start(["sunshine", "-s", "#Amsterdam"], {"out_cb": "ChangeColorScheme"})
-  else
-    call DarkMode()
   endif
 endfunction
 
@@ -347,6 +349,7 @@ function! AutoDarkModeSetup()
   call Sunshine(timer) " Initial call to setup the theme
 endfunction
 
+call DarkMode()
 call AutoDarkModeSetup()
 " }}}
 

@@ -6,7 +6,6 @@
 
 - create:
   - ~/.config
-  - ~/.terminalizer
 
 - link:
     ~/.tmux.conf: config/tmux.conf
@@ -15,9 +14,9 @@
     ~/.zshrc: config/zshrc
     ~/.irbrc: config/irbrc
     ~/.aliasrc: config/aliasrc
-    ~/.gitignore_global: config/gitignore_global
     ~/.gemrc: config/gemrc
     ~/.gitconfig: config/gitconfig
+    ~/.config/.gitignore_global: config/gitignore_global
     ~/.config/kitty:
       relink: true
       path: config/kitty
@@ -27,12 +26,9 @@
     ~/.config/waybar:
       relink: true
       path: config/waybar
-    ~/.terminalizer/config.yml:
-      relink: true
-      path: config/terminalizer.config.yml
     ~/bin:
       relink: true
       path: bin
 
 - shell:
-    - ['git submodule update --init --recursive', 'Installing submodules']
+    - ['vim +PlugInstall +qall', 'Set up Vim plugins']

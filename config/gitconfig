@@ -1,5 +1,5 @@
 [core]
-	excludesfile = /Users/ivan/.gitignore_global
+	excludesfile = ~/.config/.gitignore_global
 	editor = /usr/bin/vim
 [alias]
   publish ="!git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)"
@@ -7,7 +7,7 @@
   continue = "!git add . && git rebase --continue"
 # use separate file for username / github token / etc
 [include]
-  path = ~/.gitconfig.local
+  path = ~/.config/.gitconfig.local
 # use Kitty terminal as diff tool
 # ?????
 [diff]

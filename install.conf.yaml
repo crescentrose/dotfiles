@@ -31,4 +31,4 @@
       path: bin
 
 - shell:
-    - ['vim +PlugInstall +qall', 'Set up Vim plugins']
+  - ['vim -c "PlugInstall" -c "qa"', 'Set up Vim plugins']

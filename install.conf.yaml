@@ -11,6 +11,7 @@
     ~/.tmux.conf: config/tmux.conf
     ~/.vim: config/vim
     ~/.vimrc: config/vimrc
+    ~/.ideavimrc: config/ideavimrc
     ~/.zshrc: config/zshrc
     ~/.irbrc: config/irbrc
     ~/.aliasrc: config/aliasrc

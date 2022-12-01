@@ -21,15 +21,19 @@
     ~/.config/kitty:
       relink: true
       path: config/kitty
-    ~/.config/sway:
-      relink: true
-      path: config/sway
-    ~/.config/waybar:
-      relink: true
-      path: config/waybar
     ~/bin:
       relink: true
       path: bin
 
 - shell:
   - ['vim -c "PlugInstall" -c "qa"', 'Set up Vim plugins']
+  - command: brew bundle install
+    description: Install Homebrew and App Store packages
+    stdout: true
+    stderr: true
+  - ['cp -n ./config/gitconfig.local.example ~/.config/.gitconfig.local || true', 'Copy example Git config']
+  - command: vim ~/.config/.gitconfig.local
+    description: Edit local Git config
+    stdin: true
+    stdout: true
+    stderr: true

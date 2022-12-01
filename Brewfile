@@ -19,6 +19,26 @@ brew "gnutls"
 # GNU Pretty Good Privacy (PGP) package. Required for signing Git commits.
 brew "gnupg"
 
+# Simple CLI interface for the Mac App Store
+brew "mas"
+
+# Password manager that keeps all passwords secure behind one password
+cask "1password"
+# Music streaming service
+cask "spotify"
+# Fill and save your passwords
+mas "1Password for Safari", id: 1569813296
+# Adblock and privacy
+mas "AdGuard for Safari", id: 1440147259
+# Edit documents, notes and ideas
+mas "Craft", id: 1487937127
+# Hide menubar items
+mas "Hidden Bar", id: 1452453066
+# Organize Your Workspace
+mas "Magnet", id: 441258766
+# Beautiful images
+mas "Unsplash Wallpapers", id: 1284863847
+
 # }}}
 
 # 🔧 CLI utilities {{{
@@ -33,9 +53,6 @@ brew "htop"
 brew "ripgrep"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
-
-# Simple CLI interface for the Mac App Store
-brew "mas"
 
 # }}}
 

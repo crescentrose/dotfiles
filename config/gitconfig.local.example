@@ -1,4 +1,5 @@
 [user]
 	name = Ivan Oštrić
 	email = ivan@halcyon.hr
-	signingkey = 
+	# gpg --list-secret-keys --keyid-format=long
+	signingkey =

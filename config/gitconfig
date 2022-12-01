@@ -2,6 +2,9 @@
   excludesfile = ~/.config/.gitignore_global
   editor = /usr/bin/vim
 
+[commit]
+  gpgsign = true
+
 [alias]
   publish ="!git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)"
   d = "!git difftool --no-symlinks --dir-diff"

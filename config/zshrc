@@ -86,9 +86,6 @@ fi
 # Include custom aliases from a separate file so that we can change them easily
 safe_source ~/.aliasrc
 
-# Google :(
-export CLOUDSDK_PYTHON=python2
-
 # TODO: Extract to helper function so that shell startup isn't bogged down by
 # homebrew.
 if command -v 'brew' >/dev/null; then

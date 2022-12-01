@@ -1,6 +1,6 @@
 # pyright: reportMissingImports=false
 
-import subprocess
+from subprocess import STDOUT, check_output
 
 from kitty.boss import get_boss
 from kitty.fast_data_types import Screen, add_timer
@@ -29,7 +29,7 @@ def draw_tab(
     global timer_id
 
     if timer_id is None:
-        timer_id = add_timer(_redraw_tab_bar, 2.0, True)
+        timer_id = add_timer(_redraw_tab_bar, 10.0, True)
 
     draw_tab_with_powerline(
         draw_data, screen, tab, before, max_title_length, index, is_last, extra_data
@@ -80,7 +80,10 @@ def create_cells() -> list[str]:
     return [c for c in cells if c]
 
 def _get_kube_context() -> str:
-    out = subprocess.getoutput("/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/kubectl config current-context")
+    try:
+        out = check_output("/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/kubectl config current-context", stderr=STDOUT, timeout=2)
+    except CalledProcessError:
+        return "⚠ kubectl failed"
 
     if out == "minikube":
         return ""

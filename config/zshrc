@@ -134,7 +134,7 @@ export HISTFILE=~/.zsh_history
 export FZF_DEFAULT_OPTS="\
   --ansi \
 "
-export FZF_DEFAULT_COMMAND="ag -l --nocolor -g \"\""
+export FZF_DEFAULT_COMMAND="rg -l ."
 
 # Default configuration for `bat`
 export BAT_THEME="OneHalfDark"

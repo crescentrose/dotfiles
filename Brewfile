@@ -4,6 +4,7 @@
 tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask"
+tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
 
@@ -39,6 +40,9 @@ mas "Magnet", id: 441258766
 # Beautiful images
 mas "Unsplash Wallpapers", id: 1284863847
 
+# Free monospaced font with programming ligatures
+cask "font-fira-code"
+
 # }}}
 
 # 🔧 CLI utilities {{{
@@ -53,6 +57,8 @@ brew "htop"
 brew "ripgrep"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Git large file support
+brew "git-lfs"
 
 # }}}
 
@@ -109,8 +115,12 @@ brew "openshift-cli"
 # Terraform enables you to safely and predictably create, change, and improve
 # infrastructure
 brew "hashicorp/tap/terraform"
+# Manage Secrets & Protect Sensitive Data
+brew "hashicorp/tap/vault"
 # The Kubernetes Package Manager
 brew "helm"
+# Automate deployment, configuration, and upgrading
+brew "ansible"
 # Set of tools to manage resources and applications hosted on Google Cloud
 cask "google-cloud-sdk"
 

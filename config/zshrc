@@ -1,7 +1,7 @@
 # @crescentrose's zsh file
 # not nearly as buff as `vimrc` 😰
 
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/bin:/opt/homebrew/bin:$PATH"
 export EDITOR=vim
 
 # Custom functions {{{
@@ -145,6 +145,8 @@ export GPG_TTY=$(tty)
 export CDPATH=".:$HOME/Code"
 
 export LANG=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 # }}}
 
 # Autocompletion {{{

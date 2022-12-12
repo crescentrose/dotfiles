@@ -1,6 +1,7 @@
 # pyright: reportMissingImports=false
 
-from subprocess import STDOUT, check_output
+from subprocess import STDOUT, check_output, CalledProcessError, TimeoutExpired
+import sys
 
 from kitty.boss import get_boss
 from kitty.fast_data_types import Screen, add_timer
@@ -43,10 +44,12 @@ def draw_right_status(draw_data: DrawData, screen: Screen) -> None:
     # The tabs may have left some formats enabled. Disable them now.
     draw_attributed_string(Formatter.reset, screen)
     cells = create_cells()
+
     # Drop cells that wont fit
     while True:
         if not cells:
             return
+
         padding = screen.columns - screen.cursor.x - sum(len(c) + 3 for c in cells)
         if padding >= 0:
             break
@@ -58,6 +61,7 @@ def draw_right_status(draw_data: DrawData, screen: Screen) -> None:
     tab_bg = as_rgb(int(draw_data.inactive_bg))
     tab_fg = as_rgb(int(draw_data.inactive_fg))
     default_bg = as_rgb(int(draw_data.default_bg))
+
     for cell in cells:
         # Draw the separator
         if cell == cells[0]:
@@ -81,9 +85,9 @@ def create_cells() -> list[str]:
 
 def _get_kube_context() -> str:
     try:
-        out = check_output("/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/kubectl config current-context", stderr=STDOUT, timeout=2)
-    except CalledProcessError:
-        return "⚠ kubectl failed"
+        out = check_output(["/opt/homebrew/bin/kubectl", "config", "current-context"], stderr=STDOUT, timeout=2).decode(sys.stdout.encoding).strip()
+    except Exception as e:
+        return 'k8s: {}'.format(e)
 
     if out == "minikube":
         return ""
@@ -92,6 +96,7 @@ def _get_kube_context() -> str:
         parts = out.split("_") # gke_project_region_name
         return f"☁️ {parts[1]}"
 
+    print(out)
     return out
 
 

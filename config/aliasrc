@@ -10,12 +10,6 @@ kctx() {
   kubectl config use-context $(kubectl config get-contexts -o=name | fzf --height=30% --reverse)
 }
 
-posta() {
-  curl -XPOST "https://www.posta.hr/chrome.aspx?vrsta=1&query=$1" \
-    -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36' \
-    --silent | jq
-}
-
 gitignore() {
   local langs=${(j:,:)@}
   curl "https://www.gitignore.io/api/$langs" --silent

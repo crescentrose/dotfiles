@@ -37,3 +37,6 @@
 
 [url "ssh://git@github.com/"]
   insteadOf = https://github.com/
+
+[url "git@github.com:ingka-group-digital"]
+	insteadOf = https://github.com/ingka-group-digital

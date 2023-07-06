@@ -190,6 +190,11 @@ if executable('ag')
   set grepprg=ag\ --vimgrep
 endif
 
+" Use RipGrep for grepping if available
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+endif
+
 " Vim terminal theme consistent with Base16 Twilight - kitty color config
 " Original by David Hart (https://github.com/hartbit)
 let g:terminal_ansi_colors = [

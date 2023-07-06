@@ -89,14 +89,13 @@ def _get_kube_context() -> str:
     except Exception as e:
         return 'k8s: {}'.format(e)
 
-    if out == "minikube":
+    if out == "minikube" or out == "colima":
         return ""
 
     if out.startswith("gke"):
         parts = out.split("_") # gke_project_region_name
         return f"☁️ {parts[1]}"
 
-    print(out)
     return out
 
 

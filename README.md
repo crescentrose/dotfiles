@@ -20,6 +20,10 @@ not want that, make your own dotfiles repo.
   - `gpg --allow-secret-key-import --import private.key`
   - edit `~/.config/.gitconfig.local`
 
+
+kitty icon: [whiskers](https://github.com/igrmk/whiskers)
+([instructions](https://sw.kovidgoyal.net/kitty/faq/#i-do-not-like-the-kitty-icon))
+
 ## screenshots
 
 ![zsh](doc/zsh.png)

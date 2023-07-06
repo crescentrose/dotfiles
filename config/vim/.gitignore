@@ -1,3 +1,4 @@
 plugged
 autoload/plug.vim
 view
+.netrwhist

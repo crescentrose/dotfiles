@@ -26,6 +26,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-commentary'
   " vinegar.vim: Combine with netrw to create a delicious salad dressing
   Plug 'tpope/vim-vinegar'
+  " fugitive.vim: A Git wrapper so awesome, it should be illegal
+  Plug 'tpope/vim-fugitive'
   " Oceanic Next theme for neovim
   Plug 'mhartington/oceanic-next'
   " A solid language pack for Vim.
@@ -39,6 +41,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'christoomey/vim-tmux-navigator'
   " SourcePawn support files
   Plug 'withgod/vim-sourcepawn'
+  " Rust support files
+  Plug 'rust-lang/rust.vim'
 
   " Go development plugin for Vim
   Plug 'fatih/vim-go'
@@ -47,8 +51,6 @@ call plug#begin('~/.vim/plugged')
   let g:go_metalinter_enabled = []
   " don't jump to errors after metalinter is invoked
   let g:go_jump_to_error = 0
-  " run go imports on file save
-  let g:go_fmt_command = "goimports"
   " automatically highlight variable your cursor is on
   let g:go_auto_sameids = 0
   " god forbid we have conventions instead of configuration
@@ -62,32 +64,95 @@ call plug#begin('~/.vim/plugged')
   let g:go_highlight_generate_tags = 1
 
   " Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support
-  Plug 'dense-analysis/ale'
-  let g:ale_sign_error = '❌'
-  let g:ale_sign_warning = '⚠️'
-  let g:ale_fixers = {
-    \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-    \ 'javascript': ['eslint'],
-    \ 'ruby': ['rubocop']
-  \ }
-  let g:ale_fix_on_save = 1
+  " Enable autocompletion (has to be enabled before the plugin is triggered)
   let g:ale_completion_enabled = 1
-  nnoremap <Leader>f :ALEFix<cr>
+  " Disable errors appearing as virtual text
+  let g:ale_virtualtext_cursor = 'disabled'
+  " Subdued error signs in gutter that is always on
+  let g:ale_sign_error = ''
+  let g:ale_sign_warning = ''
+  let g:ale_sign_column_always = 1
+  " Run :ALEFix on save
+  let g:ale_fix_on_save = 1
+  " Display documentation of an identifier or the error when hovering over it
+  let g:ale_floating_preview = 1
+  let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰', '│', '─']
+  let g:ale_set_balloons = 1
+  augroup ale_hover_cursor
+    autocmd!
+    autocmd CursorHold * ALEHover
+  augroup END
 
-  " Plug 'puremourning/vimspector'
-  " let g:vimspector_enable_mappings = 'HUMAN'
+  " Make autocompletion stylish
+  let g:ale_completion_symbols = {
+  \ 'text': '',
+  \ 'method': '',
+  \ 'function': '',
+  \ 'constructor': '',
+  \ 'field': '',
+  \ 'variable': '',
+  \ 'class': '',
+  \ 'interface': '',
+  \ 'module': '',
+  \ 'property': '',
+  \ 'unit': 'unit',
+  \ 'value': 'val',
+  \ 'enum': '',
+  \ 'keyword': 'kw',
+  \ 'snippet': '',
+  \ 'color': '󰏘',
+  \ 'file': '',
+  \ 'reference': '',
+  \ 'folder': '',
+  \ 'enum member': '',
+  \ 'constant': '',
+  \ 'struct': '',
+  \ 'event': '',
+  \ 'operator': '',
+  \ 'type_parameter': 'type param',
+  \ '<default>': 'v'
+  \ }
+  Plug 'dense-analysis/ale'
 
   " A light and configurable statusline/tabline plugin for Vim
   Plug 'itchyny/lightline.vim'
+  " ALE indicator for the lightline vim plugin
+  Plug 'maximbaz/lightline-ale'
+
   let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'readonly', 'filename', 'modified' ] ]
+      \             [ 'readonly', 'filename', 'modified' ] ],
+      \   'right': [ ['branch'],
+      \              [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ] ],
       \ },
       \ 'component_function': {
       \   'filename': 'LightlineFilename',
+      \ },
+      \ 'component_expand': {
+      \   'linter_checking': 'lightline#ale#checking',
+      \   'linter_infos': 'lightline#ale#infos',
+      \   'linter_warnings': 'lightline#ale#warnings',
+      \   'linter_errors': 'lightline#ale#errors',
+      \   'linter_ok': 'lightline#ale#ok',
+      \   'branch': 'FugitiveHead',
+      \ },
+      \ 'component_type': {
+      \     'linter_checking': 'right',
+      \     'linter_infos': 'right',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'right',
+      \     'branch': 'warning',
+      \ },
       \ }
-      \ }
+
+  let g:lightline#ale#indicator_checking = "\uf110"
+  let g:lightline#ale#indicator_infos = "\uf129"
+  let g:lightline#ale#indicator_warnings = "\uf071"
+  let g:lightline#ale#indicator_errors = "\uf05e"
+  let g:lightline#ale#indicator_ok = "\uf00c"
+
 
 call plug#end()
 
@@ -176,6 +241,9 @@ set listchars=tab:␉·,trail:␠,nbsp:⎵
 " (resigned sigh)
 set mouse=a
 
+" show popups etc. (hover info) after 1 second
+set updatetime=1000
+
 " Make some file browser adjustments
 let g:netrw_liststyle = 3 " Tree view is the default view
 let g:netrw_banner = 0 " Hide the directory banner permanently
@@ -205,19 +273,75 @@ let g:terminal_ansi_colors = [
       \  '#7587a6', '#9b859d', '#afc4db',
       \  '#a7a7a7'
       \  ]
-hi Terminal ctermbg=none ctermfg=none guibg=#1e1e1e guifg=#a7a7a7
+
+highlight Terminal ctermbg=none ctermfg=none guibg=#1e1e1e guifg=#a7a7a7
+highlight ALEError cterm=undercurl gui=undercurl guisp=#ec5f67 guifg=#ec5f69 ctermfg=203
+highlight ALEWarning cterm=undercurl gui=undercurl guisp=#f99157
 
 " Light it up!
 let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
 
-" But we want our background to be transparent
-let &t_ut=''
-
 " Don't automatically insert suggestions from suggestion menus
 set completeopt=menu,menuone,preview,noselect,noinsert
 
 " Vim settings end }}}
+
+" kitty compatibility {{{
+
+" taken from https://github.com/kovidgoyal/kitty/blob/master/docs/faq.rst#using-a-color-theme-with-a-background-color-does-not-work-well-in-vim
+
+if $TERM ==? "xterm-kitty"
+  " Mouse support
+  set mouse=a
+  set ttymouse=sgr
+  set balloonevalterm
+  " Styled and colored underline support
+  let &t_AU = "\e[58:5:%dm"
+  let &t_8u = "\e[58:2:%lu:%lu:%lum"
+  let &t_Us = "\e[4:2m"
+  let &t_Cs = "\e[4:3m"
+  let &t_ds = "\e[4:4m"
+  let &t_Ds = "\e[4:5m"
+  let &t_Ce = "\e[4:0m"
+  " Strikethrough
+  let &t_Ts = "\e[9m"
+  let &t_Te = "\e[29m"
+  " Truecolor support
+  let &t_8f = "\e[38:2:%lu:%lu:%lum"
+  let &t_8b = "\e[48:2:%lu:%lu:%lum"
+  let &t_RF = "\e]10;?\e\\"
+  let &t_RB = "\e]11;?\e\\"
+  " Bracketed paste
+  let &t_BE = "\e[?2004h"
+  let &t_BD = "\e[?2004l"
+  let &t_PS = "\e[200~"
+  let &t_PE = "\e[201~"
+  " Cursor control
+  let &t_RC = "\e[?12$p"
+  let &t_SH = "\e[%d q"
+  let &t_RS = "\eP$q q\e\\"
+  let &t_SI = "\e[5 q"
+  let &t_SR = "\e[3 q"
+  let &t_EI = "\e[1 q"
+  let &t_VS = "\e[?12l"
+  " Focus tracking
+  let &t_fe = "\e[?1004h"
+  let &t_fd = "\e[?1004l"
+  execute "set <FocusGained>=\<Esc>[I"
+  execute "set <FocusLost>=\<Esc>[O"
+  " Window title
+  let &t_ST = "\e[22;2t"
+  let &t_RT = "\e[23;2t"
+
+  " vim hardcodes background color erase even if the terminfo file does
+  " not contain bce. This causes incorrect background rendering when
+  " using a color theme with a background color in terminals such as
+  " kitty that do not support background color erase.
+  let &t_ut=''
+endif
+
+" kitty compatibility end }}}
 
 " Bindings {{{
 " Move within wrapped lines
@@ -242,15 +366,19 @@ nnoremap <Leader>l :cn<cr>
 " Search for files with Ctrl+P
 nnoremap <C-p> :Files<CR>
 
-
 " Search for snippets with space-space
 nnoremap <Leader><Space> :call SnippetFinder()<cr>
+
+" ALE functionality
+nnoremap <Leader>ff :ALECodeAction<cr>
+nnoremap <Leader>fd :ALEGoToDefinition<cr>
+nnoremap <Leader>fr :ALEFindReferences<cr>
+nnoremap <Leader>fl :ALEPopulateLocList<cr>
 
 " Bindings end }}}
 
 " Custom commands {{{
 
-command! RipperTags :!ripper-tags -R . --exclude=vendor
 command! DarkMode :call DarkMode()
 command! LightMode :call LightMode()
 command! Snippets :call SnippetFinder()
@@ -313,6 +441,12 @@ command! Rake
     \ }))
 
 nnoremap <Leader>t :Rake<cr>
+
+com! CheckHighlightUnderCursor echo {l,c,n ->
+        \   'hi<'    . synIDattr(synID(l, c, 1), n)             . '> '
+        \  .'trans<' . synIDattr(synID(l, c, 0), n)             . '> '
+        \  .'lo<'    . synIDattr(synIDtrans(synID(l, c, 1)), n) . '> '
+        \ }(line("."), col("."), "name")
 
 
 " minisnip {{{

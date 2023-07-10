@@ -4,6 +4,12 @@
 export PATH="$HOME/bin:$HOME/go/bin:/opt/homebrew/bin:$PATH"
 export EDITOR=vim
 
+# Debug the slowness of the zshrc file by launching zsh with the ZPROF env
+# variable
+if [[ $ZPROF = 1 ]]; then
+  zmodload zsh/zprof
+fi
+
 # Custom functions {{{
 # Ensure that the files we want to source actually exist.
 function safe_source {
@@ -68,8 +74,8 @@ zplug mafredri/zsh-async, from:github
 # zsh-syntax-highlighting: self-descriptive
 zplug 'zsh-users/zsh-syntax-highlighting', defer:2
 # zsh-completions: approximately one billion completion scripts
-zplug 'zsh-users/zsh-completions', defer:2
-zplug 'zsh-users/zsh-autosuggestions', defer:2
+zplug 'zsh-users/zsh-completions'
+zplug 'zsh-users/zsh-autosuggestions'
 
 zplug load
 
@@ -83,13 +89,6 @@ fi
 # Shell integrations and includes {{{
 # Include custom aliases from a separate file so that we can change them easily
 safe_source ~/.aliasrc
-
-# TODO: Extract to helper function so that shell startup isn't bogged down by
-# homebrew.
-if command -v 'brew' >/dev/null; then
-  safe_source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-  safe_source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-fi
 
 # engage rbenv if it is installed
 if command -v 'rbenv' >/dev/null; then
@@ -156,8 +155,6 @@ export CARGO_NET_GIT_FETCH_WITH_CLI=true
 # }}}
 
 # Autocompletion {{{
-autoload -Uz compinit
-compinit
 
 # Completion for kitty
 if [[ "$TERM" == "xterm-kitty" && "$SSH_CLIENT" == "" ]]; then
@@ -174,5 +171,9 @@ bindkey '^x^e' edit-command-line
 zle -N zsh_minisnip
 bindkey "^T" zsh_minisnip
 # }}}
+
+if [[ $ZPROF = 1 ]]; then
+  zprof
+fi
 
 # vim: fdm=marker fdl=0

@@ -30,7 +30,9 @@ disabled = true
 
 [git_status]
 style = 'blue'
+conflicted = '[!$count ](bold red)'
 untracked = '[$count ](red)'
+stashed = '[󰆓$count ](yellow)'
 modified = '[$count ](red)'
 deleted = '[$count ](red)'
 renamed = '[$count ](red)'

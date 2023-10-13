@@ -3,7 +3,7 @@
 " rustup component add clippy
 " rustup component add rustfmt
 
-let b:ale_fixers = ['rustfmt']
+let b:ale_fixers = ['rustfmt', 'remove_trailing_lines', 'trim_whitespace']
 let b:ale_linters = ['analyzer']
 
 " run Clippy on save through rust-analyzer

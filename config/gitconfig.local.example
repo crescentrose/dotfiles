@@ -1,5 +1,12 @@
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+	allowedSignersFile = ...
+
+# Support insane Go packaga manager behaviour for private repos
+[url "git@github.com:..."]
+  insteadOf = https://github.com/...
+
 [user]
-	name = Ivan Oštrić
-	email = ivan@halcyon.hr
-	# gpg --list-secret-keys --keyid-format=long
-	signingkey =
+  name = 
+  email = 
+  signingkey = <your public SSH signing key>

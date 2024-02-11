@@ -31,22 +31,11 @@
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
 
-[url "git@github.com:ingka-group-digital"]
-  insteadOf = https://github.com/ingka-group-digital
-
-# Sign commits using my SSH signing key
-[user]
-  name = Ivan Oštrić
-  email = ivan@halcyon.hr
-  # this is my public key
-  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKJdAes80dpMrc99B68/1Kx2bbfoh6IrkbFF+60cMQti
-
 [commit]
   gpgsign = true
 
 [gpg]
   format = ssh
 
-[gpg "ssh"]
-  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
-	allowedSignersFile = /Users/ivan.ostric/.config/git/allowed_signers
+[include]
+  path = ~/.config/gitconfig.local

@@ -2,6 +2,9 @@
 #
 # version = "0.90.2"
 
+# Load custom utilities
+source ([$nu.default-config-dir "utils.nu"] | path join)
+
 # For more information on defining custom themes, see
 # https://www.nushell.sh/book/coloring_and_theming.html
 # And here is the theme collection
@@ -136,9 +139,6 @@ let light_theme = {
     shape_vardecl: purple
 }
 
-def nuopen [arg, --raw (-r)] { if $raw { open -r $arg } else { open $arg } }
-alias open = ^open
-
 # External completer example
 # let carapace_completer = {|spans|
 #     carapace $spans.0 nushell ...$spans | from json
@@ -247,7 +247,7 @@ $env.config = {
         pre_prompt: [{ null }] # run before the prompt is shown
         pre_execution: [{ null }] # run before the repl input is run
         env_change: {
-            PWD: [{|before, after| null }] # run if the PWD environment is different since the last repl input
+            PWD: [{|_, after| kitty-title $after }] # run if the PWD environment is different since the last repl input
         }
         display_output: "if (term size).columns >= 100 { table -e } else { table }" # run to display the output of a pipeline
         command_not_found: { null } # return an error message when a command is not found
@@ -841,9 +841,6 @@ $env.config = {
         }
     ]
 }
-
-# Load custom utilities
-source ([$nu.default-config-dir "utils.nu"] | path join)
 
 # Load asdf
 $env.ASDF_DIR = (brew --prefix asdf | str trim | into string | path join 'libexec')

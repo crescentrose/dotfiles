@@ -2,39 +2,28 @@
     links:
       relink: true
 
-- clean: ['~']
+- clean: ["~"]
 
 - create:
-  - ~/.config
+    - ~/.config
 
 - link:
     ~/.tmux.conf: config/tmux.conf
-    ~/.vim: config/vim
-    ~/.vimrc: config/vimrc
-    ~/.ideavimrc: config/ideavimrc
     ~/.zshrc: config/zshrc
-    ~/.irbrc: config/irbrc
-    ~/.aliasrc: config/aliasrc
-    ~/.gemrc: config/gemrc
     ~/.gitconfig: config/gitconfig
     ~/.config/.gitignore_global: config/gitignore_global
     ~/.config/kitty:
       relink: true
       path: config/kitty
+    # If only there was a cross-platform standard directory in which config files are expected to be stored.
+    # Perhaps we could even name it something like ".configuration-files"... or... shorter? ".cfiles"?
+    # Ah well, guess we could never afford such a luxury.
+    ~/Library/Application Support/nushell:
+      relink: true
+      path: config/nushell
+    ~/.tool-versions: config/tool-versions
     ~/.config/starship.toml: config/starship.toml
+    ~/.asdfrc: config/asdfrc
     ~/bin:
       relink: true
       path: bin
-
-# - shell:
-  # - ['vim -c "PlugInstall" -c "qa"', 'Set up Vim plugins']
-  # - command: brew bundle install
-  #   description: Install Homebrew and App Store packages
-  #   stdout: true
-  #   stderr: true
-  # - ['cp -n ./config/gitconfig.local.example ~/.config/.gitconfig.local || true', 'Copy example Git config']
-  # - command: vim ~/.config/.gitconfig.local
-  #   description: Edit local Git config
-  #   stdin: true
-  #   stdout: true
-  #   stderr: true

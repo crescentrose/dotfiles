@@ -13,13 +13,10 @@ not want that, make your own dotfiles repo.
 - `cd ~ && mkdir Code && cd Code && git clone git@github.com:crescentrose/dotfiles.git && cd dotfiles`
 - `./install`
   - dotfiles get symlinked
-  - vim plugins get installed
+- `brew bundle install`
   - Brewfile gets executed and installs Homebrew packages
-  - personal config file for Git gets opened for editing
 - import gpg signing keys
-  - `gpg --allow-secret-key-import --import private.key`
-  - edit `~/.config/.gitconfig.local`
-
+  - this is now done through 1Password, yay!
 
 kitty icon: [whiskers](https://github.com/igrmk/whiskers)
 ([instructions](https://sw.kovidgoyal.net/kitty/faq/#i-do-not-like-the-kitty-icon))

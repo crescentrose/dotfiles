@@ -1,6 +1,6 @@
 [core]
   excludesfile = ~/.config/.gitignore_global
-  editor = /usr/bin/vim
+  editor = nvim
 
 [alias]
   publish ="!git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)"
@@ -31,9 +31,6 @@
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
 
-[url "ssh://git@github.com/"]
-  insteadOf = https://github.com/
-
 [url "git@github.com:ingka-group-digital"]
   insteadOf = https://github.com/ingka-group-digital
 
@@ -52,4 +49,4 @@
 
 [gpg "ssh"]
   program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
-
+	allowedSignersFile = /Users/ivan.ostric/.config/git/allowed_signers

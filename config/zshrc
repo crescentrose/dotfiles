@@ -2,7 +2,7 @@
 # not nearly as buff as `vimrc` 😰
 
 export PATH="$HOME/bin:$HOME/go/bin:/opt/homebrew/bin:$PATH"
-export EDITOR=vim
+export EDITOR=nvim
 
 # Debug the slowness of the zshrc file by launching zsh with the ZPROF env
 # variable
@@ -16,110 +16,14 @@ function safe_source {
   test -e "$1" && source "$1"
 }
 
-function zsh_minisnip {
-  local snippet sub subs replacement key
-  snippet=$(minisnip)
-  LBUFFER=$snippet
-  zle reset-prompt
-
-  # Get any substitutions from the snippet
-  subs=($(egrep -o "{:[a-zA-Z0-9]+:}" <<< "$snippet"))
-
-  if [[ -n "$subs" ]]; then
-    # Run through all placeholders
-    # ${(u)subs[@]} means only unique members of the array
-    for sub in ${(u)subs[@]}; do
-      local subname=$(sed -E "s/[{:}]//g" <<< "$sub")
-      zle -R -c "$subname: _" # underscore is a hacky way of displaying a cursor
-      read -k key
-      # lifted almost verbatim from the zsh manual
-      while [[ '#key' -ne '##\n' && '#key' -ne '##\r' ]]; do
-        if [[ '#key' -eq '##^?' || '#key' -eq '##^h' ]]; then
-          [[ -n $replacement ]] && replacement=${replacement[1,-2]}
-        elif [[ '#key' -eq '##\C-g' ]]; then
-          return 1
-        else
-          replacement="${replacement}${key}"
-        fi
-        zle -R -c "$subname: ${replacement}_"
-        read -k key || return 1
-      done
-
-      # perform the replacement, clean up and display it in the buffer
-      snippet=$(sed -E "s/$sub/$replacement/g" <<< "$snippet")
-      replacement=
-      key=
-      LBUFFER=$snippet
-      zle reset-prompt
-    done
-  fi
-}
-# }}}
-
-# Plugins, using zplug: https://github.com/zplug/zplug {{{
-# Enable zplug
-export ZPLUG_HOME="$HOME/.zplug"
-
-if [[ ! -a "$ZPLUG_HOME/init.zsh" ]]; then
-  echo "[::] zplug not found, installing now..."
-  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-  zplug_setup=1
-  sleep 1
-fi
-
-source "$ZPLUG_HOME/init.zsh"
-
-# zsh-async: dependecy for many other plugins
-zplug mafredri/zsh-async, from:github
-# zsh-syntax-highlighting: self-descriptive
-zplug 'zsh-users/zsh-syntax-highlighting', defer:2
-# zsh-completions: approximately one billion completion scripts
-zplug 'zsh-users/zsh-completions'
-zplug 'zsh-users/zsh-autosuggestions'
-
-zplug load
-
-if [[ "$zplug_setup" == "1" ]]; then
-  zplug install
-  zplug load
-fi
-
-# Plugins end }}}
-
 # Shell integrations and includes {{{
-# Include custom aliases from a separate file so that we can change them easily
-safe_source ~/.aliasrc
-
-# engage rbenv if it is installed
-if command -v 'rbenv' >/dev/null; then
-  RBENV="$(which rbenv)"
-  eval "$($RBENV init -)"
-fi
-
 # Engage FZF
 safe_source "$HOME/.fzf.zsh"
 
-# He calls himself a programmer, but before him I see an Apple keyboard
-# May the merciful lord Stroustrup forgive you, for you must be a JavaScript
-# developer!
-if command -v 'fnm' >/dev/null; then
-  eval "$(fnm env)"
-fi
+# Engage asdf version manager
+safe_source "/opt/homebrew/opt/asdf/libexec/asdf.sh"
 
-# use Linuxbrew if on Linux
-if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] then
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-fi
-
-# automatically change kitty colors based on time of day
-if command -v "sunshine" >/dev/null; then
-  if [[ "$(sunshine -s "#Utrecht, Netherlands")" = "day" ]]; then
-    chtheme light
-  else
-    chtheme dark
-  fi
-fi
-
+# use a fancy prompt
 if command -v "starship" >/dev/null; then
   eval "$(starship init zsh)"
 fi
@@ -140,9 +44,6 @@ export FZF_DEFAULT_COMMAND="rg --hidden -g '!.git/' -l ."
 # Default configuration for `bat`
 export BAT_THEME="OneHalfDark"
 
-# make sure GPG can do its thing on macOS
-export GPG_TTY=$(tty)
-
 export CDPATH=".:$HOME/Code"
 
 export LANG=en_US.UTF-8
@@ -160,16 +61,6 @@ export CARGO_NET_GIT_FETCH_WITH_CLI=true
 if [[ "$TERM" == "xterm-kitty" && "$SSH_CLIENT" == "" ]]; then
   kitty + complete setup zsh | source /dev/stdin
 fi
-# }}}
-
-# Custom key bindings {{{
-autoload -U edit-command-line
-zle -N edit-command-line
-bindkey '^xe' edit-command-line
-bindkey '^x^e' edit-command-line
-
-zle -N zsh_minisnip
-bindkey "^T" zsh_minisnip
 # }}}
 
 if [[ $ZPROF = 1 ]]; then

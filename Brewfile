@@ -2,11 +2,11 @@
 #
 
 tap "hashicorp/tap"
+tap "homebrew/autoupdate"
 tap "homebrew/bundle"
-tap "homebrew/cask"
 tap "homebrew/cask-fonts"
-tap "homebrew/core"
 tap "homebrew/services"
+tap "rsteube/homebrew-tap"
 
 # 💻 General {{{
 
@@ -14,31 +14,32 @@ tap "homebrew/services"
 cask "kitty"
 # Unix shell (command interpreter)
 brew "zsh"
-
-# GNU Transport Layer Security (TLS) Library. Required for signing Git commits.
-brew "gnutls"
-# GNU Pretty Good Privacy (PGP) package. Required for signing Git commits.
-brew "gnupg"
-
 # Simple CLI interface for the Mac App Store
 brew "mas"
+# GNU File, Shell and Text utilities
+brew "coreutils"
 
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Music streaming service
 cask "spotify"
+# Music player focusing on visuals
+cask "plexamp"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"
+# Control your tools with a few keystrokes
+cask "raycast"
+# Assign keys, and then decorate and label them
+cask "elgato-stream-deck"
+
 # Fill and save your passwords
 mas "1Password for Safari", id: 1569813296
 # Adblock and privacy
 mas "AdGuard for Safari", id: 1440147259
-# Edit documents, notes and ideas
-mas "Craft", id: 1487937127
 # Hide menubar items
 mas "Hidden Bar", id: 1452453066
 # Organize Your Workspace
 mas "Magnet", id: 441258766
-# Beautiful images
-mas "Unsplash Wallpapers", id: 1284863847
 
 # Free monospaced font with programming ligatures
 cask "font-fira-code"
@@ -49,6 +50,8 @@ cask "font-fira-code"
 
 # A cat(1) clone with wings.
 brew "bat"
+# Modern shell for the GitHub era
+brew "nushell"
 # 🌸 A command-line fuzzy finder
 brew "fzf"
 # Improved top (interactive process viewer)
@@ -59,6 +62,10 @@ brew "ripgrep"
 brew "jq"
 # Git large file support
 brew "git-lfs"
+# Cross-shell prompt for astonauts
+brew "starship"
+# Multi-shell multi-command argument completer
+brew "rsteube/tap/carapace"
 
 # }}}
 
@@ -66,17 +73,13 @@ brew "git-lfs"
 
 # Command-line interface for SQLite
 brew "sqlite"
-# Object-relational database system
-brew "postgresql@14"
 
 # Interpreted, interactive, object-oriented programming language
 brew "python"
-# Fast and simple Node.js version manager
-brew "fnm"
-# Ruby version manager
-brew "rbenv"
-# Open source programming language to build simple/reliable/efficient software
-brew "go"
+# Rust toolchain installer
+brew "rustup"
+# Extendable version manager with support for Ruby, Node.js, Erlang & more
+brew "asdf"
 
 # }}}
 
@@ -100,7 +103,8 @@ brew "minikube"
 brew "cookiecutter"
 # GitHub command-line tool
 brew "gh"
-
+# Framework for managing multi-language pre-commit hooks
+brew "pre-commit"
 # vim
 brew "vim"
 # Open-source code editor
@@ -119,8 +123,6 @@ brew "hashicorp/tap/terraform"
 brew "hashicorp/tap/vault"
 # The Kubernetes Package Manager
 brew "helm"
-# Automate deployment, configuration, and upgrading
-brew "ansible"
 # Set of tools to manage resources and applications hosted on Google Cloud
 cask "google-cloud-sdk"
 

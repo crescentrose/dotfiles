@@ -12,6 +12,7 @@
     ~/.zshrc: config/zshrc
     ~/.gitconfig: config/gitconfig
     ~/.config/.gitignore_global: config/gitignore_global
+    ~/.config/nvim: config/nvim
     ~/.config/kitty:
       relink: true
       path: config/kitty

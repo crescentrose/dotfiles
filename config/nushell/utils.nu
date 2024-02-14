@@ -29,5 +29,4 @@ def --env view-project [dir: string@list-projects] {
 def open-project [dir: string@list-projects] {
   code $"($env.HOME)/Code/($dir)"
 }
-
 alias ccd = view-project

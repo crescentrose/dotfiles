@@ -45,9 +45,15 @@ $env.PROMPT_INDICATOR_VI_INSERT = ": "
 $env.PROMPT_INDICATOR_VI_NORMAL = "〉"
 $env.PROMPT_MULTILINE_INDICATOR = "::: "
 
+# Make previous prompts shorter
+$env.TRANSIENT_PROMPT_COMMAND = { starship module character }
+
 $env.EDITOR = "/opt/homebrew/bin/nvim"
 
 # Completions
 $env.CARAPACE_BRIDGES = 'zsh,fish,clap,bash,inshellisense'
 mkdir ~/.cache/carapace
 carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
+
+# Set Go environment variables
+$env.ASDF_GOLANG_MOD_VERSION_ENABLED = true

@@ -4,8 +4,18 @@
 
 [alias]
   publish ="!git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)"
-  d = "!git difftool --no-symlinks --dir-diff"
+  dt = "!git difftool --no-symlinks --dir-diff"
   continue = "!git add . && git rebase --continue"
+
+  # https://blog.gitbutler.com/git-tips-1-theres-a-git-config-for-that/
+  b = "!git blame -w -C -C -C"
+  d = "!git diff --word-diff"
+
+[branch]
+  sort = -comitterdate
+
+[column]
+  ui = auto
 
 # use Kitty terminal as diff tool
 [diff]
@@ -17,10 +27,10 @@
   trustExitCode = true
 
 [difftool "kitty"]
-  cmd = kitty +kitten diff $LOCAL $REMOTE
+  cmd = kitten diff $LOCAL $REMOTE
 
 [difftool "kitty.gui"]
-  cmd = kitty kitty +kitten diff $LOCAL $REMOTE
+  cmd = kitten diff $LOCAL $REMOTE
 
 [pull]
   ff = only
@@ -36,6 +46,10 @@
 
 [gpg]
   format = ssh
+
+[rerere]
+  enabled = true
+  autoUpdate = true
 
 [include]
   path = ~/.config/gitconfig.local

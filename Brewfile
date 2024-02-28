@@ -42,7 +42,7 @@ mas "Hidden Bar", id: 1452453066
 mas "Magnet", id: 441258766
 
 # Free monospaced font with programming ligatures
-cask "font-fira-code"
+cask "font-fira-code-nerd-font"
 
 # }}}
 
@@ -105,10 +105,12 @@ brew "cookiecutter"
 brew "gh"
 # Framework for managing multi-language pre-commit hooks
 brew "pre-commit"
-# vim
-brew "vim"
+# nvim
+brew "nvim"
 # Open-source code editor
 cask "visual-studio-code"
+# Tools for the WireGuard secure network tunnel
+brew "wireguard-tools"
 
 # }}}
 

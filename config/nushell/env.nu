@@ -11,6 +11,7 @@ $env.ENV_CONVERSIONS = {
 
 let custom_paths = [
     '/opt/homebrew/bin'
+    ([$env.HOME ".cargo/bin"] | path join)
     ([$env.HOME "bin"] | path join)
 ]
 
@@ -56,4 +57,4 @@ mkdir ~/.cache/carapace
 carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
 
 # Set Go environment variables
-$env.ASDF_GOLANG_MOD_VERSION_ENABLED = true
+$env.ASDF_GOLANG_MOD_VERSION_ENABLED = "true"

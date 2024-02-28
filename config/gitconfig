@@ -12,7 +12,7 @@
   d = "!git diff --word-diff"
 
 [branch]
-  sort = -comitterdate
+  sort = -committerdate
 
 [column]
   ui = auto

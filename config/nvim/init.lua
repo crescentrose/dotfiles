@@ -39,7 +39,7 @@ require("lazy").setup({
       -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim.
       'williamboman/mason-lspconfig.nvim',
       -- 💫 Extensible UI for Neovim notifications and LSP progress messages.
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
       -- 💻 Neovim setup for init.lua and plugin development with full signature help, docs and
       -- completion for the nvim lua API.
       'folke/neodev.nvim',
@@ -58,9 +58,9 @@ require("lazy").setup({
   -- A blazing fast and easy to configure neovim statusline plugin written in pure lua.
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = {"nvim-tree/nvim-web-devicons"},
-    config = function ()
-      require('lualine').setup { }
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require('lualine').setup {}
     end
   },
   -- Flexoki color scheme for Neovim
@@ -158,7 +158,7 @@ require("lazy").setup({
       vim.o.timeout = true
       vim.o.timeoutlen = 300
     end,
-    opts = { }
+    opts = {}
   },
   -- Snippet plugin for Neovim written in Lua
   "dcampos/nvim-snippy",
@@ -187,14 +187,14 @@ vim.cmd("colorscheme flexoki-light")
 vim.o.undofile = true -- Save undo history to a file
 
 -- Line numbers
-vim.o.number = true -- Show line numbers on the side
+vim.o.number = true         -- Show line numbers on the side
 vim.o.relativenumber = true -- Show both the relative number and the actual line number
 
 -- Saving
 vim.o.autowriteall = true -- Automatically save on any editor switch
-vim.o.swapfile = false -- Disable swap files
+vim.o.swapfile = false    -- Disable swap files
 vim.o.writebackup = false -- Disable backup files
-vim.o.backup = false -- Disable backup files
+vim.o.backup = false      -- Disable backup files
 
 -- UI
 vim.o.termguicolors = true -- Enable full colour support
@@ -217,19 +217,19 @@ vim.o.timeoutlen = 300 -- Decrease time to wait for mapped sequences to complete
 vim.o.showmode = false -- Hide mode name from command bar
 
 -- Formatting
-vim.o.textwidth = 100 -- Wrap text at 100 characters...
+vim.o.textwidth = 100             -- Wrap text at 100 characters...
 vim.opt.formatoptions:remove("t") -- ... but not automatically.
 
-vim.o.tabstop = 2 -- Tabs render as 2 spaces
-vim.o.shiftwidth = 2 -- Hitting tab inserts 2 spaces
-vim.o.shiftround = true -- Round tabs to nearest 2 spaces (so, 3 or 5 spaces are not possible)
-vim.o.expandtab = true -- Tabs get inserted as spaces
+vim.o.tabstop = 2                 -- Tabs render as 2 spaces
+vim.o.shiftwidth = 2              -- Hitting tab inserts 2 spaces
+vim.o.shiftround = true           -- Round tabs to nearest 2 spaces (so, 3 or 5 spaces are not possible)
+vim.o.expandtab = true            -- Tabs get inserted as spaces
 
-vim.o.breakindent = true -- Wrapped lines will continue indented
+vim.o.breakindent = true          -- Wrapped lines will continue indented
 
 -- Searching
-vim.o.ignorecase = true -- Case-insensitive searching...
-vim.o.smartcase = true -- ... except a capital letter is used to search
+vim.o.ignorecase = true              -- Case-insensitive searching...
+vim.o.smartcase = true               -- ... except a capital letter is used to search
 
 if vim.fn.executable('rg') == 1 then -- Use rg if available
   vim.o.grepprg = "rg --vimgrep --no-heading --smart-case"
@@ -240,11 +240,11 @@ end
 -- Custom keymaps {{{
 
 -- Cmd-S (on macOS) to save file in insert or normal mode
-vim.keymap.set({'n', 'i'}, '<D-s>', '<cmd>w<cr>', { desc = "[󰘳-s] Write current buffer" } )
+vim.keymap.set({ 'n', 'i' }, '<D-s>', '<cmd>w<cr>', { desc = "[󰘳-s] Write current buffer" })
 
 -- Telescope keybinds
 local telescope = require('telescope.builtin')
-vim.keymap.set({'n'}, '<S-D-p>', telescope.find_files, { desc = "[󰘳-󰘶-p] Search Files" })
+vim.keymap.set({ 'n' }, '<S-D-p>', telescope.find_files, { desc = "[󰘳-󰘶-p] Search Files" })
 vim.keymap.set('n', '<leader>sg', telescope.git_files, { desc = '[S]earch [G]it Files' })
 vim.keymap.set('n', '<leader>sf', telescope.find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', telescope.help_tags, { desc = '[S]earch [H]elp' })
@@ -442,6 +442,8 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
+
+  nmap('<leader>cf', vim.lsp.buf.format, '[C]ode [F]ormat')
 end
 
 -- mason-lspconfig requires that these setup functions are called in this order
@@ -462,7 +464,7 @@ local servers = {
   pyright = {},
   rust_analyzer = {},
   tsserver = {},
-  html = { filetypes = { 'html', 'twig', 'hbs'} },
+  html = { filetypes = { 'html', 'twig', 'hbs' } },
 
   lua_ls = {
     Lua = {
@@ -572,5 +574,5 @@ which_key.register({
 
 -- }}}
 
--- 
+--
 -- vim: fdm=marker fdl=0

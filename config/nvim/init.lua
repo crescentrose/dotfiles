@@ -3,6 +3,10 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Install the lazy.vim plugin manager {{{
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -59,12 +63,24 @@ require("lazy").setup({
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require('lualine').setup {}
-    end
+    opts = {
+      theme = "visual_studio_code",
+      icons_enabled = true
+    },
   },
-  -- Flexoki color scheme for Neovim
-  { "kepano/flexoki-neovim", name = "flexoki" },
+  -- A `neovim` theme that highly restores `vscode`, so that your friends will no longer be 
+  -- surprised that you use `neovim`, because they will think you are using `vscode` ..
+  {
+    "askfiy/visual_studio_code",
+    priority = 100,
+    opts = {
+      mode = "light"
+    },
+  },
+  -- A file explorer tree for neovim written in lua
+  {
+    "nvim-tree/nvim-tree.lua",
+  },
   -- Git integration for buffers
   {
     'lewis6991/gitsigns.nvim',
@@ -138,6 +154,20 @@ require("lazy").setup({
         map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = 'select git hunk' })
       end,
     },
+    -- A feature-rich Go development plugin, leveraging gopls, treesitter AST, Dap, and various Go tools to enhance the dev experience.
+    {
+      "ray-x/go.nvim",
+      dependencies = {
+        -- A GUI library for Neovim plugin developers
+        "ray-x/guihua.lua",
+      },
+      config = function()
+        require("go").setup()
+      end,
+      event = {"CmdlineEnter"},
+      ft = {"go", 'gomod'},
+      build = ':lua require("go.install").update_all_sync()'
+    }
   },
   -- Find, Filter, Preview, Pick. All lua, all the time.
   {
@@ -170,10 +200,11 @@ require("lazy").setup({
 
 -- }}}
 
-vim.cmd("colorscheme flexoki-light")
+vim.cmd("colorscheme visual_studio_code")
 
 -- Setup plugins {{{
-
+--
+require("nvim-tree").setup()
 
 -- }}}
 
@@ -242,6 +273,12 @@ end
 -- Cmd-S (on macOS) to save file in insert or normal mode
 vim.keymap.set({ 'n', 'i' }, '<D-s>', '<cmd>w<cr>', { desc = "[󰘳-s] Write current buffer" })
 
+-- Move between windows easily
+vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = "Switch to left window" })
+vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = "Switch to bottom window" })
+vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = "Switch to top window" })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = "Switch to right window" })
+
 -- Telescope keybinds
 local telescope = require('telescope.builtin')
 vim.keymap.set({ 'n' }, '<S-D-p>', telescope.find_files, { desc = "[󰘳-󰘶-p] Search Files" })
@@ -277,6 +314,17 @@ vim.api.nvim_create_autocmd("ModeChanged", {
   group = search,
   desc = "Highlighting matched words when searching",
 })
+
+-- run gofmt on save
+local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+   require('go.format').goimport()
+  end,
+  group = format_sync_grp,
+})
+
 
 -- }}}
 

@@ -44,6 +44,9 @@ mas "Magnet", id: 441258766
 # Free monospaced font with programming ligatures
 cask "font-fira-code-nerd-font"
 
+# Developer targeted fonts with a high number of glyphs
+cask "font-fantasque-sans-mono-nerd-font"
+
 # }}}
 
 # 🔧 CLI utilities {{{

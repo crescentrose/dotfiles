@@ -167,6 +167,35 @@ require("lazy").setup({
       event = {"CmdlineEnter"},
       ft = {"go", 'gomod'},
       build = ':lua require("go.install").update_all_sync()'
+    },
+    -- A UI for nvim-dap
+    {
+      "rcarriga/nvim-dap-ui",
+      dependencies = {
+        -- Debug Adapter Protocol client implementation for Neovim
+        "mfussenegger/nvim-dap",
+        -- This plugin adds virtual text support to nvim-dap
+        "theHamsta/nvim-dap-virtual-text",
+      },
+      config = function()
+        local dap, dapui = require("dap"), require("dapui")
+        dapui.setup()
+
+        dap.listeners.before.attach.dapui_config = function()
+          dapui.open()
+        end
+        dap.listeners.before.launch.dapui_config = function()
+          dapui.open()
+        end
+        dap.listeners.before.event_terminated.dapui_config = function()
+          dapui.close()
+        end
+        dap.listeners.before.event_exited.dapui_config = function()
+          dapui.close()
+        end
+
+        require("nvim-dap-virtual-text").setup({})
+      end,
     }
   },
   -- Find, Filter, Preview, Pick. All lua, all the time.
@@ -196,11 +225,12 @@ require("lazy").setup({
   "dcampos/cmp-snippy",
   -- Set of preconfigured snippets for different languages.
   "rafamadriz/friendly-snippets",
+  -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
+  "sindrets/diffview.nvim",
 })
 
 -- }}}
 
-vim.cmd("colorscheme visual_studio_code")
 
 -- Setup plugins {{{
 --
@@ -209,7 +239,9 @@ require("nvim-tree").setup()
 -- }}}
 
 -- Color scheme {{{
---
+
+vim.cmd("colorscheme visual_studio_code")
+
 -- }}}
 
 -- Basic setup {{{
@@ -237,7 +269,7 @@ vim.wo.signcolumn = "number" -- Use the number column for signs
 vim.o.splitbelow = true -- Create new splits below current split (instead of above)
 vim.o.splitright = true -- Create new splits right to the current split (instead of to the left)
 
-vim.o.scrolloff = 3 -- Put a few lines around the cursor when scrolling
+vim.o.scrolloff = 5 -- Put a few lines around the cursor when scrolling
 
 vim.o.list = true -- Display tabs and trailing spaces
 vim.o.listchars = "tab:␉·,trail:␠,nbsp:⎵" -- Show only tabs, trailing spaces and non-breaking spaces
@@ -246,6 +278,7 @@ vim.o.updatetime = 250 -- Decrease time to show popups
 vim.o.timeoutlen = 300 -- Decrease time to wait for mapped sequences to complete (?)
 
 vim.o.showmode = false -- Hide mode name from command bar
+vim.o.inccommand = "split" -- Preview substitutions as you type
 
 -- Formatting
 vim.o.textwidth = 100             -- Wrap text at 100 characters...
@@ -325,6 +358,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   group = format_sync_grp,
 })
 
+-- Highlight when yanking (copying) text
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
 
 -- }}}
 

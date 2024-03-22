@@ -5,12 +5,6 @@ def kctx [] {
   kubectl config use-context (kubectl config get-contexts -o=name | fzf --height=30% --reverse)
 }
 
-# Change the title of the current kitty window to the abbreviated form of the directory.
-def kitty-title [dir: string] {
-  let new_title = $dir | str replace $env.HOME "~" | split row (char psep) | last 3 | str join (char psep)
-  kitten @ set-window-title $new_title
-}
-
 # Pass to nushell's open command.
 def nuopen [arg, --raw (-r)] {
   if $raw { open -r $arg } else { open $arg }

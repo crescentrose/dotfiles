@@ -83,6 +83,8 @@ brew "python"
 brew "rustup"
 # Extendable version manager with support for Ruby, Node.js, Erlang & more
 brew "asdf"
+# Polyglot runtime manager (asdf rust clone)
+brew "mise"
 
 # }}}
 

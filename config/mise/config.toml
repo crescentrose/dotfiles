@@ -1,0 +1,6 @@
+[tools]
+go = "latest"
+node = "lts"
+
+[settings]
+experimental = true

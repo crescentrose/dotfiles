@@ -56,5 +56,3 @@ $env.CARAPACE_BRIDGES = 'zsh,fish,clap,bash,inshellisense'
 mkdir ~/.cache/carapace
 carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
 
-# Set Go environment variables
-$env.ASDF_GOLANG_MOD_VERSION_ENABLED = "true"

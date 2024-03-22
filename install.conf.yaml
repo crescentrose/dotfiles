@@ -22,7 +22,7 @@
     ~/Library/Application Support/nushell:
       relink: true
       path: config/nushell
-    ~/.tool-versions: config/tool-versions
+    ~/.config/mise: config/mise
     ~/.config/starship.toml: config/starship.toml
     ~/.asdfrc: config/asdfrc
     ~/bin:

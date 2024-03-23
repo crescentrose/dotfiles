@@ -32,6 +32,7 @@ return {
 		require("overseer").patch_dap(true)
 
 		-- Debug keymaps
+		vim.keymap.set("n", "<A-5>", dapui.close, { desc = "toggle debug UI" })
 		vim.keymap.set("n", "<leader>eb", dap.toggle_breakpoint, { desc = "D[e]bug: [B]reakpoint" })
 		vim.keymap.set("n", "<leader>ec", dap.toggle_breakpoint, { desc = "D[e]bug: [C]ontinue" })
 		vim.keymap.set("n", "<leader>ee", dapui.close, { desc = "D[e]bug: [E]valuate" })
@@ -39,6 +40,5 @@ return {
 		vim.keymap.set("n", "<leader>es", dap.step_into, { desc = "D[e]bug: [S]tep Into" })
 		vim.keymap.set("n", "<leader>et", dap.step_into, { desc = "D[e]bug: S[t]ep Over" })
 		vim.keymap.set("n", "<leader>ex", dapui.close, { desc = "D[e]bug: Close" })
-		vim.keymap.set("t", "<leader>et", dapui.close, { desc = "D[e]bug: [T]oggle" })
 	end,
 }

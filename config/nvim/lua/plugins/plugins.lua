@@ -27,8 +27,6 @@ require("lazy").setup({
 	"tpope/vim-surround",
 	-- commentary.vim: comment stuff out
 	"tpope/vim-commentary",
-	-- fugitive.vim: A Git wrapper so awesome, it should be illegal
-	"tpope/vim-fugitive",
 	-- repeat.vim: enable repeating supported plugin maps with "."
 	"tpope/vim-repeat",
 	-- A minimalist Neovim plugin that auto pairs & closes brackets
@@ -92,7 +90,7 @@ require("lazy").setup({
 	require("plugins.outline"),
 
 	-- Rust
-	require("plugins.rust"),
+	-- require("plugins.rust"),
 
 	-- Go
 	require("plugins.go"),
@@ -119,6 +117,10 @@ require("lazy").setup({
 
 	-- Git {{{
 
+	-- fugitive.vim: A Git wrapper so awesome, it should be illegal
+	"tpope/vim-fugitive",
+
+	-- Git signs
 	require("plugins.git"),
 
 	-- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
@@ -142,6 +144,16 @@ require("lazy").setup({
 
 	-- }}}
 
+	-- Documentation {{{
+
+	-- Document which keys do what
+	require("plugins.keymap"),
+
+	-- Documentation for every language ever
+	require("plugins.devdocs"),
+
+	-- }}}
+
 	-- Fun {{{
 
 	-- NeoVim plugin with which you can track the time you spent on files, projects, repos, filetypes
@@ -155,16 +167,6 @@ require("lazy").setup({
 
 	-- Draw ASCII diagrams in Neovim
 	"jbyuki/venn.nvim",
-
-	-- }}}
-
-	-- Documentation {{{
-
-	-- Document which keys do what
-	require("plugins.keymap"),
-
-	-- Documentation for every language ever
-	require("plugins.devdocs"),
 
 	-- }}}
 })

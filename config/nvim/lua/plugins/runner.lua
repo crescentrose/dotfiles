@@ -2,5 +2,11 @@
 return {
 	"stevearc/overseer.nvim",
 	event = "VeryLazy",
-	opts = { dap = false }, -- we load it manually in dap setup
+	config = function()
+		require("overseer").setup({ dap = false })
+
+		vim.keymap.set("n", "<A-2>", ":OverseerToggle<CR>", { desc = "Toggle Overseer" })
+
+		vim.keymap.set("n", "<leader>r", ":OverseerRun<CR>", { desc = "[R]un" })
+	end,
 }

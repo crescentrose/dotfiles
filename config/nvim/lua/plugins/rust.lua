@@ -1,6 +1,2 @@
--- Supercharge your Rust experience in Neovim! A heavily modified fork of rust-tools.nvim
-return {
-  'mrcjkb/rustaceanvim',
-  version = '^4', -- Recommended
-  ft = { 'rust' },
-}
+-- rustacean.vim is a bit much
+-- need to figure out a better way to manage rust projects

@@ -2,8 +2,8 @@ return {
 	"hedyhli/outline.nvim",
 	lazy = true,
 	cmd = { "Outline", "OutlineOpen" },
-	keys = { -- Example mapping to toggle outline
-		{ "<leader>to", "<cmd>Outline<CR>", desc = "[T]oggle [O]utline" },
+	keys = {
+		{ "<A-3>", "<cmd>Outline<CR>", desc = "Show outline" },
 	},
 	opts = {
 		-- Your setup opts here

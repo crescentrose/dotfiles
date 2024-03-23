@@ -1,7 +1,8 @@
 # pyright: reportMissingImports=false
 
-from subprocess import STDOUT, check_output, CalledProcessError, TimeoutExpired
+from subprocess import STDOUT, check_output
 import sys
+import re
 
 from kitty.boss import get_boss
 from kitty.fast_data_types import Screen, add_timer
@@ -78,7 +79,9 @@ def draw_right_status(draw_data: DrawData, screen: Screen) -> None:
 
 def create_cells() -> list[str]:
     cells = [
-        _get_kube_context()
+        _get_kube_context(),
+        _get_batt(),
+        _get_cpu(),
     ]
 
     return [c for c in cells if c]
@@ -87,7 +90,7 @@ def _get_kube_context() -> str:
     try:
         out = check_output(["/opt/homebrew/bin/kubectl", "config", "current-context"], stderr=STDOUT, timeout=2).decode(sys.stdout.encoding).strip()
     except Exception as e:
-        return 'k8s: {}'.format(e)
+        return ""
 
     if out == "minikube" or out == "colima":
         return ""
@@ -97,6 +100,34 @@ def _get_kube_context() -> str:
         return f"☁️ {parts[1]}"
 
     return out
+
+batt_re = re.compile('(\d+)\%\;')
+def _get_batt() -> str:
+    try:
+        out = check_output(["/usr/bin/pmset", "-g", "batt"], stderr=STDOUT, timeout=2).decode(sys.stdout.encoding).strip()
+    except Exception as e:
+        return ""
+
+    batt = batt_re.search(out)
+
+    if batt is not None:
+        return f"󰁹 {batt.group(1)}%"
+
+    return ""
+
+cpu_re = re.compile(r"load averages: ([0-9\.]+)")
+def _get_cpu() -> str:
+    try:
+        out = check_output(["/usr/bin/uptime"], stderr=STDOUT, timeout=2).decode(sys.stdout.encoding).strip()
+    except Exception as e:
+        return ""
+
+    load = cpu_re.search(out)
+
+    if load is not None:
+        return f" {load.group(1)}"
+
+    return ""
 
 
 def _redraw_tab_bar(timer_id):

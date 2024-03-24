@@ -4,12 +4,16 @@ revamped and enhanced for the next five years
 
 <details>
 <summary>screenshot: clean</summary>
-![nvim and kitty setup, clean](nvim-clean.png)
+
+![nvim and kitty setup, clean](./nvim-clean.png)
+
 </details>
 
 <details>
 <summary>screenshot: dirty</summary>
-![nvim and kitty setup, dirty](nvim-dirty.png)
+
+![nvim and kitty setup, dirty](./nvim-dirty.png)
+
 </details>
 
 ## setup
@@ -53,6 +57,9 @@ The dotfiles contain:
 - A mildly polished [neovim](https://neovim.io/) config with LSP, debugging and other plugins
   focused on a nice development experience
 - [mise](https://mise.jdx.dev/) for version management and a basic Git config
+
+The Neovim config is explained in more details in a dedicated help file. Run
+[`:h crescentrose`](./config/nvim/doc/crescentrose.txt) to get more info.
 
 ## links
 

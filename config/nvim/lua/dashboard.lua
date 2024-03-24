@@ -19,7 +19,11 @@ local header = {
 
 local footer = {
 	type = "text",
-	val = vim.split(vim.fn.system({ "fortune", "-n", "200", "-s" }), "\n"),
+	--	val = vim.split(vim.fn.system({ "fortune", "-n", "200", "-s" }), "\n"),
+	val = {
+		[[All things that are, are with more spirit chased than enjoyed.]],
+		[[-- Shakespeare, "Merchant of Venice"]],
+	},
 	opts = {
 		position = "center",
 		hl = "Comment",

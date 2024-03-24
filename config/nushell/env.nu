@@ -51,6 +51,8 @@ $env.TRANSIENT_PROMPT_COMMAND = { starship module character }
 
 $env.EDITOR = "/opt/homebrew/bin/nvim"
 
+$env.BAT_THEME = "ansi" # basic bitch...
+
 # Completions
 $env.CARAPACE_BRIDGES = 'zsh,fish,clap,bash,inshellisense'
 mkdir ~/.cache/carapace

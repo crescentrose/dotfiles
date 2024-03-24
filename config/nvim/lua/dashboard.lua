@@ -1,17 +1,6 @@
 local if_nil = vim.F.if_nil
 
-local default_terminal = {
-	type = "terminal",
-	command = "",
-	width = 69,
-	height = 8,
-	opts = {
-		redraw = true,
-		window_config = {},
-	},
-}
-
-local default_header = {
+local header = {
 	type = "text",
 	val = {
 		[[                   _ |\_]],
@@ -86,21 +75,14 @@ local buttons = {
 	},
 }
 
-local section = {
-	terminal = default_terminal,
-	header = default_header,
-	buttons = buttons,
-	footer = footer,
-}
-
 local config = {
 	layout = {
 		{ type = "padding", val = 4 },
-		section.header,
+		header,
 		{ type = "padding", val = 2 },
-		section.buttons,
+		buttons,
 		{ type = "padding", val = 2 },
-		section.footer,
+		footer,
 	},
 	opts = {
 		margin = 5,
@@ -108,11 +90,6 @@ local config = {
 }
 
 return {
-	button = button,
-	section = section,
 	config = config,
-	-- theme config
 	leader = leader,
-	-- deprecated
-	opts = config,
 }

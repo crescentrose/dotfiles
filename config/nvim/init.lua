@@ -11,24 +11,6 @@ vim.g.loaded_netrwPlugin = 1
 -- see: https://mise.jdx.dev/getting-started.html#_2b-alternative-add-mise-shims-to-path
 vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
 
--- Plugins {{{
-
--- Set up lazy.vim and configure plugins
-require("bootstrap")
-require("plugins.plugins")
-
--- }}}
-
--- Color scheme {{{
-
-vim.cmd.colorscheme("catppuccin")
-
--- Integrate theme with nvim-biscuits
-local comment_hl = vim.api.nvim_get_hl(0, { name = "Comment" })
-vim.api.nvim_set_hl(0, "BiscuitColor", comment_hl)
-
--- }}}
-
 -- Basic setup {{{
 
 require("options")
@@ -54,6 +36,24 @@ if vim.env.TERM == "xterm-kitty" then
 	local configpath = vim.fn.stdpath("config") .. "/kitty.vim"
 	vim.cmd("source " .. configpath)
 end
+
+-- }}}
+
+-- Plugins {{{
+
+-- Set up lazy.vim and configure plugins
+require("bootstrap")
+require("plugins.plugins")
+
+-- }}}
+
+-- Color scheme {{{
+
+vim.cmd.colorscheme("catppuccin")
+
+-- Integrate theme with nvim-biscuits
+local comment_hl = vim.api.nvim_get_hl(0, { name = "Comment" })
+vim.api.nvim_set_hl(0, "BiscuitColor", comment_hl)
 
 -- }}}
 

@@ -847,3 +847,6 @@ source ~/.cache/carapace/init.nu
 
 # Load mise
 source "/Users/ivan.ostric/Code/dotfiles/config/nushell/mise.nu"
+
+# Load Starship prompt
+use ~/.cache/starship/init.nu

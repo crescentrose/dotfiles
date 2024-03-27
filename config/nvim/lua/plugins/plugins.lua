@@ -165,8 +165,7 @@ require("lazy").setup({
 		end,
 	},
 
-	-- Draw ASCII diagrams in Neovim
-	"jbyuki/venn.nvim",
+	require("plugins.diagrams"),
 
 	-- }}}
 })

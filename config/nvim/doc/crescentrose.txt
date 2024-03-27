@@ -176,11 +176,11 @@ If a LSP is available, the following keybinds should work:
             rename the symbol under the cursor
   <Space>ca                                              *<Space>ca*
             open a list of available code actions
-  <Space>gd                                              *<Space>gd*
+  gd                                                     *gd*
             find definitions
-  <Space>gr                                              *<Space>gr*
+  gr                                                     *gr*
             find references
-  <Space>gI                                              *<Space>gI*
+  gI                                                     *gI*
             go to implementation
   <Space>cd                                              *<Space>cd*
             see type definition

@@ -192,7 +192,7 @@ If a LSP is available, the following keybinds should work:
             pop up LSP documentation
   gD                                                     *gD*
             go to declaration directly
-  <C-k>                                                  *CTRL-k*
+  <A-k>                                                  *ALT-k*
             pop up function signature
   <Space>wl                                              *<Space>wl*
             list directories in the workspace

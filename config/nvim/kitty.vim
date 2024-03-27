@@ -6,6 +6,8 @@
 " These settings must be placed before setting the colorscheme. It is also important that the value of the vim term
 " variable is not changed after these settings.
 
+set mouse=a
+
 " Styled and colored underline support
 let &t_AU = "\e[58:5:%dm"
 let &t_8u = "\e[58:2:%lu:%lu:%lum"
@@ -43,9 +45,13 @@ let &t_VS = "\e[?12l"
 " Focus tracking
 let &t_fe = "\e[?1004h"
 let &t_fd = "\e[?1004l"
-" TODO: is this necessary?
-" execute "set <FocusGained>=\<Esc>[I"
-" execute "set <FocusLost>=\<Esc>[O"
+
+augroup Kitty
+  au!
+  au VimEnter * lua io.stdout:write("\x1b]1337;SetUserVar=in_editor=MQo\007")
+  au VimLeave * lua io.stdout:write("\x1b]1337;SetUserVar=in_editor\007")
+augroup END
+
 
 " Window title
 let &t_ST = "\e[22;2t"

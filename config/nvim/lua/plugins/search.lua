@@ -2,6 +2,8 @@
 return {
 	"FabianWirth/search.nvim",
 	dependencies = { "nvim-telescope/telescope.nvim" },
+	lazy = true,
+	keys = { "<S-D-p>", "<C-p>" },
 	config = function()
 		local builtin = require("telescope.builtin")
 		local search = require("search")

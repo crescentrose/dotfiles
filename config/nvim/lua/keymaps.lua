@@ -1,13 +1,11 @@
 -- Cmd-S (on macOS) to save file in insert or normal mode
 vim.keymap.set({ "n", "i" }, "<D-s>", "<cmd>w<cr>", { desc = "[󰘳-s] Write current buffer" })
 -- Cmd-V pastes from system clipboard
-vim.keymap.set({ "n", "i" }, "<D-v>", '<cmd>"+p<cr>', { desc = "[󰘳-v] Paste from system clipboard" })
+vim.keymap.set({ "n", "i" }, "<D-v>", '"+p', { desc = "[󰘳-v] Paste from system clipboard" })
 -- Cmd-C copies to system clipboard
-vim.keymap.set({ "v" }, "<D-c>", '<cmd>"+y<cr>', { desc = "[󰘳-c] Yank to system clipboard" })
-vim.keymap.set({ "v" }, "<D-S-c>", '<cmd>"+y<cr>', { desc = "[󰘳-c] Yank to system clipboard" })
+vim.keymap.set({ "v" }, "<D-c>", '"+y', { desc = "[󰘳-c] Yank to system clipboard" })
 -- Cmd-X cuts to system clipboard
-vim.keymap.set({ "v" }, "<D-x>", '<cmd>"+d"<cr>', { desc = "[󰘳-x] Delete to system clipboard" })
-vim.keymap.set({ "v" }, "<D-S-x>", '<cmd>"+y<cr>', { desc = "[󰘳-c] Yank to system clipboard" })
+vim.keymap.set({ "v" }, "<D-x>", '"+d', { desc = "[󰘳-x] Delete to system clipboard" })
 
 -- Move between windows easily
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Switch to left window" })

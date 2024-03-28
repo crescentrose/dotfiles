@@ -1,20 +1,10 @@
--- Focus on one function at a time
+--  🌅 Twilight is a Lua plugin for Neovim 0.5 that dims inactive portions of the code you're
+--  editing using TreeSitter.
 return {
-  'koenverburg/peepsight.nvim',
-  event = "VeryLazy",
-  config = function()
-    local peepsight = require('peepsight')
-    peepsight.setup({
-      "function_declaration",
-      "method_declaration",
-      "func_literal",
-      "class_declaration",
-      "method_definition",
-      "arrow_function",
-      "function_declaration",
-      "generator_function_declaration"
-    })
-
-    vim.keymap.set('n', '<leader>tf', peepsight.toggle, { desc = '[T]oggle [F]ocus' })
-  end
+	"folke/twilight.nvim",
+	lazy = true,
+	cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
+	config = function()
+		require("twilight").setup({})
+	end,
 }

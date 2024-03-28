@@ -2,14 +2,14 @@
 vim.o.undofile = true -- Save undo history to a file
 
 -- Line numbers
-vim.o.number = true         -- Show line numbers on the side
+vim.o.number = true -- Show line numbers on the side
 vim.o.relativenumber = true -- Show both the relative number and the actual line number
 
 -- Saving
-vim.o.autowriteall = true                                                    -- Automatically save on any editor switch
-vim.o.swapfile = false                                                       -- Disable swap files
-vim.o.writebackup = false                                                    -- Disable backup files
-vim.o.backup = false                                                         -- Disable backup files
+vim.o.autowriteall = true -- Automatically save on any editor switch
+vim.o.swapfile = false -- Disable swap files
+vim.o.writebackup = false -- Disable backup files
+vim.o.backup = false -- Disable backup files
 vim.o.sessionoptions = "curdir,folds,globals,help,tabpages,terminal,winsize" -- Save these options with sessions
 
 -- UI
@@ -38,35 +38,38 @@ vim.o.showtabline = 2 -- Always display the tab line
 vim.o.cursorline = true -- Highlight the current cursor line
 
 vim.diagnostic.config({ -- Disable virtual text since we have lsp_lines
-  virtual_text = false
+	virtual_text = false,
 })
 
 -- Formatting
-vim.o.textwidth = 100             -- Wrap text at 100 characters...
+vim.o.textwidth = 100 -- Wrap text at 100 characters...
 vim.opt.formatoptions:remove("t") -- ... but not automatically.
 
-vim.o.tabstop = 2                 -- Tabs render as 2 spaces
-vim.o.shiftwidth = 2              -- Hitting tab inserts 2 spaces
-vim.o.shiftround = true           -- Round tabs to nearest 2 spaces (so, 3 or 5 spaces are not possible)
-vim.o.expandtab = true            -- Tabs get inserted as spaces
+vim.o.tabstop = 2 -- Tabs render as 2 spaces
+vim.o.shiftwidth = 2 -- Hitting tab inserts 2 spaces
+vim.o.shiftround = true -- Round tabs to nearest 2 spaces (so, 3 or 5 spaces are not possible)
+vim.o.expandtab = true -- Tabs get inserted as spaces
 
-vim.o.breakindent = true          -- Wrapped lines will continue indented
-vim.o.smartindent = true          -- Do smart indenting when starting a new line
+vim.o.breakindent = true -- Wrapped lines will continue indented
+vim.o.smartindent = true -- Do smart indenting when starting a new line
 
 -- Searching
-vim.o.ignorecase = true              -- Case-insensitive searching...
-vim.o.smartcase = true               -- ... except a capital letter is used to search
+vim.o.ignorecase = true -- Case-insensitive searching...
+vim.o.smartcase = true -- ... except a capital letter is used to search
 
-if vim.fn.executable('rg') == 1 then -- Use rg if available
-  vim.o.grepprg = "rg --vimgrep --no-heading --smart-case"
+if vim.fn.executable("rg") == 1 then -- Use rg if available
+	vim.o.grepprg = "rg --vimgrep --no-heading --smart-case"
 end
 
 -- Symbols
 vim.fn.sign_define("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "@comment.todo", numhl = "" })
-vim.fn.sign_define("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
+vim.fn.sign_define(
+	"DapBreakpointCondition",
+	{ text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" }
+)
 vim.fn.sign_define("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
 
-vim.fn.sign_define("DiagnosticSignError", { text = "󰔶", texthl = 'DiagnosticSignError' })
-vim.fn.sign_define("DiagnosticSignWarn", { text = "󰔶", texthl = 'DiagnosticSignWarn' })
-vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = 'DiagnosticSignInfo' })
-vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = 'DiagnosticSignHint' })
+vim.fn.sign_define("DiagnosticSignError", { text = "󰔶", texthl = "DiagnosticSignError" })
+vim.fn.sign_define("DiagnosticSignWarn", { text = "󰔶", texthl = "DiagnosticSignWarn" })
+vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticSignInfo" })
+vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint" })

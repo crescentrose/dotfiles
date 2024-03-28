@@ -101,15 +101,6 @@ require("lazy").setup({
 	-- JSON Schemas
 	require("plugins.json"),
 
-	-- Snippet plugin for Neovim written in Lua
-	"dcampos/nvim-snippy",
-
-	-- nvim-snippy completion source for nvim-cmp.
-	"dcampos/cmp-snippy",
-
-	-- Set of preconfigured snippets for different languages.
-	"rafamadriz/friendly-snippets",
-
 	-- Run snippets of code
 	require("plugins.sniprun"),
 

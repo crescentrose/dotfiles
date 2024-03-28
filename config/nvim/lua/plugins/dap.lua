@@ -1,7 +1,9 @@
 -- A UI for nvim-dap
 return {
 	"rcarriga/nvim-dap-ui",
-	event = "VeryLazy",
+	lazy = true,
+	command = { "DapUiToggle", "DapToggleBreakpoint" },
+	event = "BufReadPost",
 	dependencies = {
 		-- Debug Adapter Protocol client implementation for Neovim
 		"mfussenegger/nvim-dap",

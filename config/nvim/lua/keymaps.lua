@@ -23,3 +23,6 @@ vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev, { desc = "[D]iagnost
 vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next, { desc = "[D]iagnostic: [N]ext message" })
 vim.keymap.set("n", "<leader>dm", vim.diagnostic.open_float, { desc = "[D]iagnostic: View [m]essage" })
 vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "[D]iagnostic: Open [l]ist" })
+
+-- Plugin maps
+vim.keymap.set("n", "<leader>tf", ":Twilight<cr>", { desc = "[T]oggle [F]ocus" })

@@ -140,8 +140,8 @@ require("lazy").setup({
 	-- Document which keys do what
 	require("plugins.keymap"),
 
-	-- Documentation for every language ever
-	require("plugins.devdocs"),
+	-- Language and code documentation
+	require("plugins.docs"),
 
 	-- }}}
 

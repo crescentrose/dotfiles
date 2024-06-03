@@ -11,9 +11,18 @@ return {
 			{ "j-hui/fidget.nvim", opts = {} },
 			-- nvim-cmp source for neovim builtin LSP client
 			"hrsh7th/cmp-nvim-lsp",
-			-- 💻 Neovim setup for init.lua and plugin development with full signature help, docs and
-			-- completion for the nvim lua API.
-			"folke/neodev.nvim",
+			-- Faster LuaLS setup for Neovim
+			{
+				"folke/lazydev.nvim",
+				ft = "lua",
+				opts = {
+					library = {
+						"luvit-meta/library",
+					},
+				},
+			},
+			-- Meta type definitions for the Lua platform Luvit.
+			{ "Bilal2453/luvit-meta", lazy = true },
 		},
 		event = "BufReadPost",
 		config = function()
@@ -38,8 +47,6 @@ return {
 				},
 				lua_ls = {},
 			}
-
-			require("neodev").setup({})
 
 			local mason, lspconfig = require("mason"), require("mason-lspconfig")
 			mason.setup()

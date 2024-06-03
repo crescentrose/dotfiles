@@ -12,7 +12,7 @@ return {
 	},
 	config = function()
 		local telescope = require("telescope")
-		local trouble = require("trouble.providers.telescope")
+		local trouble = require("trouble.sources.telescope")
 		telescope.setup({
 			extensions = {
 				["ui-select"] = {
@@ -21,8 +21,8 @@ return {
 			},
 			defaults = {
 				mappings = {
-					i = { ["<c-r>"] = trouble.open_with_trouble },
-					n = { ["<c-r>"] = trouble.open_with_trouble },
+					i = { ["<c-r>"] = trouble.open },
+					n = { ["<c-r>"] = trouble.open },
 				},
 			},
 		})

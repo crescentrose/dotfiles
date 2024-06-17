@@ -32,7 +32,7 @@ return {
 			},
 		})
 
-		vim.keymap.set("n", "<A-2>", ":OverseerToggle<CR>", { desc = "Toggle Overseer" })
+		vim.keymap.set("n", "<A-2>", ":OverseerToggle left<CR>", { desc = "Toggle Overseer" })
 		vim.keymap.set("n", "<leader>r", ":OverseerRun<CR>", { desc = "[R]un" })
 	end,
 }

@@ -8,7 +8,7 @@ return {
 		local trouble = require("trouble")
 
 		vim.keymap.set("n", "<A-4>", function()
-			trouble.toggle("workspace_diagnostics")
+			trouble.toggle("diagnostics")
 		end, { desc = "Open diagnostics" })
 		vim.keymap.set("n", "<leader>td", function()
 			trouble.toggle("document_diagnostics")

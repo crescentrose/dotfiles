@@ -34,8 +34,16 @@ require("lazy").setup({
 		"m4xshen/autoclose.nvim",
 		config = function()
 			require("autoclose").setup({
+				keys = {
+					["`"] = { escape = false, close = false, pair = "``", disabled_filetypes = {} },
+					["'"] = { escape = false, close = false, pair = "''", disabled_filetypes = {} },
+				},
 				options = {
 					pair_spaces = true,
+					disabled_filetypes = { "text", "markdown" },
+					disable_when_touch = true,
+					touch_regex = "[%w(%[{]",
+					disable_command_mode = true,
 				},
 			})
 		end,
@@ -90,7 +98,7 @@ require("lazy").setup({
 	require("plugins.outline"),
 
 	-- Rust
-	-- require("plugins.rust"),
+	require("plugins.rust"),
 
 	-- Go
 	require("plugins.go"),

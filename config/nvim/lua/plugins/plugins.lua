@@ -11,7 +11,6 @@ require("lazy").setup({
 			local catppuccin = require("catppuccin")
 			catppuccin.setup({
 				integrations = {
-					notify = true,
 					which_key = true,
 				},
 				flavour = "frappe",
@@ -58,14 +57,25 @@ require("lazy").setup({
 	require("plugins.statusline"),
 	-- Greeter / dashboard
 	require("plugins.greeter"),
-	-- Notifications
-	require("plugins.notifications"),
 	-- Focus
 	require("plugins.focus"),
 	-- Tabs
 	require("plugins.tabs"),
-	-- Show block end annotations
-	require("plugins.biscuits"),
+	-- Select/Input
+	require("plugins.dressing"),
+	-- 💫 Extensible UI for Neovim notifications and LSP progress messages.
+	{
+		"j-hui/fidget.nvim",
+		opts = {
+			notification = {
+				override_vim_notify = true,
+				window = {
+					normal_hl = "Bold",
+				},
+			},
+		},
+	},
+
 	-- }}}
 
 	-- Search {{{
@@ -90,9 +100,6 @@ require("lazy").setup({
 
 	-- Auto formatting
 	require("plugins.format"),
-
-	-- Hints
-	require("plugins.hints"),
 
 	-- Outline
 	require("plugins.outline"),

@@ -6,19 +6,12 @@ return {
 	cmd = { "Telescope" },
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		-- Use Telescope for NeoVim core actions
-		"nvim-telescope/telescope-ui-select.nvim",
 		"folke/trouble.nvim",
 	},
 	config = function()
 		local telescope = require("telescope")
 		local trouble = require("trouble.sources.telescope")
 		telescope.setup({
-			extensions = {
-				["ui-select"] = {
-					require("telescope.themes").get_dropdown(),
-				},
-			},
 			defaults = {
 				mappings = {
 					i = { ["<c-r>"] = trouble.open },
@@ -26,7 +19,6 @@ return {
 				},
 			},
 		})
-		telescope.load_extension("ui-select")
 
 		local builtin = require("telescope.builtin")
 		vim.keymap.set("n", "<leader>sg", builtin.git_files, { desc = "[S]earch [G]it Files" })

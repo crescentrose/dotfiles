@@ -53,6 +53,7 @@ return {
 					{ name = "nvim_lsp" },
 					{ name = "path" },
 					{ name = "snippy" },
+					{ name = "crates" },
 				},
 			})
 		end,

@@ -43,7 +43,9 @@ vim.diagnostic.config({ -- Disable virtual text since we have lsp_lines
 
 -- Formatting
 vim.o.textwidth = 100 -- Wrap text at 100 characters...
-vim.opt.formatoptions:remove("t") -- ... but not automatically.
+-- vim.opt.formatoptions:remove("t") -- ... but not code, only comments
+vim.opt.formatoptions:append("1") -- ... and do not leave single letter words alone
+vim.opt.formatoptions:append("p") -- ... and do not break at single spaces that follow a period
 
 vim.o.tabstop = 2 -- Tabs render as 2 spaces
 vim.o.shiftwidth = 2 -- Hitting tab inserts 2 spaces

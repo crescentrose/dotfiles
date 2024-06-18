@@ -7,8 +7,6 @@ return {
 			{ "williamboman/mason.nvim", config = true },
 			-- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim.
 			"williamboman/mason-lspconfig.nvim",
-			-- 💫 Extensible UI for Neovim notifications and LSP progress messages.
-			{ "j-hui/fidget.nvim", opts = {} },
 			-- nvim-cmp source for neovim builtin LSP client
 			"hrsh7th/cmp-nvim-lsp",
 			-- Faster LuaLS setup for Neovim
@@ -64,6 +62,18 @@ return {
 						autostart = (servers[server_name] or { autostart = true }).autostart,
 					})
 				end,
+			})
+		end,
+	},
+	{
+		"nvimtools/none-ls.nvim",
+		event = "BufReadPost",
+		config = function()
+			local null_ls = require("null-ls")
+			null_ls.setup({
+				sources = {
+					null_ls.builtins.code_actions.gitsigns,
+				},
 			})
 		end,
 	},

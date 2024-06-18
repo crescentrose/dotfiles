@@ -3,6 +3,7 @@ function SetupAutoCmd()
 	vim.api.nvim_create_autocmd("LspAttach", {
 		group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 		callback = function(event)
+			local trouble = require("trouble")
 			local nmap = function(keys, func, desc)
 				if desc then
 					desc = "LSP: " .. desc
@@ -16,15 +17,31 @@ function SetupAutoCmd()
 				vim.lsp.buf.code_action({ context = { only = { "quickfix", "refactor", "source" } } })
 			end, "[C]ode [A]ction")
 
-			nmap("gd", require("telescope.builtin").lsp_definitions, "[G]o to [D]efinition")
-			nmap("gr", require("telescope.builtin").lsp_references, "[G]o to [R]eferences")
-			nmap("gI", require("telescope.builtin").lsp_implementations, "[G]o to [I]mplementation")
-			nmap("<leader>cd", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+			nmap("gd", function()
+				trouble.open("lsp_definitions")
+			end, "[G]o to [D]efinition")
+
+			nmap("gr", function()
+				trouble.open("lsp_references")
+			end, "[G]o to [R]eferences")
+
+			nmap("gI", function()
+				trouble.open("lsp_implementations")
+			end, "[G]o to [I]mplementation")
+
+			nmap("<leader>cd", function()
+				trouble.open("lsp_type_definitions")
+			end, "Type [D]efinition")
+
 			nmap("<leader>wd", require("telescope.builtin").lsp_document_symbols, "[D]ocument Symbols")
 			nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 
-			-- See `:help K` for why this keymap
-			nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+			-- Init_code_lens(event.buffer)
+
+			-- nmap("<leader>cl", function()
+			-- 	vim.lsp.codelens.run()
+			-- end, "[C]ode [L]ens")
+
 			nmap("<A-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
 			-- Lesser used LSP functionality
@@ -34,6 +51,10 @@ function SetupAutoCmd()
 			nmap("<leader>wl", function()
 				print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 			end, "[W]orkspace [L]ist Folders")
+
+			nmap("<leader>th", function()
+				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled)
+			end, "[T]oggle Inlay [H]ints")
 		end,
 	})
 end

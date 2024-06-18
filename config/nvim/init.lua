@@ -45,15 +45,14 @@ end
 require("bootstrap")
 require("plugins.plugins")
 
+-- Set up custom functions
+require("custom")
+
 -- }}}
 
 -- Color scheme {{{
 
 vim.cmd.colorscheme("catppuccin")
-
--- Integrate theme with nvim-biscuits
-local comment_hl = vim.api.nvim_get_hl(0, { name = "Comment" })
-vim.api.nvim_set_hl(0, "BiscuitColor", comment_hl)
 
 -- }}}
 

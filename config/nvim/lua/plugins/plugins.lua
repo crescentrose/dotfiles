@@ -28,24 +28,31 @@ require("lazy").setup({
 	"tpope/vim-commentary",
 	-- repeat.vim: enable repeating supported plugin maps with "."
 	"tpope/vim-repeat",
-	-- A minimalist Neovim plugin that auto pairs & closes brackets
+	-- Neovim Lua plugin to automatically manage character pairs.
 	{
-		"m4xshen/autoclose.nvim",
-		config = function()
-			require("autoclose").setup({
-				keys = {
-					["`"] = { escape = false, close = false, pair = "``", disabled_filetypes = {} },
-					["'"] = { escape = false, close = false, pair = "''", disabled_filetypes = {} },
-				},
-				options = {
-					pair_spaces = true,
-					disabled_filetypes = { "text", "markdown" },
-					disable_when_touch = true,
-					touch_regex = "[%w(%[{]",
-					disable_command_mode = true,
-				},
-			})
-		end,
+		"echasnovski/mini.pairs",
+		event = "VeryLazy",
+		opts = {
+			modes = { insert = true, command = true, terminal = false },
+			-- skip autopair when next character is one of these
+			skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
+			-- skip autopair when the cursor is inside these treesitter nodes
+			skip_ts = { "string" },
+			-- skip autopair when next character is closing pair
+			-- and there are more closing pairs than opening pairs
+			skip_unbalanced = true,
+			-- better deal with markdown code blocks
+			markdown = true,
+		},
+		keys = {
+			{
+				"<leader>tp",
+				function()
+					vim.g.minipairs_disable = not vim.g.minipairs_disable
+				end,
+				desc = "Toggle Auto Pairs",
+			},
+		},
 	},
 	-- }}}
 
@@ -115,9 +122,6 @@ require("lazy").setup({
 
 	-- JSON Schemas
 	require("plugins.json"),
-
-	-- Run snippets of code
-	require("plugins.sniprun"),
 
 	-- }}}
 

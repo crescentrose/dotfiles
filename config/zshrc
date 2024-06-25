@@ -68,3 +68,9 @@ if [[ $ZPROF = 1 ]]; then
 fi
 
 # vim: fdm=marker fdl=0
+# bun completions
+[ -s "/Users/ivan.ostric/.bun/_bun" ] && source "/Users/ivan.ostric/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

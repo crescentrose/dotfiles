@@ -7,8 +7,6 @@ return {
 			{ "williamboman/mason.nvim", config = true },
 			-- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim.
 			"williamboman/mason-lspconfig.nvim",
-			-- nvim-cmp source for neovim builtin LSP client
-			"hrsh7th/cmp-nvim-lsp",
 			-- Faster LuaLS setup for Neovim
 			{
 				"folke/lazydev.nvim",
@@ -48,9 +46,9 @@ return {
 
 			local mason, lspconfig = require("mason"), require("mason-lspconfig")
 			mason.setup()
+			lspconfig.setup()
 
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			lspconfig.setup({ ensure_installed = vim.tbl_keys(servers) })
 			lspconfig.setup_handlers({
@@ -62,18 +60,6 @@ return {
 						autostart = (servers[server_name] or { autostart = true }).autostart,
 					})
 				end,
-			})
-		end,
-	},
-	{
-		"nvimtools/none-ls.nvim",
-		event = "BufReadPost",
-		config = function()
-			local null_ls = require("null-ls")
-			null_ls.setup({
-				sources = {
-					null_ls.builtins.code_actions.gitsigns,
-				},
 			})
 		end,
 	},

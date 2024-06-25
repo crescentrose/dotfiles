@@ -1,13 +1,15 @@
 return {
+	-- Set of preconfigured snippets for different languages.
+	{ "rafamadriz/friendly-snippets" },
+
+	-- A completion plugin for neovim coded in Lua.
 	{
-		-- A completion plugin for neovim coded in Lua.
 		"hrsh7th/nvim-cmp",
-		event = "BufReadPost",
 		dependencies = {
-			-- nvim-cmp source for neovim builtin LSP client
-			"hrsh7th/cmp-nvim-lsp",
 			-- nvim-cmp source for filesystem paths.
 			"hrsh7th/cmp-path",
+			-- nvim-cmp source for neovim builtin LSP client
+			"hrsh7th/cmp-nvim-lsp",
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -46,25 +48,19 @@ return {
 				}),
 				snippet = {
 					expand = function(args)
-						require("snippy").expand_snippet(args.body)
+						vim.snippet.expand(args.body)
 					end,
 				},
-				sources = {
+				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
+					{ name = "vsnip" },
+					-- { name = "snippy" },
+				}, {
 					{ name = "path" },
-					{ name = "snippy" },
+				}, {
 					{ name = "crates" },
-				},
+				}),
 			})
 		end,
 	},
-
-	-- Snippet plugin for Neovim written in Lua
-	{ "dcampos/nvim-snippy", event = "BufReadPost" },
-
-	-- nvim-snippy completion source for nvim-cmp.
-	{ "dcampos/cmp-snippy", event = "BufReadPost" },
-
-	-- Set of preconfigured snippets for different languages.
-	{ "rafamadriz/friendly-snippets", event = "BufReadPost" },
 }

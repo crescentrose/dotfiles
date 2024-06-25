@@ -1,0 +1,14 @@
+# limit line length
+--max-columns=150
+--max-columns-preview
+
+# also show hidden directories and files
+--hidden
+
+# ignore Git data
+--glob=!.git/*
+
+--smart-case
+
+# allow clicking on file names to open them
+--hyperlink-format=kitty

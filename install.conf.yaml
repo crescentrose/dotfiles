@@ -24,7 +24,7 @@
       path: config/nushell
     ~/.config/mise: config/mise
     ~/.config/starship.toml: config/starship.toml
-    ~/.asdfrc: config/asdfrc
+    ~/.config/.ripgreprc: config/ripgreprc
     ~/bin:
       relink: true
       path: bin

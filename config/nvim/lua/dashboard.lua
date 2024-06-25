@@ -3,13 +3,17 @@ local if_nil = vim.F.if_nil
 local header = {
 	type = "text",
 	val = {
-		[[                   _ |\_]],
-		[[                   \` ..\]],
-		[[              __,.-" =__Y=]],
-		[[            ."        )]],
-		[[      _    /   ,    \/\_]],
-		[[     ((____|    )_-\ \_-`]],
-		[[jgs  `-----'`-----` `--`]],
+		[[     ∧＿∧]],
+		[[　  ( ･ω･ )つ━☆・*。]],
+		[[  ⊂/    /　       ・゜]],
+		[[   しーＪ　　   °。+*°。]],
+		[[                  .・]],
+		[[               ゜｡ﾟﾟ･｡･ﾟﾟ  ]],
+		[[]],
+		[[                 ╱|、      ]],
+		[[               (˚ˎ 。7  ]],
+		[[                |、˜〵     ]],
+		[[                じしˍ,)ノ ]],
 	},
 	opts = {
 		position = "center",
@@ -19,7 +23,7 @@ local header = {
 
 local footer = {
 	type = "text",
-	val = vim.split(vim.fn.system({ "fortune", "-n", "200", "-s" }), "\n"),
+	val = vim.split(vim.fn.system({ "/opt/homebrew/bin/fortune", "-n", "200", "-s" }), "\n"),
 	opts = {
 		position = "center",
 		hl = "Comment",

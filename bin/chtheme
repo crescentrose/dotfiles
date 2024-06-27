@@ -1,18 +1,24 @@
 #!/bin/zsh
 
+current_theme_file="$HOME/.config/kitty/current-theme.conf"
+
 if ! command -v kitty >/dev/null; then
   exit 1
 fi
 
 case "$1" in
 "light")
-  kitty @ set-colors -a -c "$HOME/.config/kitty/themes/base16-tomorrow.conf"
+  ln -f -s "$HOME/.config/kitty/themes/catppuccin-latte.conf" "$current_theme_file"
   ;;
 "dark")
-  kitty @ set-colors -a -c "$HOME/.config/kitty/themes/base16-twilight.conf"
+  ln -f -s "$HOME/.config/kitty/themes/catppuccin-frappe.conf" "$current_theme_file"
   ;;
 *)
   cat <<EOF
     usage: chtheme [light|dark]
 EOF
+  exit 1
 esac
+
+export KITTY_THEME=$1
+kitty @ set-colors -a ~/.config/kitty/current-theme.conf

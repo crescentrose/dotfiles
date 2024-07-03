@@ -111,7 +111,7 @@ def _get_batt() -> str:
     batt = batt_re.search(out)
 
     if batt is not None:
-        return f"󰁹 {batt.group(1)}%"
+        return f"󰄌 {batt.group(1)}%"
 
     return ""
 
@@ -125,7 +125,7 @@ def _get_cpu() -> str:
     load = cpu_re.search(out)
 
     if load is not None:
-        return f" {load.group(1)}"
+        return f" {load.group(1)}"
 
     return ""
 

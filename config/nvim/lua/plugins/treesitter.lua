@@ -2,6 +2,7 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
+	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			-- Add languages to be installed here that you want installed for treesitter
@@ -12,6 +13,12 @@ return {
 				"python",
 				"rust",
 				"tsx",
+				"yaml",
+				"html",
+				"css",
+				"sql",
+				"dockerfile",
+				"gitignore",
 				"javascript",
 				"typescript",
 				"vimdoc",
@@ -27,7 +34,6 @@ return {
 			-- You can specify additional Treesitter modules here: -- For example: -- playground = {--enable = true,-- },
 			modules = {},
 			highlight = { enable = true },
-			indent = { enable = true },
 			incremental_selection = {
 				enable = true,
 				keymaps = {
@@ -74,10 +80,10 @@ return {
 				swap = {
 					enable = true,
 					swap_next = {
-						["<leader>a"] = "@parameter.inner",
+						["<leader>pa"] = "@parameter.inner",
 					},
 					swap_previous = {
-						["<leader>A"] = "@parameter.inner",
+						["<leader>pA"] = "@parameter.inner",
 					},
 				},
 			},
@@ -86,5 +92,10 @@ return {
 			-- TODO: we might use hbs files for non-HTML languages, what then?
 			vim.treesitter.language.register("html", "handlebars"),
 		})
+
+		-- Use Treesitter for folding
+		vim.o.foldmethod = "expr"
+		vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+		vim.o.foldenable = false
 	end,
 }

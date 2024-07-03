@@ -4,7 +4,7 @@
 # Inserts a blank line between shell prompts
 add_newline = true
 
-# Replace the '❯' symbol in the prompt with '➜'
+# Replace the ❯ symbol in the prompt with ➜
 [character] # The name of the module we are configuring is 'character'
 success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
 error_symbol = '[✗](bold red)'
@@ -31,12 +31,12 @@ disabled = true
 [git_status]
 style = 'blue'
 conflicted = '[!$count ](bold red)'
-untracked = '[$count ](red)'
+untracked = '[+$count ](red)'
 stashed = '[󰆓$count ](yellow)'
-modified = '[$count ](red)'
-deleted = '[$count ](red)'
-renamed = '[$count ](red)'
-staged = '[$count ](bold yellow)'
+modified = '[✴$count ](red)'
+deleted = '[-$count ](red)'
+renamed = '[→$count ](red)'
+staged = '[•$count ](bold yellow)'
 ahead = '⇡$count '
 diverged = '⇡$ahead_count ⇣$behind_count '
 behind = '⇣$count '

@@ -26,6 +26,8 @@ if features.include? :basic
   cask "font-fira-code-nerd-font"
   # Developer targeted fonts with a high number of glyphs
   cask "font-fantasque-sans-mono-nerd-font"
+  # Symbols Nerd Font (Symbols Only)
+  cask "font-symbols-only-nerd-font"
 
   # A cat(1) clone with wings.
   brew "bat"

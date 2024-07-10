@@ -129,6 +129,12 @@ require("lazy").setup({
 		ft = "kitty",
 	},
 
+	-- basic vim/terraform integration
+	{
+		"hashivim/vim-terraform",
+		ft = "terraform",
+	},
+
 	-- }}}
 
 	-- Git {{{

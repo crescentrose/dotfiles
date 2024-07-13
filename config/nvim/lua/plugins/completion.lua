@@ -8,6 +8,7 @@ return {
 		build = "make install_jsregexp",
 		config = function()
 			require("luasnip.loaders.from_vscode").load()
+			require("luasnip.loaders.from_vscode").lazy_load({ paths = "./snippets" })
 		end,
 	},
 
@@ -23,8 +24,6 @@ return {
 			"hrsh7th/cmp-path",
 			-- nvim-cmp source for neovim builtin LSP client
 			"hrsh7th/cmp-nvim-lsp",
-			-- nvim-cmp source for displaying function signatures with the current parameter emphasized
-			"hrsh7th/cmp-nvim-lsp-signature-help",
 			-- nvim-cmp source for autocompleting git commits with conventional commits types
 			"davidsierradz/cmp-conventionalcommits",
 			-- nvim-cmp source for emoji
@@ -41,7 +40,7 @@ return {
 			local cmp = require("cmp")
 			cmp.setup({
 				view = {
-					entries = "native",
+					entries = "custom",
 				},
 				completion = {
 					completeopt = "menu,menuone,noinsert",
@@ -56,13 +55,9 @@ return {
 					["<C-Space>"] = cmp.mapping.complete({}),
 					["<CR>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
-							if luasnip.expandable() then
-								luasnip.expand()
-							else
-								cmp.confirm({
-									select = true,
-								})
-							end
+							cmp.confirm({
+								select = true,
+							})
 						else
 							fallback()
 						end
@@ -118,7 +113,6 @@ return {
 							return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
 						end,
 					},
-					{ name = "nvim_lsp_signature_help" },
 					{ name = "luasnip" },
 				}, {
 					{ name = "path" },
@@ -129,9 +123,6 @@ return {
 					{ name = "crates" },
 					{ name = "go_pkgs" },
 				}),
-				experimental = {
-					ghost_text = true,
-				},
 			})
 		end,
 	},

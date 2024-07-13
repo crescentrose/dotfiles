@@ -85,8 +85,8 @@ return {
 					null_ls.builtins.diagnostics.staticcheck,
 					null_ls.builtins.formatting.goimports_reviser,
 					-- Markdown
-					null_ls.builtins.code_actions.proselint,
-					null_ls.builtins.diagnostics.proselint,
+					null_ls.builtins.code_actions.proselint.with({ extra_filetypes = { "gitcommit" } }),
+					null_ls.builtins.diagnostics.proselint.with({ extra_filetypes = { "gitcommit" } }),
 					null_ls.builtins.diagnostics.markdownlint.with({ extra_args = { "--disable MD033 MD013" } }),
 					-- Make
 					null_ls.builtins.diagnostics.checkmake,

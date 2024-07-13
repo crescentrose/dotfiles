@@ -55,8 +55,8 @@ signing config and any other private repo configuration I might have.
 starship requires some extra setup with `nushell`:
 
 ```nu
-mkdir ~/.cache/starship
-starship init nu | save -f ~/.cache/starship/init.nu
+mkdir ~/.cache/starship                                 # set up cache directory
+starship init nu | save -f ~/.cache/starship/init.nu    # initialize cache
 ```
 
 [source](https://starship.rs/guide/#%F0%9F%9A%80-installation)

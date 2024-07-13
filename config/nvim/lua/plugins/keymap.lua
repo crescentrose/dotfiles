@@ -10,19 +10,16 @@ return {
 		local which_key = require("which-key")
 		which_key.setup({})
 
-		which_key.register({
-			["<leader>c"] = { name = "Code", _ = "which_key_ignore" },
-			["<leader>d"] = { name = "Diagnostic", _ = "which_key_ignore" },
-			["<leader>e"] = { name = "Debug", _ = "which_key_ignore" },
-			["<leader>g"] = { name = "Git", _ = "which_key_ignore" },
-			["<leader>r"] = { name = "Run", _ = "which_key_ignore" },
-			["<leader>s"] = { name = "Search", _ = "which_key_ignore" },
-			["<leader>t"] = { name = "Toggle", _ = "which_key_ignore" },
-			["<leader>w"] = { name = "Workspace", _ = "which_key_ignore" },
+		which_key.add({
+			{ "<leader>c", group = "Code" },
+			{ "<leader>d", group = "Diagnostic" },
+			{ "<leader>e", group = "Debug" },
+			{ "<leader>g", group = "Git" },
+			{ "<leader>r", group = "Run" },
+			{ "<leader>s", group = "Search" },
+			{ "<leader>t", group = "Toggle" },
+			{ "<leader>w", group = "Workspace" },
+			{ "<leader>", group = "VISUAL <leader>", mode = "v" },
 		})
-
-		which_key.register({
-			["<leader>"] = { name = "VISUAL <leader>" },
-		}, { mode = "v" })
 	end,
 }

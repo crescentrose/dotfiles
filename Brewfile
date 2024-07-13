@@ -6,6 +6,7 @@ tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/services"
 tap "rsteube/homebrew-tap"
+tap "daveshanley/vacuum"
 
 # Pass the desired features to the `HOMEBREW_FEATURES` environment variable
 features = ::ENV.fetch("HOMEBREW_FEATURES", "basic,dev,desktop,mac,cloud").split(",").map(&:to_sym)
@@ -28,6 +29,7 @@ if features.include? :basic
   cask "font-fantasque-sans-mono-nerd-font"
   # Symbols Nerd Font (Symbols Only)
   cask "font-symbols-only-nerd-font"
+
 
   # A cat(1) clone with wings.
   brew "bat"
@@ -60,8 +62,6 @@ if features.include? :dev
   brew "sqlite"
   # Interpreted, interactive, object-oriented programming language
   brew "python"
-  # Rust toolchain installer
-  brew "rustup"
   # Polyglot runtime manager (asdf rust clone)
   brew "mise"
 
@@ -73,6 +73,22 @@ if features.include? :dev
   brew "pre-commit"
   # Tools for the WireGuard secure network tunnel
   brew "wireguard-tools"
+
+  # Parser generator tool and incremental parsing library
+  brew "treesitter"
+  # CLI for Node.js style checker and lint tool for Markdown files
+  brew "markdownlint-cli"
+  # Linter for prose
+  brew "proselint"
+  # Static checker for GitHub Actions workflow files
+  brew "actionlint"
+  # Modern CSS linter
+  brew "stylelint"
+  # Vulnerability scanner for container images, file systems, and Git repos
+  brew "trivy"
+  # The worlds fastest and most scalable OpenAPI linter
+  brew "vacuum"
+
 end
 
 # }}}
@@ -107,8 +123,6 @@ if features.include? :mac
   mas "AdGuard for Safari", id: 1440147259
   # Hide menubar items
   mas "Hidden Bar", id: 1452453066
-  # Organize Your Workspace
-  mas "Magnet", id: 441258766
 end
 
 # }}}

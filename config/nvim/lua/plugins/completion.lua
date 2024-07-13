@@ -4,7 +4,7 @@ return {
 		"L3MON4D3/LuaSnip",
 		-- follow latest release.
 		version = "v2.*",
-		event = "BufReadPost",
+		event = "VeryLazy",
 		build = "make install_jsregexp",
 		config = function()
 			require("luasnip.loaders.from_vscode").load()
@@ -17,7 +17,7 @@ return {
 	-- A completion plugin for neovim coded in Lua.
 	{
 		"hrsh7th/nvim-cmp",
-		event = "BufReadPost",
+		event = "VeryLazy",
 		dependencies = {
 			-- nvim-cmp source for filesystem paths.
 			"hrsh7th/cmp-path",

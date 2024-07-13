@@ -71,10 +71,12 @@ return {
 			local null_ls = require("null-ls")
 			null_ls.setup({
 				sources = {
+					-- Builtins
+					null_ls.builtins.diagnostics.trail_space,
+					-- CSS
+					null_ls.builtins.formatting.stylelint,
 					-- Git
 					null_ls.builtins.code_actions.gitrebase,
-					-- npm i -g @commitlint/config-conventional @commitlint/cli commitlint-format-json
-					null_ls.builtins.diagnostics.commitlint,
 					-- GitHub Actions
 					null_ls.builtins.diagnostics.actionlint,
 					-- Go
@@ -82,19 +84,18 @@ return {
 					null_ls.builtins.code_actions.impl,
 					null_ls.builtins.diagnostics.staticcheck,
 					null_ls.builtins.formatting.goimports_reviser,
-					-- HTML
-					null_ls.builtins.diagnostics.tidy,
-					null_ls.builtins.formatting.tidy,
 					-- Markdown
 					null_ls.builtins.code_actions.proselint,
 					null_ls.builtins.diagnostics.proselint,
-					null_ls.builtins.diagnostics.mdl,
+					null_ls.builtins.diagnostics.markdownlint,
 					-- Make
 					null_ls.builtins.diagnostics.checkmake,
 					-- OpenAPI
 					null_ls.builtins.diagnostics.vacuum,
 					-- SQL
 					null_ls.builtins.formatting.pg_format,
+					-- Terraform
+					null_ls.builtins.diagnostics.trivy,
 				},
 			})
 		end,

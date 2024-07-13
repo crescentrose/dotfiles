@@ -14,7 +14,7 @@ function SetupAutoCmd()
 
 			nmap("<leader>cr", vim.lsp.buf.rename, "[R]ename")
 			nmap("<leader>ca", function()
-				vim.lsp.buf.code_action({ context = { only = { "quickfix", "refactor", "source" } } })
+				vim.lsp.buf.code_action()
 			end, "[C]ode [A]ction")
 
 			nmap("gd", function()

@@ -1,0 +1,11 @@
+{
+  "Async Trait": {
+    "prefix": "",
+    "body": [
+      "pub trait ${1:name}: Clone + Send + Sync + 'static {",
+      "${0}",
+      "}"
+    ],
+    "description": "Async Trait"
+  }
+}

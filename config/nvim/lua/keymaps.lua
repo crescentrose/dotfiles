@@ -1,8 +1,13 @@
+-- Paste what I yanked
+vim.keymap.set("n", "<leader>p", '"0p', { desc = "[P]aste Yanked" })
+
 -- Cmd-S (on macOS) to save file in insert or normal mode
 vim.keymap.set({ "n", "i" }, "<D-s>", "<cmd>w<cr>", { desc = "[󰘳-s] Write current buffer" })
+-- Cmd-A selects all
+vim.keymap.set({ "i", "n", "v" }, "<D-a>", "<Esc>ggvG", { desc = "[󰘳-a] Select all" })
 -- Cmd-V pastes from system clipboard
 vim.keymap.set("n", "<D-v>", '"+p', { desc = "[󰘳-v] Paste from system clipboard" })
-vim.keymap.set("i", "<D-v>", '<Esc>"+pi', { desc = "[󰘳-v] Paste from system clipboard" })
+vim.keymap.set("i", "<D-v>", '<Esc>"+pa', { desc = "[󰘳-v] Paste from system clipboard" })
 -- Cmd-C copies to system clipboard
 vim.keymap.set({ "v" }, "<D-c>", '"+y', { desc = "[󰘳-c] Yank to system clipboard" })
 -- Cmd-X cuts to system clipboard

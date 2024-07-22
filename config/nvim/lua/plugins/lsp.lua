@@ -51,6 +51,11 @@ return {
 
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+			-- use Python virtual env paths if we are in a venv
+			if vim.env.VIRTUAL_ENV then
+				vim.env.PATH = vim.env.VIRTUAL_ENV .. "/bin:" .. vim.env.PATH
+			end
+
 			lspconfig.setup({ ensure_installed = vim.tbl_keys(servers) })
 			lspconfig.setup_handlers({
 				function(server_name)

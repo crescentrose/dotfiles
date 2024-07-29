@@ -47,3 +47,7 @@ local function show_documentation()
 end
 
 vim.keymap.set("n", "K", show_documentation, { silent = true })
+
+vim.keymap.set("n", "<leader>nx", "<cmd>spl term://nu<cr>", { silent = true, desc = "Terminal: Split" })
+vim.keymap.set("n", "<leader>nv", "<cmd>vspl term://nu<cr>", { silent = true, desc = "Terminal: Vertical Split" })
+vim.keymap.set("n", "<leader>ne", "<cmd>edit term://nu<cr>", { silent = true, desc = "Terminal: Edit" })

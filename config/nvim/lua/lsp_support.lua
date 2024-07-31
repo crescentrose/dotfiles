@@ -1,5 +1,7 @@
 -- This is the LSP-specific config that will get enabled for any buffer with an LSP attached.
-function SetupAutoCmd()
+local M = {}
+
+function M.setup()
 	vim.api.nvim_create_autocmd("LspAttach", {
 		group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 		callback = function(event)
@@ -58,3 +60,5 @@ function SetupAutoCmd()
 		end,
 	})
 end
+
+return M

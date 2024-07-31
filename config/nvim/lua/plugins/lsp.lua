@@ -23,8 +23,7 @@ return {
 		},
 		event = "BufReadPost",
 		config = function()
-			require("lsp_support")
-			SetupAutoCmd()
+			require("lsp_support").setup()
 
 			-- List of LSP servers to install and support
 			local servers = {

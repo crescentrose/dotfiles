@@ -21,6 +21,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+-- Format Markdown as text instead of code
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",
 	desc = "Markdown: Break text at textwidth",
@@ -29,6 +30,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- Add Cargo related keybinds in Cargo.toml files
 vim.api.nvim_create_autocmd("BufReadPost", {
 	pattern = "Cargo.toml",
 	desc = "Add Cargo related keybinds",
@@ -63,5 +65,15 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 			desc = "Crates: Extract Into Table",
 			buffer = e.buf,
 		})
+	end,
+})
+
+-- Use Treesitter syntax highlighting in Rust files for strings and doc-comments (for injected
+-- queries).
+vim.api.nvim_create_autocmd("LspAttach", {
+	desc = "Use Treesitter syntax highlighting for Rust",
+	callback = function(_)
+		vim.api.nvim_set_hl(0, "@lsp.type.comment", {})
+		vim.api.nvim_set_hl(0, "@lsp.type.string", {})
 	end,
 })

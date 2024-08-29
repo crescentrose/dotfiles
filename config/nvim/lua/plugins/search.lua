@@ -28,7 +28,7 @@ return {
 					"Symbols",
 					builtin.lsp_dynamic_workspace_symbols,
 					available = function()
-						return #vim.lsp.get_active_clients() > 0 -- only if a LSP is connected
+						return #vim.lsp.get_clients() > 0 -- only if a LSP is connected
 					end,
 				},
 				{

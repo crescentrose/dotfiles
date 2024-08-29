@@ -41,3 +41,7 @@ ahead = '⇡$count '
 diverged = '⇡$ahead_count ⇣$behind_count '
 behind = '⇣$count '
 format = '[$all_status$ahead_behind]($style)'
+
+[env_var.SECRETS_LOADED]
+format = "with 🔑 [$env_value secrets]($style) "
+style = "bold dimmed"

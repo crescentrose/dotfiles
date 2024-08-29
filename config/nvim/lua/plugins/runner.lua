@@ -4,7 +4,7 @@ return {
 	event = "VeryLazy",
 	config = function()
 		require("overseer").setup({
-			dap = true,
+			dap = false,
 			task_list = {
 				bindings = {
 					["?"] = "ShowHelp",

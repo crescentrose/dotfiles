@@ -1,9 +1,8 @@
 -- A UI for nvim-dap
 return {
 	"rcarriga/nvim-dap-ui",
-	lazy = true,
 	command = { "DapUiToggle", "DapToggleBreakpoint" },
-	event = "BufReadPost",
+	keymap = { "<leader>e" },
 	dependencies = {
 		-- Debug Adapter Protocol client implementation for Neovim
 		"mfussenegger/nvim-dap",
@@ -31,7 +30,7 @@ return {
 
 		require("nvim-dap-virtual-text").setup({})
 		require("dap.ext.vscode").json_decode = require("overseer.json").decode
-		require("overseer").patch_dap(true)
+		require("overseer").enable_dap()
 
 		-- Debug keymaps
 		vim.keymap.set("n", "<A-5>", dapui.close, { desc = "toggle debug UI" })

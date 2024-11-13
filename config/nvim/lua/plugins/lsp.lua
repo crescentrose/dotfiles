@@ -30,7 +30,7 @@ return {
 				gopls = {},
 				pyright = {},
 				rust_analyzer = {},
-				tsserver = {},
+				ts_ls = {},
 				taplo = {},
 				html = { filetypes = { "html", "twig", "hbs" } },
 				marksman = {},
@@ -76,10 +76,9 @@ return {
 			local null_ls = require("null-ls")
 			null_ls.setup({
 				sources = {
-					-- Builtins
-					null_ls.builtins.diagnostics.trail_space,
 					-- CSS
 					null_ls.builtins.formatting.stylelint,
+					null_ls.builtins.diagnostics.stylelint,
 					-- Git
 					null_ls.builtins.code_actions.gitrebase,
 					-- GitHub Actions

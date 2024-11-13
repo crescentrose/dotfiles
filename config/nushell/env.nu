@@ -29,7 +29,9 @@ $env.NU_PLUGIN_DIRS = [
     ($nu.default-config-dir | path join 'plugins') # add <nushell-config-dir>/plugins
 ]
 
-$env.PATH = ($env.PATH | split row (char esep) | prepend $custom_paths)
+if not ("VIRTUAL_ENV" in $env) {
+  $env.PATH = ($env.PATH | split row (char esep) | prepend $custom_paths)
+}
 
 # The prompt indicators are environmental variables that represent
 # the state of the prompt

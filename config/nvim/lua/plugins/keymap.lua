@@ -19,7 +19,8 @@ return {
 			{ "<leader>s", group = "Search" },
 			{ "<leader>t", group = "Toggle" },
 			{ "<leader>w", group = "Workspace" },
-			{ "<leader>m", group = "Terminal" },
+			{ "<leader>n", group = "Terminal" },
+			{ "<leader>m", group = "Monorepo" },
 			{ "<leader>", group = "VISUAL <leader>", mode = "v" },
 		})
 	end,

@@ -4,6 +4,7 @@ return {
 	event = "VeryLazy",
 	config = function()
 		require("overseer").setup({
+			templates = { "builtin" },
 			dap = false,
 			task_list = {
 				bindings = {

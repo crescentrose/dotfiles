@@ -1,0 +1,97 @@
+// -*- mode: jsonc -*-
+{
+  // General settings
+  // Support Sway IPC for showing and hiding the bar
+  "ipc": true,
+  // Module order
+  "modules-left": [
+    "sway/workspaces",
+    "sway/mode",
+    "sway/scratchpad"
+  ],
+  "modules-center": [
+    "sway/window"
+  ],
+  "modules-right": [
+    "mpd",
+    "wireplumber",
+    "clock",
+    "tray",
+    "custom/power"
+  ],
+  // Module options
+  "sway/mode": {
+    "format": "<span style=\"italic\">{}</span>"
+  },
+  "sway/window": {
+    "all-outputs": true,
+    "offscreen-css": true,
+    "max-length": 75,
+    "rewrite": {
+      "(.*) - Mozilla Firefox": " $1",
+      "(.*)> nvim": "󰄛 $1"
+    }
+  },
+  "sway/scratchpad": {
+    "format": "{icon} {count}",
+    "show-empty": false,
+    "format-icons": [
+      "",
+      ""
+    ],
+    "tooltip": true,
+    "tooltip-format": "{app}: {title}"
+  },
+  "mpd": {
+    "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ",
+    "format-disconnected": "Disconnected ",
+    "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+    "unknown-tag": "N/A",
+    "interval": 5,
+    "consume-icons": {
+      "on": " "
+    },
+    "random-icons": {
+      "off": "",
+      "on": " "
+    },
+    "repeat-icons": {
+      "on": " "
+    },
+    "single-icons": {
+      "on": "1 "
+    },
+    "state-icons": {
+      "paused": "",
+      "playing": ""
+    },
+    "tooltip-format": "MPD (connected)",
+    "tooltip-format-disconnected": "MPD (disconnected)",
+    "on-click": "/home/ivan/bin/rmpc_kitty"
+  },
+  "tray": {
+    "spacing": 10
+  },
+  "clock": {
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%Y-%m-%d}"
+  },
+  "wireplumber": {
+    // "scroll-step": 1, // %, can be a float
+    "format": "{volume}% ",
+    "format-muted": "󰝟"
+  },
+  "custom/power": {
+    "format": "⏻ ",
+    "tooltip": false,
+    "menu": "on-click",
+    "menu-file": "$HOME/.config/waybar/power_menu.xml",
+    "menu-actions": {
+      "shutdown": "shutdown",
+      "reboot": "reboot",
+      "suspend": "systemctl suspend",
+      "hibernate": "systemctl hibernate",
+      "logout": "swaymsg exit"
+    }
+  }
+}

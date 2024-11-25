@@ -23,7 +23,7 @@ local header = {
 
 local footer = {
 	type = "text",
-	val = vim.split(vim.fn.system({ "/opt/homebrew/bin/fortune", "-n", "200", "-s" }), "\n"),
+	val = vim.split(vim.fn.system({ "/usr/bin/env", "fortune", "-n", "200", "-s" }), "\n"),
 	opts = {
 		position = "center",
 		hl = "Comment",

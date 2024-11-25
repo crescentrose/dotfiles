@@ -1,0 +1,7 @@
+#!/bin/sh
+
+GRIM_DEFAULT_DIR=$HOME/Screenshots/
+
+mkdir -p $GRIM_DEFAULT_DIR
+
+grim -g "$(slurp)"

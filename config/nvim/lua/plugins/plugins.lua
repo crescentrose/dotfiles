@@ -123,6 +123,12 @@ require("lazy").setup({
 	-- JSON Schemas
 	require("plugins.json"),
 
+  -- RON syntax highlighting for Vim
+  {
+    "ron-rs/ron.vim",
+    ft = "ron",
+  },
+
 	-- Vim syntax highlighting for Kitty terminal config files
 	{
 		"fladson/vim-kitty",

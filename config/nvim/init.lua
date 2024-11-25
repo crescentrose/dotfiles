@@ -52,7 +52,7 @@ require("custom")
 
 -- Color scheme {{{
 
-vim.cmd.colorscheme("catppuccin")
+vim.cmd.colorscheme("catppuccin-macchiato")
 
 -- }}}
 

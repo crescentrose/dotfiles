@@ -47,7 +47,7 @@ def --env "update-env" [] {
 }
 
 def --env mise_hook [] {
-  ^"/opt/homebrew/bin/mise" hook-env -s nu
+  ^"/usr/bin/env" mise hook-env -s nu
     | parse vars
     | update-env
 }

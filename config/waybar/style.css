@@ -1,0 +1,81 @@
+@import "macchiato.css";
+
+* {
+  font-family: "Departure Mono", "Symbols Nerd Font Mono", FontAwesome;
+  font-size: 11px;
+}
+
+button:hover {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+window#waybar {
+  background: transparent;
+  color: @text;
+  transition-property: color;
+  transition-duration: .2s;
+}
+
+#window {
+  background-color: transparent;
+  text-shadow: 1px 2px 2px @base;
+}
+
+.modules-left {
+  margin-left: 10px; /* match gaps */
+}
+
+.modules-right {
+  margin-right: 5px;
+}
+
+.module {
+  border-radius: 15px;
+  background-color: @base;
+  margin-top: 5px;
+  margin-right: 5px;
+  padding: 0 10px;
+}
+
+#workspaces button {
+  color: @pink;
+}
+
+#workspaces button.active {
+  color: @flamingo;
+}
+
+#workspaces button:hover {
+  color: @rosewater;
+}
+
+#clock {
+  color: @lavender;
+}
+
+#wireplumber {
+  color: @pink;
+}
+
+#wireplumber.muted {
+  color: @red;
+}
+
+#tray {
+}
+
+#custom-power {
+  color: @sky;
+  padding-right: 5px;
+}
+
+tooltip {
+  background: @mantle;
+  border: 1px solid @teal;
+}
+
+tooltip label {
+  color: @text;
+}

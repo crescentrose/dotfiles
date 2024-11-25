@@ -1,0 +1,28 @@
+bs-hl-color=ed8796
+clock
+color=181926
+fade-in=2
+font-size=22
+font=Departure Mono
+grace-no-mouse
+grace=5
+indicator
+inside-color=181926
+inside-ver-color=1e2030
+inside-wrong-color=00000000
+inside-clear-color=181926
+key-hl-color=c6a0f6
+line-clear-color=00000000
+line-color=00000000
+line-ver-color=00000000
+ring-clear-color=181926
+ring-color=181926
+ring-ver-color=1e2030
+ring-wrong-color=00000000
+separator-color=00000000
+text-clear-color=f4dbd6
+text-color=f4dbd6
+text-ver-color=f4dbd6
+text-wrong-color=f4dbd6
+# I really do not want to see Dutch names for weekdays...
+datestr=♥

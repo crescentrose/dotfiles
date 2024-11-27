@@ -97,6 +97,9 @@ require("lazy").setup({
 	-- JSON Schemas
 	require("plugins.json"),
 
+	-- Markdown
+	require("plugins.markdown"),
+
 	-- Vim syntax highlighting for Kitty terminal config files
 	{
 		"fladson/vim-kitty",

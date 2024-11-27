@@ -30,6 +30,15 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- Conceal Markdown syntax when not editing.
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	desc = "Markdown: Conceal syntax",
+	callback = function()
+		vim.wo.conceallevel = 2
+	end,
+})
+
 -- Add Cargo related keybinds in Cargo.toml files
 vim.api.nvim_create_autocmd("BufReadPost", {
 	pattern = "Cargo.toml",

@@ -11,6 +11,7 @@ $env.ENV_CONVERSIONS = {
 
 let custom_paths = [
     '/opt/homebrew/bin'
+    ([$env.HOME ".bun/bin"] | path join)
     ([$env.HOME ".local/bin"] | path join)
     ([$env.HOME ".cargo/bin"] | path join)
     ([$env.HOME "bin"] | path join)

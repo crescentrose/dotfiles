@@ -12,9 +12,6 @@ return {
 		end,
 	},
 
-	-- Set of preconfigured snippets for different languages.
-	{ "rafamadriz/friendly-snippets" },
-
 	-- A completion plugin for neovim coded in Lua.
 	{
 		"hrsh7th/nvim-cmp",
@@ -118,7 +115,6 @@ return {
 					{ name = "path" },
 					{ name = "conventionalcommits" },
 					{ name = "emoji" },
-					{ name = "calc" },
 				}, {
 					{ name = "crates" },
 					{ name = "go_pkgs" },

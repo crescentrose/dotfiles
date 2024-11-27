@@ -129,6 +129,9 @@ require("lazy").setup({
     ft = "ron",
   },
 
+	-- Markdown
+	require("plugins.markdown"),
+
 	-- Vim syntax highlighting for Kitty terminal config files
 	{
 		"fladson/vim-kitty",

@@ -27,9 +27,10 @@
     "all-outputs": true,
     "offscreen-css": true,
     "max-length": 75,
+    "format": "{title}",
     "rewrite": {
-      "(.*) - Mozilla Firefox": " $1",
-      "(.*)> nvim": "󰄛 $1"
+      "(.*) — Mozilla Firefox": " $1",
+      "(.*) nvim": "󰄛 $1"
     }
   },
   "sway/scratchpad": {
@@ -48,18 +49,12 @@
     "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
     "unknown-tag": "N/A",
     "interval": 5,
-    "consume-icons": {
-      "on": " "
-    },
     "random-icons": {
       "off": "",
       "on": " "
     },
     "repeat-icons": {
       "on": " "
-    },
-    "single-icons": {
-      "on": "1 "
     },
     "state-icons": {
       "paused": "",

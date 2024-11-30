@@ -90,6 +90,15 @@
   };
 
 
+  # Fix crackle in certain apps that use Pipewire/Pulseaudio combo
+  xdg.configFile."pipewire/pipewire-pulse.conf.d/20-pulse-properties.conf".text = ''
+  pulse.properties = {
+      pulse.min.req          = 256/48000
+      pulse.min.frag         = 256/48000
+      pulse.min.quantum      = 256/48000
+  }
+  '';
+
   # Dotfiles
   # I do not really want to store all of my dotfiles in the Nix language because it makes it more
   # difficult to iterate upon them and share with others who might not use NixOS. So they get

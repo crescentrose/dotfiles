@@ -158,29 +158,7 @@ in
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
-
-      # games ran through Proton use a very low quantum value, causing crackling
-      # this raises that to something more reasonable that doesn't noticeably lag and fixes the
-      # crackling
-      extraConfig.pipewire-pulse."20-fix-crackling" = {
-        context.modules = [
-        {
-          name = "libpipewire-module-protocol-pulse";
-          args = {
-            pulse.min.req = "512/48000";
-            pulse.default.req = "512/48000";
-            pulse.max.req = "512/48000";
-            pulse.min.quantum = "512/48000";
-            pulse.max.quantum = "512/48000";
-          };
-        }
-        ];
-        stream.properties = {
-          node.latency = "512/48000";
-          resample.quality = 1;
-        };
-      };
-    };
+  };
 
   # Enable Bluetooth
   hardware.bluetooth = {

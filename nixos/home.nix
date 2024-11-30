@@ -22,6 +22,7 @@
       waybar # status bar
       swww # wallpaper
       glib # gtk config
+      overskride # bluetooth
 
       # apps
       firefox # firefox

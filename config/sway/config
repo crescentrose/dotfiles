@@ -23,15 +23,20 @@ include ./catppuccin-macchiato
 # The Everything launcher (not yet, but eventually)
 set $menu rofi -config ~/.config/rofi/config.rasi -show combi
 
-# The command used for screenshots
+# Screenshot commands
 set $screenshot ~/.config/sway/screenshot
 set $screenshotToFile ~/.config/sway/screenshot-to-file
 
-# The commands used to control volume
+# Commands used to control volume
 set $volumeUp wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+
 set $volumeDown wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
 set $volumeMute wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 set $volumeMicMute wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+
+# Commands used to control media
+set $mediaPlayPause rmpc togglepause
+set $mediaPrev rmpc prev
+set $mediaNext rmpc next
 
 ###
 # Notifications
@@ -236,6 +241,10 @@ bindsym $mod+r mode "resize"
     bindsym XF86AudioLowerVolume exec $volumeDown
     bindsym XF86AudioMute exec $volumeMute
     bindsym XF86AudioMicMute exec $volumeMicMute
+
+    bindsym XF86AudioPlay exec $mediaPlayPause
+    bindsym XF86AudioNext exec $mediaNext
+    bindsym XF86AudioPrev exec $mediaPrev
 
 ###
 # Status bar

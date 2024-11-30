@@ -43,6 +43,7 @@
       carapace # completion
       gh # github client
       neofetch # r/unixporn bait
+      gifsicle # gif editing
 
       # developer tools
       gcc # the GNU Compiler Collection

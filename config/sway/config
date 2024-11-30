@@ -27,6 +27,11 @@ set $menu rofi -config ~/.config/rofi/config.rasi -show combi
 set $screenshot ~/.config/sway/screenshot
 set $screenshotToFile ~/.config/sway/screenshot-to-file
 
+# The commands used to control volume
+set $volumeUp wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+
+set $volumeDown wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+set $volumeMute wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+set $volumeMicMute wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 
 ###
 # Notifications
@@ -223,6 +228,14 @@ bindsym $mod+r mode "resize"
     bindsym $mod+Print exec $screenshot
     bindsym $mod+Shift+Print exec $screenshotToFile
 
+#
+# Audio control keys
+#
+
+    bindsym XF86AudioRaiseVolume exec $volumeUp
+    bindsym XF86AudioLowerVolume exec $volumeDown
+    bindsym XF86AudioMute exec $volumeMute
+    bindsym XF86AudioMicMute exec $volumeMicMute
 
 ###
 # Status bar

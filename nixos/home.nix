@@ -79,6 +79,7 @@
       name = "Bibata-Modern-Classic";
       package = pkgs.bibata-cursors;
     };
+
   };
 
 
@@ -147,5 +148,18 @@
       config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/mako;
     "proselint".source =
       config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/proselint;
+  };
+
+  # Enable hardware acceleration in Discord, which is disabled by default because of reasons only
+  # known to Mr. John Discord himself
+  xdg.desktopEntries.discord = {
+    categories= [ "Network" "InstantMessaging" ];
+    exec = "discord --ignore-gpu-blocklist --disable-features=UseOzonePlatform --enable-features=VaapiVideoDecoder --use-gl=desktop --enable-gpu-rasterization --enable-zero-copy";
+    genericName = "All-in-one cross-platform voice and text chat for gamers";
+    icon = "discord";
+    mimeType = ["x-scheme-handler/discord"];
+    name = "Discord";
+    type = "Application";
+    terminal = false;
   };
 }

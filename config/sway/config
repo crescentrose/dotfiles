@@ -286,5 +286,5 @@ for_window {
   [app_id="rmpc"] floating enable; resize set 800 400; border pixel 1
 
   # give games a full screen window and inhibit idling
-  [instance="Overwatch.exe"] inhibit_idle focus; floating enable; border none; fullscreen enable; shadows disable
+  # [instance="Overwatch.exe"] inhibit_idle focus; floating enable; border none; fullscreen enable; shadows disable
 }

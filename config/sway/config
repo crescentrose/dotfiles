@@ -246,6 +246,9 @@ bindsym $mod+r mode "resize"
     bindsym XF86AudioNext exec $mediaNext
     bindsym XF86AudioPrev exec $mediaPrev
 
+    # quick access to music player
+    bindsym $mod+m exec ~/bin/rmpc_kitty
+
 ###
 # Status bar
 #

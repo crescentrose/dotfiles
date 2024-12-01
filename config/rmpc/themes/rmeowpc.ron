@@ -42,8 +42,12 @@
         ),
         (
             prop: (kind: Property(Title), style: (fg: "#7dc4e4"), default: (kind: Text("Unknown"))),
-            width_percent: 60,
+            width_percent: 40,
         ),
+        (
+            prop: (kind: Property(Duration), style: (fg: "#eed49f"), default: (kind: Text("--:--"))),
+            width_percent: 20,
+        )
     ],
     header: (
         rows: [
@@ -57,6 +61,9 @@
                     (kind: Text("󰄛"), style: (fg: "#b7bdf8", modifiers: "Bold")),
                 ],
                 right: [
+                    (kind: Text("󰕾 "), style: (fg: "#b7bdf8", modifiers: "Bold")),
+                    (kind: Property(Status(Volume)), style: (fg: "#b7bdf8", modifiers: "Bold")),
+                    (kind: Text("%"), style: (fg: "#b7bdf8", modifiers: "Bold")),
                 ]
             ),
             (

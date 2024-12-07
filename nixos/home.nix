@@ -12,6 +12,7 @@
     packages = with pkgs; [
       # desktop environment
       swayfx # window manager
+      swayidle # auto lock
       wl-clipboard # copy and paste
       mako # notifications
       rofi # app launcher 2: electric boogaloo

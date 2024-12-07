@@ -58,7 +58,7 @@ output DP-2 resolution 2560x1440@75Hz position 1920,0 scale 1.25
 ### Wallpaper
 #
 exec swww-daemon
-exec swww img ~/Wallpapers/kirbys-chill-land.gif
+exec swww img ~/.cache/current-wallpaper
 
 ### Idle configuration
 # lock screen after 5 minutes

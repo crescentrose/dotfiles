@@ -249,6 +249,12 @@ bindsym $mod+r mode "resize"
     # quick access to music player
     bindsym $mod+m exec ~/bin/rmpc_kitty
 
+#
+# Emoji picker
+#
+
+    bindsym $mod+period exec smile
+
 ###
 # Status bar
 #
@@ -289,6 +295,8 @@ exec_always {
   gsettings set $gnome-schema cursor-theme Bibata-Modern-Classic
 }
 
+
+
 ###
 # Custom window settings
 #
@@ -296,6 +304,9 @@ exec_always {
 for_window {
   # show rmpc in a small floating window
   [app_id="rmpc"] floating enable; resize set 800 400; border pixel 1
+
+  # show smile in a small floating window
+  [app_id="smile"] floating enable; move position pointer
 
   # give games a full screen window and inhibit idling
   # [instance="Overwatch.exe"] inhibit_idle focus; floating enable; border none; fullscreen enable; shadows disable

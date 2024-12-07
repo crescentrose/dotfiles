@@ -23,6 +23,7 @@
       swww # wallpaper
       glib # gtk config
       overskride # bluetooth
+      smile # emoji picker
 
       # apps
       firefox # firefox

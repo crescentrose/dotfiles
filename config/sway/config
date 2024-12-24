@@ -61,14 +61,13 @@ exec swww-daemon
 exec swww img ~/.cache/current-wallpaper
 
 ### Idle configuration
-# lock screen after 5 minutes
-# turn off screen after 10 minutes
-# suspend after 15 minutes
+# lock screen after 10 minutes
+# ensure screen is locked before sleep
+# tell systemd we've been idle if there is no activity for 15 minutes
 exec swayidle -w \
-         timeout 300 $lock \
-         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         timeout 900 'systemctl suspend' \
-         before-sleep $lock
+         timeout 600 $lock \
+         before-sleep $lock \
+         idlehint 900
 
 
 ### Input configuration

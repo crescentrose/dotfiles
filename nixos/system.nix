@@ -241,6 +241,11 @@ in
   systemd.packages = [ pkgs.lact ];
   systemd.services.lactd.wantedBy = ["multi-user.target"];
 
+  # Suspend the system when the DE signals it is idle
+  services.logind.extraConfig = ''
+    IdleAction=suspend
+  '';
+
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

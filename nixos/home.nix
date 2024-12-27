@@ -31,11 +31,13 @@
       kitty # terminal
       _1password-gui # secrets
       todoist-electron # task list
-      obsidian # personal notes
       discord # keep up with the egirls
       mpd # radiohead
       rmpc
       mpdscribble # scrobble
+
+      # trial
+      anytype
 
       # cli apps
       nushell # a nicer shell

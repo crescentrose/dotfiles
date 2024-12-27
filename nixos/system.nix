@@ -210,6 +210,13 @@ in
       localNetworkGameTransfers.openFirewall = true;
   };
 
+  # set up 1password
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    polkitPolicyOwners = [ "ivan" ];
+  };
+
   # Set up VPN
   services.tailscale = {
     enable = true;

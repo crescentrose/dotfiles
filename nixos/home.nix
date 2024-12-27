@@ -25,6 +25,7 @@
       glib # gtk config
       overskride # bluetooth
       smile # emoji picker
+      gnome-keyring # temporary secrets storage
 
       # apps
       firefox # firefox
@@ -84,7 +85,6 @@
       name = "Bibata-Modern-Classic";
       package = pkgs.bibata-cursors;
     };
-
   };
 
 
@@ -100,6 +100,11 @@
             name "PipeWire Sound Server"
         }
       '';
+    };
+
+    # temporary secrets storage
+    gnome-keyring = {
+      enable = true;
     };
   };
 

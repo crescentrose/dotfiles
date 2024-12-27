@@ -105,6 +105,7 @@ in
     unzip
     ripgrep
     killall
+    file
 
     # window manager
     swayfx

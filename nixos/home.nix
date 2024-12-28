@@ -6,6 +6,15 @@
   programs = {
     # Home Manager manages itself
     home-manager.enable = true;
+
+    # use 1password to authenticate with SSH
+    ssh = {
+      enable = true;
+      extraConfig = ''
+        Host *
+          IdentityAgent ~/.1password/agent.sock
+      '';
+    };
   };
 
   home = {

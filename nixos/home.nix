@@ -64,6 +64,7 @@
       mise # maintain dev environments
       rustup # rust installer
       terraform # the CLOUD
+      pkg-config # builds
 
       # language servers
       gopls # golang

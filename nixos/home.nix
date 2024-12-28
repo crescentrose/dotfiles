@@ -62,8 +62,18 @@
       # developer tools
       gcc # the GNU Compiler Collection
       mise # maintain dev environments
-      nodejs_22 # for Mason
       rustup # rust installer
+      terraform # the CLOUD
+
+      # language servers
+      gopls # golang
+      lua-language-server # lua
+      taplo # toml
+      terraform-ls # terraform
+      nil # nix
+      vscode-langservers-extracted # html, css, json, eslint
+      typescript-language-server # javascript, typescript
+
 
       # fonts
       noto-fonts

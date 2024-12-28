@@ -97,11 +97,14 @@ require("lazy").setup({
 	-- JSON Schemas
 	require("plugins.json"),
 
-  -- RON syntax highlighting for Vim
-  {
-    "ron-rs/ron.vim",
-    ft = "ron",
-  },
+	-- Neovim development
+	require("plugins.nvim"),
+
+	-- RON syntax highlighting for Vim
+	{
+		"ron-rs/ron.vim",
+		ft = "ron",
+	},
 
 	-- Markdown
 	require("plugins.markdown"),

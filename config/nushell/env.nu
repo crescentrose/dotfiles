@@ -40,7 +40,7 @@ $env.PROMPT_INDICATOR_VI_INSERT = ": "
 $env.PROMPT_INDICATOR_VI_NORMAL = "〉"
 $env.PROMPT_MULTILINE_INDICATOR = "::: "
 
-$env.EDITOR = "/opt/homebrew/bin/nvim"
+$env.EDITOR = "nvim"
 
 $env.BAT_THEME = "ansi" # basic bitch...
 

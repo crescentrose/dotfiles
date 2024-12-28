@@ -47,7 +47,7 @@
       starship # terminal prompt
       carapace # completion
       gh # github client
-      neofetch # r/unixporn bait
+      fastfetch # r/unixporn bait
       gifsicle # gif editing
 
       # developer tools

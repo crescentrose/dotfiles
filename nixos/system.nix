@@ -254,6 +254,16 @@ in
     IdleAction=suspend
   '';
 
+  # Set up Docker
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+  users.extraGroups.docker.members = [ "ivan" ];
+
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

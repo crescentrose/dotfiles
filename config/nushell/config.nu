@@ -257,7 +257,14 @@ $env.config = {
         pre_prompt: [{ null }] # run before the prompt is shown
         pre_execution: [{ null }] # run before the repl input is run
         display_output: "if (term size).columns >= 100 { table -e } else { table }" # run to display the output of a pipeline
-        command_not_found: { null } # return an error message when a command is not found
+        command_not_found: { |cmd|
+          if (which command-not-found | is-empty) {
+            return null
+          }
+          let help = (command-not-found $cmd)
+
+          $"(ansi $env.config.color_config.shape_external)($help)(ansi reset)"
+        }
         env_change: {
           PWD: { ||
               if (which direnv | is-empty) {

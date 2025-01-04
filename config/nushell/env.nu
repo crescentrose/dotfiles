@@ -45,9 +45,11 @@ $env.EDITOR = "nvim"
 $env.BAT_THEME = "ansi" # basic bitch...
 
 # Completions
-$env.CARAPACE_BRIDGES = 'zsh,fish,clap,bash,inshellisense'
-mkdir ~/.cache/carapace
-carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
+$env.CARAPACE_BRIDGES = 'carapace,bash,zsh,yargs,complete,clap'
+if (not ("~/.cache/carapace/init.nu" | path exists)) {
+  mkdir ~/.cache/carapace
+  carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
+}
 
 # Other configuration files
 $env.RIPGREP_CONFIG_PATH = ($env.HOME | path join ".config/.ripgreprc")

@@ -64,6 +64,8 @@
       gh # github client
       fastfetch # r/unixporn bait
       gifsicle # gif editing
+      bat # nicer cat
+      glow # markdown viewer
 
       # developer tools
       gcc # the GNU Compiler Collection

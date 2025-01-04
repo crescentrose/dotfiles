@@ -51,5 +51,4 @@ carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
 
 # Other configuration files
 $env.RIPGREP_CONFIG_PATH = ($env.HOME | path join ".config/.ripgreprc")
-
 $env.MISE_GO_DEFAULT_PACKAGES_FILE = ($env.HOME | path join ".config/mise/default-go-packages")

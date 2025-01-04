@@ -15,6 +15,12 @@
           IdentityAgent ~/.1password/agent.sock
       '';
     };
+
+    # keep per-project shell configs
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
   };
 
   home = {

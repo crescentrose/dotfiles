@@ -258,6 +258,15 @@ $env.config = {
         pre_execution: [{ null }] # run before the repl input is run
         display_output: "if (term size).columns >= 100 { table -e } else { table }" # run to display the output of a pipeline
         command_not_found: { null } # return an error message when a command is not found
+        env_change: {
+          PWD: { ||
+              if (which direnv | is-empty) {
+                  return
+              }
+
+              direnv export json | from json | default {} | load-env
+          }
+        }
     }
 
     menus: [

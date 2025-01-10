@@ -51,6 +51,7 @@
       mpd # radiohead
       rmpc
       mpdscribble # scrobble
+      obsidian
 
       # trial
       anytype

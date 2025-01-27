@@ -266,13 +266,13 @@ $env.config = {
           $"(ansi $env.config.color_config.shape_external)($help)(ansi reset)"
         }
         env_change: {
-          PWD: { ||
+          PWD: [{ ||
               if (which direnv | is-empty) {
                   return
               }
 
               direnv export json | from json | default {} | load-env
-          }
+          }]
         }
     }
 

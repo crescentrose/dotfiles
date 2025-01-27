@@ -1,3 +1,3 @@
 #!/bin/sh
 
-sudo nixos-rebuild --flake ./nixos#streaming-heart --impure switch
+sudo nixos-rebuild --flake ./nixos#streaming-heart --impure --recreate-lock-file switch

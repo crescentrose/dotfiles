@@ -39,7 +39,6 @@ return {
 			require('lspconfig').taplo.setup({})
 			-- TypeScript
 			require('lspconfig').ts_ls.setup({})
-
 		end,
 	},
 
@@ -73,5 +72,16 @@ return {
 				},
 			})
 		end,
+	},
+
+	-- Display LSP output as virtual text
+	{
+		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		config = function()
+			require("lsp_lines").setup()
+			vim.diagnostic.config({ virtual_text = false })
+
+			vim.keymap.set("", "<Leader>dt", require("lsp_lines").toggle, { desc = "[D]iagnostics: [T]oggle Lines" })
+		end
 	},
 }

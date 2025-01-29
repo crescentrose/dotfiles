@@ -51,10 +51,7 @@
       mpd # radiohead
       rmpc
       mpdscribble # scrobble
-      obsidian
-
-      # trial
-      anytype
+      obsidian # notes
 
       # cli apps
       nushell # a nicer shell
@@ -67,6 +64,7 @@
       gifsicle # gif editing
       bat # nicer cat
       glow # markdown viewer
+      zola # static site generator
 
       # developer tools
       gcc # the GNU Compiler Collection

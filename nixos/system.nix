@@ -138,22 +138,22 @@ in
     subpixel.rgba = "rgb";
 
     # do not antialias pixel fonts because that's the ENTIRE FUCKING POINT OF A PIXEL FONT
-    localConf = ''
-      <match target="font">
-        <test name="family" qual="any">
-          <string>Departure Mono</string>
-        </test>
-        <edit name="antialias" mode="assign">
-          <bool>false</bool>
-        </edit>
-      </match>
-    '';
+    # localConf = ''
+    #   <match target="font">
+    #     <test name="family" qual="any">
+    #       <string>Departure Mono</string>
+    #     </test>
+    #     <edit name="antialias" mode="assign">
+    #       <bool>false</bool>
+    #     </edit>
+    #   </match>
+    # '';
   };
 
 
   # Enable sound (seriously, why is this not default?)
   security.rtkit.enable = true; # enable RealtimeKit for audio purposes
-  hardware.pulseaudio.enable = false; # and good riddance, you wretched beast!
+  services.pulseaudio.enable = false; # and good riddance, you wretched beast!
   services.pipewire = {
       enable = true;
       alsa.enable = true;

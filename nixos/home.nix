@@ -65,6 +65,7 @@
       bat # nicer cat
       glow # markdown viewer
       zola # static site generator
+      libnotify # for notify-send
 
       # developer tools
       gcc # the GNU Compiler Collection
@@ -185,6 +186,8 @@
       config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/mako;
     "proselint".source =
       config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/proselint;
+    "rofi".source =
+      config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/rofi;
   };
 
   # Enable hardware acceleration in Discord, which is disabled by default because of reasons only

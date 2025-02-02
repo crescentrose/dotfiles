@@ -1,0 +1,13 @@
+configuration {
+  modes: [ combi ];
+  combi-modes: [ drun ];
+  show-icons: true;
+  terminal: "kitty";
+  drun-display-format: "{icon} {name}";
+  location: 0;
+  disable-history: false;
+  hide-scrollbar: true;
+  sidebar-mode: true;
+}
+
+@theme "catppuccin-macchiato"

@@ -1,0 +1,7 @@
+#!/usr/bin/env nu
+def main [] {
+  let profiles = (ls /nix/var/nix/profiles | sort -n -r | first 2 )
+  nix store diff-closures $profiles.1.name $profiles.0.name
+}
+
+# vim: set ft=nu

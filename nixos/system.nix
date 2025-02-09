@@ -106,6 +106,7 @@ in
     ripgrep
     killall
     file
+    wget
 
     # window manager
     swayfx
@@ -119,6 +120,16 @@ in
     # gpu controller
     lact
   ];
+
+  # Use nvim as the default editor
+  environment.variables.EDITOR = "nvim";
+
+  # Allow inter-app communication
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [
+    pkgs.xdg-desktop-portal-wlr
+  ];
+  xdg.portal.config.common.default = "*";
 
   # Set up dconf
   programs.dconf.enable = true;

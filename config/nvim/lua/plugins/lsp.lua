@@ -32,7 +32,16 @@ return {
 			-- Nix
 			require('lspconfig').nil_ls.setup({})
 			-- Rust (via rustup)
-			require('lspconfig').rust_analyzer.setup({})
+			require('lspconfig').rust_analyzer.setup({
+				settings = {
+					['rust-analyzer'] = {
+						-- Run `clippy` on save instead of `cargo check`
+						checkOnSave = {
+							command = "clippy",
+						},
+					},
+				},
+			})
 			-- Terraform
 			require('lspconfig').terraformls.setup({})
 			-- TOML

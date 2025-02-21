@@ -1,8 +1,5 @@
 { pkgs, config, ... }:
 {
-  # Disable Richard Stallman
-  nixpkgs.config.allowUnfree = true;
-
   programs = {
     # Home Manager manages itself
     home-manager.enable = true;

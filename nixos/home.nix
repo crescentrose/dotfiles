@@ -69,7 +69,6 @@
 
       # developer tools
       gcc # the GNU Compiler Collection
-      mise # maintain dev environments
       rustup # rust installer
       terraform # the CLOUD
       pkg-config # builds

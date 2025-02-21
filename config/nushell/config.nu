@@ -221,8 +221,8 @@ $env.config = {
     }
 
     filesize: {
-        metric: false # true => KB, MB, GB (ISO standard), false => KiB, MiB, GiB (Windows standard)
-        format: "auto" # b, kb, kib, mb, mib, gb, gib, tb, tib, pb, pib, eb, eib, auto
+      unit: "metric"
+      precision: 1
     }
 
     cursor_shape: {
@@ -867,9 +867,6 @@ $env.config = {
 
 # Load carapace
 source ~/.cache/carapace/init.nu
-
-# Load mise
-source mise.nu
 
 # Load Starship prompt
 use ~/.cache/starship/init.nu

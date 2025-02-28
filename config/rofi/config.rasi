@@ -1,6 +1,5 @@
 configuration {
-  modes: [ combi ];
-  combi-modes: [ drun ];
+  modes: [ drun, ssh, window ];
   show-icons: true;
   terminal: "kitty";
   drun-display-format: "{icon} {name}";
@@ -8,6 +7,7 @@ configuration {
   disable-history: false;
   hide-scrollbar: true;
   sidebar-mode: true;
+  monitor: 0;
 }
 
 @theme "catppuccin-macchiato"

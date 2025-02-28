@@ -21,7 +21,7 @@ set $lock 'swaylock -C ~/.config/swaylock/config'
 include ./catppuccin-macchiato
 
 # The Everything launcher (not yet, but eventually)
-set $menu rofi -config ~/.config/rofi/config.rasi -show combi
+set $menu rofi -config ~/.config/rofi/config.rasi -show drun
 
 # Screenshot commands
 set $screenshot ~/.config/sway/screenshot

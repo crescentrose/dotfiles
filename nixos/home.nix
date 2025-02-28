@@ -1,5 +1,8 @@
-{ pkgs, config, ... }:
+{ pkgs, config, zen-browser, system,... }:
 {
+  # Disable Richard Stallman
+  nixpkgs.config.allowUnfree = true;
+
   programs = {
     # Home Manager manages itself
     home-manager.enable = true;
@@ -40,7 +43,6 @@
       gnome-keyring # temporary secrets storage
 
       # apps
-      firefox # firefox
       kitty # terminal
       _1password-gui # secrets
       todoist-electron # task list
@@ -92,6 +94,8 @@
       # icons
       font-awesome
       nerd-fonts.symbols-only
+    ] ++ [
+      zen-browser.packages."x86_64-linux".default
     ];
 
     username = "ivan";

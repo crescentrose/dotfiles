@@ -211,6 +211,14 @@ in
 
   environment.etc."greetd/greetd.png".source = ./greetd.png;
 
+  # Allow Zen browser to use 1Password
+  environment.etc."1password/custom_allowed_browsers" = {
+    text = ''
+      zen
+    '';
+    mode = "0755";
+  };
+
   # Set up lockscreen support with Swaylock
   security.pam.services.swaylock = {};
 

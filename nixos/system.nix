@@ -287,6 +287,19 @@ in
   };
   users.extraGroups.docker.members = [ "ivan" ];
 
+  # Keep only last 5 configurations
+  boot.loader.systemd-boot.configurationLimit = 5;
+
+  # Clean up older configurations once a week
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 1w";
+  };
+
+  # Automatically keep the Nix store optimized by hard-linking identical files
+  nix.settings.auto-optimise-store = true;
+
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

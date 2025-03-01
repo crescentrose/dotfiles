@@ -145,21 +145,6 @@
   }
   '';
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-wlr
-      xdg-desktop-portal-gtk
-    ];
-    config = {
-      preferred = {
-        default = [
-          "gtk" "wlr"
-        ];
-      };
-    };
-  };
-
   # Dotfiles
   # I do not really want to store all of my dotfiles in the Nix language because it makes it more
   # difficult to iterate upon them and share with others who might not use NixOS. So they get

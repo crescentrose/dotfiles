@@ -45,11 +45,11 @@
     "tooltip-format": "{app}: {title}"
   },
   "custom/colorscheme": {
-    "exec": "color-scheme waybar",
+    "exec": "$HOME/bin/color-scheme waybar",
     "return-type": "json",
     "interval": "once",
     "exec-on-event": true,
-    "on-click": "color-scheme toggle",
+    "on-click": "$HOME/bin/color-scheme toggle",
     "format": "{}"
   },
   "mpd": {
@@ -71,7 +71,7 @@
     },
     "tooltip-format": "MPD (connected)",
     "tooltip-format-disconnected": "MPD (disconnected)",
-    "on-click": "/home/ivan/bin/rmpc_kitty"
+    "on-click": "$HOME/bin/rmpc_kitty"
   },
   "tray": {
     "spacing": 10

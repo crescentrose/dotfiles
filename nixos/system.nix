@@ -109,7 +109,7 @@ in
     wget
 
     # window manager
-    swayfx
+    sway
 
     # networking
     cifs-utils # Samba shares
@@ -128,8 +128,15 @@ in
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [
     pkgs.xdg-desktop-portal-wlr
+    pkgs.xdg-desktop-portal-gtk
   ];
-  xdg.portal.config.common.default = "*";
+  xdg.portal.config = {
+      preferred = {
+        default = [
+          "gtk" "wlr"
+        ];
+      };
+    };
 
   # Set up dconf
   programs.dconf.enable = true;
@@ -183,7 +190,7 @@ in
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.swayfx}/bin/sway --config ${greetConfig}";
+        command = "${pkgs.sway}/bin/sway --config ${greetConfig}";
       };
     };
   };

@@ -124,20 +124,6 @@ in
   # Use nvim as the default editor
   environment.variables.EDITOR = "nvim";
 
-  # Allow inter-app communication
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [
-    pkgs.xdg-desktop-portal-wlr
-    pkgs.xdg-desktop-portal-gtk
-  ];
-  xdg.portal.config = {
-      preferred = {
-        default = [
-          "gtk" "wlr"
-        ];
-      };
-    };
-
   # Set up dconf
   programs.dconf.enable = true;
 

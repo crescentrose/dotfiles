@@ -7,7 +7,6 @@ configuration {
   disable-history: false;
   hide-scrollbar: true;
   sidebar-mode: true;
-  monitor: 0;
 }
 
 @theme "catppuccin-macchiato"

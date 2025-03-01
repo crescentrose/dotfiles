@@ -1,4 +1,4 @@
-{ pkgs, config, zen-browser, system,... }:
+{ pkgs, config, zen-browser, ... }:
 {
   # Disable Richard Stallman
   nixpkgs.config.allowUnfree = true;
@@ -133,6 +133,34 @@
     # temporary secrets storage
     gnome-keyring = {
       enable = true;
+    };
+  };
+
+  # Allow inter-app communication
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [
+    pkgs.xdg-desktop-portal-wlr
+    pkgs.xdg-desktop-portal-gtk
+  ];
+  xdg.portal.config = {
+    # The GTK portal can handle most interfaces, while the WLR portal handles screenshots and screen
+    # casting for Sway.
+    # Notably, neither handle clipboard - seems like only the GNOME portal does that. 😕
+    # more info: https://wiki.archlinux.org/title/XDG_Desktop_Portal
+    common = {
+      default = [
+        "gtk" "wlr"
+      ];
+    };
+
+    sway = {
+      default = [ "gtk" "wlr" ];
+    };
+
+    preferred = {
+      default = [
+        "gtk" "wlr"
+      ];
     };
   };
 

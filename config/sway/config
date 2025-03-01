@@ -39,6 +39,12 @@ set $mediaPrev rmpc prev
 set $mediaNext rmpc next
 
 ###
+# Desktop Portal
+
+# Ensure that xdg-desktop-portal knows about us
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+###
 # Notifications
 
 # Set up the notifications daemon
@@ -57,7 +63,6 @@ output DP-2 resolution 2560x1440@75Hz position 1920,0 scale 1.25
 
 ### Wallpaper
 #
-exec swww-daemon
 exec swww img ~/.cache/current-wallpaper
 
 ### Idle configuration
@@ -258,10 +263,7 @@ bindsym $mod+r mode "resize"
 # Status bar
 #
 
-bar {
-    swaybar_command waybar
-}
-
+bar swaybar_command waybar
 
 ###
 # Color scheme
@@ -286,14 +288,6 @@ gaps inner 10
 # Disable borders, they are ugly
 default_border none
 default_floating_border normal
-
-# Set GTK settings
-set $gnome-schema org.gnome.desktop.interface
-exec_always {
-  gsettings set $gnome-schema gtk-application-prefer-dark-theme true
-  gsettings set $gnome-schema cursor-theme Bibata-Modern-Classic
-}
-
 
 
 ###

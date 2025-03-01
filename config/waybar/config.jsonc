@@ -13,6 +13,7 @@
     "sway/window"
   ],
   "modules-right": [
+    "custom/colorscheme",
     "mpd",
     "wireplumber",
     "clock",
@@ -42,6 +43,14 @@
     ],
     "tooltip": true,
     "tooltip-format": "{app}: {title}"
+  },
+  "custom/colorscheme": {
+    "exec": "color-scheme waybar",
+    "return-type": "json",
+    "interval": "once",
+    "exec-on-event": true,
+    "on-click": "color-scheme toggle",
+    "format": "{}"
   },
   "mpd": {
     "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ",

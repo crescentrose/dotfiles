@@ -26,7 +26,7 @@
   home = {
     packages = with pkgs; [
       # desktop environment
-      swayfx # window manager
+      sway # window manager
       swayidle # auto lock
       wl-clipboard # copy and paste
       mako # notifications
@@ -144,6 +144,21 @@
       pulse.min.quantum      = 256/48000
   }
   '';
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-gtk
+    ];
+    config = {
+      preferred = {
+        default = [
+          "gtk" "wlr"
+        ];
+      };
+    };
+  };
 
   # Dotfiles
   # I do not really want to store all of my dotfiles in the Nix language because it makes it more

@@ -63,12 +63,21 @@ window#waybar {
   color: @red;
 }
 
-#tray {
-}
+#tray {}
 
 #custom-power {
   color: @sky;
   padding-right: 5px;
+}
+
+#custom-colorscheme {}
+#custom-colorscheme.colorscheme-light {
+  background-color: @text;
+  color: @base;
+}
+#custom-colorscheme.colorscheme-dark {
+  background-color: @base;
+  color: @text;
 }
 
 tooltip {

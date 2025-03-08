@@ -40,6 +40,7 @@
       glib # gtk config
       overskride # bluetooth
       smile # emoji picker
+      thunderbird # mail
       gnome-keyring # temporary secrets storage
 
       # apps
@@ -80,7 +81,6 @@
       nil # nix
       vscode-langservers-extracted # html, css, json, eslint
       typescript-language-server # javascript, typescript
-
 
       # fonts
       noto-fonts

@@ -129,6 +129,9 @@
         }
       '';
     };
+    mpd-discord-rpc = {
+      enable = true;
+    };
 
     # temporary secrets storage
     gnome-keyring = {

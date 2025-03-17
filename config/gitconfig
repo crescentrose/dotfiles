@@ -53,3 +53,7 @@
 
 [include]
   path = ~/.config/gitconfig.local
+[user]
+	email = hi@crescentro.se
+[push]
+	autoSetupRemote = true

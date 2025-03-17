@@ -53,6 +53,9 @@ vim.o.shiftround = true -- Round tabs to nearest 2 spaces (so, 3 or 5 spaces are
 vim.o.expandtab = true -- Tabs get inserted as spaces
 
 vim.o.breakindent = true -- Wrapped lines will continue indented
+
+vim.o.fixeol = true -- We are not cavemen, are we now
+
 vim.o.smartindent = true -- Do smart indenting when starting a new line
 
 -- Searching

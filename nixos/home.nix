@@ -1,4 +1,4 @@
-{ pkgs, config, zen-browser, ... }:
+{ pkgs, config, zen-browser, cringe-emojis, ... }:
 {
   # Disable Richard Stallman
   nixpkgs.config.allowUnfree = true;
@@ -42,6 +42,10 @@
       smile # emoji picker
       thunderbird # mail
       gnome-keyring # temporary secrets storage
+      xkeyboard_config
+
+      niri # window manager 2: window manageraloo
+      xwayland-satellite # xwayland outside wayland
 
       # apps
       kitty # terminal
@@ -72,6 +76,7 @@
       rustup # rust installer
       terraform # the CLOUD
       pkg-config # builds
+      strace
 
       # language servers
       gopls # golang
@@ -96,6 +101,7 @@
       nerd-fonts.symbols-only
     ] ++ [
       zen-browser.packages."x86_64-linux".default
+      cringe-emojis.packages."x86_64-linux".default
     ];
 
     username = "ivan";
@@ -115,6 +121,9 @@
     };
   };
 
+  fonts.fontconfig.defaultFonts.emoji = [
+    cringe-emojis.packages."x86_64-linux".default
+  ];
 
   services = {
     mpd = {
@@ -143,7 +152,9 @@
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [
     pkgs.xdg-desktop-portal-wlr
+    pkgs.xdg-desktop-portal-gnome
     pkgs.xdg-desktop-portal-gtk
+    pkgs.gnome-keyring
   ];
   xdg.portal.config = {
     # The GTK portal can handle most interfaces, while the WLR portal handles screenshots and screen
@@ -162,7 +173,7 @@
 
     preferred = {
       default = [
-        "gtk" "wlr"
+        "gnome" "gtk" "wlr"
       ];
     };
   };
@@ -175,6 +186,59 @@
       pulse.min.quantum      = 256/48000
   }
   '';
+
+  # Set up systemd units for various supporting DE services.
+  systemd.user.services = {
+    # Bar
+    waybar = {
+      Unit = {
+        Description = "Waybar";
+        PartOf = "graphical-session.target";
+        After = "graphical-session.target";
+        Requisite = "graphical-session.target";
+      };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.waybar}/bin/waybar";
+        ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
+        Restart = "on-failure";
+      };
+    };
+
+    # Notification daemon
+    mako = {
+      Unit = {
+        Description = "Mako - Notification daemon";
+        PartOf = "graphical-session.target";
+        After = "graphical-session.target";
+      };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.mako}/bin/mako";
+        ExecReload = "${pkgs.mako}/bin/makoctl reload";
+        Restart = "on-failure";
+      };
+    };
+    # Wallpaper manager
+    swww = {
+      Unit = {
+        Description = "Solution to Wayland Wallpaper Woes";
+        PartOf = "graphical-session.target";
+        After = "graphical-session.target";
+      };
+      Install = {
+        WantedBy = [ "niri.service" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.swww}/bin/swww-daemon";
+        Restart = "on-failure";
+      };
+    };
+  };
 
   # Dotfiles
   # I do not really want to store all of my dotfiles in the Nix language because it makes it more
@@ -219,6 +283,8 @@
       config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/proselint;
     "rofi".source =
       config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/rofi;
+    "niri".source =
+      config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/niri;
   };
 
   # Enable hardware acceleration in Discord, which is disabled by default because of reasons only

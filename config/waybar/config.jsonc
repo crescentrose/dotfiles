@@ -1,16 +1,15 @@
 // -*- mode: jsonc -*-
 {
+  "height": 35,
   // General settings
   // Support Sway IPC for showing and hiding the bar
   "ipc": true,
   // Module order
   "modules-left": [
-    "sway/workspaces",
-    "sway/mode",
-    "sway/scratchpad"
+    "niri/workspaces"
   ],
   "modules-center": [
-    "sway/window"
+    "niri/window"
   ],
   "modules-right": [
     "custom/colorscheme",
@@ -18,31 +17,18 @@
     "wireplumber",
     "clock",
     "tray",
+    "niri/language",
     "custom/power"
   ],
-  // Module options
-  "sway/mode": {
-    "format": "<span style=\"italic\">{}</span>"
+  "niri/workspaces": {},
+  "niri/window": {
+    "separate-outputs": true
   },
-  "sway/window": {
-    "all-outputs": true,
-    "offscreen-css": true,
-    "max-length": 75,
-    "format": "{title}",
-    "rewrite": {
-      "(.*) — Mozilla Firefox": " $1",
-      "(.*) nvim": "󰄛 $1"
-    }
-  },
-  "sway/scratchpad": {
-    "format": "{icon} {count}",
-    "show-empty": false,
-    "format-icons": [
-      "",
-      ""
-    ],
-    "tooltip": true,
-    "tooltip-format": "{app}: {title}"
+  "niri/language": {
+    "format-nl": "🇳🇱",
+    "format-fi": "🇫🇮",
+    "format-hr": "🇭🇷",
+    "on-click": "niri msg action switch-layout next"
   },
   "custom/colorscheme": {
     "exec": "$HOME/bin/color-scheme waybar",
@@ -62,6 +48,7 @@
       "off": "",
       "on": " "
     },
+    "max-length": 40,
     "repeat-icons": {
       "on": " "
     },
@@ -91,11 +78,11 @@
     "menu": "on-click",
     "menu-file": "$HOME/.config/waybar/power_menu.xml",
     "menu-actions": {
+      "lock": "swaylock -C ~/.config/swaylock/config",
       "shutdown": "shutdown",
       "reboot": "reboot",
       "suspend": "systemctl suspend",
-      "hibernate": "systemctl hibernate",
-      "logout": "swaymsg exit"
+      "logout": "niri msg quit"
     }
   }
 }

@@ -23,6 +23,12 @@ return {
 				"typescript",
 				"vimdoc",
 				"vim",
+				"nix",
+				"nu",
+				-- Linux devs standardise on one config language challenge (turbo-mega-impossible)
+				"ron",
+				"kdl",
+				"rasi",
 			},
 
 			-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)

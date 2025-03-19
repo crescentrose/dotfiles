@@ -75,6 +75,9 @@ in
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
+  # experiment with fish, why not
+  programs.fish.enable = true;
+
   # User accounts
   users.users.ivan = {
     isNormalUser = true;
@@ -140,18 +143,6 @@ in
 
     # fixes height
     subpixel.rgba = "rgb";
-
-    # do not antialias pixel fonts because that's the ENTIRE FUCKING POINT OF A PIXEL FONT
-    # localConf = ''
-    #   <match target="font">
-    #     <test name="family" qual="any">
-    #       <string>Departure Mono</string>
-    #     </test>
-    #     <edit name="antialias" mode="assign">
-    #       <bool>false</bool>
-    #     </edit>
-    #   </match>
-    # '';
   };
 
 
@@ -182,6 +173,7 @@ in
   };
 
   environment.etc."greetd/environments".text = ''
+    niri-session
     sway
     zsh
   '';

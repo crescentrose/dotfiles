@@ -5,6 +5,10 @@ const prefer_light = "'prefer-light'"
 const prefer_dark = "'prefer-dark'"
 
 def set-scheme [scheme] {
+  if $env.XDG_CURRENT_DESKTOP == "niri" {
+    niri msg action do-screen-transition --delay-ms 250
+  }
+
   dconf write $dconf_path $scheme
 }
 

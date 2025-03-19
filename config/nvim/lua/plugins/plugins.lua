@@ -1,5 +1,4 @@
 require("lazy").setup({
-
 	-- Theme {{{
 
 	-- 🍨 Soothing pastel theme for (Neo)vim
@@ -8,14 +7,28 @@ require("lazy").setup({
 		name = "catppuccin",
 		priority = 1000,
 		config = function()
-			local catppuccin = require("catppuccin")
-			catppuccin.setup({
+			require("catppuccin").setup({
 				integrations = {
 					which_key = true,
 				},
-				flavour = "frappe",
 			})
 		end,
+	},
+	-- A Neovim plugin for macOS, Linux & Windows that automatically changes the editor appearance
+	-- based on system settings.
+	{
+		"f-person/auto-dark-mode.nvim",
+		opts = {
+			set_dark_mode = function()
+				vim.cmd.colorscheme("catppuccin-macchiato")
+				require("lazy").reload({ plugins = { "tabby.nvim" } })
+			end,
+			set_light_mode = function()
+				vim.cmd.colorscheme("catppuccin-latte")
+				require("lazy").reload({ plugins = { "tabby.nvim" } })
+			end,
+			fallback = "light",
+		},
 	},
 
 	-- }}}
@@ -91,20 +104,11 @@ require("lazy").setup({
 	-- Go
 	require("plugins.go"),
 
-	-- Nushell
-	require("plugins.nu"),
-
 	-- JSON Schemas
 	require("plugins.json"),
 
 	-- Neovim development
 	require("plugins.nvim"),
-
-	-- RON syntax highlighting for Vim
-	{
-		"ron-rs/ron.vim",
-		ft = "ron",
-	},
 
 	-- Markdown
 	require("plugins.markdown"),

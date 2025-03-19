@@ -1,14 +1,6 @@
-@import "macchiato.css";
-
 * {
   font-family: "Departure Mono", "Symbols Nerd Font Mono", FontAwesome;
   font-size: 11px;
-}
-
-button:hover {
-  background: transparent;
-  border: none;
-  box-shadow: none;
 }
 
 window#waybar {
@@ -24,7 +16,8 @@ window#waybar {
 }
 
 .modules-left {
-  margin-left: 10px; /* match gaps */
+  margin-left: 10px;
+  /* match gaps */
 }
 
 .modules-right {
@@ -34,21 +27,28 @@ window#waybar {
 .module {
   border-radius: 15px;
   background-color: @base;
-  margin-top: 5px;
   margin-right: 5px;
   padding: 0 10px;
 }
 
-#workspaces button {
-  color: @pink;
+#workspaces {
+  padding: 0;
 }
 
-#workspaces button.active {
+/* order is important here - last takes precedent */
+#workspaces button {
+  border-radius: 15px;
+  background-color: @base;
   color: @flamingo;
 }
 
-#workspaces button:hover {
-  color: @rosewater;
+#workspaces button.empty {
+  color: @subtext1;
+}
+
+#workspaces button.focused {
+  background-color: @pink;
+  color: @base;
 }
 
 #clock {
@@ -70,12 +70,7 @@ window#waybar {
   padding-right: 5px;
 }
 
-#custom-colorscheme {}
-#custom-colorscheme.colorscheme-light {
-  background-color: @text;
-  color: @base;
-}
-#custom-colorscheme.colorscheme-dark {
+#custom-colorscheme {
   background-color: @base;
   color: @text;
 }

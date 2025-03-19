@@ -15,6 +15,11 @@
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+
+    cringe-emojis = {
+      url = "github:samuelngs/apple-emoji-linux";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ { self, nixpkgs, home-manager, nixos-hardware, ... }:

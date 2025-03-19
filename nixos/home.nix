@@ -26,7 +26,6 @@
   home = {
     packages = with pkgs; [
       # desktop environment
-      sway # window manager
       swayidle # auto lock
       wl-clipboard # copy and paste
       mako # notifications
@@ -34,7 +33,6 @@
       grim # screenshots
       slurp # screenshots (select region)
       swaylock-effects # lock screen
-      nautilus # file browser
       waybar # status bar
       swww # wallpaper
       glib # gtk config
@@ -57,6 +55,22 @@
       mpdscribble # scrobble
       obsidian # notes
 
+      # Fine, I Will Use Gnome Apps
+      boatswain # stream deck controller
+      decibels # audio player
+      dialect # translation
+      diebahn # choo choo 🚆
+      evince # document viewr
+      gnome-calculator
+      gnome-calendar
+      gnome-maps
+      gnome-weather
+      loupe # image viewer
+      nautilus # file browser
+      newsflash # rss
+      video-trimmer # if only all apps were named this consistently
+      warp # file transfer
+
       # cli apps
       nushell # a nicer shell
       _1password-cli # secrets
@@ -76,7 +90,7 @@
       rustup # rust installer
       terraform # the CLOUD
       pkg-config # builds
-      strace
+      strace # peek under the hood
 
       # language servers
       gopls # golang
@@ -121,9 +135,7 @@
     };
   };
 
-  fonts.fontconfig.defaultFonts.emoji = [
-    cringe-emojis.packages."x86_64-linux".default
-  ];
+  fonts.fontconfig.defaultFonts.emoji = [ "Apple Color Emoji" "Twitter Color Emoji" ];
 
   services = {
     mpd = {
@@ -149,31 +161,27 @@
   };
 
   # Allow inter-app communication
+  # The GTK portal can handle most interfaces, while the WLR portal handles screenshots and screen
+  # casting for Niri.
+  # Notably, neither handle clipboard - seems like only the GNOME portal does that. 😕
+  # more info: https://wiki.archlinux.org/title/XDG_Desktop_Portal
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [
-    pkgs.xdg-desktop-portal-wlr
     pkgs.xdg-desktop-portal-gnome
     pkgs.xdg-desktop-portal-gtk
     pkgs.gnome-keyring
   ];
   xdg.portal.config = {
-    # The GTK portal can handle most interfaces, while the WLR portal handles screenshots and screen
-    # casting for Sway.
-    # Notably, neither handle clipboard - seems like only the GNOME portal does that. 😕
-    # more info: https://wiki.archlinux.org/title/XDG_Desktop_Portal
-    common = {
-      default = [
-        "gtk" "wlr"
-      ];
-    };
-
-    sway = {
-      default = [ "gtk" "wlr" ];
+    niri = {
+      default = ["gnome" "gtk"];
+      "org.freedesktop.impl.portal.Access" = "gtk";
+      "org.freedesktop.impl.portal.Notification" = "gtk";
+      "org.freedesktop.impl.portal.Secret" = "gnome-keyring";
     };
 
     preferred = {
       default = [
-        "gnome" "gtk" "wlr"
+        "gnome" "gtk"
       ];
     };
   };
@@ -269,8 +277,6 @@
       config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/starship.toml;
     ".ripgreprc".source =
       config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/ripgreprc;
-    "sway".source =
-      config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/sway;
     "waybar".source =
       config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/waybar;
     "swaylock".source =

@@ -1,6 +1,7 @@
 // -*- mode: jsonc -*-
 {
-  "height": 35,
+  "height": 30,
+  "margin-top": 5,
   // General settings
   // Support Sway IPC for showing and hiding the bar
   "ipc": true,
@@ -82,7 +83,7 @@
       "shutdown": "shutdown",
       "reboot": "reboot",
       "suspend": "systemctl suspend",
-      "logout": "niri msg quit"
+      "logout": "niri msg action quit"
     }
   }
 }

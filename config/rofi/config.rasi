@@ -3,8 +3,6 @@ configuration {
   show-icons: true;
   terminal: "kitty";
   drun-display-format: "{icon} {name}";
-  location: 0;
-  monitor: 1;
   disable-history: false;
   hide-scrollbar: true;
   sidebar-mode: true;

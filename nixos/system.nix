@@ -214,10 +214,6 @@ in
       localNetworkGameTransfers.openFirewall = true;
   };
 
-  programs.streamdeck-ui = {
-    enable = true;
-  };
-
   # set up 1password
   programs._1password.enable = true;
   programs._1password-gui = {

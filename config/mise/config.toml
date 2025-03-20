@@ -1,8 +1,0 @@
-[tools]
-go = "latest"
-node = "lts"
-ruby = "latest"
-bun = "latest"
-
-[settings]
-experimental = true

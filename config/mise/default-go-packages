@@ -1,8 +1,0 @@
-golang.org/x/tools/cmd/goimports@latest
-golang.org/x/tools/gopls@latest
-github.com/fatih/gomodifytags@latest
-github.com/ajmesa9891/impl/goimpl@latest
-github.com/golangci/golangci-lint/cmd/golangci-lint@latest
-github.com/nametake/golangci-lint-langserver@latest
-github.com/go-delve/delve/cmd/dlv@latest
-mvdan.cc/gofumpt@latest

@@ -1,0 +1,30 @@
+#!/usr/bin/env nu
+
+def lock [] {
+  if (pidof hyprlock | complete).exit_code == 0 {
+    print -e "Already locked, exiting.\n"
+    return # we are already running hyprlock
+  }
+  $env.LC_TIME = "en_GB.UTF8" # don't localize date names...
+  makoctl mode -a locked
+
+  hyprlock # Block until we unlock
+
+  after-unlock
+}
+
+def after-unlock [] {
+  makoctl mode -r locked
+}
+
+def "main lock" [] {
+  lock
+}
+
+def "main unlock" [] {
+  pkill -SIGUSR1 "hyprlock"
+}
+
+def main [] {
+  print "Usage: screen-lock [lock|unlock]"
+}

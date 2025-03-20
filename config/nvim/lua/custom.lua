@@ -5,6 +5,13 @@ vim.api.nvim_create_user_command("Unwrap", function()
 	vim.cmd([[Trouble quickfix]])
 end, { nargs = 0 })
 
+-- Add Rasi file type
+vim.filetype.add({
+	extension = {
+		rasi = 'rasi',
+	},
+})
+
 function Init_code_lens(bufnr)
 	vim.api.nvim_set_hl(0, "LspCodeLens", { link = "WarningMsg", default = true })
 	vim.api.nvim_set_hl(0, "LspCodeLensText", { link = "WarningMsg", default = true })

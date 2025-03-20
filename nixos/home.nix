@@ -26,34 +26,34 @@
   home = {
     packages = with pkgs; [
       # desktop environment
-      swayidle # auto lock
-      wl-clipboard # copy and paste
-      mako # notifications
-      rofi # app launcher 2: electric boogaloo
-      grim # screenshots
-      slurp # screenshots (select region)
-      swaylock-effects # lock screen
-      waybar # status bar
-      swww # wallpaper
       glib # gtk config
-      overskride # bluetooth
-      smile # emoji picker
-      thunderbird # mail
       gnome-keyring # temporary secrets storage
-      xkeyboard_config
-
+      mako # notifications
       niri # window manager 2: window manageraloo
+      hyprlock # lock screen 2: lock... yeah whatever
+      hypridle # idle management daemon
+      swww # wallpaper
+      thunderbird # mail
+      waybar # status bar
+      wl-clipboard # copy and paste
+      wtype # automate writing (for inserting emojis)
       xwayland-satellite # xwayland outside wayland
 
+      # app launcher 2: electric boogaloo
+      (rofi-wayland.override (old: { plugins = [
+        pkgs.rofi-emoji-wayland
+        pkgs.rofi-calc
+      ]; }))
+
       # apps
-      kitty # terminal
       _1password-gui # secrets
-      todoist-electron # task list
       discord # keep up with the egirls
+      kitty # terminal
       mpd # radiohead
-      rmpc
       mpdscribble # scrobble
       obsidian # notes
+      rmpc
+      todoist-electron # task list
 
       # Fine, I Will Use Gnome Apps
       boatswain # stream deck controller
@@ -72,50 +72,50 @@
       warp # file transfer
 
       # cli apps
-      nushell # a nicer shell
       _1password-cli # secrets
-      fortune # wisdom
-      starship # terminal prompt
-      carapace # completion
-      gh # github client
-      fastfetch # r/unixporn bait
-      gifsicle # gif editing
       bat # nicer cat
+      carapace # completion
+      fastfetch # r/unixporn bait
+      fortune # wisdom
+      gh # github client
+      gifsicle # gif editing
       glow # markdown viewer
-      zola # static site generator
       libnotify # for notify-send
+      nushell # a nicer shell
+      starship # terminal prompt
+      zola # static site generator
 
       # developer tools
       gcc # the GNU Compiler Collection
-      rustup # rust installer
-      terraform # the CLOUD
       pkg-config # builds
+      rustup # rust installer
       strace # peek under the hood
+      terraform # the CLOUD
 
       # language servers
       gopls # golang
       lua-language-server # lua
+      nil # nix
       taplo # toml
       terraform-ls # terraform
-      nil # nix
-      vscode-langservers-extracted # html, css, json, eslint
       typescript-language-server # javascript, typescript
+      vscode-langservers-extracted # html, css, json, eslint
 
       # fonts
-      noto-fonts
-      noto-fonts-cjk-sans
       cascadia-code
       departure-mono
       iosevka
       liberation_ttf # replacements for common MS fonts
+      noto-fonts
+      noto-fonts-cjk-sans
       twitter-color-emoji # 🤓
 
       # icons
       font-awesome
       nerd-fonts.symbols-only
     ] ++ [
-      zen-browser.packages."x86_64-linux".default
-      cringe-emojis.packages."x86_64-linux".default
+      zen-browser.packages."x86_64-linux".default # firefoxn't
+      cringe-emojis.packages."x86_64-linux".default # apple emojis (attempted)
     ];
 
     username = "ivan";
@@ -231,6 +231,7 @@
         Restart = "on-failure";
       };
     };
+
     # Wallpaper manager
     swww = {
       Unit = {
@@ -243,6 +244,22 @@
       };
       Service = {
         ExecStart = "${pkgs.swww}/bin/swww-daemon";
+        Restart = "on-failure";
+      };
+    };
+
+    # Wallpaper manager
+    hypridle = {
+      Unit = {
+        Description = "Idle management daemon";
+        PartOf = "graphical-session.target";
+        After = "graphical-session.target";
+      };
+      Install = {
+        WantedBy = [ "niri.service" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.hypridle}/bin/hypridle";
         Restart = "on-failure";
       };
     };
@@ -279,8 +296,6 @@
       config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/ripgreprc;
     "waybar".source =
       config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/waybar;
-    "swaylock".source =
-      config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/swaylock;
     "rmpc".source =
       config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/rmpc;
     "mako".source =
@@ -291,6 +306,8 @@
       config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/rofi;
     "niri".source =
       config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/niri;
+    "hypr".source =
+      config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/hypr;
   };
 
   # Enable hardware acceleration in Discord, which is disabled by default because of reasons only

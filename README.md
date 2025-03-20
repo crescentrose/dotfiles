@@ -21,16 +21,3 @@ starship init nu | save -f ~/.cache/starship/init.nu    # initialize cache
 ```
 
 [source](https://starship.rs/guide/#%F0%9F%9A%80-installation)
-
-## what's in the box
-
-The dotfiles contain:
-
-- Straightforward [kitty](https://github.com/kovidgoyal/kitty) and
-  [nushell](https://www.nushell.sh/) setups with the [starship](https://starship.rs/) prompt
-- A mildly polished [neovim](https://neovim.io/) config with LSP, debugging and other plugins
-  focused on a nice development experience
-- [mise](https://mise.jdx.dev/) for version management and a basic Git config
-
-The Neovim config is explained in more details in a dedicated help file. Run
-[`:h crescentrose`](./config/nvim/doc/crescentrose.txt) to get more info.

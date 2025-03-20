@@ -34,4 +34,10 @@ format=%s\n──\n%b
 [mode=do-not-disturb]
 invisible=1
 
+# If `locked` mode is enabled, do not expire notifications. Keep them all in "limbo".
+[mode=locked]
+ignore-timeout=1
+default-timeout=0
+invisible=1
+
 # vim: ft=config

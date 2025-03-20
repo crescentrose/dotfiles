@@ -1,5 +1,5 @@
 configuration {
-  modes: [ drun, ssh, window ];
+  modes: [ drun, ssh, window, emoji, calc ];
   show-icons: true;
   terminal: "kitty";
   drun-display-format: "{icon} {name}";

@@ -16,6 +16,7 @@ def get-current-scheme [] {
   dconf read $dconf_path
 }
 
+# Toggle color scheme.
 def "main toggle" [] {
   let old_scheme = get-current-scheme
   let new_scheme = if ($old_scheme == $prefer_light) {
@@ -27,14 +28,17 @@ def "main toggle" [] {
   set-scheme $new_scheme
 }
 
+# Set color scheme to dark.
 def "main dark" [] {
   set-scheme $prefer_dark
 }
 
+# Set color scheme to light.
 def "main light" [] {
   set-scheme $prefer_light
 }
 
+# Return a Waybar module.
 def "main waybar" [] {
   # work around Wayland bug https://github.com/Alexays/Waybar/pull/1784
   # I'm not sending signals, what fucking year is this?
@@ -50,5 +54,5 @@ def "main waybar" [] {
 }
 
 def main [] {
-  print "Usage: ./color-scheme [dark|light|toggle|waybar]"
+  help main
 }

@@ -1,0 +1,74 @@
+#!/usr/bin/env nu
+
+use vlog.nu *
+
+let WALLPAPER_LOCATION = $"($env.HOME)/.cache/current_wallpaper"
+let LOCK_WALLPAPER_LOCATION = $"($env.HOME)/.cache/hyprlock_wallpaper.jpg"
+let WALLPAPER_FOLDER = $"($env.HOME)/Wallpapers"
+
+# Links the new wallpaper to the wallpaper cache, converts it to JPG for the lock screen if
+# necessary, and cleans up previous wallpaper if needed.
+def prepare-wallpaper [path: string] {
+  # Clean up existing links/caches
+  if ($LOCK_WALLPAPER_LOCATION | path exists) {
+    vlog debug $"󰒜 Removing lock-screen wallpaper from ($LOCK_WALLPAPER_LOCATION)..."
+    rm $LOCK_WALLPAPER_LOCATION
+  }
+
+  if ($WALLPAPER_LOCATION | path exists) {
+    vlog debug $"󰒜 Removing wallpaper link from ($WALLPAPER_LOCATION)..."
+    rm $WALLPAPER_LOCATION
+  }
+
+  # Determine if we have to use the "first frame" when converting to JPEG or not
+  let wallpaperFileType = file --brief --dereference --mime $path
+  if ($wallpaperFileType | str index-of 'image/gif') != -1 {
+    # "index into" first frame of the GIF
+    vlog debug $"🎥 Converting GIF to JPG..."
+    magick $"($path)[0]" ~/.cache/hyprlock-wallpaper.jpg
+  } else {
+    vlog debug $"👨‍🎨 Converting image to JPG..."
+    magick $"($path)" ~/.cache/hyprlock-wallpaper.jpg
+  }
+
+  # Link to new location
+  vlog debug $"🔗 Linking new wallpaper..."
+  ln -fs $path $WALLPAPER_LOCATION
+}
+
+# Switches the wallpaper to the prepared wallpaper.
+def switch-wallpaper [--transition-type (-t): string = "random", --filter (-f): string = "Nearest"] {
+  vlog info "🌆 Transitioning wallpaper..."
+  swww img --transition-type $transition_type --filter $filter $WALLPAPER_LOCATION
+}
+
+# Returns a random file from the directory.
+def random-file [dir: string] {
+  vlog info "🎲 Selecting random wallpaper..."
+  let files = ls $dir
+  let idx = random int 0..(($files | length) - 1)
+
+  $files | get $idx
+}
+
+def set-wallpaper [path: string] {
+    prepare-wallpaper $path
+    switch-wallpaper
+}
+
+def "main set" [path: string] {
+  vlog timed "Wallpaper change" {
+    set-wallpaper $path
+  }
+}
+
+def "main random" [] {
+  vlog timed "Random wallpaper" {
+    let wallpaper = random-file $WALLPAPER_FOLDER
+    set-wallpaper $wallpaper.name
+  }
+}
+
+def main [] {
+  help main
+}

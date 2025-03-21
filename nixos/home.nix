@@ -1,4 +1,4 @@
-{ pkgs, config, zen-browser, cringe-emojis, ... }:
+{ lib, pkgs, config, zen-browser, cringe-emojis, ... }:
 {
   # Disable Richard Stallman
   nixpkgs.config.allowUnfree = true;
@@ -81,6 +81,7 @@
       gh # github client
       gifsicle # gif editing
       glow # markdown viewer
+      imagemagick # magic of the image variety
       libnotify # for notify-send
       nushell # a nicer shell
       starship # terminal prompt
@@ -220,6 +221,7 @@
         WantedBy = [ "graphical-session.target" ];
       };
       Service = {
+        Environment = "$PATH:${lib.makeBinPath [ pkgs.imagemagick ]}";
         ExecStart = "${pkgs.waybar}/bin/waybar";
         ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
         Restart = "on-failure";

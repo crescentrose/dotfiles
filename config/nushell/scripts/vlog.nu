@@ -31,6 +31,7 @@ export def "vlog timed" [name: string, block: closure] {
     do $block
   } catch { |err|
     log error $err.msg
+    print -e $err.rendered
     log error $"🌧️ ($name) failed in (time-since $start)."
     return
   }

@@ -39,7 +39,14 @@ def prepare-wallpaper [path: string] {
 # Switches the wallpaper to the prepared wallpaper.
 def switch-wallpaper [--transition-type (-t): string = "random", --filter (-f): string = "Nearest"] {
   vlog info "🌆 Transitioning wallpaper..."
-  swww img --transition-type $transition_type --filter $filter $WALLPAPER_LOCATION
+  let params = [
+    "img",
+    $"--transition-type=($transition_type)",
+    $"--filter=($filter)",
+    $WALLPAPER_LOCATION
+  ]
+  vlog debug $"Params: ($params | to json -r)"
+  swww ...$params
 }
 
 # Returns a random file from the directory.
@@ -65,6 +72,7 @@ def "main set" [path: string] {
 def "main random" [] {
   vlog timed "Random wallpaper" {
     let wallpaper = random-file $WALLPAPER_FOLDER
+    vlog debug $"Selected ($wallpaper.name) for new wallpaper."
     set-wallpaper $wallpaper.name
   }
 }

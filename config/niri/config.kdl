@@ -49,7 +49,7 @@ layout {
   //   together with the previously focused column.
   center-focused-column "never"
 
-  always-center-single-column
+  //  always-center-single-column
 
   // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
   preset-column-widths {
@@ -198,7 +198,7 @@ environment {
 
 // Set the disable-primary flag to disable the primary clipboard (middle-click paste). Toggling this
 // flag will only apply to applications started afterward.
-clipboard {
+/-clipboard {
   disable-primary
 }
 

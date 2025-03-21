@@ -174,7 +174,6 @@ in
 
   environment.etc."greetd/environments".text = ''
     niri-session
-    sway
     zsh
   '';
 
@@ -204,8 +203,8 @@ in
     mode = "0755";
   };
 
-  # Set up lockscreen support with Swaylock
-  security.pam.services.swaylock = {};
+  # Set up lockscreen support with Hyprlock
+  security.pam.services.hyprlock = {};
 
   # Set up GAMING!
   programs.steam = {

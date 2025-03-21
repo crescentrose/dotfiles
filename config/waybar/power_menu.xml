@@ -2,6 +2,14 @@
 <interface>
   <object class="GtkMenu" id="menu">
     <child>
+      <object class="GtkMenuItem" id="wallpaper">
+        <property name="label">Switch Wallpaper</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="delimiter0"/>
+    </child>
+    <child>
       <object class="GtkMenuItem" id="lock">
         <property name="label">Lock</property>
       </object>

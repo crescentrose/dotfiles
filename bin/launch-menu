@@ -1,0 +1,24 @@
+#!/usr/bin/env nu
+
+const DCONF_PATH = "/org/gnome/desktop/interface/color-scheme"
+const PREFER_LIGHT = "'prefer-light'"
+
+def get-current-scheme [] {
+  dconf read $DCONF_PATH
+}
+
+def start-rofi [--config: string, --show: string] {
+  if ((get-current-scheme) == $PREFER_LIGHT) {
+    $env.LIGHT_MODE = "true"
+  }
+  rofi -config $config -show $show -normal-window
+}
+
+# Show the app launcher
+def "main launcher" [] {
+  start-rofi --config=~/.config/rofi/launcher.rasi --show=drun
+}
+
+def main [] {
+  help main
+}

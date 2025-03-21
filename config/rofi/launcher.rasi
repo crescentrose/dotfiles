@@ -1,10 +1,106 @@
-* {
-    main-bg:            #11111be6;
-    main-fg:            #cdd6f4ff;
-    main-br:            #cba6f7ff;
-    main-ex:            #f5e0dcff;
-    select-bg:          #b4befeff;
-    select-fg:          #11111bff;
-    separatorcolor:     transparent;
-    border-color:       transparent;
+@theme "adaptive"
+
+configuration {
+  modes: [ drun ];
+  show-icons: true;
+  terminal: "kitty";
+  drun-display-format: "{icon} {name}";
+  disable-history: false;
+  hide-scrollbar: true;
+  sidebar-mode: true;
 }
+
+window {
+  transparency: "real";
+  width: 700px;
+  background-color: var(surface0);
+  text-color: var(text);
+  font: "Departure Mono 11px";
+
+  children: ["mainbox"];
+}
+
+mainbox {
+  background-color: var(surface0);
+  padding: 15px;
+  border: 0;
+  spacing: 15px;
+  children: ["inputbar", "listview"];
+}
+
+inputbar {
+  text-color: var(text);
+  background-color: var(surface0);
+  children: [ "prompt", "entry" ];
+}
+
+prompt {
+  padding: 15px;
+  margin: 0 10px;
+  border-radius: 15px;
+  background-color: var(pink);
+  text-color: var(base);
+}
+
+entry {
+  background-color: var(surface1);
+  text-color: var(text);
+  cursor: text;
+  padding: 10px;
+  placeholder-color: var(subtext1);
+  placeholder: "Type to search";
+  border-radius: 15px;
+  vertical-align: 0.5;
+}
+
+listview {
+  background-color: transparent;
+  padding: 10px;
+  spacing: 25px;
+
+  layout: vertical;
+  reverse: false;
+  lines: 3;
+  columns: 5;
+  cycle: true;
+  fixed-height: true;
+  fixed-columns: true;
+}
+
+element {
+  padding: 5px;
+  cursor:  pointer;
+  border:  0;
+  children: ["element-icon", "element-text"];
+  background-color: transparent;
+  orientation: vertical;
+}
+
+element normal.normal {
+  background-color: transparent;
+  text-color: var(text);
+}
+
+element selected.normal {
+  background-color: var(overlay0);
+  border-radius: 15px;
+}
+
+element-text {
+  background-color: transparent;
+  text-color: var(text);
+  vertical-align: 0.5;
+  horizontal-align: 0.5;
+}
+
+element-text selected {
+  text-color: var(subtext1);
+}
+
+element-icon {
+  size: 48px;
+  padding: 10px 0;
+  background-color: transparent;
+}
+
+

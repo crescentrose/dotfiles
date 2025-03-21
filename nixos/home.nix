@@ -40,8 +40,8 @@
       xwayland-satellite # xwayland outside wayland
 
       # app launcher 2: electric boogaloo
-      (rofi-wayland.override (old: { plugins = [
-        pkgs.rofi-emoji-wayland
+      (rofi.override (old: { plugins = [
+        pkgs.rofi-emoji
         pkgs.rofi-calc
       ]; }))
 
@@ -52,7 +52,7 @@
       mpd # radiohead
       mpdscribble # scrobble
       obsidian # notes
-      rmpc
+      rmpc # terminal music player
       todoist-electron # task list
 
       # Fine, I Will Use Gnome Apps
@@ -68,6 +68,7 @@
       loupe # image viewer
       nautilus # file browser
       newsflash # rss
+      plattenalbum # MPD client
       video-trimmer # if only all apps were named this consistently
       warp # file transfer
 
@@ -132,6 +133,16 @@
       x11.enable = true;
       name = "Bibata-Modern-Classic";
       package = pkgs.bibata-cursors;
+    };
+  };
+
+  # GTK theming settings
+  gtk = {
+    enable = true;
+    # Certain GNOME apps break without this because they are impeccably coded
+    iconTheme = {
+      package = pkgs.adwaita-icon-theme;
+      name = "Adwaita";
     };
   };
 

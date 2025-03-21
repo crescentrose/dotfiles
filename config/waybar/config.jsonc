@@ -2,28 +2,30 @@
 {
   "height": 30,
   "margin-top": 5,
+  "margin-left": 15,
+  "margin-right": 15,
   // General settings
   // Support Sway IPC for showing and hiding the bar
   "ipc": true,
   // Module order
   "modules-left": [
-    "niri/workspaces"
-  ],
-  "modules-center": [
+    "custom/power",
+    "niri/workspaces",
     "niri/window"
   ],
+  "modules-center": [],
   "modules-right": [
-    "custom/colorscheme",
     "mpd",
     "wireplumber",
-    "clock",
     "tray",
+    "custom/colorscheme",
     "niri/language",
-    "custom/power"
+    "clock"
   ],
   "niri/workspaces": {},
   "niri/window": {
-    "separate-outputs": true
+    "separate-outputs": true,
+    "format": " {title}"
   },
   "niri/language": {
     "format-nl": "🇳🇱",
@@ -41,9 +43,8 @@
   },
   "mpd": {
     "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ",
-    "format-disconnected": "Disconnected ",
-    "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
-    "unknown-tag": "N/A",
+    "format-stopped": "",
+    "unknown-tag": "",
     "interval": 5,
     "random-icons": {
       "off": "",
@@ -57,8 +58,6 @@
       "paused": "",
       "playing": ""
     },
-    "tooltip-format": "MPD (connected)",
-    "tooltip-format-disconnected": "MPD (disconnected)",
     "on-click": "$HOME/bin/rmpc_kitty"
   },
   "tray": {
@@ -74,12 +73,13 @@
     "format-muted": "󰝟"
   },
   "custom/power": {
-    "format": "⏻ ",
+    "format": "󰄛",
     "tooltip": false,
     "menu": "on-click",
     "menu-file": "$HOME/.config/waybar/power_menu.xml",
     "menu-actions": {
-      "lock": "swaylock -C ~/.config/swaylock/config",
+      "wallpaper": "$HOME/bin/change-wallpaper random",
+      "lock": "loginctl lock-screen",
       "shutdown": "shutdown",
       "reboot": "reboot",
       "suspend": "systemctl suspend",

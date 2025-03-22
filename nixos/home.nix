@@ -1,4 +1,4 @@
-{ lib, pkgs, config, zen-browser, cringe-emojis, ... }:
+{ lib, pkgs, config, zen-browser, ... }:
 {
   # Disable Richard Stallman
   nixpkgs.config.allowUnfree = true;
@@ -117,7 +117,6 @@
       nerd-fonts.symbols-only
     ] ++ [
       zen-browser.packages."x86_64-linux".default # firefoxn't
-      cringe-emojis.packages."x86_64-linux".default # apple emojis (attempted)
     ];
 
     username = "ivan";
@@ -147,7 +146,7 @@
     };
   };
 
-  fonts.fontconfig.defaultFonts.emoji = [ "Apple Color Emoji" "Twitter Color Emoji" ];
+  fonts.fontconfig.defaultFonts.emoji = [ "Twitter Color Emoji" ];
 
   services = {
     mpd = {

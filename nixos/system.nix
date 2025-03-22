@@ -253,8 +253,20 @@ in
   systemd.services.lactd.wantedBy = ["multi-user.target"];
 
   # Suspend the system when the DE signals it is idle
+  # ref: https://www.freedesktop.org/software/systemd/man/latest/logind.conf.html
   services.logind.extraConfig = ''
     IdleAction=suspend
+    HandlePowerKey=suspend
+  '';
+
+  # Disable mouse from waking up the computer
+  # ref: https://wiki.archlinux.org/title/Udev#Waking_from_suspend_with_USB_device
+  # NOTE: This applies to the Keychron wireless mouse dongle. Other mice will have different
+  # hardware IDs. That also means this needs to be changed if I get a different mouse.
+  # NOTE: Plug the device out then back in for this rule to take effect.
+  services.udev.extraRules = ''
+    # Disable mouse from waking up the computer
+    ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="d030", ATTR{power/wakeup}="disabled", ATTR{driver/1-1/power/wakeup}="disabled"
   '';
 
   # Set up Docker
@@ -283,6 +295,7 @@ in
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # HERE BE DRAGONS!!!
+  # This field determines which set of default values to use.
+  # WARN: Do not change this before reviewing changes: https://nixos.org/manual/nixos/unstable/release-notes
   system.stateVersion = "24.11";
 }

@@ -185,21 +185,10 @@ layout {
   }
 }
 
-// Add lines like this to spawn processes at startup.
-// Note that running niri as a session supports xdg-desktop-autostart,
-// which may be more convenient to use.
-// See the binds section below for more spawn examples.
-
-// Allow running X11 apps
+// Run X11 apps on Wayland
 spawn-at-startup "xwayland-satellite"
 environment {
   DISPLAY ":0"
-}
-
-// Set the disable-primary flag to disable the primary clipboard (middle-click paste). Toggling this
-// flag will only apply to applications started afterward.
-/-clipboard {
-  disable-primary
 }
 
 // You can change the path where screenshots are saved.

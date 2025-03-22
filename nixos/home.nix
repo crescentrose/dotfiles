@@ -1,4 +1,4 @@
-{ lib, pkgs, config, zen-browser, cringe-emojis, ... }:
+{ lib, pkgs, config, zen-browser, ... }:
 {
   # Disable Richard Stallman
   nixpkgs.config.allowUnfree = true;
@@ -117,7 +117,6 @@
       nerd-fonts.symbols-only
     ] ++ [
       zen-browser.packages."x86_64-linux".default # firefoxn't
-      cringe-emojis.packages."x86_64-linux".default # apple emojis (attempted)
     ];
 
     username = "ivan";
@@ -147,7 +146,7 @@
     };
   };
 
-  fonts.fontconfig.defaultFonts.emoji = [ "Apple Color Emoji" "Twitter Color Emoji" ];
+  fonts.fontconfig.defaultFonts.emoji = [ "Twitter Color Emoji" ];
 
   services = {
     mpd = {
@@ -274,6 +273,30 @@
       Service = {
         ExecStart = "${pkgs.hypridle}/bin/hypridle";
         Restart = "on-failure";
+      };
+    };
+
+    # Run X11 apps under Wayland compositors without xwayland
+    xwayland-satellite = {
+      Unit = {
+        Description = "Xwayland outside your Wayland";
+        BindsTo = "graphical-session.target";
+        PartOf = "graphical-session.target";
+        Requisite = "graphical-session.target";
+        After = "niri.service";
+      };
+      Service = {
+        Environment = [
+          "DISPLAY=:0"
+          "RUST_LOG=xwayland_satellite::xstate::selection"
+        ];
+        Type = "notify";
+        NotifyAccess = "all";
+        ExecStart = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
+        StandardOutput = "journal";
+      };
+      Install = {
+        Wants = [ "niri.service" ];
       };
     };
   };

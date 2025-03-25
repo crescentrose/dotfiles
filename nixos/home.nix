@@ -169,6 +169,9 @@
     gnome-keyring = {
       enable = true;
     };
+
+    # Make Bluetooth headset buttons usable with media players
+    mpris-proxy.enable = true;
   };
 
   # Allow inter-app communication

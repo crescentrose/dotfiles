@@ -1,5 +1,9 @@
 # crescentrose's dotfiles
 
+> [!NOTE]
+> This branch contains only the dotfiles for my macOS set-up. You can find my NixOS set-up in the
+> [`experimental`](https://github.com/crescentrose/dotfiles/tree/experimental) branch.
+
 revamped and enhanced for the next five years
 
 <details>

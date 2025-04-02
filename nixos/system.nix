@@ -43,11 +43,6 @@ in
     ];
   };
 
-  # Enable AMD GPU overclocking
-  boot.extraModprobeConfig = ''
-    options amdgpu ppfeaturemask=0xFFFFFFFF
-  '';
-
   # Networking
   networking.hostName = "streaming-heart";
   networking.networkmanager.enable = true;

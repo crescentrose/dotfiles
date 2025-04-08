@@ -58,9 +58,6 @@ return {
 			local null_ls = require("null-ls")
 			null_ls.setup({
 				sources = {
-					-- CSS
-					null_ls.builtins.formatting.stylelint,
-					null_ls.builtins.diagnostics.stylelint,
 					-- Git
 					null_ls.builtins.code_actions.gitrebase,
 					-- GitHub Actions

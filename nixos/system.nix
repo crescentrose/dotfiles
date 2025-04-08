@@ -70,9 +70,6 @@ in
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
-  # experiment with fish, why not
-  programs.fish.enable = true;
-
   # User accounts
   users.users.ivan = {
     isNormalUser = true;
@@ -80,6 +77,10 @@ in
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
     packages = [];
+    openssh.authorizedKeys.keys = [
+      # Authorization key
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII2RfXNZk0ta2DOmvrGNv6EfQCkdtUBpZ3OHiTyr4k35"
+    ];
   };
 
   # Disable Richard Stallman
@@ -164,6 +165,20 @@ in
       default_session = {
         command = "${pkgs.sway}/bin/sway --config ${greetConfig}";
       };
+    };
+  };
+
+  # Set up SSH access
+  services.openssh = {
+    enable = true;
+    ports = [ 22 ];
+    startWhenNeeded = true;
+    settings = {
+      PasswordAuthentication = false;
+      AllowUsers = [ "ivan" ];
+      UseDns = true;
+      X11Forwarding = false;
+      PermitRootLogin = "no";
     };
   };
 

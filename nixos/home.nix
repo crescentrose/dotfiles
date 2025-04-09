@@ -54,6 +54,7 @@
       obsidian # notes
       rmpc # terminal music player
       todoist-electron # task list
+      prismlauncher # the children yearn for the mines
 
       # Fine, I Will Use Gnome Apps
       boatswain # stream deck controller

@@ -150,6 +150,21 @@ in
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
+
+      # Expose AirPlay devices as sinks
+      raopOpenFirewall = true;
+      extraConfig.pipewire = {
+        "10-airplay" = {
+          "context.modules" = [
+            {
+              name = "libpipewire-module-raop-discover";
+              args = {
+                "raop.latency.ms" = 500;
+              };
+            }
+          ];
+        };
+      };
   };
 
   # Enable Bluetooth

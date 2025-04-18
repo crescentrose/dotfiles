@@ -55,6 +55,7 @@
       rmpc # terminal music player
       todoist-electron # task list
       prismlauncher # the children yearn for the mines
+      vivaldi # for when I need a chromium-based browser
 
       # Fine, I Will Use Gnome Apps
       boatswain # stream deck controller
@@ -337,14 +338,5 @@
     name = "Discord";
     type = "Application";
     terminal = false;
-  };
-
-  # Set up default apps
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "inode/directory" = "org.gnome.Nautilus.desktop";
-      "x-scheme-handler/anytype" = "anytype.desktop";
-    };
   };
 }

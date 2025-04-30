@@ -55,6 +55,7 @@
       rmpc # terminal music player
       todoist-electron # task list
       prismlauncher # the children yearn for the mines
+      slack # work, work
       vivaldi # for when I need a chromium-based browser
 
       # Fine, I Will Use Gnome Apps
@@ -87,6 +88,7 @@
       libnotify # for notify-send
       nushell # a nicer shell
       starship # terminal prompt
+      v4l-utils # webcam settings
       zola # static site generator
 
       # developer tools

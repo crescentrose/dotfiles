@@ -31,6 +31,18 @@ return {
 			require('lspconfig').lua_ls.setup({})
 			-- Nix
 			require('lspconfig').nil_ls.setup({})
+			-- Python
+			require('lspconfig').pylsp.setup({
+				settings = {
+					pylsp = {
+						plugins = {
+							pycodestyle = {
+								ignore = { 'E501' },
+							}
+						}
+					}
+				}
+			})
 			-- Rust (via rustup)
 			require('lspconfig').rust_analyzer.setup({
 				settings = {

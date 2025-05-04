@@ -90,6 +90,7 @@
       starship # terminal prompt
       v4l-utils # webcam settings
       zola # static site generator
+      libjxl # jpegxl conversion
 
       # developer tools
       gcc # the GNU Compiler Collection

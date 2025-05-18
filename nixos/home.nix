@@ -57,6 +57,7 @@
       prismlauncher # the children yearn for the mines
       slack # work, work
       vivaldi # for when I need a chromium-based browser
+      qbittorrent # yarr
 
       # Fine, I Will Use Gnome Apps
       boatswain # stream deck controller

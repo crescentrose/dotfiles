@@ -38,6 +38,7 @@
       wl-clipboard # copy and paste
       wtype # automate writing (for inserting emojis)
       xwayland-satellite # xwayland outside wayland
+      wob # overlay
 
       # app launcher 2: electric boogaloo
       (rofi.override (old: { plugins = [

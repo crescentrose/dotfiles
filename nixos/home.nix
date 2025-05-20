@@ -47,7 +47,6 @@
       ]; }))
 
       # apps
-      _1password-gui # secrets
       discord # keep up with the egirls
       kitty # terminal
       mpd # radiohead
@@ -79,7 +78,6 @@
       warp # file transfer
 
       # cli apps
-      _1password-cli # secrets
       bat # nicer cat
       carapace # completion
       fastfetch # r/unixporn bait

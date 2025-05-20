@@ -32,6 +32,9 @@ in
   boot.consoleLogLevel = 0;
   boot.initrd.verbose = false;
 
+  # Make the kernel use AMD drivers at boot already
+  boot.initrd.kernelModules = [ "amdgpu" ];
+
   # nice boot animation
   boot.plymouth = {
     enable = true;
@@ -128,6 +131,8 @@ in
 
   # Enable video
   hardware.graphics.enable = true;
+  # Enable AMD hardware video encoder
+  hardware.graphics.extraPackages = [ pkgs.amf ];
 
   # Make fonts render twice as good as Ubuntu but half as good as macOS
   fonts.fontconfig = {

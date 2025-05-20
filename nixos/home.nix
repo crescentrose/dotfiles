@@ -62,6 +62,7 @@
 
       # Fine, I Will Use Gnome Apps
       boatswain # stream deck controller
+      celluloid # video player
       decibels # audio player
       dialect # translation
       diebahn # choo choo 🚆
@@ -141,6 +142,11 @@
       name = "Bibata-Modern-Classic";
       package = pkgs.bibata-cursors;
     };
+  };
+
+  # screen recording
+  programs.obs-studio = {
+    enable = true;
   };
 
   # GTK theming settings

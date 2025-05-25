@@ -27,8 +27,6 @@
     packages = with pkgs; [
       # desktop environment
       glib # gtk config
-      gnome-keyring # temporary secrets storage
-      mako # notifications
       niri # window manager 2: window manageraloo
       hyprlock # lock screen 2: lock... yeah whatever
       hypridle # idle management daemon
@@ -74,6 +72,7 @@
       nautilus # file browser
       newsflash # rss
       plattenalbum # MPD client
+      seahorse # secret management
       video-trimmer # if only all apps were named this consistently
       warp # file transfer
 
@@ -173,11 +172,6 @@
       '';
     };
     mpd-discord-rpc = {
-      enable = true;
-    };
-
-    # temporary secrets storage
-    gnome-keyring = {
       enable = true;
     };
 

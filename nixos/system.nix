@@ -95,6 +95,9 @@ in
   # Do not prompt `wheel` users for the sudo password
   security.sudo.wheelNeedsPassword = false;
 
+  # Use gnome-keyring for temporary secret storage
+  services.gnome.gnome-keyring.enable = true;
+
   # Global packages
   environment.systemPackages = with pkgs; [
     # basic shell tools

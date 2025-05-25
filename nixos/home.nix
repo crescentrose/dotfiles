@@ -177,6 +177,9 @@
 
     # Make Bluetooth headset buttons usable with media players
     mpris-proxy.enable = true;
+
+    # Enable system authentication for unprivileged apps
+    polkit-gnome.enable = true;
   };
 
   # Allow inter-app communication

@@ -94,6 +94,12 @@ in
 
   # Do not prompt `wheel` users for the sudo password
   security.sudo.wheelNeedsPassword = false;
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+      if (subject.isInGroup("wheel"))
+        return polkit.Result.YES;
+    });
+  '';
 
   # Use gnome-keyring for temporary secret storage
   services.gnome.gnome-keyring.enable = true;

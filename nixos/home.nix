@@ -32,6 +32,7 @@
       hypridle # idle management daemon
       swww # wallpaper
       thunderbird # mail
+      mako # notifications
       waybar # status bar
       wl-clipboard # copy and paste
       wtype # automate writing (for inserting emojis)

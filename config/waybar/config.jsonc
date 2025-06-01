@@ -82,8 +82,8 @@
     "menu-actions": {
       "wallpaper": "$HOME/bin/change-wallpaper random",
       "lock": "loginctl lock-screen",
-      "shutdown": "shutdown",
-      "reboot": "reboot",
+      "shutdown": "systemctl poweroff",
+      "reboot": "systemctl reboot",
       "suspend": "systemctl suspend",
       "logout": "niri msg action quit"
     }

@@ -30,7 +30,8 @@
       niri # window manager 2: window manageraloo
       hyprlock # lock screen 2: lock... yeah whatever
       hypridle # idle management daemon
-      swww # wallpaper
+      swww # dynamic wallpaper
+      swaybg # static wallpaper
       thunderbird # mail
       mako # notifications
       waybar # status bar
@@ -272,7 +273,23 @@
       };
     };
 
-    # Wallpaper manager
+    # Overview wallpaper manager
+    swaybg = {
+      Unit = {
+        Description = "Background for Wayland";
+        PartOf = "graphical-session.target";
+        After = "graphical-session.target";
+      };
+      Install = {
+        WantedBy = [ "niri.service" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.swaybg}/bin/swaybg --output=\"*\" -i /home/ivan/.cache/blurred_wallpaper.jpg";
+        Restart = "on-failure";
+      };
+    };
+
+    # Idle manager
     hypridle = {
       Unit = {
         Description = "Idle management daemon";

@@ -252,16 +252,37 @@ window-rule {
   default-column-width { fixed 900; }
 }
 
-// Give Waybar a shadow
-/-layer-rule {
-  match namespace="waybar"
+// Keep swaybg within the overview backdrop
+layer-rule {
+  match namespace="^wallpaper$"
+  place-within-backdrop true
+}
+
+// Give Waybar a tasteful shadow
+layer-rule {
+  match namespace="^waybar$"
+
   shadow {
     on
     softness 40
     spread 5
     draw-behind-window true
-    color "#0006"
+    color "#3332"
   }
+}
+
+// Skip the hotkey overlay at startup.
+hotkey-overlay {
+  skip-at-startup
+}
+
+// Disable middle-click paste because we live in $CURRENT_YEAR
+clipboard {
+  disable-primary
+}
+
+overview {
+  zoom 0.5
 }
 
 binds {
@@ -280,11 +301,11 @@ binds {
   Mod+Shift+Slash { show-hotkey-overlay; }
 
   // Suggested binds for running programs: terminal, app launcher, screen locker.
-  Mod+Return { spawn "kitty"; }
-  Mod+Space { spawn "~/bin/launch-menu" "launcher"; }
-  Mod+m { spawn "~/bin/rmpc_kitty"; }
+  Mod+Return hotkey-overlay-title="Open terminal window" repeat=false { spawn "kitty"; }
+  Mod+Space hotkey-overlay-title="App launcher" repeat=false { spawn "~/bin/launch-menu" "launcher"; }
+  Mod+m hotkey-overlay-title="Open music player" repeat=false { spawn "~/bin/rmpc_kitty"; }
 
-  Mod+Ctrl+q { spawn "loginctl" "lock-session"; }
+  Mod+Ctrl+q hotkey-overlay-title="Lock screen" repeat=false { spawn "loginctl" "lock-session"; }
 
   // Example volume keys mappings for PipeWire & WirePlumber.
   // The allow-when-locked=true property makes them work even when the session is locked.
@@ -413,6 +434,7 @@ binds {
   //
   // For example, with 2 workspaces + 1 empty, indices 3, 4, 5 and so on
   // will all refer to the 3rd workspace.
+  Mod+Grave { open-overview; }
   Mod+1 { focus-workspace 1; }
   Mod+2 { focus-workspace 2; }
   Mod+3 { focus-workspace 3; }
@@ -494,8 +516,7 @@ binds {
   // Mod+Shift+Space { switch-layout "prev"; }
 
   Print { screenshot; }
-  Mod+Print { screenshot-window write-to-disk=false; }
-  Ctrl+Print { screenshot-screen; }
+  Ctrl+Print { screenshot-screen show-pointer=false; }
   // You can take the Mac away from me, but you can never take me away from the Mac...
   Alt+Shift+4 { screenshot; }
 

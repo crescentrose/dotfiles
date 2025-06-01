@@ -4,6 +4,8 @@
   "margin-top": 5,
   "margin-left": 15,
   "margin-right": 15,
+  // Draw Waybar on top of the compositor, so that it's visible in the Niri overview
+  "layer": "top",
   // General settings
   // Support Sway IPC for showing and hiding the bar
   "ipc": true,

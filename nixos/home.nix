@@ -100,6 +100,7 @@
       rustup # rust installer
       strace # peek under the hood
       terraform # the CLOUD
+      hotspot # perf
 
       # language servers
       gopls # golang
@@ -122,6 +123,9 @@
       # icons
       font-awesome
       nerd-fonts.symbols-only
+
+      # grumble gumble
+      flatpak
     ] ++ [
       zen-browser.packages."x86_64-linux".default # firefoxn't
     ];

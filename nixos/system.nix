@@ -77,7 +77,7 @@ in
   users.users.ivan = {
     isNormalUser = true;
     description = "Ivan";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "kvm" "docker" "libvirtd" "wireshark" ];
     shell = pkgs.zsh;
     packages = [];
     openssh.authorizedKeys.keys = [
@@ -124,6 +124,10 @@ in
 
     # networking
     cifs-utils # Samba shares
+    dnsmasq # VM networking
+
+    # hardware
+    usbutils # lsusb
 
     # auth
     lxqt.lxqt-policykit # Authorize PolicyKit actions
@@ -308,6 +312,16 @@ in
     ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="d030", ATTR{power/wakeup}="disabled", ATTR{driver/1-1/power/wakeup}="disabled"
   '';
 
+  services.udev.packages = [
+    (pkgs.writeTextFile {
+        name = "pegboard_udev";
+        text = ''
+          ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="37fa", ATTRS{idProduct}=="8201", MODE="0770", TAG+="uaccess"
+        '';
+        destination = "/etc/udev/rules.d/50-pegboard.rules";
+    })
+  ];
+
   # Set up Docker
   virtualisation.docker = {
     enable = true;
@@ -316,7 +330,27 @@ in
       setSocketVariable = true;
     };
   };
-  users.extraGroups.docker.members = [ "ivan" ];
+
+  # Set up virtualisation
+  virtualisation.libvirtd = {
+    enable = true;
+
+    # Enable TMP emulation
+    qemu = {
+      swtpm.enable = true;
+      ovmf.packages = [ pkgs.OVMFFull.fd ];
+    };
+  };
+
+  # Enable USB redirection
+  virtualisation.spiceUSBRedirection.enable = true;
+
+  # Enable Wireshark with USB support
+  programs.wireshark = {
+    enable = true;
+    usbmon.enable = true;
+    dumpcap.enable = true;
+  };
 
   # Keep only last 5 configurations
   boot.loader.systemd-boot.configurationLimit = 5;

@@ -39,6 +39,7 @@
       wtype # automate writing (for inserting emojis)
       xwayland-satellite # xwayland outside wayland
       wob # overlay
+      blueberry # bluetooth settings
 
       # app launcher 2: electric boogaloo
       (rofi.override (old: { plugins = [
@@ -57,6 +58,7 @@
       prismlauncher # the children yearn for the mines
       slack # work, work
       qbittorrent # yarr
+      gnome-boxes # vms
 
       # Fine, I Will Use Gnome Apps
       boatswain # stream deck controller

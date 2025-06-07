@@ -74,6 +74,12 @@ in
   users.defaultUserShell = pkgs.zsh;
 
   # User accounts
+  users.groups = {
+    wireshark = {
+      members = [ "ivan" ];
+    };
+  };
+
   users.users.ivan = {
     isNormalUser = true;
     description = "Ivan";
@@ -125,6 +131,7 @@ in
     # networking
     cifs-utils # Samba shares
     dnsmasq # VM networking
+    phodav # VM sharing
 
     # hardware
     usbutils # lsusb
@@ -347,6 +354,7 @@ in
 
   # Enable Wireshark with USB support
   programs.wireshark = {
+    package = pkgs.wireshark;
     enable = true;
     usbmon.enable = true;
     dumpcap.enable = true;

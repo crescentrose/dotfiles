@@ -1,4 +1,4 @@
-{ lib, pkgs, config, zen-browser, ... }:
+{ lib, pkgs, config, zen-browser, quickshell, ... }:
 {
   # Disable Richard Stallman
   nixpkgs.config.allowUnfree = true;
@@ -64,8 +64,6 @@
       boatswain # stream deck controller
       celluloid # video player
       decibels # audio player
-      dialect # translation
-      diebahn # choo choo 🚆
       evince # document viewr
       gnome-calculator
       gnome-calendar
@@ -77,7 +75,6 @@
       plattenalbum # MPD client
       seahorse # secret management
       video-trimmer # if only all apps were named this consistently
-      warp # file transfer
 
       # cli apps
       bat # nicer cat
@@ -85,7 +82,6 @@
       fastfetch # r/unixporn bait
       fortune # wisdom
       gh # github client
-      gifsicle # gif editing
       glow # markdown viewer
       imagemagick # magic of the image variety
       libnotify # for notify-send
@@ -97,7 +93,6 @@
 
       # developer tools
       gcc # the GNU Compiler Collection
-      pkg-config # builds
       rustup # rust installer
       strace # peek under the hood
       terraform # the CLOUD
@@ -129,12 +124,13 @@
       flatpak
     ] ++ [
       zen-browser.packages."x86_64-linux".default # firefoxn't
+      quickshell.packages."x86_64-linux".default # DIY shell
     ];
 
     username = "ivan";
     homeDirectory = "/home/ivan";
 
-    stateVersion = "24.11";
+    stateVersion = "25.05";
 
     sessionVariables = {
       EDITOR = "nvim";

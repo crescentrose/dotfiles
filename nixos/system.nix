@@ -378,5 +378,5 @@ in
 
   # This field determines which set of default values to use.
   # WARN: Do not change this before reviewing changes: https://nixos.org/manual/nixos/unstable/release-notes
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
 }

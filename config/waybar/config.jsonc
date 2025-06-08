@@ -17,7 +17,7 @@
   ],
   "modules-center": [],
   "modules-right": [
-    "mpd",
+    "mpris",
     "wireplumber",
     "tray",
     "custom/colorscheme",
@@ -43,24 +43,28 @@
     "on-click": "$HOME/bin/color-scheme toggle",
     "format": "{}"
   },
-  "mpd": {
-    "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ",
+  "mpris": {
+    "format": "{status_icon} {artist} - {title} {player_icon}",
     "format-stopped": "",
-    "unknown-tag": "",
     "interval": 5,
     "random-icons": {
       "off": "",
       "on": " "
     },
-    "max-length": 40,
+    "artist-len": 20,
+    "title-len": 30,
     "repeat-icons": {
       "on": " "
     },
-    "state-icons": {
+    "player-icons": {
+      "default": "",
+      "mpd": "",
+      "firefox": ""
+    },
+    "status-icons": {
       "paused": "",
       "playing": ""
-    },
-    "on-click": "$HOME/bin/rmpc_kitty"
+    }
   },
   "tray": {
     "spacing": 10

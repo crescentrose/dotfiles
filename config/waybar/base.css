@@ -68,12 +68,13 @@ window#waybar.empty #window {
   color: @text;
 }
 
-#mpd.playing, #mpd.paused {
+#mpris.playing,
+#mpris.paused {
   color: @flamingo;
 }
 
-#mpd.stopped, #mpd.disconnected {
-}
+#mpris.stopped,
+#mpris.disconnected {}
 
 tooltip {
   background: @mantle;

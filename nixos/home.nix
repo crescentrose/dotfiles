@@ -178,6 +178,12 @@
       enable = true;
     };
 
+    # control mpd through the MPRIS protocol
+    mpd-mpris.enable = true;
+
+    # daemon that tracks media player activity
+    playerctld.enable = true;
+
     # Make Bluetooth headset buttons usable with media players
     mpris-proxy.enable = true;
 

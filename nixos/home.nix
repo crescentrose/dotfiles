@@ -90,6 +90,7 @@
       v4l-utils # webcam settings
       zola # static site generator
       libjxl # jpegxl conversion
+      dig # it's always DNS
 
       # developer tools
       gcc # the GNU Compiler Collection

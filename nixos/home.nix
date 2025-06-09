@@ -38,7 +38,6 @@
       wl-clipboard # copy and paste
       wtype # automate writing (for inserting emojis)
       xwayland-satellite # xwayland outside wayland
-      wob # overlay
       blueberry # bluetooth settings
 
       # app launcher 2: electric boogaloo
@@ -88,8 +87,6 @@
       nushell # a nicer shell
       starship # terminal prompt
       v4l-utils # webcam settings
-      zola # static site generator
-      libjxl # jpegxl conversion
       dig # it's always DNS
 
       # developer tools

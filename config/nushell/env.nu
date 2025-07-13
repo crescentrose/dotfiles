@@ -45,7 +45,7 @@ $env.EDITOR = "nvim"
 $env.BAT_THEME = "ansi" # basic bitch...
 
 # Completions
-$env.CARAPACE_BRIDGES = 'carapace,bash,zsh,yargs,complete,clap'
+$env.CARAPACE_BRIDGES = 'carapace,yargs,complete,clap,click'
 if (not ("~/.cache/carapace/init.nu" | path exists)) {
   mkdir ~/.cache/carapace
   carapace _carapace nushell | save --force ~/.cache/carapace/init.nu

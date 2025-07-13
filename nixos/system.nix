@@ -11,10 +11,9 @@ let
   '';
 in
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -26,7 +25,11 @@ in
 
   # less noise during boot
   boot.kernelParams = [
-    "quiet" "splash" "boot.shell_on_fail" "rd.systemd.show_status=false" "rd.udev.log_level=3"
+    "quiet"
+    "splash"
+    "boot.shell_on_fail"
+    "rd.systemd.show_status=false"
+    "rd.udev.log_level=3"
     "udev.log_priority=3"
   ];
   boot.consoleLogLevel = 0;
@@ -41,8 +44,8 @@ in
     theme = "colorful_sliced";
     themePackages = with pkgs; [
       (adi1090x-plymouth-themes.override {
-       selected_themes = [ "colorful_sliced" ];
-       })
+        selected_themes = [ "colorful_sliced" ];
+      })
     ];
   };
 
@@ -83,9 +86,16 @@ in
   users.users.ivan = {
     isNormalUser = true;
     description = "Ivan";
-    extraGroups = [ "networkmanager" "wheel" "kvm" "docker" "libvirtd" "wireshark" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "kvm"
+      "docker"
+      "libvirtd"
+      "wireshark"
+    ];
     shell = pkgs.zsh;
-    packages = [];
+    packages = [ ];
     openssh.authorizedKeys.keys = [
       # Authorization key
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII2RfXNZk0ta2DOmvrGNv6EfQCkdtUBpZ3OHiTyr4k35"
@@ -166,36 +176,35 @@ in
     subpixel.rgba = "rgb";
   };
 
-
   # Enable sound (seriously, why is this not default?)
   security.rtkit.enable = true; # enable RealtimeKit for audio purposes
   services.pulseaudio.enable = false; # and good riddance, you wretched beast!
   services.pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
 
-      # Expose AirPlay devices as sinks
-      raopOpenFirewall = true;
-      extraConfig.pipewire = {
-        "10-airplay" = {
-          "context.modules" = [
-            {
-              name = "libpipewire-module-raop-discover";
-              args = {
-                "raop.latency.ms" = 500;
-              };
-            }
-          ];
-        };
+    # Expose AirPlay devices as sinks
+    raopOpenFirewall = true;
+    extraConfig.pipewire = {
+      "10-airplay" = {
+        "context.modules" = [
+          {
+            name = "libpipewire-module-raop-discover";
+            args = {
+              "raop.latency.ms" = 500;
+            };
+          }
+        ];
       };
+    };
   };
 
   # Enable Bluetooth
   hardware.bluetooth = {
-      enable = true;
-      powerOnBoot = true;
+    enable = true;
+    powerOnBoot = true;
   };
 
   # Set up greeter
@@ -254,13 +263,13 @@ in
   };
 
   # Set up lockscreen support with Hyprlock
-  security.pam.services.hyprlock = {};
+  security.pam.services.hyprlock = { };
 
   # Set up GAMING!
   programs.steam = {
-      enable = true;
-      remotePlay.openFirewall = true;
-      localNetworkGameTransfers.openFirewall = true;
+    enable = true;
+    remotePlay.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
   };
 
   # set up 1password
@@ -280,9 +289,9 @@ in
 
   # Enable network auto-discovery
   services.avahi = {
-      enable = true;
-      nssmdns4 = true;
-      openFirewall = true;
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
   };
 
   # Mount network storage
@@ -290,17 +299,18 @@ in
   # I am not exactly sure how. For now I place it manually, but eventually I would prefer to
   # automate this.
   fileSystems."/mnt/music" = {
-      device = "//virtuous-contract.local/music";
-      fsType = "cifs";
-      options = let
-        automount_opts
-        = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-      in ["${automount_opts},credentials=/etc/nixos/smb-secrets,uid=1000,gid=100"];
+    device = "//virtuous-contract.local/music";
+    fsType = "cifs";
+    options =
+      let
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+      in
+      [ "${automount_opts},credentials=/etc/nixos/smb-secrets,uid=1000,gid=100" ];
   };
 
   # Enable AMD GPU controller for easier overclocking
   systemd.packages = [ pkgs.lact ];
-  systemd.services.lactd.wantedBy = ["multi-user.target"];
+  systemd.services.lactd.wantedBy = [ "multi-user.target" ];
 
   # Suspend the system when the DE signals it is idle
   # ref: https://www.freedesktop.org/software/systemd/man/latest/logind.conf.html
@@ -321,11 +331,11 @@ in
 
   services.udev.packages = [
     (pkgs.writeTextFile {
-        name = "pegboard_udev";
-        text = ''
-          ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="37fa", ATTRS{idProduct}=="8201", MODE="0770", TAG+="uaccess"
-        '';
-        destination = "/etc/udev/rules.d/50-pegboard.rules";
+      name = "pegboard_udev";
+      text = ''
+        ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="37fa", ATTRS{idProduct}=="8201", MODE="0770", TAG+="uaccess"
+      '';
+      destination = "/etc/udev/rules.d/50-pegboard.rules";
     })
   ];
 
@@ -373,8 +383,14 @@ in
   # Automatically keep the Nix store optimized by hard-linking identical files
   nix.settings.auto-optimise-store = true;
 
+  # Generate man-page indexes, so that you can tab-complete them
+  documentation.man.generateCaches = true;
+
   # Enable flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # This field determines which set of default values to use.
   # WARN: Do not change this before reviewing changes: https://nixos.org/manual/nixos/unstable/release-notes

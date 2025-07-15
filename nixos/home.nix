@@ -1,4 +1,11 @@
-{ lib, pkgs, config, zen-browser, quickshell, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  zen-browser,
+  quickshell,
+  ...
+}:
 {
   # Disable Richard Stallman
   nixpkgs.config.allowUnfree = true;
@@ -24,106 +31,114 @@
   };
 
   home = {
-    packages = with pkgs; [
-      # desktop environment
-      glib # gtk config
-      niri # window manager 2: window manageraloo
-      hyprlock # lock screen 2: lock... yeah whatever
-      hypridle # idle management daemon
-      swww # dynamic wallpaper
-      swaybg # static wallpaper
-      thunderbird # mail
-      mako # notifications
-      waybar # status bar
-      wl-clipboard # copy and paste
-      wtype # automate writing (for inserting emojis)
-      xwayland-satellite # xwayland outside wayland
-      blueberry # bluetooth settings
+    packages =
+      with pkgs;
+      [
+        # desktop environment
+        glib # gtk config
+        niri # window manager 2: window manageraloo
+        hyprlock # lock screen 2: lock... yeah whatever
+        hypridle # idle management daemon
+        swww # dynamic wallpaper
+        swaybg # static wallpaper
+        thunderbird # mail
+        mako # notifications
+        waybar # status bar
+        wl-clipboard # copy and paste
+        wtype # automate writing (for inserting emojis)
+        xwayland-satellite # xwayland outside wayland
+        blueberry # bluetooth settings
 
-      # app launcher 2: electric boogaloo
-      (rofi.override (old: { plugins = [
-        pkgs.rofi-emoji
-        pkgs.rofi-calc
-      ]; }))
+        # app launcher 2: electric boogaloo
+        (rofi.override (old: {
+          plugins = [
+            pkgs.rofi-emoji
+            pkgs.rofi-calc
+          ];
+        }))
 
-      # apps
-      discord # keep up with the egirls
-      kitty # terminal
-      mpd # radiohead
-      mpdscribble # scrobble
-      obsidian # notes
-      rmpc # terminal music player
-      todoist-electron # task list
-      prismlauncher # the children yearn for the mines
-      slack # work, work
-      qbittorrent # yarr
-      gnome-boxes # vms
+        # apps
+        discord # keep up with the egirls
+        kitty # terminal
+        mpd # radiohead
+        mpdscribble # scrobble
+        obsidian # notes
+        rmpc # terminal music player
+        todoist-electron # task list
+        prismlauncher # the children yearn for the mines
+        slack # work, work
+        qbittorrent # yarr
+        gnome-boxes # vms
 
-      # Fine, I Will Use Gnome Apps
-      boatswain # stream deck controller
-      celluloid # video player
-      decibels # audio player
-      evince # document viewr
-      gnome-calculator
-      gnome-calendar
-      gnome-maps
-      gnome-weather
-      loupe # image viewer
-      nautilus # file browser
-      newsflash # rss
-      plattenalbum # MPD client
-      seahorse # secret management
-      video-trimmer # if only all apps were named this consistently
+        # Fine, I Will Use Gnome Apps
+        boatswain # stream deck controller
+        celluloid # video player
+        decibels # audio player
+        evince # document viewr
+        gnome-calculator
+        gnome-calendar
+        gnome-maps
+        gnome-weather
+        loupe # image viewer
+        nautilus # file browser
+        newsflash # rss
+        plattenalbum # MPD client
+        seahorse # secret management
+        video-trimmer # if only all apps were named this consistently
 
-      # cli apps
-      bat # nicer cat
-      carapace # completion
-      fastfetch # r/unixporn bait
-      fortune # wisdom
-      gh # github client
-      glow # markdown viewer
-      imagemagick # magic of the image variety
-      libnotify # for notify-send
-      nushell # a nicer shell
-      starship # terminal prompt
-      v4l-utils # webcam settings
-      dig # it's always DNS
+        # cli apps
+        bat # nicer cat
+        carapace # completion
+        fastfetch # r/unixporn bait
+        fortune # wisdom
+        gh # github client
+        glow # markdown viewer
+        imagemagick # magic of the image variety
+        libnotify # for notify-send
+        nushell # a nicer shell
+        helix # "post-modern" text editor
+        starship # terminal prompt
+        v4l-utils # webcam settings
+        broot # trees
+        dig # it's always DNS
 
-      # developer tools
-      gcc # the GNU Compiler Collection
-      rustup # rust installer
-      strace # peek under the hood
-      terraform # the CLOUD
-      hotspot # perf
+        # developer tools
+        gcc # the GNU Compiler Collection
+        rustup # rust installer
+        strace # peek under the hood
+        terraform # the CLOUD
+        hotspot # perf
+        lldb # debugger
 
-      # language servers
-      gopls # golang
-      lua-language-server # lua
-      nil # nix
-      taplo # toml
-      terraform-ls # terraform
-      typescript-language-server # javascript, typescript
-      vscode-langservers-extracted # html, css, json, eslint
+        # language servers
+        gopls # golang
+        lua-language-server # lua
+        nil # nix
+        taplo # toml
+        terraform-ls # terraform
+        typescript-language-server # javascript, typescript
+        vscode-langservers-extracted # html, css, json, eslint
 
-      # fonts
-      cascadia-code
-      departure-mono
-      iosevka
-      liberation_ttf # replacements for common MS fonts
-      noto-fonts
-      noto-fonts-cjk-sans
-      twitter-color-emoji # 🤓
+        # fonts
+        cascadia-code
+        departure-mono
+        iosevka
+        liberation_ttf # replacements for common MS fonts
+        noto-fonts
+        noto-fonts-cjk-sans
+        twitter-color-emoji # 🤓
 
-      # icons
-      font-awesome
-      nerd-fonts.symbols-only
+        # icons
+        font-awesome
+        nerd-fonts.symbols-only
 
-      # grumble gumble
-      flatpak
-    ] ++ [
-      zen-browser.packages."x86_64-linux".default # firefoxn't
-      quickshell.packages."x86_64-linux".default # DIY shell
-    ];
+        # grumble gumble
+        flatpak
+      ]
+      ++ [
+        zen-browser.packages."x86_64-linux".default # firefoxn't
+        quickshell.packages."x86_64-linux".default # DIY shell
+      ];
 
     username = "ivan";
     homeDirectory = "/home/ivan";
@@ -131,7 +146,7 @@
     stateVersion = "25.05";
 
     sessionVariables = {
-      EDITOR = "nvim";
+      EDITOR = "hx";
     };
 
     pointerCursor = {
@@ -202,7 +217,10 @@
   ];
   xdg.portal.config = {
     niri = {
-      default = ["gnome" "gtk"];
+      default = [
+        "gnome"
+        "gtk"
+      ];
       "org.freedesktop.impl.portal.Access" = "gtk";
       "org.freedesktop.impl.portal.Notification" = "gtk";
       "org.freedesktop.impl.portal.Secret" = "gnome-keyring";
@@ -210,18 +228,19 @@
 
     preferred = {
       default = [
-        "gnome" "gtk"
+        "gnome"
+        "gtk"
       ];
     };
   };
 
   # Fix crackle in certain apps that use Pipewire/Pulseaudio combo
   xdg.configFile."pipewire/pipewire-pulse.conf.d/20-pulse-properties.conf".text = ''
-  pulse.properties = {
-      pulse.min.req          = 256/48000
-      pulse.min.frag         = 256/48000
-      pulse.min.quantum      = 256/48000
-  }
+    pulse.properties = {
+        pulse.min.req          = 256/48000
+        pulse.min.frag         = 256/48000
+        pulse.min.quantum      = 256/48000
+    }
   '';
 
   # Set up systemd units for various supporting DE services.
@@ -319,51 +338,39 @@
   # TODO: Looks like only absolute paths are supported currently. Need to figure out a better way to
   # handle this.
   home.file = {
-    ".gitconfig".source =
-      config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/gitconfig;
-    "bin".source =
-      config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/bin;
+    ".gitconfig".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/gitconfig;
+    "bin".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/bin;
   };
 
   xdg.configFile = {
     ".gitignore_global".source =
       config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/gitignore_global;
-    "nvim".source =
-      config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/nvim;
-    "kitty".source =
-      config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/kitty;
-    "nushell".source =
-      config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/nushell;
-    "mise".source =
-      config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/mise;
+    "nvim".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/nvim;
+    "kitty".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/kitty;
+    "nushell".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/nushell;
+    "helix".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/helix;
     "starship.toml".source =
       config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/starship.toml;
-    ".ripgreprc".source =
-      config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/ripgreprc;
-    "waybar".source =
-      config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/waybar;
-    "rmpc".source =
-      config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/rmpc;
-    "mako".source =
-      config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/mako;
-    "proselint".source =
-      config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/proselint;
-    "rofi".source =
-      config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/rofi;
-    "niri".source =
-      config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/niri;
-    "hypr".source =
-      config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/hypr;
+    ".ripgreprc".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/ripgreprc;
+    "waybar".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/waybar;
+    "rmpc".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/rmpc;
+    "mako".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/mako;
+    "rofi".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/rofi;
+    "niri".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/niri;
+    "hypr".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/hypr;
   };
 
   # Enable hardware acceleration in Discord, which is disabled by default because of reasons only
   # known to Mr. John Discord himself
   xdg.desktopEntries.discord = {
-    categories= [ "Network" "InstantMessaging" ];
+    categories = [
+      "Network"
+      "InstantMessaging"
+    ];
     exec = "discord --ignore-gpu-blocklist --disable-features=UseOzonePlatform --enable-features=VaapiVideoDecoder --use-gl=desktop --enable-gpu-rasterization --enable-zero-copy";
     genericName = "All-in-one cross-platform voice and text chat for gamers";
     icon = "discord";
-    mimeType = ["x-scheme-handler/discord"];
+    mimeType = [ "x-scheme-handler/discord" ];
     name = "Discord";
     type = "Application";
     terminal = false;

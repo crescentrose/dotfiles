@@ -10,8 +10,6 @@ $env.ENV_CONVERSIONS = {
 }
 
 let custom_paths = [
-    '/opt/homebrew/bin'
-    ([$env.HOME ".bun/bin"] | path join)
     ([$env.HOME ".local/bin"] | path join)
     ([$env.HOME ".cargo/bin"] | path join)
     ([$env.HOME "bin"] | path join)
@@ -29,9 +27,7 @@ $env.NU_PLUGIN_DIRS = [
     ($nu.default-config-dir | path join 'plugins') # add <nushell-config-dir>/plugins
 ]
 
-if not ("VIRTUAL_ENV" in $env) {
-  $env.PATH = ($env.PATH | split row (char esep) | prepend $custom_paths)
-}
+$env.PATH = ($env.PATH | split row (char esep) | prepend $custom_paths)
 
 # The prompt indicators are environmental variables that represent
 # the state of the prompt
@@ -40,7 +36,7 @@ $env.PROMPT_INDICATOR_VI_INSERT = ": "
 $env.PROMPT_INDICATOR_VI_NORMAL = "〉"
 $env.PROMPT_MULTILINE_INDICATOR = "::: "
 
-$env.EDITOR = "nvim"
+$env.EDITOR = "hx"
 
 $env.BAT_THEME = "ansi" # basic bitch...
 
@@ -53,4 +49,3 @@ if (not ("~/.cache/carapace/init.nu" | path exists)) {
 
 # Other configuration files
 $env.RIPGREP_CONFIG_PATH = ($env.HOME | path join ".config/.ripgreprc")
-$env.MISE_GO_DEFAULT_PACKAGES_FILE = ($env.HOME | path join ".config/mise/default-go-packages")

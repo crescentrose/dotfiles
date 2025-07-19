@@ -68,14 +68,14 @@ def random-file [dir: string] {
   $files | get $idx
 }
 
-def set-wallpaper [path: string] {
+def set-wallpaper [path: string, --filter (-f): string = "Nearest"] {
     prepare-wallpaper $path
-    switch-wallpaper
+    switch-wallpaper --filter=($filter)
 }
 
-def "main set" [path: string] {
+def "main set" [path: string, --filter (-f): string = "Nearest"] {
   vlog timed "Wallpaper change" {
-    set-wallpaper $path
+    set-wallpaper $path 
   }
 }
 

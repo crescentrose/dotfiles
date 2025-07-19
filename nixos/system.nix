@@ -380,8 +380,12 @@ in
     options = "--delete-older-than 1w";
   };
 
-  # Automatically keep the Nix store optimized by hard-linking identical files
-  nix.settings.auto-optimise-store = true;
+  nix.settings= {
+    # Automatically keep the Nix store optimized by hard-linking identical files
+    auto-optimise-store = true;
+    # Allow unprivileged user to specify binary caches
+    trusted-users = ["root" "ivan"];
+  };
 
   # Generate man-page indexes, so that you can tab-complete them
   documentation.man.generateCaches = true;

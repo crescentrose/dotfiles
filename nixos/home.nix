@@ -88,27 +88,28 @@
 
         # cli apps
         bat # nicer cat
+        broot # trees
         carapace # completion
+        dig # it's always DNS
         fastfetch # r/unixporn bait
         fortune # wisdom
         gh # github client
         glow # markdown viewer
+        helix # "post-modern" text editor
         imagemagick # magic of the image variety
         libnotify # for notify-send
         nushell # a nicer shell
-        helix # "post-modern" text editor
         starship # terminal prompt
         v4l-utils # webcam settings
-        broot # trees
-        dig # it's always DNS
 
         # developer tools
+        devenv # we have nix at home
         gcc # the GNU Compiler Collection
+        hotspot # perf
+        lldb # debugger
         rustup # rust installer
         strace # peek under the hood
         terraform # the CLOUD
-        hotspot # perf
-        lldb # debugger
 
         # language servers
         gopls # golang

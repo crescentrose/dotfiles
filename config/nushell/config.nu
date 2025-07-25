@@ -852,3 +852,5 @@ source mise.nu
 
 # Load Starship prompt
 use ~/.cache/starship/init.nu
+
+use '/Users/ivan.ostric/.config/broot/launcher/nushell/br' *

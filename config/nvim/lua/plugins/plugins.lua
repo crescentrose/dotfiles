@@ -33,6 +33,13 @@ require("lazy").setup({
 
 	-- }}}
 
+	-- {
+	-- 	"karb94/neoscroll.nvim",
+	-- 	config = function()
+	-- 		require("neoscroll").setup({})
+	-- 	end,
+	-- },
+
 	-- Editing {{{
 
 	-- surround.vim: quoting/parenthesizing made simple
@@ -41,6 +48,9 @@ require("lazy").setup({
 	"tpope/vim-commentary",
 	-- repeat.vim: enable repeating supported plugin maps with "."
 	"tpope/vim-repeat",
+	-- abolish.vim: Work with several variants of a word at once
+	"tpope/vim-abolish",
+
 	-- }}}
 
 	-- UI {{{

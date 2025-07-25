@@ -40,16 +40,20 @@ $env.PROMPT_INDICATOR_VI_INSERT = ": "
 $env.PROMPT_INDICATOR_VI_NORMAL = "〉"
 $env.PROMPT_MULTILINE_INDICATOR = "::: "
 
-$env.EDITOR = "/opt/homebrew/bin/nvim"
+$env.EDITOR = "/opt/homebrew/bin/hx"
 
 $env.BAT_THEME = "ansi" # basic bitch...
 
 # Completions
 $env.CARAPACE_BRIDGES = 'zsh,fish,clap,bash,inshellisense'
-mkdir ~/.cache/carapace
-carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
 
 # Other configuration files
 $env.RIPGREP_CONFIG_PATH = ($env.HOME | path join ".config/.ripgreprc")
 
 $env.MISE_GO_DEFAULT_PACKAGES_FILE = ($env.HOME | path join ".config/mise/default-go-packages")
+
+# Get rid of the ugly, duplicate prompt caused by venv
+$env.VIRTUAL_ENV_DISABLE_PROMPT = true;
+
+# do not line wrap in postgres output
+$env.PSQL_PAGER = "less -S"

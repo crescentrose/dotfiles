@@ -110,6 +110,7 @@
         rustup # rust installer
         strace # peek under the hood
         terraform # the CLOUD
+        uv # snek
 
         # language servers
         gopls # golang

@@ -3,3 +3,4 @@ theme = "catppuccin_macchiato"
 [editor]
 shell = ["nu", "-c"]
 line-number = "relative"
+soft-wrap = { enable = true }

@@ -6,3 +6,6 @@ tags
 .vimspector.json
 vendor/bundle
 .tool-versions
+.direnv
+shell.nix
+.envrc

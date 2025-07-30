@@ -279,6 +279,9 @@ in
     polkitPolicyOwners = [ "ivan" ];
   };
 
+  # set up support for the greatest package management system of all time
+  programs.nix-ld.enable = true;
+
   # Set up VPN
   services.tailscale = {
     enable = true;

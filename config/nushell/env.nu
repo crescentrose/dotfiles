@@ -57,3 +57,20 @@ $env.VIRTUAL_ENV_DISABLE_PROMPT = true;
 
 # do not line wrap in postgres output
 $env.PSQL_PAGER = "less -S"
+
+print $"(ansi yellow)
+        		     ∧＿∧
+        		　  \( ･ω･ )つ━☆・*。
+        		  ⊂/    /　       ・゜
+        		   しーＪ　　   °。+*°。
+        		                  .・
+        		               ゜｡ﾟﾟ･｡･ﾟﾟ  
+        		
+        		                 ╱|、      
+        		               \(˚ˎ 。7  
+        		                |、˜〵     
+        		                じしˍ,)ノ 
+        
+(ansi reset)"
+
+print $"   (ansi dark_gray_italic)(fortune -s)(ansi reset)"

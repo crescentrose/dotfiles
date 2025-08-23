@@ -110,7 +110,11 @@
         rustup # rust installer
         strace # peek under the hood
         terraform # the CLOUD
+        agebox # secret
+        age # more secret
         uv # snek
+        bun # coffee language
+        lefthook # git hooks
 
         # language servers
         gopls # golang

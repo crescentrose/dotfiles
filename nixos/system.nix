@@ -2,7 +2,7 @@
 let
   # TODO: move this elsewhere, it makes no sense to keep this at the top of the file
   greetConfig = pkgs.writeText "greetd-sway-config" ''
-    exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l -s /etc/greetd/gtkgreet.css; swaymsg exit"
+    exec "${pkgs.gtkgreet}/bin/gtkgreet -l -s /etc/greetd/gtkgreet.css; swaymsg exit"
     bindsym Mod4+shift+e exec swaynag \
       -t warning \
       -m 'What do you want to do?' \
@@ -317,10 +317,11 @@ in
 
   # Suspend the system when the DE signals it is idle
   # ref: https://www.freedesktop.org/software/systemd/man/latest/logind.conf.html
-  services.logind.extraConfig = ''
-    IdleAction=suspend
-    HandlePowerKey=suspend
-  '';
+  services.logind.settings.Login = {
+    IdleAction = "suspend";
+    HandlePowerKey = "suspend";
+  };
+  
 
   # Disable mouse from waking up the computer
   # ref: https://wiki.archlinux.org/title/Udev#Waking_from_suspend_with_USB_device
@@ -372,7 +373,7 @@ in
     usbmon.enable = true;
     dumpcap.enable = true;
   };
-
+  
   # Keep only last 5 configurations
   boot.loader.systemd-boot.configurationLimit = 5;
 

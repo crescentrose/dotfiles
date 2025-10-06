@@ -17,11 +17,6 @@
 [column]
   ui = auto
 
-# use Kitty terminal as diff tool
-[diff]
-  tool = kitty
-  guitool = kitty.gui
-
 [difftool]
   prompt = false
   trustExitCode = true

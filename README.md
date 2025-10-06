@@ -53,5 +53,3 @@ starship init nu | save -f ~/.cache/starship/init.nu    # initialize cache
 ## links
 
 Dotfiles are managed with [Dotbot](https://github.com/anishathalye/dotbot).
-
-([instructions](https://sw.kovidgoyal.net/kitty/faq/#i-do-not-like-the-kitty-icon))

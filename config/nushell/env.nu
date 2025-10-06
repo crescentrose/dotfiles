@@ -11,6 +11,7 @@ $env.ENV_CONVERSIONS = {
 
 let custom_paths = [
     '/opt/homebrew/bin'
+    '/usr/local/bin'
     ([$env.HOME ".bun/bin"] | path join)
     ([$env.HOME ".local/bin"] | path join)
     ([$env.HOME ".cargo/bin"] | path join)
@@ -45,7 +46,7 @@ $env.EDITOR = "/opt/homebrew/bin/hx"
 $env.BAT_THEME = "ansi" # basic bitch...
 
 # Completions
-$env.CARAPACE_BRIDGES = 'zsh,fish,clap,bash,inshellisense'
+# $env.CARAPACE_BRIDGES = 'zsh,fish,clap,bash,inshellisense'
 
 # Other configuration files
 $env.RIPGREP_CONFIG_PATH = ($env.HOME | path join ".config/.ripgreprc")

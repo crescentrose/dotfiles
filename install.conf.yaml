@@ -12,11 +12,8 @@
     ~/.zshrc: config/zshrc
     ~/.gitconfig: config/gitconfig
     ~/.config/.gitignore_global: config/gitignore_global
-    ~/.config/proselint: config/proselint
-    ~/.config/nvim: config/nvim
-    ~/.config/kitty:
-      relink: true
-      path: config/kitty
+    ~/.config/helix: config/helix
+    ~/.config/ghostty: config/ghostty
     # If only there was a cross-platform standard directory in which config files are expected to be stored.
     # Perhaps we could even name it something like ".configuration-files"... or... shorter? ".cfiles"?
     # Ah well, guess we could never afford such a luxury.

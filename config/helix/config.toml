@@ -1,0 +1,5 @@
+theme = "catppuccin_frappe"
+
+[editor]
+shell = ["nu", "-c"]
+line-number = "relative"

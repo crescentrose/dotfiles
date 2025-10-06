@@ -4,21 +4,6 @@
 > This branch contains only the dotfiles for my macOS set-up. You can find my NixOS set-up in the
 > [`experimental`](https://github.com/crescentrose/dotfiles/tree/experimental) branch.
 
-revamped and enhanced for the next five years
-
-<details>
-<summary>screenshot: clean</summary>
-
-![nvim and kitty setup, clean](./nvim-clean.png)
-
-</details>
-
-<details>
-<summary>screenshot: dirty</summary>
-
-![nvim and kitty setup, dirty](./nvim-dirty.png)
-
-</details>
 
 ## setup
 
@@ -65,22 +50,8 @@ starship init nu | save -f ~/.cache/starship/init.nu    # initialize cache
 
 [source](https://starship.rs/guide/#%F0%9F%9A%80-installation)
 
-## what's in the box
-
-The dotfiles contain:
-
-- Straightforward [kitty](https://github.com/kovidgoyal/kitty) and
-  [nushell](https://www.nushell.sh/) setups with the [starship](https://starship.rs/) prompt
-- A mildly polished [neovim](https://neovim.io/) config with LSP, debugging and other plugins
-  focused on a nice development experience
-- [mise](https://mise.jdx.dev/) for version management and a basic Git config
-
-The Neovim config is explained in more details in a dedicated help file. Run
-[`:h crescentrose`](./config/nvim/doc/crescentrose.txt) to get more info.
-
 ## links
 
 Dotfiles are managed with [Dotbot](https://github.com/anishathalye/dotbot).
 
-kitty icon: [whiskers](https://github.com/igrmk/whiskers)
 ([instructions](https://sw.kovidgoyal.net/kitty/faq/#i-do-not-like-the-kitty-icon))

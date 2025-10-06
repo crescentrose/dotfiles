@@ -5,7 +5,6 @@ tap "homebrew/autoupdate"
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/services"
-tap "rsteube/homebrew-tap"
 tap "daveshanley/vacuum"
 
 # Pass the desired features to the `HOMEBREW_FEATURES` environment variable
@@ -14,8 +13,8 @@ features = ::ENV.fetch("HOMEBREW_FEATURES", "basic,dev,desktop,mac,cloud").split
 # 💻 Basic {{{
 
 if features.include? :basic
-  # World's greatest terminal emulator.
-  cask "kitty"
+  # World's second greatest terminal emulator.
+  cask "ghostty"
   # Unix shell (command interpreter)
   brew "zsh"
   # Modern shell for the GitHub era
@@ -23,13 +22,10 @@ if features.include? :basic
   # GNU File, Shell and Text utilities
   brew "coreutils"
 
-  # Free monospaced font with programming ligatures
-  cask "font-fira-code-nerd-font"
-  # Developer targeted fonts with a high number of glyphs
-  cask "font-fantasque-sans-mono-nerd-font"
+  cask "font-iosevka"
+  cask "font-iosevka-nerd-font"
   # Symbols Nerd Font (Symbols Only)
   cask "font-symbols-only-nerd-font"
-
 
   # A cat(1) clone with wings.
   brew "bat"
@@ -45,12 +41,10 @@ if features.include? :basic
   brew "git-lfs"
   # Cross-shell prompt for astonauts
   brew "starship"
-  # Multi-shell multi-command argument completer
-  brew "rsteube/tap/carapace"
   # Render markdown on the CLI
   brew "glow"
-  # nvim
-  brew "nvim"
+  # Post-modern text editor
+  brew "helix"
 end
 
 # }}}

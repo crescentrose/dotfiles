@@ -1,35 +1,36 @@
-# @crescentrose's zsh file
-# not nearly as buff as `vimrc` 😰
-
 export PATH="$HOME/bin:$HOME/go/bin:/opt/homebrew/bin:$PATH"
-export EDITOR=nvim
+export EDITOR=hx
 
-# Debug the slowness of the zshrc file by launching zsh with the ZPROF env
-# variable
-if [[ $ZPROF = 1 ]]; then
-  zmodload zsh/zprof
-fi
-
-# Custom functions {{{
+# Custom functions
+# ===
 # Ensure that the files we want to source actually exist.
+
 function safe_source {
   test -e "$1" && source "$1"
 }
 
-# Shell integrations and includes {{{
+# Shell integrations and includes
+# ===
+
 # Engage FZF
 safe_source "$HOME/.fzf.zsh"
-
-# Engage asdf version manager
-safe_source "/opt/homebrew/opt/asdf/libexec/asdf.sh"
 
 # use a fancy prompt
 if command -v "starship" >/dev/null; then
   eval "$(starship init zsh)"
 fi
-# }}}
 
-# Environment variables {{{
+# bun
+[ -s "/Users/ivan.ostric/.bun/_bun" ] && source "/Users/ivan.ostric/.bun/_bun"
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# br
+safe_source "$HOME/.config/broot/launcher/bash/br"
+
+# Environment variables
+# ===
+
 # Enable history
 export HISTSIZE=10000
 export SAVEHIST=10000
@@ -44,6 +45,7 @@ export FZF_DEFAULT_COMMAND="rg --hidden -g '!.git/' -l ."
 # Default configuration for `bat`
 export BAT_THEME="OneHalfDark"
 
+# `cd` to any project from anywhere
 export CDPATH=".:$HOME/Code"
 
 export LANG=en_US.UTF-8
@@ -52,27 +54,3 @@ export LC_ALL=en_US.UTF-8
 
 # This is what happens when you mix Go and Rust...
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
-
-# }}}
-
-# Autocompletion {{{
-
-# Completion for kitty
-if [[ "$TERM" == "xterm-kitty" && "$SSH_CLIENT" == "" ]]; then
-  kitty + complete setup zsh | source /dev/stdin
-fi
-# }}}
-
-if [[ $ZPROF = 1 ]]; then
-  zprof
-fi
-
-# vim: fdm=marker fdl=0
-# bun completions
-[ -s "/Users/ivan.ostric/.bun/_bun" ] && source "/Users/ivan.ostric/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-source /Users/ivan.ostric/.config/broot/launcher/bash/br

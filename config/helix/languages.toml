@@ -1,3 +1,7 @@
 [language-server.pylsp.config.pylsp]
 plugins.ruff.enabled = true
 plugins.black.enabled = true
+
+[[language]]
+name = "sql"
+formatter = { command = "sqlfmt", args = ["--use-spaces", "--align" ] }

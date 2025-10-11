@@ -16,10 +16,12 @@ in
   ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.timeout = 5; # hide OS choice
-
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+    timeout = 5;
+  };
+    
   # Use latest available kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -33,10 +35,13 @@ in
     "udev.log_priority=3"
   ];
   boot.consoleLogLevel = 0;
-  boot.initrd.verbose = false;
 
-  # Make the kernel use AMD drivers at boot already
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.initrd = {
+    verbose = false;
+
+    # Make the kernel use AMD drivers at boot already
+    kernelModules = [ "amdgpu" ];
+  };
 
   # nice boot animation
   boot.plymouth = {
@@ -123,8 +128,7 @@ in
   # Global packages
   environment.systemPackages = with pkgs; [
     # basic shell tools
-    zsh
-    neovim
+    nano
     git
     htop
     jq
@@ -140,21 +144,16 @@ in
 
     # networking
     cifs-utils # Samba shares
-    dnsmasq # VM networking
-    phodav # VM sharing
 
     # hardware
     usbutils # lsusb
 
     # auth
     lxqt.lxqt-policykit # Authorize PolicyKit actions
-
-    # gpu controller
-    lact
   ];
 
   # Use nvim as the default editor
-  environment.variables.EDITOR = "nvim";
+  environment.variables.EDITOR = "nano";
 
   # Set up dconf
   programs.dconf.enable = true;
@@ -178,27 +177,11 @@ in
 
   # Enable sound (seriously, why is this not default?)
   security.rtkit.enable = true; # enable RealtimeKit for audio purposes
-  services.pulseaudio.enable = false; # and good riddance, you wretched beast!
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-
-    # Expose AirPlay devices as sinks
-    raopOpenFirewall = true;
-    extraConfig.pipewire = {
-      "10-airplay" = {
-        "context.modules" = [
-          {
-            name = "libpipewire-module-raop-discover";
-            args = {
-              "raop.latency.ms" = 500;
-            };
-          }
-        ];
-      };
-    };
   };
 
   # Enable Bluetooth
@@ -311,9 +294,6 @@ in
       [ "${automount_opts},credentials=/etc/nixos/smb-secrets,uid=1000,gid=100" ];
   };
 
-  # Enable AMD GPU controller for easier overclocking
-  systemd.packages = [ pkgs.lact ];
-  systemd.services.lactd.wantedBy = [ "multi-user.target" ];
 
   # Suspend the system when the DE signals it is idle
   # ref: https://www.freedesktop.org/software/systemd/man/latest/logind.conf.html
@@ -352,28 +332,6 @@ in
     };
   };
 
-  # Set up virtualisation
-  virtualisation.libvirtd = {
-    enable = true;
-
-    # Enable TMP emulation
-    qemu = {
-      swtpm.enable = true;
-      ovmf.packages = [ pkgs.OVMFFull.fd ];
-    };
-  };
-
-  # Enable USB redirection
-  virtualisation.spiceUSBRedirection.enable = true;
-
-  # Enable Wireshark with USB support
-  programs.wireshark = {
-    package = pkgs.wireshark;
-    enable = true;
-    usbmon.enable = true;
-    dumpcap.enable = true;
-  };
-  
   # Keep only last 5 configurations
   boot.loader.systemd-boot.configurationLimit = 5;
 
@@ -384,7 +342,7 @@ in
     options = "--delete-older-than 1w";
   };
 
-  nix.settings= {
+  nix.settings = {
     # Automatically keep the Nix store optimized by hard-linking identical files
     auto-optimise-store = true;
     # Allow unprivileged user to specify binary caches

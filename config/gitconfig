@@ -1,9 +1,8 @@
 [core]
   excludesfile = ~/.config/.gitignore_global
-  editor = nvim
+  editor = hx
 
 [alias]
-  publish ="!git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)"
   dt = "!git difftool --no-symlinks --dir-diff"
   continue = "!git add . && git rebase --continue"
 
@@ -17,29 +16,11 @@
 [column]
   ui = auto
 
-# use Kitty terminal as diff tool
-[diff]
-  tool = kitty
-  guitool = kitty.gui
-
-[difftool]
-  prompt = false
-  trustExitCode = true
-
-[difftool "kitty"]
-  cmd = kitten diff $LOCAL $REMOTE
-
-[difftool "kitty.gui"]
-  cmd = kitten diff $LOCAL $REMOTE
-
 [pull]
   ff = only
 
-[filter "lfs"]
-  required = true
-  clean = git-lfs clean -- %f
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
+[push]
+  autoSetupRemote = true
 
 [commit]
   gpgsign = true

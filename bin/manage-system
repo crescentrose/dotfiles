@@ -28,8 +28,6 @@ def "main clean-up" [] {
   vlog timed "Clean-up" {
     vlog info "♻ Running garbage collection..."
     sudo nix-collect-garbage --delete-old
-    vlog info "🫙 Running store optimisation..."
-    sudo nix-store --optimise
   }
 }
 
@@ -48,5 +46,3 @@ def "main inspect" [service: string, --root (-r)] {
 def main [] {
   help main
 }
-
-# Logger

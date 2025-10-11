@@ -40,12 +40,5 @@ $env.EDITOR = "hx"
 
 $env.BAT_THEME = "ansi" # basic bitch...
 
-# Completions
-$env.CARAPACE_BRIDGES = 'carapace,yargs,complete,clap,click'
-if (not ("~/.cache/carapace/init.nu" | path exists)) {
-  mkdir ~/.cache/carapace
-  carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
-}
-
 # Other configuration files
 $env.RIPGREP_CONFIG_PATH = ($env.HOME | path join ".config/.ripgreprc")

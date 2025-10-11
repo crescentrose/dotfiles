@@ -3,7 +3,6 @@
   pkgs,
   config,
   zen-browser,
-  quickshell,
   ...
 }:
 {
@@ -37,6 +36,7 @@
         # desktop environment
         glib # gtk config
         niri # window manager 2: window manageraloo
+        quickshell # eventually I will give up on it
         hyprlock # lock screen 2: lock... yeah whatever
         hypridle # idle management daemon
         swww # dynamic wallpaper
@@ -59,19 +59,15 @@
 
         # apps
         discord # keep up with the egirls
-        kitty # terminal
+        ghostty # terminal
         mpd # radiohead
         mpdscribble # scrobble
         obsidian # notes
-        rmpc # terminal music player
-        todoist-electron # task list
         prismlauncher # the children yearn for the mines
         slack # work, work
         qbittorrent # yarr
-        gnome-boxes # vms
 
         # Fine, I Will Use Gnome Apps
-        boatswain # stream deck controller
         celluloid # video player
         decibels # audio player
         evince # document viewr
@@ -83,13 +79,11 @@
         nautilus # file browser
         newsflash # rss
         plattenalbum # MPD client
-        seahorse # secret management
         video-trimmer # if only all apps were named this consistently
 
         # cli apps
         bat # nicer cat
         broot # trees
-        carapace # completion
         dig # it's always DNS
         fastfetch # r/unixporn bait
         fortune # wisdom
@@ -124,9 +118,11 @@
         terraform-ls # terraform
         typescript-language-server # javascript, typescript
         vscode-langservers-extracted # html, css, json, eslint
+        kdePackages.qtdeclarative # qt (quickshell)
 
         # fonts
         cascadia-code
+        inter
         departure-mono
         iosevka
         liberation_ttf # replacements for common MS fonts
@@ -137,23 +133,15 @@
         # icons
         font-awesome
         nerd-fonts.symbols-only
-
-        # grumble gumble
-        flatpak
       ]
       ++ [
         zen-browser.packages."x86_64-linux".default # firefoxn't
-        quickshell.packages."x86_64-linux".default # DIY shell
       ];
 
     username = "ivan";
     homeDirectory = "/home/ivan";
 
     stateVersion = "25.05";
-
-    sessionVariables = {
-      EDITOR = "hx";
-    };
 
     pointerCursor = {
       gtk.enable = true;
@@ -192,9 +180,6 @@
             name "PipeWire Sound Server"
         }
       '';
-    };
-    mpd-discord-rpc = {
-      enable = true;
     };
 
     # control mpd through the MPRIS protocol
@@ -351,7 +336,6 @@
   xdg.configFile = {
     ".gitignore_global".source =
       config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/gitignore_global;
-    "nvim".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/nvim;
     "kitty".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/kitty;
     "nushell".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/nushell;
     "helix".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/helix;
@@ -364,6 +348,7 @@
     "rofi".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/rofi;
     "niri".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/niri;
     "hypr".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/hypr;
+    "ghostty".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/ghostty;
   };
 
   # Enable hardware acceleration in Discord, which is disabled by default because of reasons only

@@ -43,6 +43,8 @@ in
     kernelModules = [ "amdgpu" ];
   };
 
+  boot.supportedFilesystems = [ "nfs" ] ;
+
   # nice boot animation
   boot.plymouth = {
     enable = true;
@@ -82,12 +84,6 @@ in
   users.defaultUserShell = pkgs.zsh;
 
   # User accounts
-  users.groups = {
-    wireshark = {
-      members = [ "ivan" ];
-    };
-  };
-
   users.users.ivan = {
     isNormalUser = true;
     description = "Ivan";
@@ -97,7 +93,6 @@ in
       "kvm"
       "docker"
       "libvirtd"
-      "wireshark"
     ];
     shell = pkgs.zsh;
     packages = [ ];
@@ -147,6 +142,10 @@ in
 
     # hardware
     usbutils # lsusb
+
+    # VMs (for testing)
+    qemu
+    quickemu
 
     # auth
     lxqt.lxqt-policykit # Authorize PolicyKit actions
@@ -281,17 +280,13 @@ in
   };
 
   # Mount network storage
-  # This depends on a file in /etc/nixos/smb-secrets. This file should be put there somehow, but
-  # I am not exactly sure how. For now I place it manually, but eventually I would prefer to
-  # automate this.
-  fileSystems."/mnt/music" = {
-    device = "//virtuous-contract.local/music";
-    fsType = "cifs";
-    options =
-      let
-        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-      in
-      [ "${automount_opts},credentials=/etc/nixos/smb-secrets,uid=1000,gid=100" ];
+  fileSystems."/mnt/media" = {
+    device = "192.168.1.200:/Multimedia";
+    fsType = "nfs";
+    options = [ "nfsvers=4.1" "x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" "rw" ];
+  };
+  networking.firewall = {
+    allowedTCPPorts = [ 2049 ];
   };
 
 

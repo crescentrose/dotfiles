@@ -14,10 +14,24 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    vicinae = {
+      url = "github:vicinaehq/vicinae";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, nixos-hardware, ... }:
+  nixConfig.extra-substituters = [
+    "https://vicinae.cachix.org"
+  ];
+
+  nixConfig.extra-trusted-public-keys = [
+    "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
+  ];
+
+  outputs = inputs @ { nixpkgs, home-manager, nixos-hardware, vicinae, ... }:
   let
     system = "x86_64-linux";
   in
@@ -36,6 +50,9 @@
             {
               home-manager = {
                 users.ivan = import ./home.nix;
+                sharedModules = [
+                   vicinae.homeManagerModules.default
+                 ];
                 extraSpecialArgs = inputs;
               };
             }

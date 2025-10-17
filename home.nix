@@ -49,14 +49,6 @@
         xwayland-satellite # xwayland outside wayland
         blueberry # bluetooth settings
 
-        # app launcher 2: electric boogaloo
-        (rofi.override (old: {
-          plugins = [
-            pkgs.rofi-emoji
-            pkgs.rofi-calc
-          ];
-        }))
-
         # apps
         discord # keep up with the egirls
         ghostty # terminal
@@ -66,6 +58,7 @@
         prismlauncher # the children yearn for the mines
         slack # work, work
         qbittorrent # yarr
+        euphonica # music
 
         # Fine, I Will Use Gnome Apps
         celluloid # video player
@@ -78,7 +71,6 @@
         loupe # image viewer
         nautilus # file browser
         newsflash # rss
-        plattenalbum # MPD client
         video-trimmer # if only all apps were named this consistently
 
         # cli apps
@@ -109,11 +101,12 @@
         uv # snek
         bun # coffee language
         lefthook # git hooks
+        nmap # hacks
 
         # language servers
         gopls # golang
         lua-language-server # lua
-        nil # nix
+        nixd # nix
         taplo # toml
         terraform-ls # terraform
         typescript-language-server # javascript, typescript
@@ -171,13 +164,20 @@
   services = {
     mpd = {
       enable = true;
-      musicDirectory = "/mnt/music";
+      musicDirectory = "/mnt/media/Music";
       extraConfig = ''
         auto_update "yes"
 
         audio_output {
             type "pipewire"
             name "PipeWire Sound Server"
+        }
+
+        audio_output {
+          type "fifo"
+          name "visualizer"
+          path "~/.local/state/mpd/mpd.fifo"
+          format "44100:16:2"
         }
       '';
     };
@@ -193,6 +193,13 @@
 
     # Enable system authentication for unprivileged apps
     polkit-gnome.enable = true;
+
+    vicinae = {
+      enable = true;
+      settings = {
+        theme.name = "catppuccin_macchiato";
+      };
+    };
   };
 
   # Allow inter-app communication
@@ -343,9 +350,7 @@
       config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/starship.toml;
     ".ripgreprc".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/ripgreprc;
     "waybar".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/waybar;
-    "rmpc".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/rmpc;
     "mako".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/mako;
-    "rofi".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/rofi;
     "niri".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/niri;
     "hypr".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/hypr;
     "ghostty".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/ghostty;

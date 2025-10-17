@@ -194,18 +194,6 @@ window-rule {
   open-floating true
 }
 
-// Open Rofi in floating mode by default.
-window-rule {
-  match app-id=r#"Rofi$"#
-  open-floating true
-  shadow {
-    on
-    softness 30
-    spread 5
-    color "#18192650"
-  }
-}
-
 // Keep swaybg within the overview backdrop
 layer-rule {
   match namespace="^wallpaper$"
@@ -256,7 +244,7 @@ binds {
 
   // Suggested binds for running programs: terminal, app launcher, screen locker.
   Mod+Return hotkey-overlay-title="Open terminal window" repeat=false { spawn "ghostty"; }
-  Mod+Space hotkey-overlay-title="App launcher" repeat=false { spawn "~/bin/launch-menu" "launcher"; }
+  Mod+Space hotkey-overlay-title="App launcher" repeat=false { spawn "vicinae" "toggle"; }
 
   Mod+Ctrl+q hotkey-overlay-title="Lock screen" repeat=false { spawn "loginctl" "lock-session"; }
 

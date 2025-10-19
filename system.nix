@@ -134,6 +134,9 @@ in
     file
     wget
 
+    # binary cache
+    cachix
+
     # window manager
     sway
 

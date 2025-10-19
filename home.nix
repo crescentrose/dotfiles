@@ -59,6 +59,7 @@
         slack # work, work
         qbittorrent # yarr
         euphonica # music
+        foliate # ebook
 
         # Fine, I Will Use Gnome Apps
         celluloid # video player
@@ -68,6 +69,7 @@
         gnome-calendar
         gnome-maps
         gnome-weather
+        gnome-text-editor
         loupe # image viewer
         nautilus # file browser
         newsflash # rss

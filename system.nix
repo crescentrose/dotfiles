@@ -105,8 +105,10 @@ in
   # Disable Richard Stallman
   nixpkgs.config.allowUnfree = true;
 
-  # Enable Polkit, required for setting up a WM
+  # Enable Polkit, used for doing root things as non-root user
   security.polkit.enable = true;
+  # Use Soteria to authenticate with Polkit (the little thingamajig that pops up to ask you for your password)
+  security.soteria.enable = true;
 
   # Do not prompt `wheel` users for the sudo password
   security.sudo.wheelNeedsPassword = false;
@@ -149,9 +151,6 @@ in
     # VMs (for testing)
     qemu
     quickemu
-
-    # auth
-    lxqt.lxqt-policykit # Authorize PolicyKit actions
   ];
 
   # Use nano as the default editor (if we do not have something user-specific)

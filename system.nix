@@ -154,7 +154,7 @@ in
     lxqt.lxqt-policykit # Authorize PolicyKit actions
   ];
 
-  # Use nvim as the default editor
+  # Use nano as the default editor (if we do not have something user-specific)
   environment.variables.EDITOR = "nano";
 
   # Set up dconf

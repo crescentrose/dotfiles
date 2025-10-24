@@ -17,23 +17,3 @@ the setup experience is on my to-do list, but it's not yet ready.
 
 Note that this set-up is tweaked for my desktop PC and is currently not very modular or
 extensible. Improving this is also on my to-do list.
-
-## What's included?
-
-For the system:
-
-- [Niri](https://github.com/YaLTeR/niri) - a horizontally scrolling Wayland compositor
-- [Waybar](https://github.com/Alexays/Waybar) - with a handful of custom widgets for things like
-  light/dark mode switching.
-- [Hyprlock](https://github.com/hyprwm/hyprlock?tab=readme-ov-file) for a pleasant screen lock
-  experience
-- Mako as the notification daemon
-- Rofi as the launcher
-
-Additional apps include:
-
-- basic GNOME apps
-- basic productivity apps that I use (Obsidian, Todoist, 1password, etc.)
-- [Zen browser](https://zen-browser.app/) for, well, browsing
-- a kick-ass [Neovim](https://neovim.io/) setup, if I can humbly say so myself
-- Steam - gaming ready!

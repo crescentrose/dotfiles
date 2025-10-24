@@ -194,12 +194,6 @@ window-rule {
   open-floating true
 }
 
-// Keep swaybg within the overview backdrop
-layer-rule {
-  match namespace="^wallpaper$"
-  place-within-backdrop true
-}
-
 // Give Waybar a tasteful shadow
 layer-rule {
   match namespace="^waybar$"

@@ -40,7 +40,6 @@
         hyprlock # lock screen 2: lock... yeah whatever
         hypridle # idle management daemon
         swww # dynamic wallpaper
-        swaybg # static wallpaper
         thunderbird # mail
         mako # notifications
         waybar # status bar
@@ -82,16 +81,16 @@
         fastfetch # r/unixporn bait
         fortune # wisdom
         gh # github client
-        glow # markdown viewer
         helix # "post-modern" text editor
         imagemagick # magic of the image variety
         libnotify # for notify-send
         nushell # a nicer shell
         starship # terminal prompt
         v4l-utils # webcam settings
+        difftastic # syntax-aware diff
+        jujutsu # fine, i will try it...
 
         # developer tools
-        devenv # we have nix at home
         gcc # the GNU Compiler Collection
         hotspot # perf
         lldb # debugger
@@ -297,22 +296,6 @@
       };
     };
 
-    # Overview wallpaper manager
-    swaybg = {
-      Unit = {
-        Description = "Background for Wayland";
-        PartOf = "graphical-session.target";
-        After = "graphical-session.target";
-      };
-      Install = {
-        WantedBy = [ "niri.service" ];
-      };
-      Service = {
-        ExecStart = "${pkgs.swaybg}/bin/swaybg --output=\"*\" -i /home/ivan/.cache/blurred_wallpaper.jpg";
-        Restart = "on-failure";
-      };
-    };
-
     # Idle manager
     hypridle = {
       Unit = {
@@ -329,6 +312,9 @@
       };
     };
   };
+
+  # Show mpd status on Discord
+  services.mpd-discord-rpc.enable = true;
 
   # Dotfiles
   # I do not really want to store all of my dotfiles in the Nix language because it makes it more
@@ -356,6 +342,7 @@
     "niri".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/niri;
     "hypr".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/hypr;
     "ghostty".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/ghostty;
+    "quickshell".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/quickshell;
   };
 
   # Enable hardware acceleration in Discord, which is disabled by default because of reasons only

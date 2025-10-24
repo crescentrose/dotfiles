@@ -37,10 +37,6 @@ def prepare-wallpaper [path: string] {
     magick $"($path)" $LOCK_WALLPAPER_LOCATION
   }
 
-  vlog debug $"💧 Generating blurred version of the wallpaper..."
-  magick $LOCK_WALLPAPER_LOCATION -gaussian-blur 20x5 $BLUR_WALLPAPER_LOCATION
-  systemctl --user restart swaybg
-
   # Link to new location
   vlog debug $"🔗 Linking new wallpaper..."
   ln -fs $path $WALLPAPER_LOCATION

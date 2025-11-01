@@ -14,28 +14,31 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    vicinae.url = "github:vicinaehq/vicinae";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+    elephant.url = "github:abenz1267/elephant";
+
+    walker = {
+      url = "github:abenz1267/walker";
+      inputs.elephant.follows = "elephant";
+    };
   };
 
-  nixConfig.extra-substituters = [
-    "https://vicinae.cachix.org"
-  ];
-
-  nixConfig.extra-trusted-public-keys = [
-    "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
-  ];
-
-  outputs = inputs @ { nixpkgs, home-manager, nixos-hardware, vicinae, ... }:
-  let
-    system = "x86_64-linux";
-  in
-  {
-    nixosConfigurations = {
-      streaming-heart = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./system.nix
+  outputs =
+    inputs@{
+      home-manager,
+      nixos-hardware,
+      nixpkgs,
+      ...
+    }:
+    let
+      system = "x86_64-linux";
+    in
+    {
+      nixosConfigurations = {
+        streaming-heart = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./system.nix
             nixos-hardware.nixosModules.common-pc
             nixos-hardware.nixosModules.common-pc-ssd
             nixos-hardware.nixosModules.common-gpu-amd
@@ -45,16 +48,11 @@
             {
               home-manager = {
                 users.ivan = import ./home.nix;
-                sharedModules = [
-                   vicinae.homeManagerModules.default
-                 ];
                 extraSpecialArgs = inputs;
               };
             }
-        ];
+          ];
+        };
       };
     };
-  };
 }
-/*
- */

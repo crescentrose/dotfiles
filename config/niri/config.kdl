@@ -238,7 +238,7 @@ binds {
 
   // Suggested binds for running programs: terminal, app launcher, screen locker.
   Mod+Return hotkey-overlay-title="Open terminal window" repeat=false { spawn "ghostty"; }
-  Mod+Space hotkey-overlay-title="App launcher" repeat=false { spawn "vicinae" "toggle"; }
+  Mod+Space hotkey-overlay-title="App launcher" repeat=false { spawn "walker"; }
 
   Mod+Ctrl+q hotkey-overlay-title="Lock screen" repeat=false { spawn "loginctl" "lock-session"; }
 

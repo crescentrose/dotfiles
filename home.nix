@@ -2,12 +2,15 @@
   lib,
   pkgs,
   config,
+  walker,
   zen-browser,
   ...
 }:
 {
   # Disable Richard Stallman
   nixpkgs.config.allowUnfree = true;
+
+  imports = [ walker.homeManagerModules.default ];
 
   programs = {
     # Home Manager manages itself
@@ -26,6 +29,11 @@
     direnv = {
       enable = true;
       nix-direnv.enable = true;
+    };
+
+    walker = {
+      enable = true;
+      runAsService = true;
     };
   };
 
@@ -103,6 +111,8 @@
         bun # coffee language
         lefthook # git hooks
         nmap # hacks
+        nixfmt-rfc-style # nix formatter
+        kanidm_1_7 # auth
 
         # language servers
         gopls # golang
@@ -194,13 +204,6 @@
 
     # Enable system authentication for unprivileged apps
     polkit-gnome.enable = true;
-
-    vicinae = {
-      enable = true;
-      settings = {
-        theme.name = "catppuccin_macchiato";
-      };
-    };
   };
 
   # Allow inter-app communication
@@ -342,7 +345,8 @@
     "niri".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/niri;
     "hypr".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/hypr;
     "ghostty".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/ghostty;
-    "quickshell".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/quickshell;
+    "quickshell".source =
+      config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/quickshell;
   };
 
   # Enable hardware acceleration in Discord, which is disabled by default because of reasons only

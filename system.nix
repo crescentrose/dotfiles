@@ -21,7 +21,7 @@ in
     efi.canTouchEfiVariables = true;
     timeout = 5;
   };
-    
+
   # Use latest available kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -43,7 +43,7 @@ in
     kernelModules = [ "amdgpu" ];
   };
 
-  boot.supportedFilesystems = [ "nfs" ] ;
+  boot.supportedFilesystems = [ "nfs" ];
 
   # nice boot animation
   boot.plymouth = {
@@ -285,12 +285,17 @@ in
   fileSystems."/mnt/media" = {
     device = "192.168.1.200:/Multimedia";
     fsType = "nfs";
-    options = [ "nfsvers=4.1" "x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" "rw" ];
+    options = [
+      "nfsvers=4.1"
+      "x-systemd.automount"
+      "noauto"
+      "x-systemd.idle-timeout=600"
+      "rw"
+    ];
   };
   networking.firewall = {
     allowedTCPPorts = [ 2049 ];
   };
-
 
   # Suspend the system when the DE signals it is idle
   # ref: https://www.freedesktop.org/software/systemd/man/latest/logind.conf.html
@@ -298,7 +303,6 @@ in
     IdleAction = "suspend";
     HandlePowerKey = "suspend";
   };
-  
 
   # Disable mouse from waking up the computer
   # ref: https://wiki.archlinux.org/title/Udev#Waking_from_suspend_with_USB_device
@@ -343,7 +347,20 @@ in
     # Automatically keep the Nix store optimized by hard-linking identical files
     auto-optimise-store = true;
     # Allow unprivileged user to specify binary caches
-    trusted-users = ["root" "ivan"];
+    trusted-users = [
+      "root"
+      "ivan"
+    ];
+
+    # Additional binary caches
+    extra-substituters = [
+      "https://walker.cachix.org"
+      "https://walker-git.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "walker.cachix.org-1:fG8q+uAaMqhsMxWjwvk0IMb4mFPFLqHjuvfwQxE4oJM="
+      "walker-git.cachix.org-1:vmC0ocfPWh0S/vRAQGtChuiZBTAe4wiKDeyyXM0/7pM="
+    ];
   };
 
   # Generate man-page indexes, so that you can tab-complete them

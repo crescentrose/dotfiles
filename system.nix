@@ -151,6 +151,10 @@ in
     # VMs (for testing)
     qemu
     quickemu
+
+    # icons
+    adwaita-icon-theme
+    adwaita-icon-theme-legacy
   ];
 
   # Use nano as the default editor (if we do not have something user-specific)
@@ -361,6 +365,11 @@ in
       "walker.cachix.org-1:fG8q+uAaMqhsMxWjwvk0IMb4mFPFLqHjuvfwQxE4oJM="
       "walker-git.cachix.org-1:vmC0ocfPWh0S/vRAQGtChuiZBTAe4wiKDeyyXM0/7pM="
     ];
+  };
+
+  # Maybe?
+  gtk = {
+    iconCache.enable = true;
   };
 
   # Generate man-page indexes, so that you can tab-complete them

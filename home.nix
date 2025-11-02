@@ -44,7 +44,6 @@
         # desktop environment
         glib # gtk config
         niri # window manager 2: window manageraloo
-        quickshell # eventually I will give up on it
         hyprlock # lock screen 2: lock... yeah whatever
         hypridle # idle management daemon
         swww # dynamic wallpaper
@@ -122,7 +121,6 @@
         terraform-ls # terraform
         typescript-language-server # javascript, typescript
         vscode-langservers-extracted # html, css, json, eslint
-        kdePackages.qtdeclarative # qt (quickshell)
 
         # fonts
         cascadia-code
@@ -135,6 +133,9 @@
         twitter-color-emoji # 🤓
 
         # icons
+        adwaita-icon-theme
+        adwaita-icon-theme-legacy
+        morewaita-icon-theme
         font-awesome
         nerd-fonts.symbols-only
       ]
@@ -165,8 +166,8 @@
     enable = true;
     # Certain GNOME apps break without this because they are impeccably coded
     iconTheme = {
-      package = pkgs.adwaita-icon-theme;
-      name = "Adwaita";
+      package = pkgs.morewaita-icon-theme;
+      name = "MoreWaita";
     };
   };
 
@@ -345,8 +346,6 @@
     "niri".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/niri;
     "hypr".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/hypr;
     "ghostty".source = config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/ghostty;
-    "quickshell".source =
-      config.lib.file.mkOutOfStoreSymlink /home/ivan/Code/dotfiles/config/quickshell;
   };
 
   # Enable hardware acceleration in Discord, which is disabled by default because of reasons only

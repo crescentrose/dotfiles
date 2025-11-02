@@ -31,7 +31,6 @@
   },
   "niri/language": {
     "format-nl": "🇳🇱",
-    "format-fi": "🇫🇮",
     "format-hr": "🇭🇷",
     "on-click": "niri msg action switch-layout next"
   },

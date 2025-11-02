@@ -9,7 +9,7 @@ input {
 
   keyboard {
     xkb {
-      layout "nl(mac),fi(mac),hr"
+      layout "nl(mac),hr"
       options "ctrl:nocaps"
     }
   }
@@ -146,12 +146,6 @@ layout {
     top 0
     bottom 0
   }
-}
-
-// Run X11 apps on Wayland
-spawn-at-startup "xwayland-satellite"
-environment {
-  DISPLAY ":0"
 }
 
 // You can change the path where screenshots are saved.
@@ -369,7 +363,7 @@ binds {
   //
   // For example, with 2 workspaces + 1 empty, indices 3, 4, 5 and so on
   // will all refer to the 3rd workspace.
-  Mod+Grave { open-overview; }
+  Mod+Grave { toggle-overview; }
   Mod+1 { focus-workspace 1; }
   Mod+2 { focus-workspace 2; }
   Mod+3 { focus-workspace 3; }
@@ -470,4 +464,8 @@ binds {
   // Powers off the monitors. To turn them back on, do any input like
   // moving the mouse or pressing any other key.
   Mod+Shift+P { power-off-monitors; }
+}
+
+cursor {
+  xcursor-theme "Bibata-Modern-Classic"
 }

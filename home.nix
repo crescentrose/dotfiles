@@ -66,6 +66,7 @@
         qbittorrent # yarr
         euphonica # music
         foliate # ebook
+        mprisence # discord presence
 
         # Fine, I Will Use Gnome Apps
         celluloid # video player
@@ -315,10 +316,22 @@
         Restart = "on-failure";
       };
     };
-  };
 
-  # Show mpd status on Discord
-  services.mpd-discord-rpc.enable = true;
+    # Discord rich presence
+    mprisence = {
+      Unit = {
+        Description = "Discord Rich Presence for MPRIS media players";
+      };
+      Service = {
+        ExecStart = "${pkgs.mprisence}/bin/mprisence";
+        Restart = "always";
+        RestartSec = 10;
+      };
+      Install = {
+        WantedBy = [ "default.target" ];
+      };
+    };
+  };
 
   # Dotfiles
   # I do not really want to store all of my dotfiles in the Nix language because it makes it more

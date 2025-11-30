@@ -3,7 +3,7 @@
 use vlog.nu *
 
 let FLAKE_DIR = $"($env.HOME)/Code/dotfiles"
-let SYSTEM_NAME = "streaming-heart"
+let SYSTEM_NAME = "starlight"
 let FLAKE_NAME = $"($FLAKE_DIR)#($SYSTEM_NAME)"
 
 # Update the Nix flake version.

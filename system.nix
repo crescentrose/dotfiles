@@ -9,6 +9,7 @@ let
       -b 'Poweroff' 'systemctl poweroff' \
       -b 'Reboot' 'systemctl reboot'
   '';
+  plymouthCat = pkgs.callPackage ./plymouth-cat/package.nix { };
 in
 {
   imports = [
@@ -23,7 +24,7 @@ in
   };
 
   # Use latest available kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_6_17;
 
   # less noise during boot
   boot.kernelParams = [
@@ -35,29 +36,20 @@ in
     "udev.log_priority=3"
   ];
   boot.consoleLogLevel = 0;
-
-  boot.initrd = {
-    verbose = false;
-
-    # Make the kernel use AMD drivers at boot already
-    kernelModules = [ "amdgpu" ];
-  };
-
+  boot.initrd.verbose = false;
   boot.supportedFilesystems = [ "nfs" ];
 
   # nice boot animation
   boot.plymouth = {
     enable = true;
-    theme = "colorful_sliced";
-    themePackages = with pkgs; [
-      (adi1090x-plymouth-themes.override {
-        selected_themes = [ "colorful_sliced" ];
-      })
+    theme = "cat";
+    themePackages = [
+      plymouthCat
     ];
   };
 
   # Networking
-  networking.hostName = "streaming-heart";
+  networking.hostName = "starlight";
   networking.networkmanager.enable = true;
 
   # Time zone
@@ -92,7 +84,6 @@ in
       "wheel"
       "kvm"
       "docker"
-      "libvirtd"
     ];
     shell = pkgs.zsh;
     packages = [ ];
@@ -155,8 +146,11 @@ in
     # icons
     adwaita-icon-theme
     adwaita-icon-theme-legacy
-  ];
 
+    # hardware
+    lm_sensors
+    linuxKernel.packages.linux_6_17.zenpower
+  ];
   # Use nano as the default editor (if we do not have something user-specific)
   environment.variables.EDITOR = "nano";
 
@@ -167,6 +161,7 @@ in
   hardware.graphics.enable = true;
   # Enable AMD hardware video encoder
   hardware.graphics.extraPackages = [ pkgs.amf ];
+  hardware.amdgpu.initrd.enable = true;
 
   # Make fonts render twice as good as Ubuntu but half as good as macOS
   fonts.fontconfig = {
@@ -227,7 +222,7 @@ in
   # Show a nice background instead of a flashbang
   environment.etc."greetd/gtkgreet.css".text = ''
     window {
-        background-image: url("file:///etc/greetd/greetd.png");
+        background-image: url("file://${pkgs.nixos-artwork.wallpapers.simple-dark-gray-bottom}/share/backgrounds/nixos/nix-wallpaper-simple-dark-gray_bottom.png");
         background-size: cover;
         background-position: center;
     }
@@ -239,8 +234,6 @@ in
         padding: 50px;
     }
   '';
-
-  environment.etc."greetd/greetd.png".source = ./greetd.png;
 
   # Allow Zen browser to use 1Password
   environment.etc."1password/custom_allowed_browsers" = {
@@ -383,5 +376,5 @@ in
 
   # This field determines which set of default values to use.
   # WARN: Do not change this before reviewing changes: https://nixos.org/manual/nixos/unstable/release-notes
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 }

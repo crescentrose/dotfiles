@@ -1,5 +1,5 @@
 {
-  description = "streaming-heart";
+  description = "starlight";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
@@ -21,6 +21,11 @@
       url = "github:abenz1267/walker";
       inputs.elephant.follows = "elephant";
     };
+
+    ragenix = {
+      url = "github:yaxitech/ragenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -28,6 +33,7 @@
       home-manager,
       nixos-hardware,
       nixpkgs,
+      ragenix,
       ...
     }:
     let
@@ -35,7 +41,7 @@
     in
     {
       nixosConfigurations = {
-        streaming-heart = nixpkgs.lib.nixosSystem {
+        starlight = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
             ./system.nix
@@ -44,6 +50,7 @@
             nixos-hardware.nixosModules.common-gpu-amd
             nixos-hardware.nixosModules.common-cpu-amd-pstate
             nixos-hardware.nixosModules.common-cpu-amd-zenpower
+            ragenix.nixosModules.default
             home-manager.nixosModules.home-manager
             {
               home-manager = {

@@ -4,13 +4,20 @@
   config,
   walker,
   zen-browser,
+  ragenix,
   ...
 }:
 {
   # Disable Richard Stallman
   nixpkgs.config.allowUnfree = true;
 
-  imports = [ walker.homeManagerModules.default ];
+  imports = [
+    walker.homeManagerModules.default
+    ragenix.homeManagerModules.default
+    ./modules/services/mprisence.nix
+  ];
+
+  age.secrets.mpdscribble.file = ./secrets/mpdscribble.age;
 
   programs = {
     # Home Manager manages itself
@@ -109,14 +116,13 @@
         discord # keep up with the egirls
         ghostty # terminal
         mpd # radiohead
-        mpdscribble # scrobble
         obsidian # notes
         prismlauncher # the children yearn for the mines
         slack # work, work
         qbittorrent # yarr
         euphonica # music
         foliate # ebook
-        mprisence # discord presence
+        mangohud # FPS, temp monitor
 
         # Fine, I Will Use Gnome Apps
         celluloid # video player
@@ -191,12 +197,13 @@
       ]
       ++ [
         zen-browser.packages."x86_64-linux".default # firefoxn't
+        ragenix.packages."x86_64-linux".default
       ];
 
     username = "ivan";
     homeDirectory = "/home/ivan";
 
-    stateVersion = "25.05";
+    stateVersion = "25.11";
 
     pointerCursor = {
       gtk.enable = true;
@@ -238,7 +245,7 @@
         audio_output {
           type "fifo"
           name "visualizer"
-          path "~/.local/state/mpd/mpd.fifo"
+          path "~/.local/share/mpd/mpd.fifo"
           format "44100:16:2"
         }
       '';
@@ -255,7 +262,39 @@
 
     # Enable system authentication for unprivileged apps
     polkit-gnome.enable = true;
+
+    # Enable Discord rich presence
+    mprisence = {
+      enable = true;
+      settings = {
+        player = {
+          default = {
+            ignore = true;
+          };
+          "io.github.htkhiem.euphonica" = {
+            ignore = true;
+          };
+          "*mpd*" = {
+            ignore = false;
+          };
+          zen = {
+            ignore = true;
+          };
+        };
+      };
+    };
+
+    mpdscribble = {
+      enable = true;
+      endpoints."last.fm" = {
+        passwordFile = "/run/user/1000/agenix/mpdscribble"; # TODO: super hacky
+        username = "crescentr0se";
+      };
+    };
+
   };
+
+  xdg.dataFile."mpd/.keep".text = "";
 
   # Allow inter-app communication
   # The GTK portal can handle most interfaces, while the WLR portal handles screenshots and screen
@@ -363,21 +402,6 @@
       Service = {
         ExecStart = "${pkgs.hypridle}/bin/hypridle";
         Restart = "on-failure";
-      };
-    };
-
-    # Discord rich presence
-    mprisence = {
-      Unit = {
-        Description = "Discord Rich Presence for MPRIS media players";
-      };
-      Service = {
-        ExecStart = "${pkgs.mprisence}/bin/mprisence";
-        Restart = "always";
-        RestartSec = 10;
-      };
-      Install = {
-        WantedBy = [ "default.target" ];
       };
     };
   };

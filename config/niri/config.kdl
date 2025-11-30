@@ -20,7 +20,7 @@ input {
   }
 }
 
-output "DP-3" {
+output "DP-1" {
   mode "3440x1440@180.000"
   position x=0 y=0
   variable-refresh-rate on-demand=true

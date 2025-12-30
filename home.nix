@@ -163,7 +163,6 @@
         agebox # secret
         age # more secret
         uv # snek
-        bun # coffee language
         lefthook # git hooks
         nmap # hacks
         nixfmt-rfc-style # nix formatter

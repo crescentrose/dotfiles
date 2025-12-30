@@ -39,6 +39,3 @@ $env.PROMPT_MULTILINE_INDICATOR = "::: "
 $env.EDITOR = "hx"
 
 $env.BAT_THEME = "ansi" # basic bitch...
-
-# Other configuration files
-$env.RIPGREP_CONFIG_PATH = ($env.HOME | path join ".config/.ripgreprc")

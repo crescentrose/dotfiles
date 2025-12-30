@@ -44,7 +44,7 @@
         starlight = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            ./system.nix
+            ./machines/starlight
             nixos-hardware.nixosModules.common-pc
             nixos-hardware.nixosModules.common-pc-ssd
             nixos-hardware.nixosModules.common-gpu-amd
@@ -54,7 +54,7 @@
             home-manager.nixosModules.home-manager
             {
               home-manager = {
-                users.ivan = import ./home.nix;
+                users.ivan = import ./home/_home.nix;
                 extraSpecialArgs = inputs;
               };
             }

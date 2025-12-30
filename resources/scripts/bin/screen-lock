@@ -1,0 +1,35 @@
+#!/usr/bin/env nu
+
+use vlog
+
+def lock [] {
+  if (pidof hyprlock | complete).exit_code == 0 {
+    vlog warn "🔒 Screen already locked; exiting."
+    return # we are already running hyprlock
+  }
+  $env.LC_TIME = "en_GB.UTF8" # don't localize date names...
+  makoctl mode -a locked
+
+  hyprlock # Block until we unlock
+
+  after-unlock
+}
+
+def after-unlock [] {
+  makoctl mode -r locked
+  vlog info "🔓 After-unlock triggered."
+}
+
+# Lock the screen, if it is not already locked.
+def "main lock" [] {
+  lock
+}
+
+# Send a signal to unlock the screen.
+def "main unlock" [] {
+  pkill -SIGUSR1 "hyprlock"
+}
+
+def main [] {
+  help main
+}

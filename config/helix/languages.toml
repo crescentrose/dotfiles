@@ -1,7 +1,0 @@
-[language-server.rust-analyzer.config.check]
-command = "clippy"
-
-[[language]]
-name = "nix"
-formatter = { command = "nixfmt" }
-auto-format = true

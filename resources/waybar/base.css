@@ -1,0 +1,82 @@
+window#waybar {
+  color: @text;
+  background-color: transparent;
+  font-family: "Inter", "Symbols Nerd Font Mono", FontAwesome;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+window#waybar.empty #window {
+  background-color: transparent;
+}
+
+.modules-left {
+  margin-left: 10px;
+  /* match gaps */
+}
+
+.modules-right {
+  margin-right: 5px;
+}
+
+.module {
+  border-radius: 15px;
+  background-color: @base;
+  margin-right: 5px;
+  padding: 0 10px;
+}
+
+#workspaces {
+  padding: 0;
+}
+
+/* order is important here - last takes precedent */
+#workspaces button {
+  border-radius: 15px;
+  background-color: @base;
+  color: @flamingo;
+}
+
+#workspaces button.empty {
+  color: @subtext1;
+}
+
+#workspaces button.focused {
+  background-color: @pink;
+  color: @base;
+}
+
+#clock {
+  color: @lavender;
+}
+
+#wireplumber {
+  color: @pink;
+}
+
+#wireplumber.muted {
+  color: @red;
+}
+
+#custom-power {
+  padding: 0 10px;
+}
+
+#custom-colorscheme {
+  background-color: @base;
+  color: @text;
+}
+
+#mpris.playing,
+#mpris.paused {
+  color: @flamingo;
+}
+
+tooltip {
+  background: @mantle;
+  border: 1px solid @teal;
+}
+
+tooltip label {
+  color: @text;
+}

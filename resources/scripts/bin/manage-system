@@ -1,0 +1,48 @@
+#!/usr/bin/env nu
+
+use vlog
+
+let FLAKE_DIR = $"($env.HOME)/Code/dotfiles"
+let SYSTEM_NAME = "starlight"
+let FLAKE_NAME = $"($FLAKE_DIR)#($SYSTEM_NAME)"
+
+# Update the Nix flake version.
+def "main update" [] {
+  vlog info $"🚚 Updating flake ($FLAKE_NAME)..."
+  vlog timed "Update" {
+    nix flake update --flake $FLAKE_DIR
+  }
+}
+
+# Build a new derivation and switch to it.
+def "main rebuild" [] {
+  vlog timed "Rebuild" {
+    vlog info $"🏠 Building flake ($FLAKE_NAME)..."
+    sudo nixos-rebuild --flake $FLAKE_NAME --impure switch
+  }
+}
+
+# Clean up garbage and optimise Nix store. (Most of the time this should happen automatically,
+# though.)
+def "main clean-up" [] {
+  vlog timed "Clean-up" {
+    vlog info "♻ Running garbage collection..."
+    sudo nix-collect-garbage --delete-old
+  }
+}
+
+# Show the latest logs for a (root) systemd unit in reverse chronological order.
+def "main inspect" [service: string, --root (-r)] {
+  vlog info $"🤨 Inspecting ($service)..."
+  vlog timed "Service inspection" {
+    if $root {
+      sudo journalctl -u $service --reverse --since="15m ago"
+    } else {
+      journalctl --user -u $service --reverse --since="15m ago"
+    }
+  }
+}
+
+def main [] {
+  help main
+}

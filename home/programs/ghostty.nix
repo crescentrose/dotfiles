@@ -1,0 +1,13 @@
+{
+  programs.ghostty = {
+    enable = true;
+    enableZshIntegration = true;
+
+    settings = {
+      theme = "dark:Catppuccin Macchiato,light:Catppuccin Latte";
+      font-family = "Iosevka";
+      font-size = 12;
+      command = "/usr/bin/env nu";
+    };
+  };
+}

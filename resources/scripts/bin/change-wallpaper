@@ -1,6 +1,6 @@
 #!/usr/bin/env nu
 
-use vlog
+use ../lib/vlog
 
 let WALLPAPER_LOCATION = $"($env.HOME)/.cache/current_wallpaper"
 let LOCK_WALLPAPER_LOCATION = $"($env.HOME)/.cache/hyprlock_wallpaper.jpg"

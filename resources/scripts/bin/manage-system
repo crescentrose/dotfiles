@@ -1,6 +1,6 @@
 #!/usr/bin/env nu
 
-use vlog
+use ../lib/vlog
 
 let FLAKE_DIR = $"($env.HOME)/Code/dotfiles"
 let SYSTEM_NAME = "starlight"

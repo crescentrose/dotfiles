@@ -1,6 +1,6 @@
 #!/usr/bin/env nu
 
-use vlog
+use ../lib/vlog
 
 def lock [] {
   if (pidof hyprlock | complete).exit_code == 0 {

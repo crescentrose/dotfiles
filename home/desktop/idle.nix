@@ -138,10 +138,10 @@
     enable = true;
     settings = {
       general = {
-        lock_cmd = "~/bin/screen-lock lock";
-        unlock_cmd = "~/bin/screen-lock unlock";
+        lock_cmd = "~/.local/share/scripts/bin/screen-lock lock";
+        unlock_cmd = "~/.local/share/scripts/bin/screen-lock unlock";
 
-        before_sleep_cmd = "~/bin/screen-lock lock";
+        before_sleep_cmd = "~/.local/share/scripts/bin/screen-lock lock";
       };
 
       listener = [

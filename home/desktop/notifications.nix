@@ -21,7 +21,7 @@
 
       # If the notification has a body, separate the body and the summary with a line.
       "body~=.+" = {
-        format = "%s\n──\n%b";
+        format = "%s\\n──\\n%b";
       };
 
       # If `do-not-disturb` mode is enabled, hide all notifications
@@ -30,7 +30,7 @@
       };
 
       # If `locked` mode is enabled, do not expire notifications. Keep them all in "limbo".
-      "[mode=locked]" = {
+      "mode=locked" = {
         ignore-timeout = 1;
         default-timeout = 0;
         invisible = 1;

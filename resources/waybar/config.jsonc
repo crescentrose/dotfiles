@@ -35,11 +35,11 @@
     "on-click": "niri msg action switch-layout next"
   },
   "custom/colorscheme": {
-    "exec": "$HOME/bin/color-scheme waybar",
+    "exec": "$HOME/.local/share/scripts/bin/color-scheme waybar",
     "return-type": "json",
     "interval": "once",
     "exec-on-event": true,
-    "on-click": "$HOME/bin/color-scheme toggle",
+    "on-click": "$HOME/.local/share/scripts/bin/color-scheme toggle",
     "format": "{}"
   },
   "mpris": {
@@ -83,7 +83,6 @@
     "menu": "on-click",
     "menu-file": "$HOME/.config/waybar/power_menu.xml",
     "menu-actions": {
-      "wallpaper": "$HOME/bin/change-wallpaper random",
       "lock": "loginctl lock-screen",
       "shutdown": "systemctl poweroff",
       "reboot": "systemctl reboot",

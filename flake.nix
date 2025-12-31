@@ -26,6 +26,11 @@
       url = "github:yaxitech/ragenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -34,15 +39,13 @@
       nixos-hardware,
       nixpkgs,
       ragenix,
+      nix-darwin,
       ...
     }:
-    let
-      system = "x86_64-linux";
-    in
     {
       nixosConfigurations = {
         starlight = nixpkgs.lib.nixosSystem {
-          inherit system;
+          system = "x86_64-linux";
           modules = [
             ./machines/starlight
             nixos-hardware.nixosModules.common-pc
@@ -55,6 +58,22 @@
             {
               home-manager = {
                 users.ivan = import ./home/_home.nix;
+                extraSpecialArgs = inputs;
+              };
+            }
+          ];
+        };
+      };
+
+      darwinConfigurations = {
+        work = nix-darwin.lib.darwinSystem {
+          modules = [
+            ./machines/work
+            home-manager.darwinModules.home-manager
+            {
+              home-manager = {
+                users."ivan.ostric" = import ./home/_work.nix;
+                backupFileExtension = ".before-nix-darwin";
                 extraSpecialArgs = inputs;
               };
             }

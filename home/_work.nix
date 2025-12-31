@@ -1,19 +1,23 @@
-{ pkgs, ... }:
 {
   # only import the subset supported by macOS
   imports = [
     ./base.nix
     ./programs/git.nix
     ./programs/ssh.nix
-    ./programs/ghostty.nix
     ./programs/helix.nix
     ./shell
   ];
 
   # corporate mandated
   home.username = "ivan.ostric";
-  home.directory = "/Users/ivan.ostric";
+  home.homeDirectory = "/Users/ivan.ostric";
 
-  # :squints:
-  programs.ghostty.settings.font-size = pkgs.mkForce 12;
+  # TODO: Ghostty is not packaged for macOS in Nix, so we can't use the same
+  # config. This should be fixed.
+  xdg.configFile."ghostty/config".text = ''
+    command = /usr/bin/env zsh -c nu
+    font-family = Iosevka
+    font-size = 14
+    theme = dark:Catppuccin Macchiato,light:Catppuccin Latte
+  '';
 }

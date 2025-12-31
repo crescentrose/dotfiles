@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
+    ./developer.nix
     ./nu.nix
     ./ripgrep.nix
     ./starship.nix
@@ -19,23 +20,9 @@
     jujutsu # fine, i will try it...
 
     # developer tools
-    gcc # the GNU Compiler Collection
-    rustup # rust installer
-    terraform # the CLOUD
     agebox # secret
     age # more secret
-    uv # snek
     lefthook # git hooks
-
-    # language servers
-    gopls # golang
-    lua-language-server # lua
-    nixd # nix
-    nixfmt-rfc-style # nix formatter
-    taplo # toml
-    terraform-ls # terraform
-    typescript-language-server # javascript, typescript
-    vscode-langservers-extracted # html, css, json, eslint
   ];
 
   xdg.dataFile."scripts".source = ../../resources/scripts;

@@ -27,5 +27,9 @@
       $env.NU_LIB_DIRS ++= ["${config.xdg.dataHome}/scripts/lib"]
       $env.PATH ++= ["${config.xdg.dataHome}/scripts/bin"]
     '';
+
+    extraConfig = ''
+      use pm switch # for fast swap between directories
+    '';
   };
 }

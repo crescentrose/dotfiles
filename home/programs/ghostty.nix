@@ -1,3 +1,5 @@
+# TODO: Ghostty is not packaged for macOS in Nix, so we can't use the same
+# config. This should be fixed.
 {
   programs.ghostty = {
     enable = true;

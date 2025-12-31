@@ -6,7 +6,7 @@ export def list [] {
 }
 
 # Change to a project directory (directory under ~/Code).
-export def --env go [dir: string@list] {
+export def --env switch [dir: string@list] {
   cd $"($env.HOME)/Code/($dir)"
 }
 

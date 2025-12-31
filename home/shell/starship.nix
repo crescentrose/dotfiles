@@ -2,6 +2,7 @@
   programs.starship = {
     enable = true;
     enableNushellIntegration = true;
+    enableZshIntegration = true;
     settings = {
 
       # Inserts a blank line between shell prompts

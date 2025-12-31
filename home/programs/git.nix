@@ -1,5 +1,10 @@
+{ pkgs, ... }:
 let
-  onePasswordSigner = "/run/current-system/sw/bin/op-ssh-sign"; # TODO: make dynamic
+  onePasswordSigner =
+    if pkgs.stdenv.isDarwin then
+      "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+    else
+      "/run/current-system/sw/bin/op-ssh-sign";
   userName = "Ivan";
   userEmail = "hi@crescentro.se";
   signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKJdAes80dpMrc99B68/1Kx2bbfoh6IrkbFF+60cMQti";

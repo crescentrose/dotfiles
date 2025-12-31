@@ -21,7 +21,15 @@ in
   homebrew = {
     enable = true;
     brews = [
+      # Install apps from the Mac App Store through CLI
       "mas"
+      # Set up a development database
+      {
+        name = "postgresql@18";
+        restart_service = true;
+        link = true;
+        conflicts_with = [ "postgresql" ];
+      }
     ];
     casks = [
       "1password"
@@ -36,8 +44,36 @@ in
     ];
   };
 
-  # Run a PostgreSQL development database
-  services.postgresql.enable = true;
+  # System configuration
+  system.defaults = {
+    # Automatic dark/light mode switch
+    NSGlobalDomain.AppleInterfaceStyleSwitchesAutomatically = true;
+
+    # Disable automatic predictive text
+    NSGlobalDomain.NSAutomaticInlinePredictionEnabled = false;
+
+    # Use F1, F2, ... keys as standard function keys
+    NSGlobalDomain."com.apple.keyboard.fnState" = true;
+
+    # Enable tap-to-click
+    NSGlobalDomain."com.apple.mouse.tapBehavior" = 1;
+
+    # Auto hide the Dock
+    dock.autohide = true;
+
+    # Do not show recent apps in the Dock
+    dock.show-recents = false;
+
+    # When opening a new Finder window, take me to my home directory rather
+    # than Recents.
+    finder.NewWindowTarget = "Home";
+
+    # Switch between languages on Globe key.
+    hitoolbox.AppleFnUsageType = "Change Input Source";
+  };
+
+  system.keyboard.enableKeyMapping = true;
+  system.keyboard.remapCapsLockToControl = true;
 
   # Use ZSH as the main shell
   programs.zsh.enable = true;

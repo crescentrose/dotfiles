@@ -1,14 +1,18 @@
 # crescentrose's dotfiles
 
-![screenshot](./resources/screenshot-clean.png)
-
-![screenshot](./resources/screenshot-dirty.png)
+|   |   |
+|---|---|
+|![screenshot](./resources/screenshot-clean.png)|![screenshot](./resources/screenshot-dirty.png)|
 
 ## Setup
 
 There are two variants: a pure NixOS variant with a custom desktop shell, and a
 macOS variant that shares a small part of the command-line configuration for
 consistency with my work machine.
+
+> [!TIP]
+> Activate the development environment (`nix develop`) to use the provided
+> scripts for (re)building on the appropriate platform. 
 
 ### NixOS
 

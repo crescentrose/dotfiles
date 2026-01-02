@@ -56,11 +56,25 @@ def log [level: string, message: string] {
     return
   }
 
-  print -e $"(ansi dark_gray)(current-timestamp)(ansi reset) (ansi light_gray)(current-script)(ansi reset) (log-badge $level) (ansi default_bold)($message)(ansi reset)"
+  let message = $"(ansi default_bold)($message)(ansi reset)"
+
+  let parts = [
+    (current-timestamp)
+    # (current-script)
+    (log-badge $level)
+    ($message)
+  ]
+
+  print -e ($parts | str join ' ')
+}
+
+def current-timestamp [] {
+  $"(ansi dark_gray)(date now | format date '%Y-%m-%d %H:%M:%S')(ansi reset)"
 }
 
 def current-script [] {
   $env.CURRENT_FILE
+  $"(ansi light_gray)($env.CURRENT_FILE)(ansi reset)"
 }
 
 def log-badge [level: string] {
@@ -85,6 +99,3 @@ def log-level [level: string] {
   }
 }
 
-def current-timestamp [] {
-  date now | format date "%Y-%m-%d %H:%M:%S"
-}

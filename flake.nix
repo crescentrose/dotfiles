@@ -2,7 +2,7 @@
   description = "starlight";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -42,7 +42,33 @@
       nix-darwin,
       ...
     }:
+    let
+      linuxPkgs = import nixpkgs { system = "x86_64-linux"; };
+      darwinPkgs = import nixpkgs { system = "aarch64-darwin"; };
+      devShellHook = ''
+        export PATH="$PWD/scripts/bin:$PATH"
+        printf "\n❄️ Quick reference:\n\n"
+        printf "  • \`manage-system update\`   – update the flake\n"
+        printf "  • \`manage-system rebuild\`  – rebuild and switch\n"
+        printf "  • \`manage-system clean-up\` – collect garbage\n"
+        printf "\n💡 Once installed, these commands are available system-wide.\n\n"
+      '';
+    in
     {
+      devShells = {
+        "x86_64-linux".default = linuxPkgs.mkShellNoCC {
+          name = "dotfiles-linux";
+          buildPackages = [ linuxPkgs.nushell ];
+          shellHook = devShellHook;
+        };
+
+        "aarch64-darwin".default = darwinPkgs.mkShellNoCC {
+          name = "dotfiles-mac";
+          buildPackages = [ darwinPkgs.nushell ];
+          shellHook = devShellHook;
+        };
+      };
+
       nixosConfigurations = {
         starlight = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";

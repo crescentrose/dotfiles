@@ -25,5 +25,5 @@
     lefthook # git hooks
   ];
 
-  xdg.dataFile."scripts".source = ../../resources/scripts;
+  xdg.dataFile."scripts".source = ../../scripts;
 }

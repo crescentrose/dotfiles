@@ -1,0 +1,60 @@
+#!/usr/bin/env nu
+
+use ../lib/vlog
+
+def "flake-name" [system_name?: string, flake_dir?: string ] {
+  let flake_name = match (uname).operating-system {
+    "Darwin" => "work"
+    "Linux" => "starlight"
+  }
+  let default_dir = $"($env.HOME)/Code/dotfiles"
+
+  $"($flake_dir | default $default_dir)#($system_name | default $flake_name)"
+}
+
+# Update the Nix flake version.
+def "main update" [system_name?: string, flake_dir?: string] {
+  let flake_name = flake-name $system_name $flake_dir
+
+  vlog info $"🚚 Updating flake ($flake_name)..."
+  vlog timed "Update" {
+    nix flake update --flake $flake_name
+  }
+}
+
+# Build a new derivation and switch to it.
+def "main rebuild" [system_name?: string, flake_dir?: string] {
+  let flake_name = flake-name $system_name $flake_dir
+  vlog timed "Rebuild" {
+    vlog info $"🏠 Building flake ($flake_name)..."
+    match (uname).operating-system {
+      "Darwin" => { sudo darwin-rebuild --flake $flake_name --impure switch }
+      "Linux" => { sudo nixos-rebuild --flake $flake_name --impure switch}
+    }
+  }
+}
+
+# Clean up garbage and optimise Nix store. (Most of the time this should happen automatically,
+# though.)
+def "main clean-up" [] {
+  vlog timed "Clean-up" {
+    vlog info "♻ Running garbage collection..."
+    sudo nix-collect-garbage --delete-old
+  }
+}
+
+# Show the latest logs for a (root) systemd unit in reverse chronological order.
+def "main inspect" [service: string, --root (-r)] {
+  vlog info $"🤨 Inspecting ($service)..."
+  vlog timed "Service inspection" {
+    if $root {
+      sudo journalctl -u $service --reverse --since="15m ago"
+    } else {
+      journalctl --user -u $service --reverse --since="15m ago"
+    }
+  }
+}
+
+def main [] {
+  help main
+}

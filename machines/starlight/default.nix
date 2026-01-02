@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
   # TODO: move this elsewhere, it makes no sense to keep this at the top of the file
   greetConfig = pkgs.writeText "greetd-sway-config" ''
@@ -10,6 +10,7 @@ let
       -b 'Reboot' 'systemctl reboot'
   '';
   plymouthCat = pkgs.callPackage ../../packages/plymouth-cat/package.nix { };
+  zenpower5 = config.boot.kernelPackages.callPackage ../../packages/zenpower5/package.nix { };
 in
 {
   imports = [
@@ -24,7 +25,9 @@ in
   };
 
   # Use latest available kernel
-  boot.kernelPackages = pkgs.linuxPackages_6_17;
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
+  boot.extraModulePackages = [ zenpower5 ];
+  boot.kernelModules = [ "zenpower" ];
 
   # less noise during boot
   boot.kernelParams = [
@@ -149,8 +152,8 @@ in
 
     # hardware
     lm_sensors
-    linuxKernel.packages.linux_6_17.zenpower
   ];
+
   # Use nano as the default editor (if we do not have something user-specific)
   environment.variables.EDITOR = "nano";
 

@@ -5,7 +5,8 @@ use ../lib/vlog
 def "flake-name" [system_name?: string, flake_dir?: string ] {
   let flake_name = match (uname).operating-system {
     "Darwin" => "work"
-    "Linux" => "starlight"
+    "GNU/Linux" => "starlight"
+      _ => { vlog fatal $"Unsupported OS: ((uname).operating-system)" 2}
   }
   let default_dir = $"($env.HOME)/Code/dotfiles"
 
@@ -29,7 +30,8 @@ def "main rebuild" [system_name?: string, flake_dir?: string] {
     vlog info $"🏠 Building flake ($flake_name)..."
     match (uname).operating-system {
       "Darwin" => { sudo darwin-rebuild --flake $flake_name --impure switch }
-      "Linux" => { sudo nixos-rebuild --flake $flake_name --impure switch}
+      "GNU/Linux" => { sudo nixos-rebuild --flake $flake_name --impure switch}
+      _ => { vlog fatal $"Unsupported OS: ((uname).operating-system)" 2}
     }
   }
 }

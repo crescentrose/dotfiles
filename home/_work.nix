@@ -19,5 +19,6 @@
     font-family = Iosevka
     font-size = 14
     theme = dark:Catppuccin Macchiato,light:Catppuccin Latte
+    macos-option-as-alt = true
   '';
 }

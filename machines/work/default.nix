@@ -21,8 +21,11 @@ in
   homebrew = {
     enable = true;
     brews = [
+      "helm"
       # Install apps from the Mac App Store through CLI
       "mas"
+      # Install Vault through Hashicorp's tap
+      "hashicorp/tap/vault"
       # Set up a development database
       {
         name = "postgresql@18";
@@ -31,6 +34,7 @@ in
         conflicts_with = [ "postgresql" ];
       }
     ];
+    taps = [ "hashicorp/tap" ];
     casks = [
       "1password"
       "1password-cli"
@@ -41,6 +45,7 @@ in
       "font-cascadia-code-nf"
       "font-fira-code-nerd-font"
       "font-symbols-only-nerd-font"
+      "zed"
     ];
   };
 

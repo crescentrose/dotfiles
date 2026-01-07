@@ -10,6 +10,7 @@
     ./programs/discord.nix
     ./programs/ghostty.nix
     ./programs/helix.nix
+    ./programs/zed.nix
     ./desktop
     ./shell
   ];

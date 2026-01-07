@@ -10,7 +10,8 @@ let
       -b 'Reboot' 'systemctl reboot'
   '';
   plymouthCat = pkgs.callPackage ../../packages/plymouth-cat/package.nix { };
-  zenpower5 = config.boot.kernelPackages.callPackage ../../packages/zenpower5/package.nix { };
+  kernel = config.boot.kernelPackages;
+  zenpower5 = kernel.callPackage ../../packages/zenpower5/package.nix { };
 in
 {
   imports = [
@@ -26,8 +27,19 @@ in
 
   # Use latest available kernel
   boot.kernelPackages = pkgs.linuxPackages_6_18;
-  boot.extraModulePackages = [ zenpower5 ];
-  boot.kernelModules = [ "zenpower" ];
+
+  boot.extraModulePackages = [
+    # Temperature and power sensors for Zen 5 CPUs
+    zenpower5
+
+    # Temeprature, fan, and voltage readings for ASRock B850I motherboards
+    kernel.nct6687d
+  ];
+
+  boot.kernelModules = [
+    "zenpower"
+    "nct6687"
+  ];
 
   # less noise during boot
   boot.kernelParams = [

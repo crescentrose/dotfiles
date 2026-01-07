@@ -178,6 +178,9 @@ in
   hardware.graphics.extraPackages = [ pkgs.amf ];
   hardware.amdgpu.initrd.enable = true;
 
+  # Include some standard fonts
+  fonts.enableDefaultPackages = true;
+
   # Make fonts render twice as good as Ubuntu but half as good as macOS
   fonts.fontconfig = {
     # fixes pixelation

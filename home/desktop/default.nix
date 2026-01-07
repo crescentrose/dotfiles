@@ -5,6 +5,7 @@
     ./audio.nix
     ./apps.nix
     ./bar.nix
+    ./fonts.nix
     ./idle.nix
     ./gtk.nix
     ./notifications.nix
@@ -41,23 +42,9 @@
     newsflash # rss
     video-trimmer # if only all apps were named this consistently
 
-    # fonts
-    cascadia-code
-    inter
-    departure-mono
-    iosevka
-    liberation_ttf # replacements for common MS fonts
-    noto-fonts
-    noto-fonts-cjk-sans
-    twitter-color-emoji # 🤓
-
     # icons
     adwaita-icon-theme
     adwaita-icon-theme-legacy
     morewaita-icon-theme
-    font-awesome
-    nerd-fonts.symbols-only
   ];
-
-  fonts.fontconfig.defaultFonts.emoji = [ "Twitter Color Emoji" ];
 }

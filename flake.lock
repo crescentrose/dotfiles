@@ -68,16 +68,17 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1767723810,
-        "narHash": "sha256-W86KbZMUyaR+n5OJvug9h5vLUI7+7KHrludsBBwhb4o=",
+        "lastModified": 1767428760,
+        "narHash": "sha256-crwgIp7kVMNbkziJmSJlmakX5N57fwe1XW1iU/u4Rk4=",
         "owner": "abenz1267",
         "repo": "elephant",
-        "rev": "ea4b3c32edd23f39e48e91d16adbe1517c1f6911",
+        "rev": "946019db9183593af2c14d56924000d519e1f8d4",
         "type": "github"
       },
       "original": {
         "owner": "abenz1267",
         "repo": "elephant",
+        "rev": "946019db9183593af2c14d56924000d519e1f8d4",
         "type": "github"
       }
     },

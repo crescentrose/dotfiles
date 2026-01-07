@@ -15,7 +15,9 @@
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    elephant.url = "github:abenz1267/elephant";
+
+    # something broke recently, ignore breakage for now
+    elephant.url = "github:abenz1267/elephant?rev=946019db9183593af2c14d56924000d519e1f8d4";
 
     walker = {
       url = "github:abenz1267/walker";

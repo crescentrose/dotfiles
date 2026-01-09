@@ -18,11 +18,13 @@
     imagemagick # magic of the image variety
     difftastic # syntax-aware diff
     jujutsu # fine, i will try it...
+    xh # curl at home
 
     # developer tools
     agebox # secret
     age # more secret
     lefthook # git hooks
+    gnumake # for the heathens
   ];
 
   xdg.dataFile."scripts".source = ../../scripts;

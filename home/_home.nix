@@ -1,4 +1,4 @@
-{ ragenix, ... }:
+{ pkgs, ragenix, ... }:
 {
   imports = [
     ragenix.homeManagerModules.default
@@ -19,7 +19,12 @@
   programs.discordAccel.enable = true;
 
   home = {
-    packages = [ ragenix.packages."x86_64-linux".default ];
+    packages = [
+      ragenix.packages."x86_64-linux".default
+      # TODO: Extract out
+      pkgs.kubernetes-helm
+      pkgs.vault
+    ];
 
     username = "ivan";
     homeDirectory = "/home/ivan";

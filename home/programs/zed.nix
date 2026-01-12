@@ -25,6 +25,7 @@
       };
       "buffer_line_height" = "comfortable";
       "buffer_font_family" = "Iosevka";
+      "buffer_font_fallbacks" = [ "Symbols Nerd Font Mono" ];
       "show_edit_predictions" = false;
       "base_keymap" = "VSCode";
       "toolbar" = {

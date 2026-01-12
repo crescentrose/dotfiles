@@ -28,11 +28,10 @@ extensible. Improving this is also on my to-do list.
 
 ### macOS
 
-The macOS variant assumes [Determinate Nix](https://determinate.systems/nix/)
-as it has a better setup experience and plays better with various corporate
-tools.
+The macOS variant assumes [Determinate Nix] as it has a better setup experience
+and plays better with various corporate tools.
 
-In addition to Determinate Nix, you should also set up [Homebrew](https://brew.sh/).
+In addition to Determinate Nix, you should also set up [Homebrew].
 
 For initial set-up, run:
 
@@ -45,3 +44,17 @@ Afterwards, you can use `darwin-rebuild` to apply changes:
 ```sh
 sudo darwin-rebuild switch --flake .
 ```
+
+[Determinate Nix]: https://determinate.systems/nix/
+[Homebrew]: https://brew.sh
+
+## Attribution
+
+Due to popular demand, there's now a license in this repo.
+
+Except specific files which bear a different mention, this programme is licensed
+under the [EUPL-1.2 or later]. Official translations are available on the
+[website of the European Commission].
+
+[EUPL-1.2 or later]: ./LICENSE
+[website of the European Commission]: https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12

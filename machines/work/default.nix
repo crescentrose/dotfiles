@@ -26,6 +26,8 @@ in
       "mas"
       # Install Vault through Hashicorp's tap
       "hashicorp/tap/vault"
+      # Install Docker credential helpers
+      "docker-credential-helper"
       # Set up a development database
       {
         name = "postgresql@18";

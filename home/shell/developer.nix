@@ -27,7 +27,7 @@
 
     # ❄️ Nix
     nixd
-    nixfmt-rfc-style # nix formatter
+    nixfmt # nix formatter
 
     # 🐍 Python
     uv

@@ -16,14 +16,6 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
-    # something broke recently, ignore breakage for now
-    elephant.url = "github:abenz1267/elephant?rev=946019db9183593af2c14d56924000d519e1f8d4";
-
-    walker = {
-      url = "github:abenz1267/walker";
-      inputs.elephant.follows = "elephant";
-    };
-
     ragenix = {
       url = "github:yaxitech/ragenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,6 +23,11 @@
 
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -42,6 +39,7 @@
       nixpkgs,
       ragenix,
       nix-darwin,
+      dms,
       ...
     }:
     let
@@ -74,8 +72,10 @@
       nixosConfigurations = {
         starlight = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+          specialArgs = inputs;
           modules = [
             ./machines/starlight
+            dms.nixosModules.greeter
             nixos-hardware.nixosModules.common-pc
             nixos-hardware.nixosModules.common-pc-ssd
             nixos-hardware.nixosModules.common-gpu-amd

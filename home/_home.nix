@@ -1,11 +1,14 @@
-{ pkgs, ragenix, ... }:
+{
+  pkgs,
+  ragenix,
+  ...
+}:
 {
   imports = [
     ragenix.homeManagerModules.default
     ./base.nix
     ./programs/git.nix
     ./programs/ssh.nix
-    ./programs/walker.nix
     ./programs/mpd.nix
     ./programs/discord.nix
     ./programs/ghostty.nix

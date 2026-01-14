@@ -1,14 +1,10 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  dms,
+  ...
+}:
 let
-  # TODO: move this elsewhere, it makes no sense to keep this at the top of the file
-  greetConfig = pkgs.writeText "greetd-sway-config" ''
-    exec "${pkgs.gtkgreet}/bin/gtkgreet -l -s /etc/greetd/gtkgreet.css; swaymsg exit"
-    bindsym Mod4+shift+e exec swaynag \
-      -t warning \
-      -m 'What do you want to do?' \
-      -b 'Poweroff' 'systemctl poweroff' \
-      -b 'Reboot' 'systemctl reboot'
-  '';
   plymouthCat = pkgs.callPackage ../../packages/plymouth-cat/package.nix { };
   kernel = config.boot.kernelPackages;
   zenpower5 = kernel.callPackage ../../packages/zenpower5/package.nix { };
@@ -99,6 +95,7 @@ in
       "wheel"
       "kvm"
       "docker"
+      "greeter"
     ];
     shell = pkgs.zsh;
     packages = [ ];
@@ -167,10 +164,16 @@ in
   ];
 
   # Use nano as the default editor (if we do not have something user-specific)
-  environment.variables.EDITOR = "nano";
+  environment.variables.eDITOR = "nano";
 
   # Set up dconf
   programs.dconf.enable = true;
+
+  # Set up AccountsService
+  services.accounts-daemon.enable = true;
+
+  # Use Niri as the default compositor
+  programs.niri.enable = true;
 
   # Enable video
   hardware.graphics.enable = true;
@@ -209,13 +212,12 @@ in
   };
 
   # Set up greeter
-  services.greetd = {
+  # TODO: this also requires some symlinks and ACLs, which is currently manual.
+  # see: https://danklinux.com/docs/dankgreeter/configuration#manual-sync
+  programs.dank-material-shell.greeter = {
     enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.sway}/bin/sway --config ${greetConfig}";
-      };
-    };
+    compositor.name = "niri";
+    configHome = "/home/ivan";
   };
 
   # Set up SSH access
@@ -231,27 +233,6 @@ in
       PermitRootLogin = "no";
     };
   };
-
-  environment.etc."greetd/environments".text = ''
-    niri-session
-    zsh
-  '';
-
-  # Show a nice background instead of a flashbang
-  environment.etc."greetd/gtkgreet.css".text = ''
-    window {
-        background-image: url("file://${pkgs.nixos-artwork.wallpapers.simple-dark-gray-bottom}/share/backgrounds/nixos/nix-wallpaper-simple-dark-gray_bottom.png");
-        background-size: cover;
-        background-position: center;
-    }
-
-    box#body {
-        background-color: #ffffff;
-        color: black;
-        border-radius: 10px;
-        padding: 50px;
-    }
-  '';
 
   # Allow Zen browser to use 1Password
   environment.etc."1password/custom_allowed_browsers" = {
@@ -366,18 +347,6 @@ in
       "root"
       "ivan"
     ];
-
-    # # Additional binary caches
-    # # Disabled temporarily because it gets queried for everything which is
-    # # not necessarily what I want
-    # extra-substituters = [
-    #   "https://walker.cachix.org"
-    #   "https://walker-git.cachix.org"
-    # ];
-    # extra-trusted-public-keys = [
-    #   "walker.cachix.org-1:fG8q+uAaMqhsMxWjwvk0IMb4mFPFLqHjuvfwQxE4oJM="
-    #   "walker-git.cachix.org-1:vmC0ocfPWh0S/vRAQGtChuiZBTAe4wiKDeyyXM0/7pM="
-    # ];
   };
 
   # Maybe?

@@ -1,6 +1,3 @@
-{ pkgs, ... }:
 {
-  home.packages = [ pkgs.niri ];
-
-  xdg.configFile.niri.source = ../../resources/niri;
+  xdg.configFile."niri/config.kdl".source = ../../resources/niri/config.kdl;
 }

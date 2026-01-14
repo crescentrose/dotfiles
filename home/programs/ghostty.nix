@@ -10,6 +10,7 @@
       font-family = "Iosevka";
       font-size = 12;
       command = "/usr/bin/env nu";
+      app-notifications = "no-clipboard-copy,no-config-reload";
     };
   };
 }

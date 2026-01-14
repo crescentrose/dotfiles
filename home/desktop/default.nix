@@ -1,18 +1,31 @@
-{ pkgs, ... }:
+{ pkgs, dms, ... }:
 {
   # Contains stuff pertaining to the Year of the Linux Desktop
   imports = [
+    dms.homeModules.dank-material-shell
     ./audio.nix
     ./apps.nix
-    ./bar.nix
     ./fonts.nix
-    ./idle.nix
     ./gtk.nix
-    ./notifications.nix
     ./portal.nix
-    ./wallpaper.nix
     ./window-manager.nix
   ];
+
+  programs.dank-material-shell = {
+    enable = true;
+    systemd = {
+      enable = true; # Systemd service for auto-start
+      restartIfChanged = true; # Auto-restart dms.service when dank-material-shell changes
+    };
+
+    # Core features
+    enableSystemMonitoring = true; # System monitoring widgets (dgop)
+    enableVPN = true; # VPN management widget
+    enableDynamicTheming = true; # Wallpaper-based theming (matugen)
+    enableAudioWavelength = true; # Audio visualizer (cava)
+    enableCalendarEvents = true; # Calendar integration (khal)
+    enableClipboardPaste = true; # Pasting items from the clipboard (wtype)
+  };
 
   # Enable system authentication for unprivileged apps
   services.polkit-gnome.enable = true;
@@ -24,7 +37,6 @@
     wl-clipboard # copy and paste
     wtype # automate writing (for inserting emojis)
     xwayland-satellite # xwayland outside wayland
-    blueberry # bluetooth settings
     v4l-utils # webcam settings
     libnotify # for notify-send
 

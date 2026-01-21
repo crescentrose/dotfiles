@@ -45,6 +45,7 @@ in
     "rd.systemd.show_status=false"
     "rd.udev.log_level=3"
     "udev.log_priority=3"
+    "amdgpu.dcdebugmask=0x10" # fixes laggy GPU after suspend
   ];
   boot.consoleLogLevel = 0;
   boot.initrd.verbose = false;

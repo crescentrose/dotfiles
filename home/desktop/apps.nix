@@ -9,6 +9,8 @@
     pkgs.slack # work, work
     pkgs.qbittorrent # yarr
     pkgs.euphonica # music
+    pkgs.feishin # music
+    pkgs.tauon # music
     pkgs.foliate # ebook
     pkgs.mangohud # FPS, temp monitor
     zen-browser.packages."x86_64-linux".default # firefoxn't

@@ -164,8 +164,17 @@ in
     lm_sensors
   ];
 
-  # Use nano as the default editor (if we do not have something user-specific)
-  environment.variables.eDITOR = "nano";
+  environment.variables = {
+    # Use nano as the default editor (if we do not have something user-specific)
+    EDITOR = "nano";
+
+    # Do not shove Go stuff in my home dir, ugly
+    GOPATH = "$HOME/.local/share/go";
+
+    # Do not shove Rust stuff in my home dir, ugly
+    CARGO_HOME = "$HOME/.local/share/cargo";
+    RUSTUP_HONE = "$HOME/.local/share/rustup";
+  };
 
   # Set up dconf
   programs.dconf.enable = true;

@@ -7,6 +7,7 @@
     iosevka
     liberation_ttf # replacements for common MS fonts
     maple-mono.truetype
+    maple-mono.NF-unhinted
     noto-fonts
     noto-fonts-cjk-sans
     twitter-color-emoji # 🤓

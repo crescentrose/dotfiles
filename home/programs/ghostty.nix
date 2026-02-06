@@ -7,7 +7,7 @@
 
     settings = {
       theme = "dark:Catppuccin Macchiato,light:Catppuccin Latte";
-      font-family = "Iosevka";
+      font-family = "Maple Mono NF";
       font-size = 12;
       command = "/usr/bin/env nu";
       app-notifications = "no-clipboard-copy,no-config-reload";

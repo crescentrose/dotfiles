@@ -6,6 +6,7 @@
     departure-mono
     iosevka
     liberation_ttf # replacements for common MS fonts
+    maple-mono.truetype
     noto-fonts
     noto-fonts-cjk-sans
     twitter-color-emoji # 🤓

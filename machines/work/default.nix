@@ -47,6 +47,7 @@ in
       "font-cascadia-code-nf"
       "font-fira-code-nerd-font"
       "font-symbols-only-nerd-font"
+      "font-maple-mono"
       "zed"
     ];
   };

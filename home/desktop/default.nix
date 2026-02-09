@@ -33,7 +33,6 @@
   # Include basic packages
   home.packages = with pkgs; [
     glib # gtk config
-    waybar # status bar
     wl-clipboard # copy and paste
     wtype # automate writing (for inserting emojis)
     xwayland-satellite # xwayland outside wayland
@@ -53,10 +52,5 @@
     nautilus # file browser
     newsflash # rss
     video-trimmer # if only all apps were named this consistently
-
-    # icons
-    adwaita-icon-theme
-    adwaita-icon-theme-legacy
-    morewaita-icon-theme
   ];
 }

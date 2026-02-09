@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  dms,
   ...
 }:
 let
@@ -47,9 +46,14 @@ in
     "udev.log_priority=3"
     "amdgpu.dcdebugmask=0x10" # fixes laggy GPU after suspend
   ];
+
   boot.consoleLogLevel = 0;
   boot.initrd.verbose = false;
   boot.supportedFilesystems = [ "nfs" ];
+  # Define accurate regulatory domain for Wi-Fi
+  boot.extraModprobeConfig = ''
+    options cfg80211 ieee80211_regdom="NL"
+  '';
 
   # nice boot animation
   boot.plymouth = {
@@ -140,28 +144,20 @@ in
     file
     wget
 
-    # binary cache
-    cachix
-
-    # window manager
-    sway
+    # backups
+    bup
 
     # networking
     cifs-utils # Samba shares
 
     # hardware
     usbutils # lsusb
-
-    # VMs (for testing)
-    qemu
-    quickemu
+    lm_sensors # temperature sensors
 
     # icons
     adwaita-icon-theme
     adwaita-icon-theme-legacy
-
-    # hardware
-    lm_sensors
+    morewaita-icon-theme
   ];
 
   environment.variables = {
@@ -190,6 +186,10 @@ in
   # Enable AMD hardware video encoder
   hardware.graphics.extraPackages = [ pkgs.amf ];
   hardware.amdgpu.initrd.enable = true;
+
+  # Wireless: include the regulatory database so that signal strength can
+  # be set appropriately
+  hardware.wirelessRegulatoryDatabase = true;
 
   # Include some standard fonts
   fonts.enableDefaultPackages = true;
@@ -317,18 +317,8 @@ in
   # NOTE: Plug the device out then back in for this rule to take effect.
   services.udev.extraRules = ''
     # Disable mouse from waking up the computer
-    ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="d030", ATTR{power/wakeup}="disabled", ATTR{driver/1-1/power/wakeup}="disabled"
+    ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="d026", ATTR{power/wakeup}="disabled", ATTR{driver/1-1/power/wakeup}="disabled"
   '';
-
-  services.udev.packages = [
-    (pkgs.writeTextFile {
-      name = "pegboard_udev";
-      text = ''
-        ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="37fa", ATTRS{idProduct}=="8201", MODE="0770", TAG+="uaccess"
-      '';
-      destination = "/etc/udev/rules.d/50-pegboard.rules";
-    })
-  ];
 
   # Set up Docker
   virtualisation.docker = {

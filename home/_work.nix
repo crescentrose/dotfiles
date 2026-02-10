@@ -16,7 +16,7 @@
   # config. This should be fixed.
   xdg.configFile."ghostty/config".text = ''
     command = /usr/bin/env zsh -c nu
-    font-family = Iosevka
+    font-family = Maple Mono
     font-size = 14
     theme = dark:Catppuccin Macchiato,light:Catppuccin Latte
     macos-option-as-alt = true

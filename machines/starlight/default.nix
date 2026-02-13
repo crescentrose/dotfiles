@@ -21,7 +21,7 @@ in
   };
 
   # Use latest available kernel
-  boot.kernelPackages = pkgs.linuxPackages_6_18;
+  boot.kernelPackages = pkgs.linuxPackages_6_19;
 
   boot.extraModulePackages = [
     # Temperature and power sensors for Zen 5 CPUs

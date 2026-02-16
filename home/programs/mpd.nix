@@ -7,7 +7,7 @@
 
   services = {
     mpd = {
-      enable = true;
+      enable = false;
       musicDirectory = "/mnt/media/Music";
       extraConfig = ''
         auto_update "yes"
@@ -27,7 +27,7 @@
     };
 
     # control mpd through the MPRIS protocol
-    mpd-mpris.enable = true;
+    mpd-mpris.enable = false;
 
     # daemon that tracks media player activity
     playerctld.enable = true;
@@ -37,7 +37,7 @@
 
     # Enable Discord rich presence
     mprisence = {
-      enable = true;
+      enable = false;
       settings = {
         player = {
           default = {
@@ -58,7 +58,7 @@
 
     # Enable scrobbling
     mpdscribble = {
-      enable = true;
+      enable = false;
       endpoints."last.fm" = {
         passwordFile = "/run/user/1000/agenix/mpdscribble"; # TODO: super hacky
         username = "crescentr0se";

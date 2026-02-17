@@ -35,10 +35,6 @@
     # 🦀 Rust
     rustup
 
-    # 🏗️ Terraform
-    terraform
-    terraform-ls
-
     # 📝 TOML
     taplo
   ];

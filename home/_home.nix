@@ -27,6 +27,8 @@
       # TODO: Extract out
       pkgs.kubernetes-helm
       pkgs.vault
+      pkgs.terraform
+      pkgs.terraform-ls
     ];
 
     username = "ivan";

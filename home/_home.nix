@@ -24,11 +24,16 @@
   home = {
     packages = [
       ragenix.packages."x86_64-linux".default
+
+      # I do not want to compile macOS versions from scratch
       # TODO: Extract out
       pkgs.kubernetes-helm
       pkgs.vault
       pkgs.terraform
       pkgs.terraform-ls
+
+      # Resource monitor
+      pkgs.btop
     ];
 
     username = "ivan";

@@ -144,6 +144,9 @@ in
     file
     wget
 
+    # keyboard
+    via
+
     # backups
     bup
 
@@ -186,6 +189,10 @@ in
   # Enable AMD hardware video encoder
   hardware.graphics.extraPackages = [ pkgs.amf ];
   hardware.amdgpu.initrd.enable = true;
+
+  # Enable support for QMK keyboards
+  hardware.keyboard.qmk.enable = true;
+  hardware.keyboard.qmk.keychronSupport = true;
 
   # Wireless: include the regulatory database so that signal strength can
   # be set appropriately
@@ -319,6 +326,8 @@ in
     # Disable mouse from waking up the computer
     ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="d026", ATTR{power/wakeup}="disabled", ATTR{driver/1-1/power/wakeup}="disabled"
   '';
+  # For compatibility with QMK keyboards
+  services.udev.packages = with pkgs; [ via ];
 
   # Set up Docker
   virtualisation.docker = {

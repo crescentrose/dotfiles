@@ -9,7 +9,7 @@
     docker-language-server
 
     # 🐭 Go
-    go
+    go_1_26
     gopls
     delve
     golangci-lint

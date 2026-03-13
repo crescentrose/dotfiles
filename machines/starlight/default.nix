@@ -329,6 +329,13 @@ in
   # For compatibility with QMK keyboards
   services.udev.packages = with pkgs; [ via ];
 
+  # Allow key composition (e.g. `ROption+<+3` to input a Unicode heart)
+  i18n.inputMethod = {
+    enable = true;
+    type = "ibus";
+    ibus.engines = [ pkgs.ibus-engines.uniemoji ];
+  };
+
   # Set up Docker
   virtualisation.docker = {
     enable = true;

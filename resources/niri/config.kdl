@@ -10,7 +10,9 @@ input {
   keyboard {
     xkb {
       layout "nl(mac),hr"
-      options "ctrl:nocaps"
+      // Use Caps Lock as CTRL
+      // Use the right Option key ("Windows" key on inferior systems) as Compose key
+      options "ctrl:nocaps,compose:rwin"
     }
   }
 
@@ -19,7 +21,6 @@ input {
     accel-profile "flat"
   }
 }
-
 
 layout {
   gaps 10

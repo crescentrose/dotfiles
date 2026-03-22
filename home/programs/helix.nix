@@ -3,7 +3,7 @@
     enable = true;
 
     settings = {
-      theme = "catppuccin_macchiato";
+      theme = "base16_default";
       editor = {
         shell = [
           "nu"

@@ -296,7 +296,7 @@ in
 
   # Mount network storage
   fileSystems."/mnt/media" = {
-    device = "192.168.1.200:/Multimedia";
+    device = "192.168.2.200:/Multimedia";
     fsType = "nfs";
     options = [
       "nfsvers=4.1"
@@ -371,7 +371,7 @@ in
   };
 
   # Generate man-page indexes, so that you can tab-complete them
-  documentation.man.generateCaches = true;
+  documentation.man.cache.enable = true;
 
   # Enable flakes
   nix.settings.experimental-features = [

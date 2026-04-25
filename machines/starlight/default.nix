@@ -101,6 +101,7 @@ in
       "kvm"
       "docker"
       "greeter"
+      "plugdev"
     ];
     shell = pkgs.zsh;
     packages = [ ];
@@ -325,6 +326,11 @@ in
   services.udev.extraRules = ''
     # Disable mouse from waking up the computer
     ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="d026", ATTR{power/wakeup}="disabled", ATTR{driver/1-1/power/wakeup}="disabled"
+
+    # Espressif USB JTAG/serial debug unit
+    ATTRS{idVendor}=="303a", ATTRS{idProduct}=="1001", MODE="660", GROUP="plugdev", TAG+="uaccess"
+    # Espressif USB Bridge
+    ATTRS{idVendor}=="303a", ATTRS{idProduct}=="1002", MODE="660", GROUP="plugdev", TAG+="uaccess"
   '';
   # For compatibility with QMK keyboards
   services.udev.packages = with pkgs; [ via ];

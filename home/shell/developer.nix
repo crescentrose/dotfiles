@@ -28,6 +28,7 @@
     # ❄️ Nix
     nixd
     nixfmt # nix formatter
+    nil # language server
 
     # 🐍 Python
     uv

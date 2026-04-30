@@ -36,6 +36,10 @@
     # 🦀 Rust
     rustup
 
+    # 💎 Ruby
+    ruby_4_0
+    ruby-lsp
+
     # 📝 TOML
     taplo
   ];

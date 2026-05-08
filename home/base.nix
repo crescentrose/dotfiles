@@ -9,11 +9,7 @@
     # Home Manager manages itself
     home-manager.enable = true;
 
-    # keep per-project shell configs
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-    };
+    direnv.enable = true;
   };
 
   home.stateVersion = "25.11";

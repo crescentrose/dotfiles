@@ -71,6 +71,10 @@ in
   # Time zone
   time.timeZone = "Europe/Amsterdam";
 
+  # Location
+  location.provider = "geoclue2";
+  services.geoclue2.enable = true;
+
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -144,6 +148,7 @@ in
     killall
     file
     wget
+    nixos-firewall-tool
 
     # keyboard
     via
@@ -290,6 +295,8 @@ in
 
   # Enable network auto-discovery
   services.avahi = {
+    publish.enable = true;
+    publish.userServices = true;
     enable = true;
     nssmdns4 = true;
     openFirewall = true;
@@ -307,9 +314,17 @@ in
       "rw"
     ];
   };
+
+  # Enable firewall
   networking.firewall = {
-    allowedTCPPorts = [ 2049 ];
+    allowedTCPPorts = [
+      2049 # NFS
+    ];
+    # sudo dmesg --follow --human | grep 'refused packet:'
+    logRefusedPackets = true;
   };
+  # Use nftables over iptables
+  networking.nftables.enable = true;
 
   # Suspend the system when the DE signals it is idle
   # ref: https://www.freedesktop.org/software/systemd/man/latest/logind.conf.html

@@ -7,6 +7,7 @@ let
   plymouthCat = pkgs.callPackage ../../packages/plymouth-cat/package.nix { };
   kernel = config.boot.kernelPackages;
   zenpower5 = kernel.callPackage ../../packages/zenpower5/package.nix { };
+  opendeck = pkgs.callPackage ../../packages/opendeck/package.nix { };
 in
 {
   imports = [
@@ -136,38 +137,43 @@ in
   services.gnome.gnome-keyring.enable = true;
 
   # Global packages
-  environment.systemPackages = with pkgs; [
-    # basic shell tools
-    nano
-    git
-    htop
-    jq
-    zip
-    unzip
-    ripgrep
-    killall
-    file
-    wget
-    nixos-firewall-tool
+  environment.systemPackages =
+    with pkgs;
+    [
+      # basic shell tools
+      nano
+      git
+      htop
+      jq
+      zip
+      unzip
+      ripgrep
+      killall
+      file
+      wget
+      nixos-firewall-tool
 
-    # keyboard
-    via
+      # keyboard
+      via
 
-    # backups
-    bup
+      # backups
+      bup
 
-    # networking
-    cifs-utils # Samba shares
+      # networking
+      cifs-utils # Samba shares
 
-    # hardware
-    usbutils # lsusb
-    lm_sensors # temperature sensors
+      # hardware
+      usbutils # lsusb
+      lm_sensors # temperature sensors
 
-    # icons
-    adwaita-icon-theme
-    adwaita-icon-theme-legacy
-    morewaita-icon-theme
-  ];
+      # icons
+      adwaita-icon-theme
+      adwaita-icon-theme-legacy
+      morewaita-icon-theme
+    ]
+    ++ [
+      opendeck
+    ];
 
   environment.variables = {
     # Use nano as the default editor (if we do not have something user-specific)
@@ -347,8 +353,11 @@ in
     # Espressif USB Bridge
     ATTRS{idVendor}=="303a", ATTRS{idProduct}=="1002", MODE="660", GROUP="plugdev", TAG+="uaccess"
   '';
-  # For compatibility with QMK keyboards
-  services.udev.packages = with pkgs; [ via ];
+  # For compatibility with QMK keyboards and the Stream Deck
+  services.udev.packages = [
+    pkgs.via
+    opendeck
+  ];
 
   # Allow key composition (e.g. `ROption+<+3` to input a Unicode heart)
   i18n.inputMethod = {

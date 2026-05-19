@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  opnix,
   ...
 }:
 let
@@ -13,6 +14,9 @@ in
   imports = [
     ./hardware-configuration.nix
   ];
+
+  # Disable Richard Stallman
+  nixpkgs.config.allowUnfree = true;
 
   # Bootloader.
   boot.loader = {
@@ -116,9 +120,6 @@ in
     ];
   };
 
-  # Disable Richard Stallman
-  nixpkgs.config.allowUnfree = true;
-
   # Enable Polkit, used for doing root things as non-root user
   security.polkit.enable = true;
   # Use Soteria to authenticate with Polkit (the little thingamajig that pops up to ask you for your password)
@@ -173,6 +174,7 @@ in
     ]
     ++ [
       opendeck
+      opnix.packages."x86_64-linux".default
     ];
 
   environment.variables = {

@@ -3,8 +3,6 @@
     ../../modules/services/mprisence.nix
   ];
 
-  age.secrets.mpdscribble.file = ../../secrets/mpdscribble.age;
-
   services = {
     mpd = {
       enable = false;
@@ -53,15 +51,6 @@
             ignore = true;
           };
         };
-      };
-    };
-
-    # Enable scrobbling
-    mpdscribble = {
-      enable = false;
-      endpoints."last.fm" = {
-        passwordFile = "/run/user/1000/agenix/mpdscribble"; # TODO: super hacky
-        username = "crescentr0se";
       };
     };
   };

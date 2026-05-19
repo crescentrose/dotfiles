@@ -16,8 +16,8 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
-    ragenix = {
-      url = "github:yaxitech/ragenix";
+    opnix = {
+      url = "github:brizzbuzz/opnix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -37,7 +37,7 @@
       home-manager,
       nixos-hardware,
       nixpkgs,
-      ragenix,
+      opnix,
       nix-darwin,
       dms,
       ...
@@ -81,7 +81,7 @@
             nixos-hardware.nixosModules.common-gpu-amd
             nixos-hardware.nixosModules.common-cpu-amd-pstate
             nixos-hardware.nixosModules.common-cpu-amd-zenpower
-            ragenix.nixosModules.default
+            opnix.nixosModules.default
             home-manager.nixosModules.home-manager
             {
               home-manager = {

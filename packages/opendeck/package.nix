@@ -22,7 +22,8 @@
   libX11,
   libXext,
   libXrandr,
-
+  glib-networking,
+  ...
 }:
 
 stdenv.mkDerivation rec {
@@ -58,6 +59,7 @@ stdenv.mkDerivation rec {
     libX11
     libXext
     libXrandr
+    glib-networking
   ];
 
   unpackPhase = ''

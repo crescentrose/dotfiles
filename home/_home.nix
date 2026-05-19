@@ -1,11 +1,9 @@
 {
   pkgs,
-  ragenix,
   ...
 }:
 {
   imports = [
-    ragenix.homeManagerModules.default
     ./base.nix
     ./programs/git.nix
     ./programs/ssh.nix
@@ -23,8 +21,6 @@
 
   home = {
     packages = [
-      ragenix.packages."x86_64-linux".default
-
       # I do not want to compile macOS versions from scratch
       # TODO: Extract out
       pkgs.kubernetes-helm

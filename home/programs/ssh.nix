@@ -4,8 +4,10 @@
     enable = true;
 
     # Default host config
-    matchBlocks."*" = {
-      identityAgent = "~/.1password/agent.sock";
+    settings = {
+      "Host *" = {
+        IdentityAgent = "~/.1password/agent.sock";
+      };
     };
 
     # Fix deprecation warning

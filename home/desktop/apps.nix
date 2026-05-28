@@ -13,6 +13,7 @@
     pkgs.tauon # music
     pkgs.foliate # ebook
     pkgs.mangohud # FPS, temp monitor
+    pkgs.mixxx # dj
     zen-browser.packages."x86_64-linux".default # firefoxn't
   ];
 }

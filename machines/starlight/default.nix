@@ -359,6 +359,7 @@ in
   services.udev.packages = [
     pkgs.via
     opendeck
+    pkgs.qFlipper
   ];
 
   # Allow key composition (e.g. `ROption+<+3` to input a Unicode heart)

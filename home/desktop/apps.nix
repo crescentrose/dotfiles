@@ -14,6 +14,7 @@
     pkgs.foliate # ebook
     pkgs.mangohud # FPS, temp monitor
     pkgs.mixxx # dj
+    pkgs.qFlipper # flipper UI
     zen-browser.packages."x86_64-linux".default # firefoxn't
   ];
 }

@@ -111,6 +111,7 @@ in
       "docker"
       "greeter"
       "plugdev"
+      "dialout"
     ];
     shell = pkgs.zsh;
     packages = [ ];
@@ -350,16 +351,40 @@ in
     # Disable mouse from waking up the computer
     ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="d026", ATTR{power/wakeup}="disabled", ATTR{driver/1-1/power/wakeup}="disabled"
 
-    # Espressif USB JTAG/serial debug unit
-    ATTRS{idVendor}=="303a", ATTRS{idProduct}=="1001", MODE="660", GROUP="plugdev", TAG+="uaccess"
-    # Espressif USB Bridge
-    ATTRS{idVendor}=="303a", ATTRS{idProduct}=="1002", MODE="660", GROUP="plugdev", TAG+="uaccess"
   '';
   # For compatibility with QMK keyboards and the Stream Deck
   services.udev.packages = [
     pkgs.via
     opendeck
     pkgs.qFlipper
+    (pkgs.writeTextFile {
+      name = "flipper-udev";
+      text = ''
+        # Flipper Zero serial port
+        SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5740", ATTRS{manufacturer}=="Flipper Devices Inc.", TAG+="uaccess", GROUP="dialout"
+        # Flipper Zero DFU
+        SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", ATTRS{manufacturer}=="STMicroelectronics", TAG+="uaccess", GROUP="dialout"
+        # Flipper ESP32s2 BlackMagic
+        SUBSYSTEMS=="usb", ATTRS{idVendor}=="303a", ATTRS{idProduct}=="40??", ATTRS{manufacturer}=="Flipper Devices Inc.", TAG+="uaccess", GROUP="dialout"
+        # Flipper ESP32s2 in DAP mode
+        SUBSYSTEMS=="usb", ATTRS{idVendor}=="303a", ATTRS{idProduct}=="40??", ATTRS{manufacturer}=="CMSIS-DAP", TAG+="uaccess", GROUP="dialout"
+        # Flipper U2F
+        SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5741", ATTRS{manufacturer}=="Flipper Devices Inc.", ENV{ID_SECURITY_TOKEN}="1"
+        # ST-Link-V3
+        SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="37??", ATTRS{manufacturer}=="STMicroelectronics", TAG+="uaccess", GROUP="dialout"
+      '';
+      destination = "/etc/udev/rules.d/42-flipper-zero-dev.rules";
+    })
+    (pkgs.writeTextFile {
+      name = "espressif-s3-udev";
+      text = ''
+        # Espressif USB JTAG/serial debug unit
+        ATTRS{idVendor}=="303a", ATTRS{idProduct}=="1001", MODE="660", GROUP="plugdev", TAG+="uaccess"
+        # Espressif USB Bridge
+        ATTRS{idVendor}=="303a", ATTRS{idProduct}=="1002", MODE="660", GROUP="plugdev", TAG+="uaccess"
+      '';
+      destination = "/etc/udev/rules.d/42-espressif-s3.rules";
+    })
   ];
 
   # Allow key composition (e.g. `ROption+<+3` to input a Unicode heart)

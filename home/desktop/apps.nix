@@ -15,6 +15,7 @@
     pkgs.mangohud # FPS, temp monitor
     pkgs.mixxx # dj
     pkgs.qFlipper # flipper UI
+    pkgs.gnome-disk-utility # partition
     zen-browser.packages."x86_64-linux".default # firefoxn't
   ];
 }

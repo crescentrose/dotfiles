@@ -3,7 +3,6 @@
   imports = [
     ./base.nix
     ./programs/git.nix
-    ./programs/ssh.nix
     ./programs/helix.nix
     ./shell
   ];
@@ -21,4 +20,18 @@
     theme = dark:Catppuccin Macchiato,light:Catppuccin Latte
     macos-option-as-alt = true
   '';
+
+  programs.ssh = {
+    enable = true;
+
+    # Default host config
+    settings = {
+      "Host *" = {
+        IdentityAgent = "~/Library/Group\\ Containers/2BUA8C4S2C.com.1password/t/agent.sock";
+      };
+    };
+
+    # Fix deprecation warning
+    enableDefaultConfig = false;
+  };
 }

@@ -16,7 +16,10 @@
     golangci-lint-langserver
 
     # ☁️ Google Cloud
-    (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
+    (google-cloud-sdk.withExtraComponents [
+      google-cloud-sdk.components.gke-gcloud-auth-plugin
+      google-cloud-sdk.components.package-go-module
+    ])
     kubectl
 
     # ☕ Javascript

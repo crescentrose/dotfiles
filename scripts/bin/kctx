@@ -1,4 +1,4 @@
 #!/usr/bin/env nu
 
-# Switch the Kubernetes context with the magic of FZF.
-kubectl config use-context (kubectl config get-contexts -o=name | fzf --height=30% --reverse)
+# Switch the Kubernetes context with the magic of nushell
+kubectl config use-context (kubectl config get-contexts -o=name | split row "\n" | input list)

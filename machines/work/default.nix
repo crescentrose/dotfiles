@@ -1,4 +1,3 @@
-{ pkgs, ... }:
 let
   # Another joy of the corporate life: your full legal name as the device
   # user...
@@ -7,13 +6,6 @@ in
 {
   system.primaryUser = user;
 
-  environment.systemPackages = with pkgs; [
-    # macOS-specific Docker stuff
-    podman
-    docker # use `docker` commands with podman
-    docker-buildx
-  ];
-
   # Ideally we would manage everything with Nix, but life is sad and some
   # packages are only available through Brew.
   #
@@ -21,6 +13,10 @@ in
   homebrew = {
     enable = true;
     brews = [
+      # macOS-specific Docker stuff
+      "podman"
+      "docker" # use `docker` commands with podman
+      "docker-buildx"
       "helm"
       # Install apps from the Mac App Store through CLI
       "mas"
@@ -51,6 +47,7 @@ in
       "font-symbols-only-nerd-font"
       "font-maple-mono"
       "zed"
+      "linearmouse"
     ];
   };
 

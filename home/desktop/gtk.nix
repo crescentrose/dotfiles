@@ -2,6 +2,7 @@
 {
   # Manage through DMS
   home.pointerCursor = {
+    enable = true;
     gtk.enable = true;
     x11.enable = true;
     name = "Bibata-Modern-Classic";

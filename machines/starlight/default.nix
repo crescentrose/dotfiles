@@ -155,6 +155,10 @@ in
       wget
       nixos-firewall-tool
 
+      gnome-boxes
+      dnsmasq # VM networking
+      phodav # (optional) Share files with guest VMs
+
       # keyboard
       via
 
@@ -172,6 +176,14 @@ in
       adwaita-icon-theme
       adwaita-icon-theme-legacy
       morewaita-icon-theme
+
+      # Apple devices
+      libimobiledevice
+      idevicerestore
+      ifuse
+      rockbox-utility
+      hfsprogs
+      hfsutils
     ]
     ++ [
       opendeck
@@ -212,6 +224,24 @@ in
   # Wireless: include the regulatory database so that signal strength can
   # be set appropriately
   hardware.wirelessRegulatoryDatabase = true;
+
+  # Set up virtualisation
+  virtualisation.libvirtd = {
+    enable = true;
+  };
+
+  # Enable USB redirection
+  virtualisation.spiceUSBRedirection.enable = true;
+
+  # Allow VM management
+  users.groups.libvirtd.members = [ "ivan" ];
+  users.groups.kvm.members = [ "ivan" ];
+
+  # Enable Apple device support
+  services.usbmuxd = {
+    enable = true;
+    package = pkgs.usbmuxd2;
+  };
 
   # Include some standard fonts
   fonts.enableDefaultPackages = true;
@@ -358,32 +388,11 @@ in
     opendeck
     pkgs.qFlipper
     (pkgs.writeTextFile {
-      name = "flipper-udev";
+      name = "ipod";
       text = ''
-        # Flipper Zero serial port
-        SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5740", ATTRS{manufacturer}=="Flipper Devices Inc.", TAG+="uaccess", GROUP="dialout"
-        # Flipper Zero DFU
-        SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", ATTRS{manufacturer}=="STMicroelectronics", TAG+="uaccess", GROUP="dialout"
-        # Flipper ESP32s2 BlackMagic
-        SUBSYSTEMS=="usb", ATTRS{idVendor}=="303a", ATTRS{idProduct}=="40??", ATTRS{manufacturer}=="Flipper Devices Inc.", TAG+="uaccess", GROUP="dialout"
-        # Flipper ESP32s2 in DAP mode
-        SUBSYSTEMS=="usb", ATTRS{idVendor}=="303a", ATTRS{idProduct}=="40??", ATTRS{manufacturer}=="CMSIS-DAP", TAG+="uaccess", GROUP="dialout"
-        # Flipper U2F
-        SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5741", ATTRS{manufacturer}=="Flipper Devices Inc.", ENV{ID_SECURITY_TOKEN}="1"
-        # ST-Link-V3
-        SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="37??", ATTRS{manufacturer}=="STMicroelectronics", TAG+="uaccess", GROUP="dialout"
+        SUBSYSTEM=="block", SUBSYSTEMS=="usb", ATTRS{product}=="iPod", ATTRS{manufacturer}=="Apple Inc.", MODE="660", TAG+="uaccess"
       '';
-      destination = "/etc/udev/rules.d/42-flipper-zero-dev.rules";
-    })
-    (pkgs.writeTextFile {
-      name = "espressif-s3-udev";
-      text = ''
-        # Espressif USB JTAG/serial debug unit
-        ATTRS{idVendor}=="303a", ATTRS{idProduct}=="1001", MODE="660", GROUP="plugdev", TAG+="uaccess"
-        # Espressif USB Bridge
-        ATTRS{idVendor}=="303a", ATTRS{idProduct}=="1002", MODE="660", GROUP="plugdev", TAG+="uaccess"
-      '';
-      destination = "/etc/udev/rules.d/42-espressif-s3.rules";
+      destination = "/etc/udev/rules.d/42-ipod.rules";
     })
   ];
 

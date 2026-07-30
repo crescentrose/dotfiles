@@ -1,4 +1,15 @@
+{ pkgs, ... }:
 {
+  home.packages = with pkgs; [
+    ffmpeg
+    rsgain
+    flac
+    flac2all
+    id3v2
+    opus-tools
+    lrcget
+  ];
+
   # Fix crackle in certain apps that use Pipewire/Pulseaudio combo
   xdg.configFile."pipewire/pipewire-pulse.conf.d/20-pulse-properties.conf".text = ''
     pulse.properties = {

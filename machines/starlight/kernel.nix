@@ -13,12 +13,12 @@ in
     zenpower5
 
     # Temeprature, fan, and voltage readings for ASRock B850I motherboards
-    kernel.nct6687d
+    # kernel.nct6687d
   ];
 
   boot.kernelModules = [
     "zenpower"
-    "nct6687"
+    # "nct6687"
   ];
 
   boot.kernelParams = [

@@ -13,11 +13,14 @@
     broot # trees
     dig # it's always DNS
     fastfetch # r/unixporn bait
+    fd # find replacement
     fortune # wisdom
+    fq # jq for binary formats
     gh # github client
     imagemagick # magic of the image variety
     difftastic # syntax-aware diff
     jujutsu # fine, i will try it...
+    viu # view images in terminal
     xh # curl at home
 
     # developer tools
@@ -25,6 +28,9 @@
     age # more secret
     lefthook # git hooks
     gnumake # for the heathens
+
+    # system management
+    nh # nix cli helper
   ];
 
   xdg.dataFile."scripts".source = ../../scripts;

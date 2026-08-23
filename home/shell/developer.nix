@@ -9,7 +9,7 @@
     docker-language-server
 
     # 🐭 Go
-    go_1_26
+    go_1_27
     gopls
     delve
     golangci-lint
@@ -23,7 +23,7 @@
     kubectl
 
     # ☕ Javascript
-    nodejs_24
+    nodejs_26
     pnpm
     typescript-language-server # javascript, typescript
     vscode-langservers-extracted # html, css, json, eslint
@@ -38,6 +38,9 @@
 
     # 🦀 Rust
     rustup
+
+    # SQL
+    pgcli
 
     # 📝 TOML
     taplo

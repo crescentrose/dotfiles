@@ -21,6 +21,7 @@
     environmentVariables = {
       EDITOR = "hx";
       BAT_THEME = "ansi";
+      NH_FLAKE = "${config.home.homeDirectory}/Code/dotfiles";
     };
 
     extraEnv = ''

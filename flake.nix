@@ -48,9 +48,9 @@
       devShellHook = ''
         export PATH="$PWD/scripts/bin:$PATH"
         printf "\n❄️ Quick reference:\n\n"
-        printf "  • \`manage-system update\`   – update the flake\n"
-        printf "  • \`manage-system rebuild\`  – rebuild and switch\n"
-        printf "  • \`manage-system clean-up\` – collect garbage\n"
+        printf "  • \`nix flake update\`   – update the flake\n"
+        printf "  • \`nh {os,darwin} switch\`  – rebuild and switch\n"
+        printf "  • \`nh clean\` – collect garbage\n"
         printf "\n💡 Once installed, these commands are available system-wide.\n\n"
       '';
     in
@@ -58,13 +58,13 @@
       devShells = {
         "x86_64-linux".default = linuxPkgs.mkShellNoCC {
           name = "dotfiles-linux";
-          buildPackages = [ linuxPkgs.nushell ];
+          buildPackages = [ linuxPkgs.nushell linuxPkgs.nh ];
           shellHook = devShellHook;
         };
 
         "aarch64-darwin".default = darwinPkgs.mkShellNoCC {
           name = "dotfiles-mac";
-          buildPackages = [ darwinPkgs.nushell ];
+          buildPackages = [ darwinPkgs.nushell darwinPkgs.nh ];
           shellHook = devShellHook;
         };
       };

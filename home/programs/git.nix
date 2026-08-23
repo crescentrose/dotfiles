@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
   onePasswordSigner =
-    if pkgs.stdenv.isDarwin then
+    if pkgs.stdenv.hostPlatform.isDarwin then
       "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
     else
       "/run/current-system/sw/bin/op-ssh-sign";

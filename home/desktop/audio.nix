@@ -7,7 +7,6 @@
     flac2all
     id3v2
     opus-tools
-    lrcget
   ];
 
   # Fix crackle in certain apps that use Pipewire/Pulseaudio combo

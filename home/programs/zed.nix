@@ -7,25 +7,35 @@
       "catppuccin-icons"
 
       # Language support
-      "toml"
+      "astro"
+      "biome"
       "dockerfile"
-      "sql"
+      "gleam"
+      "html"
+      "kdl"
       "make"
-      "terraform"
       "nix"
+      "nu"
       "proto"
+      "sql"
+      "terraform"
+      "toml"
+      "vue"
     ];
 
     userSettings = {
       "terminal" = {
-        "font_family" = "Iosevka";
+        "font_family" = "Maple Mono NF";
         "shell" = {
           "program" = "nu";
         };
       };
       "buffer_line_height" = "comfortable";
-      "buffer_font_family" = "Iosevka";
-      "buffer_font_fallbacks" = [ "Symbols Nerd Font Mono" ];
+      "buffer_font_family" = "Maple Mono NF";
+      "buffer_font_features" = {
+        "calt" = 1;
+        "dlig" = 1;
+      };
       "show_edit_predictions" = false;
       "base_keymap" = "VSCode";
       "toolbar" = {

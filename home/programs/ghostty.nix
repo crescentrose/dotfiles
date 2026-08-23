@@ -11,6 +11,10 @@
       font-size = 12;
       command = "/usr/bin/env nu";
       app-notifications = "no-clipboard-copy,no-config-reload";
+
+      # send a desktop notification when a long running task is complete
+      notify-on-command-finish = "unfocused";
+      notify-on-command-finish-action = "no-bell,notify";
     };
   };
 }

@@ -8,15 +8,14 @@
     pkgs.prismlauncher # the children yearn for the mines
     pkgs.slack # work, work
     pkgs.qbittorrent # yarr
-    pkgs.euphonica # music
     pkgs.feishin # music
     pkgs.tauon # music
     pkgs.foliate # ebook
     pkgs.mangohud # FPS, temp monitor
-    pkgs.mixxx # dj
     pkgs.qFlipper # flipper UI
     pkgs.gnome-disk-utility # partition
     pkgs.gnome-boxes # VMs
+    pkgs.lrcget # download lyrics for music files
     zen-browser.packages."x86_64-linux".default # firefoxn't
   ];
 }

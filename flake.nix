@@ -30,6 +30,11 @@
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    jj-starship = {
+      url = "github:dmmulroy/jj-starship";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -58,13 +63,19 @@
       devShells = {
         "x86_64-linux".default = linuxPkgs.mkShellNoCC {
           name = "dotfiles-linux";
-          buildPackages = [ linuxPkgs.nushell linuxPkgs.nh ];
+          buildPackages = [
+            linuxPkgs.nushell
+            linuxPkgs.nh
+          ];
           shellHook = devShellHook;
         };
 
         "aarch64-darwin".default = darwinPkgs.mkShellNoCC {
           name = "dotfiles-mac";
-          buildPackages = [ darwinPkgs.nushell darwinPkgs.nh ];
+          buildPackages = [
+            darwinPkgs.nushell
+            darwinPkgs.nh
+          ];
           shellHook = devShellHook;
         };
       };

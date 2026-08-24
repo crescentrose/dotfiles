@@ -9,7 +9,6 @@
     pkgs.slack # work, work
     pkgs.qbittorrent # yarr
     pkgs.feishin # music
-    pkgs.tauon # music
     pkgs.foliate # ebook
     pkgs.mangohud # FPS, temp monitor
     pkgs.qFlipper # flipper UI

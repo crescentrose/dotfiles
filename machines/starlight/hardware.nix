@@ -57,7 +57,6 @@
     }
   ];
 
-
   # Allow microcode updates
   hardware.cpu.amd.updateMicrocode = true;
 
@@ -67,6 +66,9 @@
   # Enable AMD hardware video encoder
   hardware.graphics.extraPackages = [ pkgs.amf ];
   hardware.amdgpu.initrd.enable = true;
+
+  # Control monitor brightness settings via ddcutil
+  hardware.i2c.enable = true;
 
   # Wireless: include the regulatory database so that signal strength can
   # be set appropriately

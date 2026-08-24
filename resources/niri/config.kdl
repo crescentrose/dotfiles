@@ -186,6 +186,9 @@ binds {
   Mod+Shift+period hotkey-overlay-title="Open a notepad" { spawn "dms" "ipc" "call" "notepad" "toggle"; }
   Ctrl+Alt+Delete hotkey-overlay-title="Open the power menu" { spawn "dms" "ipc" "call" "powermenu" "open"; }
 
+  XF86MonBrightnessUp allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "increment" "10" "ddc:i2c-10"; }
+  XF86MonBrightnessDown allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "decrement" "10" "ddc:i2c-10"; }
+
   // Example volume keys mappings for PipeWire & WirePlumber.
   // The allow-when-locked=true property makes them work even when the session is locked.
   XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+"; }

@@ -35,6 +35,7 @@
       "greeter"
       "plugdev"
       "dialout"
+      "i2c"
     ];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
@@ -65,6 +66,7 @@
       # hardware
       usbutils # lsusb
       lm_sensors # temperature sensors
+      ddcutil # remote monitor setting control
     ]
     ++ [
       opnix.packages."x86_64-linux".default
@@ -106,7 +108,6 @@
     localNetworkGameTransfers.openFirewall = true;
   };
 
-
   # Allow direct access to certain devices
   services.udev.packages = [
     pkgs.qFlipper
@@ -114,7 +115,6 @@
 
   # Generate man-page indexes, so that you can tab-complete them
   documentation.man.cache.enable = true;
-
 
   # This field determines which set of default values to use.
   # WARN: Do not change this before reviewing changes: https://nixos.org/manual/nixos/unstable/release-notes

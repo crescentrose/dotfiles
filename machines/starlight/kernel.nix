@@ -9,15 +9,15 @@ in
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.extraModulePackages = [
-    # Temperature and power sensors for Zen 5 CPUs
     zenpower5
-
-    # Temeprature, fan, and voltage readings for ASRock B850I motherboards
     kernel.nct6687d
   ];
 
   boot.kernelModules = [
+    # Temperature and power sensors for Zen 5 CPUs
     "zenpower"
+
+    # Temperature, fan, and voltage readings for ASRock B850I motherboards
     "nct6687"
   ];
 

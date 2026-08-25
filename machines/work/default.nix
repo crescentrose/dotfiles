@@ -1,7 +1,5 @@
 let
-  # Another joy of the corporate life: your full legal name as the device
-  # user...
-  user = "ivan.ostric";
+  user = "crescentrose";
 in
 {
   system.primaryUser = user;
@@ -14,9 +12,6 @@ in
     enable = true;
     brews = [
       # macOS-specific Docker stuff
-      "podman"
-      "docker" # use `docker` commands with podman
-      "docker-buildx"
       "helm"
       # Install apps from the Mac App Store through CLI
       "mas"
@@ -40,13 +35,12 @@ in
       "1password-cli"
       "ghostty"
       "obsidian"
-      "podman-desktop"
-      "raycast"
       "font-cascadia-code-nf"
       "font-fira-code-nerd-font"
       "font-symbols-only-nerd-font"
       "font-maple-mono"
-      "zed"
+      "slack"
+      "microsoft-outlook"
       "linearmouse"
     ];
   };

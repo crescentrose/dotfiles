@@ -4,12 +4,12 @@
     ./base.nix
     ./programs/git.nix
     ./programs/helix.nix
+    ./programs/zed.nix
     ./shell
   ];
 
-  # corporate mandated
-  home.username = "ivan.ostric";
-  home.homeDirectory = "/Users/ivan.ostric";
+  home.username = "crescentrose";
+  home.homeDirectory = "/Users/crescentrose";
 
   # TODO: Ghostty is not packaged for macOS in Nix, so we can't use the same
   # config. This should be fixed.

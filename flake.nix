@@ -105,13 +105,13 @@
       };
 
       darwinConfigurations = {
-        work = nix-darwin.lib.darwinSystem {
+        liberty-prime = nix-darwin.lib.darwinSystem {
           modules = [
             ./machines/work
             home-manager.darwinModules.home-manager
             {
               home-manager = {
-                users."ivan.ostric" = import ./home/_work.nix;
+                users.crescentrose = import ./home/_work.nix;
                 backupFileExtension = ".before-nix-darwin";
                 extraSpecialArgs = inputs;
               };

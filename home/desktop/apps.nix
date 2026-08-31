@@ -15,6 +15,8 @@
     pkgs.gnome-disk-utility # partition
     pkgs.gnome-boxes # VMs
     pkgs.lrcget # download lyrics for music files
+    pkgs.sushi # preview
+    pkgs.file-roller # archive manager
     zen-browser.packages."x86_64-linux".default # firefoxn't
   ];
 }

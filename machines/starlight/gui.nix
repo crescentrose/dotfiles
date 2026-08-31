@@ -46,6 +46,12 @@
     morewaita-icon-theme
   ];
 
+  # Use Sushi to preview files in Nautilus
+  services.gnome.sushi.enable = true;
+
+  # Teach Niri about Nautilus
+  programs.niri.useNautilus = true;
+
   # Set up dconf
   programs.dconf.enable = true;
 

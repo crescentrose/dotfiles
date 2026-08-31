@@ -30,6 +30,9 @@
   # Enable system authentication for unprivileged apps
   services.polkit-gnome.enable = true;
 
+  # Create XDG user directories at expected locations
+  xdg.userDirs.enable = true;
+
   # Include basic packages
   home.packages = with pkgs; [
     glib # gtk config

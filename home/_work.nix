@@ -19,6 +19,8 @@
     font-size = 14
     theme = dark:Catppuccin Macchiato,light:Catppuccin Latte
     macos-option-as-alt = true
+    background-opacity = 0.9
+    background-blur = macos-glass-regular
   '';
 
   programs.ssh = {

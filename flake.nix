@@ -14,7 +14,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     opnix = {
       url = "github:brizzbuzz/opnix";
@@ -31,8 +34,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    dms-greeter = {
+      url = "github:AvengeMedia/dank-greeter/v1.6.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.dank-qml-common.follows = "dms/dank-qml-common";
+    };
+
     jj-starship = {
-      url = "github:dmmulroy/jj-starship";
+      url = "github:dmmulroy/jj-starship/v0.7.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -44,7 +53,7 @@
       nixpkgs,
       opnix,
       nix-darwin,
-      dms,
+      dms-greeter,
       ...
     }:
     let
@@ -86,7 +95,7 @@
           specialArgs = inputs;
           modules = [
             ./machines/starlight
-            dms.nixosModules.greeter
+            dms-greeter.nixosModules.default
             nixos-hardware.nixosModules.common-pc
             nixos-hardware.nixosModules.common-pc-ssd
             nixos-hardware.nixosModules.common-gpu-amd

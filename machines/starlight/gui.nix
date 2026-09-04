@@ -24,7 +24,7 @@
   # Set up greeter
   # TODO: this also requires some symlinks and ACLs, which is currently manual.
   # see: https://danklinux.com/docs/dankgreeter/configuration#manual-sync
-  programs.dank-material-shell.greeter = {
+  programs.dms-greeter = {
     enable = true;
     compositor.name = "niri";
     configHome = "/home/ivan";

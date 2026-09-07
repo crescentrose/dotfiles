@@ -42,6 +42,7 @@ in
       "slack"
       "microsoft-outlook"
       "linearmouse"
+      "vorssaint"
     ];
   };
 

@@ -31,8 +31,8 @@
       # Resource monitor
       pkgs.btop
 
-      # arduino IDE
-      pkgs.arduino-ide
+      pkgs.eden
+      pkgs.unrar
     ];
 
     username = "ivan";

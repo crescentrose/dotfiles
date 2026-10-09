@@ -113,6 +113,8 @@
     pkgs.qFlipper
   ];
 
+  services.flatpak.enable = true;
+
   # Generate man-page indexes, so that you can tab-complete them
   documentation.man.cache.enable = true;
 

@@ -2,20 +2,20 @@
 let
   plymouthCat = pkgs.callPackage ../../packages/plymouth-cat/package.nix { };
   kernel = config.boot.kernelPackages;
-  zenpower5 = kernel.callPackage ../../packages/zenpower5/package.nix { };
+  # zenpower5 = kernel.callPackage ../../packages/zenpower5/package.nix { };
 in
 {
   # Use latest available kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.extraModulePackages = [
-    zenpower5
+    # zenpower5
     kernel.nct6687d
   ];
 
   boot.kernelModules = [
     # Temperature and power sensors for Zen 5 CPUs
-    "zenpower"
+    "k10temp"
 
     # Temperature, fan, and voltage readings for ASRock B850I motherboards
     "nct6687"
@@ -33,7 +33,6 @@ in
   ];
 
   boot.consoleLogLevel = 0;
-  boot.initrd.verbose = false;
   boot.supportedFilesystems = [ "nfs" ];
   # Define accurate regulatory domain for Wi-Fi
   boot.extraModprobeConfig = ''

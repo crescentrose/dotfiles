@@ -30,18 +30,18 @@
     };
 
     dms = {
-      url = "github:AvengeMedia/DankMaterialShell/stable";
+      url = "github:duxlabs-dev/dux-shell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     dms-greeter = {
-      url = "github:AvengeMedia/dank-greeter/v1.6.0";
+      url = "github:duxlabs-dev/dux-greeter/v2.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.dank-qml-common.follows = "dms/dank-qml-common";
     };
 
     jj-starship = {
-      url = "github:dmmulroy/jj-starship/v0.7.2";
+      url = "github:dmmulroy/jj-starship/v0.7.4";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -100,7 +100,7 @@
             nixos-hardware.nixosModules.common-pc-ssd
             nixos-hardware.nixosModules.common-gpu-amd
             nixos-hardware.nixosModules.common-cpu-amd-pstate
-            nixos-hardware.nixosModules.common-cpu-amd-zenpower
+            # nixos-hardware.nixosModules.common-cpu-amd-zenpower
             opnix.nixosModules.default
             home-manager.nixosModules.home-manager
             {

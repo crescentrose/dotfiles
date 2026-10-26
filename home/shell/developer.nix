@@ -44,5 +44,8 @@
 
     # 📝 TOML
     taplo
+
+    # Task runner
+    just
   ];
 }

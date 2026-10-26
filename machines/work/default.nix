@@ -43,6 +43,7 @@ in
       "microsoft-outlook"
       "linearmouse"
       "vorssaint"
+      "zed"
     ];
   };
 

@@ -4,7 +4,7 @@
     ./base.nix
     ./programs/git.nix
     ./programs/helix.nix
-    ./programs/zed.nix
+    # ./programs/zed.nix
     ./shell
   ];
 

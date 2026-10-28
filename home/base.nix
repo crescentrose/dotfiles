@@ -12,5 +12,8 @@
     direnv.enable = true;
   };
 
+  # tidy up wherever possible
+  home.preferXdgDirectories = true;
+
   home.stateVersion = "26.05";
 }
